@@ -1,0 +1,64 @@
+{
+    "hero": {
+        "title": "STUDY ABROAD, VISA & TRAVEL SERVICES",
+        "subtitle": "Your trusted guide for students and families.",
+        "cta": "Apply Now"
+    },
+    "services": {
+        "title": "Our Services",
+        "visa": "Visa Services",
+        "university": "University Admission",
+        "translation": "Document Translation",
+        "work": "Work Visas",
+        "umra": "Umra Packages",
+        "ticket": "Flight Tickets"
+    },
+    "countries": {
+        "title": "Popular Destinations",
+        "russia": "Russia",
+        "china": "China",
+        "turkey": "Turkey",
+        "cyprus": "Cyprus",
+        "belarus": "Belarus"
+    },
+    "whyUs": {
+        "title": "Why Choose Us",
+        "trust": {
+            "header": "Trust",
+            "desc": "Verified partners and transparent process."
+        },
+        "support": {
+            "header": "Support",
+            "desc": "24/7 assistance for students abroad."
+        },
+        "global": {
+            "header": "Global Reach",
+            "desc": "Connections in over 20 countries."
+        },
+        "team": {
+            "header": "Expert Team",
+            "desc": "Experienced counselors and lawyers."
+        }
+    },
+    "team": {
+        "title": "Meet Our Team",
+        "testimonials_title": "Student Stories"
+    },
+    "form": {
+        "title": "Quick Application",
+        "name": "Full Name",
+        "phone": "Phone Number",
+        "country": "Preferred Country",
+        "submit": "Quick Submit"
+    },
+    "footer": {
+        "contact": "Contact Us",
+        "socials": "Follow Us"
+    },
+    "nav": {
+        "home": "Home",
+        "services": "Services",
+        "about": "About",
+        "contact": "Contact"
+    }
+}
