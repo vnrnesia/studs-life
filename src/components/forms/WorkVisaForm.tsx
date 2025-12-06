@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter, useParams } from "next/navigation";
+import { submitToGoogleSheets } from "@/lib/submitToGoogleSheets";
 
 interface WorkVisaFormProps {
   onBack: () => void;
@@ -19,16 +21,29 @@ const TURKMEN_REGIONS = ['Lebap', 'Mary', 'Dashoguz', 'Balkan', 'Ahal', 'Ashgaba
 const WORK_COUNTRIES = ['Russia', 'Belarus'];
 
 export default function WorkVisaForm({ onBack, dict }: WorkVisaFormProps) {
+  const router = useRouter();
+  const params = useParams();
+  const lang = params.lang as string;
+  
   const [formData, setFormData] = useState({
     fullName: '', phone: '', email: '', dateOfBirth: '', hasPassport: '', passportExpiry: '',
     relationship: '', citizenship: '', region: '', city: '', workPreferences: '',
     targetCountry: '', previousTravel: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Work Visa Application:', formData);
-    alert('Work visa request submitted! (Demo)');
+    setIsSubmitting(true);
+
+    const result = await submitToGoogleSheets('Work Visa', formData);
+    
+    if (result.success) {
+      router.push(`/${lang}/thanks`);
+    } else {
+      alert(result.message);
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -150,8 +165,8 @@ export default function WorkVisaForm({ onBack, dict }: WorkVisaFormProps) {
         </div>
 
         <div className="pt-6">
-          <button type="submit" className="w-full py-4 bg-crimson text-white font-black uppercase tracking-widest rounded-lg hover:bg-red-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-            {dict.buttons.submit}
+          <button type="submit" disabled={isSubmitting} className="w-full py-4 bg-crimson text-white font-black uppercase tracking-widest rounded-lg hover:bg-red-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+            {isSubmitting ? 'Submitting...' : dict.buttons.submit}
           </button>
         </div>
       </form>

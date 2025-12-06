@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter, useParams } from "next/navigation";
+import { submitToGoogleSheets } from "@/lib/submitToGoogleSheets";
 
 interface SchoolFormProps {
   onBack: () => void;
@@ -18,15 +20,28 @@ const COUNTRIES = ['Turkmenistan', 'China', 'Turkey', 'Uzbekistan', 'Tajikistan'
 const TURKMEN_REGIONS = ['Lebap', 'Mary', 'Dashoguz', 'Balkan', 'Ahal', 'Ashgabat'];
 
 export default function SchoolForm({ onBack, dict }: SchoolFormProps) {
+  const router = useRouter();
+  const params = useParams();
+  const lang = params.lang as string;
+  
   const [formData, setFormData] = useState({
     studentName: '', parentName: '', relationship: '', phone: '', email: '',
     dateOfBirth: '', hasPassport: '', passportExpiry: '', citizenship: '', region: '', city: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('School Application:', formData);
-    alert('School application submitted! (Demo)');
+    setIsSubmitting(true);
+
+    const result = await submitToGoogleSheets('School', formData);
+    
+    if (result.success) {
+      router.push(`/${lang}/thanks`);
+    } else {
+      alert(result.message);
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -131,8 +146,8 @@ export default function SchoolForm({ onBack, dict }: SchoolFormProps) {
         ) : null}
 
         <div className="pt-6">
-          <button type="submit" className="w-full py-4 bg-crimson text-white font-black uppercase tracking-widest rounded-lg hover:bg-red-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-            {dict.buttons.submit}
+          <button type="submit" disabled={isSubmitting} className="w-full py-4 bg-crimson text-white font-black uppercase tracking-widest rounded-lg hover:bg-red-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+            {isSubmitting ? 'Submitting...' : dict.buttons.submit}
           </button>
         </div>
       </form>

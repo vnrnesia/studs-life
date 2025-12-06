@@ -443,5 +443,28 @@
             "title": "Ready to start your journey?",
             "button": "Contact Us"
         }
+    },
+    "thanksPage": {
+        "title": "Thank You!",
+        "subtitle": "Your application has been received successfully",
+        "message": "Our team will contact you soon to discuss the next steps.",
+        "ctas": {
+            "instagram": {
+                "title": "Social Media",
+                "description": "Follow us on Instagram for updates and student stories",
+                "button": "Follow on Instagram"
+            },
+            "pdf": {
+                "title": "Downloadable Content",
+                "description": "Download our Russia Student Guide PDF",
+                "button": "Download PDF"
+            },
+            "whatsapp": {
+                "title": "Contact",
+                "description": "Don't want to wait? Message us on WhatsApp now",
+                "button": "Chat on WhatsApp"
+            },
+            "home": "Back to Home"
+        }
     }
 }
