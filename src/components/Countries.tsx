@@ -98,7 +98,7 @@ export default function Countries({ lang, dict }: CountriesProps) {
 
       <div 
         ref={scrollContainerRef}
-        className="relative w-full overflow-x-auto pb-12 hide-scrollbar cursor-grab active:cursor-grabbing"
+        className="relative w-full overflow-x-auto pb-11 hide-scrollbar cursor-grab active:cursor-grabbing"
         onMouseDown={handleMouseDown}
         onMouseLeave={handleMouseLeave}
         onMouseUp={handleMouseUp}

@@ -7,7 +7,7 @@ import { Bed, Users, Key } from "lucide-react";
 interface AccommodationAssistantProps {
   dict: any;
 }
-
+ 
 export default function AccommodationAssistant({ dict }: AccommodationAssistantProps) {
   const options = [
     { key: "dorms", icon: Users, color: "bg-blue-500" },

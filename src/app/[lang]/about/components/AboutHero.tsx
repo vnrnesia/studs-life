@@ -22,7 +22,7 @@ export default function AboutHero({ dict }: AboutHeroProps) {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
           <div className="space-y-6">
-            <h1 className="text-4xl md:text-6xl font-black text-slate-800 leading-tight">
+            <h1 className="text-3xl md:text-6xl font-black text-slate-800 leading-tight">
               {dict.title}
             </h1>
             <p className="text-xl text-slate-600 font-light">
