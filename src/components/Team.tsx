@@ -1,4 +1,4 @@
-import TornPaper from "./TornPaper";
+
 import { Star } from "lucide-react";
 
 interface TeamProps {
@@ -12,7 +12,7 @@ export default function Team({ lang, dict }: TeamProps) {
 
   return (
     <section className="relative py-32 bg-gray-50 text-gray-900 overflow-hidden">
-      <TornPaper position="top" className="rotate-180 -top-1" color="white" />
+
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Team Section */}

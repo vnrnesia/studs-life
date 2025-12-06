@@ -6,7 +6,7 @@ import {
   Plane, 
   Ticket 
 } from "lucide-react";
-import TornPaper from "./TornPaper";
+
 
 interface ServicesProps {
   lang: string;

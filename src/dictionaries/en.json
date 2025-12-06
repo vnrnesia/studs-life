@@ -1,7 +1,8 @@
 {
     "hero": {
-        "title": "STUDY ABROAD, VISA & TRAVEL SERVICES",
-        "subtitle": "Your trusted guide for students and families.",
+        "title": "INTERNATIONAL PARTNERSHIP",
+        "subtitle": "In The Field Of Attracting International Students",
+        "description": "Official Partner Of Universities In Russia, Europe And Asia",
         "cta": "Apply Now"
     },
     "services": {
@@ -15,12 +16,30 @@
     },
     "countries": {
         "title": "Popular Destinations",
-        "russia": "Russia",
-        "china": "China",
-        "turkey": "Turkey",
-        "cyprus": "Cyprus",
-        "belarus": "Belarus",
-        "bulgaria": "Bulgaria"
+        "russia": {
+            "name": "Russia",
+            "slogan": "A world of boundless horizons and fundamental knowledge"
+        },
+        "china": {
+            "name": "China",
+            "slogan": "Synergy of ancient wisdom and future technologies"
+        },
+        "turkey": {
+            "name": "Turkey",
+            "slogan": "Crossroads of civilizations and vibrant student life"
+        },
+        "cyprus": {
+            "name": "Cyprus",
+            "slogan": "A sunny island of European education and comfort"
+        },
+        "belarus": {
+            "name": "Belarus",
+            "slogan": "Hospitality, safety, and academic traditions"
+        },
+        "bulgaria": {
+            "name": "Bulgaria",
+            "slogan": "Affordable European education on the Black Sea coast"
+        }
     },
     "whyUs": {
         "title": "Why Choose Us",
@@ -61,5 +80,200 @@
         "services": "Services",
         "about": "About",
         "contact": "Contact"
+    },
+    "servicesPage": {
+        "hero": {
+            "title": "YOUR JOURNEY IN EDUCATION, LIFE AND CAREER STARTS HERE",
+            "subtitle": "End-to-end service from university admission to accommodation, visa procedures to city adaptation.",
+            "cta": "Free Consultation"
+        },
+        "coreServices": {
+            "title": "Our Core Services",
+            "visa": {
+                "title": "Visa & Residency",
+                "desc": "Tracking all bureaucratic processes."
+            },
+            "university": {
+                "title": "University Admission",
+                "desc": "Department selection and application management."
+            },
+            "accommodation": {
+                "title": "Accommodation Solutions",
+                "desc": "Dormitory, house rental, and roommate finding support."
+            },
+            "transport": {
+                "title": "Transport & Welcome",
+                "desc": "Fight tickets and airport transfer."
+            },
+            "translation": {
+                "title": "Translation & Documents",
+                "desc": "Sworn translation and equivalency procedures."
+            },
+            "support": {
+                "title": "Adaptation & Support",
+                "desc": "City orientation and 24/7 emergency line."
+            }
+        },
+        "costOfLiving": {
+            "title": "Student's Life Guidance",
+            "subtitle": "Average monthly costs by city",
+            "rent": "Rent",
+            "food": "Food",
+            "transport": "Transport",
+            "total": "Total / Month",
+            "data": {
+                "russia": {
+                    "name": "Russia",
+                    "cities": [
+                        {
+                            "name": "Moscow",
+                            "rent": "$400-600",
+                            "food": "$200-300",
+                            "transport": "$30",
+                            "total": "$650-1000"
+                        },
+                        {
+                            "name": "St. Petersburg",
+                            "rent": "$300-500",
+                            "food": "$180-250",
+                            "transport": "$25",
+                            "total": "$500-800"
+                        },
+                        {
+                            "name": "Kazan",
+                            "rent": "$200-350",
+                            "food": "$150-200",
+                            "transport": "$20",
+                            "total": "$350-600"
+                        }
+                    ]
+                },
+                "china": {
+                    "name": "China",
+                    "cities": [
+                        {
+                            "name": "Beijing",
+                            "rent": "$500-800",
+                            "food": "$250-350",
+                            "transport": "$30",
+                            "total": "$800-1200"
+                        },
+                        {
+                            "name": "Shanghai",
+                            "rent": "$600-900",
+                            "food": "$300-400",
+                            "transport": "$30",
+                            "total": "$900-1400"
+                        },
+                        {
+                            "name": "Guangzhou",
+                            "rent": "$400-600",
+                            "food": "$200-300",
+                            "transport": "$25",
+                            "total": "$650-950"
+                        }
+                    ]
+                },
+                "turkey": {
+                    "name": "Turkey",
+                    "cities": [
+                        {
+                            "name": "Istanbul",
+                            "rent": "$300-500",
+                            "food": "$200-300",
+                            "transport": "$40",
+                            "total": "$550-850"
+                        },
+                        {
+                            "name": "Ankara",
+                            "rent": "$200-350",
+                            "food": "$150-250",
+                            "transport": "$25",
+                            "total": "$400-650"
+                        },
+                        {
+                            "name": "Izmir",
+                            "rent": "$250-400",
+                            "food": "$180-280",
+                            "transport": "$30",
+                            "total": "$500-750"
+                        }
+                    ]
+                }
+            }
+        },
+        "destinations": {
+            "title": "Explore Destinations",
+            "cities": [
+                {
+                    "name": "Moscow",
+                    "country": "Russia",
+                    "majors": "Medicine, Engineering",
+                    "img": "https://images.unsplash.com/photo-1513326738677-b964603b136d?q=80&w=1000&auto=format&fit=crop"
+                },
+                {
+                    "name": "St. Petersburg",
+                    "country": "Russia",
+                    "majors": "Arts, Humanities",
+                    "img": "https://images.unsplash.com/photo-1556610961-2fecc5927173?q=80&w=1000&auto=format&fit=crop"
+                },
+                {
+                    "name": "Beijing",
+                    "country": "China",
+                    "majors": "Technology, Business",
+                    "img": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=1000&auto=format&fit=crop"
+                },
+                {
+                    "name": "Shanghai",
+                    "country": "China",
+                    "majors": "Finance, Economics",
+                    "img": "https://images.unsplash.com/photo-1548957175-84f0f9af659e?q=80&w=1000&auto=format&fit=crop"
+                },
+                {
+                    "name": "Istanbul",
+                    "country": "Turkey",
+                    "majors": "History, Architecture",
+                    "img": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=80&w=1000&auto=format&fit=crop"
+                },
+                {
+                    "name": "Ankara",
+                    "country": "Turkey",
+                    "majors": "Politics, Law",
+                    "img": "https://images.unsplash.com/photo-1589030343991-69ea1433b941?q=80&w=1000&auto=format&fit=crop"
+                }
+            ]
+        },
+        "accommodationAssistant": {
+            "title": "Where Will You Stay?",
+            "dorms": {
+                "title": "Dormitories",
+                "price": "$70-$150",
+                "desc": "Most economical, socialization opportunity."
+            },
+            "shared": {
+                "title": "Shared Apartments",
+                "price": "$150-$250",
+                "desc": "More freedom, shared expenses."
+            },
+            "private": {
+                "title": "Private Apartment",
+                "price": "$300+",
+                "desc": "Full comfort and privacy."
+            }
+        },
+        "trust": {
+            "title": "Official Competencies and Documents"
+        },
+        "faq": {
+            "title": "Frequent Questions",
+            "q1": {
+                "q": "When should I apply?",
+                "a": "As soon as possible."
+            },
+            "q2": {
+                "q": "What are the service fees?",
+                "a": "Depends on the package."
+            }
+        }
     }
 }

@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Montserrat, Inter } from "next/font/google"; // Using requested fonts
+import { Manrope } from "next/font/google"; 
 import "../globals.css";
 import { i18n, type Locale } from "@/i18n-config";
 
-const montserrat = Montserrat({ subsets: ["latin", "cyrillic"], variable: "--font-montserrat", weight: ["400", "700", "900"] });
-const inter = Inter({ subsets: ["latin", "cyrillic"], variable: "--font-inter" });
+const manrope = Manrope({ subsets: ["latin", "cyrillic"], variable: "--font-manrope" });
 
 export const metadata: Metadata = {
   title: "Student's Life",
@@ -26,7 +25,7 @@ export default async function RootLayout({
 
   return (
     <html lang={lang}>
-      <body className={`${montserrat.variable} ${inter.variable} font-sans antialiased bg-gray-50 text-gray-900`}>
+      <body className={`${manrope.variable} font-sans antialiased bg-gray-50 text-gray-900`}>
         {children}
       </body>
     </html>

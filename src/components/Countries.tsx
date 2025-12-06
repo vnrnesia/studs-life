@@ -1,6 +1,6 @@
 "use client";
 
-import TornPaper from "./TornPaper";
+
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
@@ -11,13 +11,20 @@ interface CountriesProps {
   dict: any;
 }
 
+import russiaImg from "../assets/images/russia.png";
+import chinaImg from "../assets/images/china.png";
+import turkeyImg from "../assets/images/turkey.png";
+import cyprusImg from "../assets/images/cyprus.png";
+import belarusImg from "../assets/images/belarus.png";
+import bulgariaImg from "../assets/images/bulgaria.png";
+
 const countriesList = [
-  { key: "russia", img: "https://images.unsplash.com/photo-1513326738677-b964603b136d?q=80&w=1000&auto=format&fit=crop" },
-  { key: "china", img: "https://images.unsplash.com/photo-1547981609-4b6bfe95e300?q=80&w=1000&auto=format&fit=crop" },
-  { key: "turkey", img: "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?q=80&w=1000&auto=format&fit=crop" },
-  { key: "cyprus", img: "https://images.unsplash.com/photo-1528659560411-eb652bb2d3a3?q=80&w=1000&auto=format&fit=crop" },
-  { key: "belarus", img: "https://images.unsplash.com/photo-1622312634351-1e9444f6f1c7?q=80&w=1000&auto=format&fit=crop" },
-  { key: "bulgaria", img: "https://images.unsplash.com/photo-1565439931720-z94336c25736?q=80&w=1000&auto=format&fit=crop" },
+  { key: "russia", img: russiaImg },
+  { key: "china", img: chinaImg },
+  { key: "turkey", img: turkeyImg },
+  { key: "cyprus", img: cyprusImg },
+  { key: "belarus", img: belarusImg },
+  { key: "bulgaria", img: bulgariaImg },
 ];
 
 export default function Countries({ lang, dict }: CountriesProps) {
@@ -65,7 +72,7 @@ export default function Countries({ lang, dict }: CountriesProps) {
 
   return (
     <section className="relative py-32 bg-gray-50 overflow-hidden">
-      <TornPaper position="top" className="rotate-180 -top-1" color="white" />
+
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 flex justify-between items-end">
         <h2 className="text-3xl md:text-5xl font-black uppercase font-montserrat tracking-wide text-gray-900">
@@ -102,7 +109,6 @@ export default function Countries({ lang, dict }: CountriesProps) {
             <motion.div
               key={country.key}
               className="relative w-[300px] h-[400px] md:w-[350px] md:h-[500px] rounded-2xl overflow-hidden group shadow-lg hover:shadow-2xl transition-all"
-              whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
               <Image
@@ -116,15 +122,24 @@ export default function Countries({ lang, dict }: CountriesProps) {
               
               <div className="absolute bottom-0 left-0 p-8 w-full pointer-events-none">
                 <span className="text-crimson font-bold text-sm tracking-widest uppercase mb-2 block">Study in</span>
-                <h3 className="text-3xl font-black text-white uppercase font-montserrat">{dict[country.key]}</h3>
+                <h3 className="text-3xl font-black text-white uppercase font-montserrat">{dict[country.key].name}</h3>
                 <div className="mt-4 w-full h-[2px] bg-white/20 group-hover:bg-crimson transition-colors" />
+                
+                {/* Slogan with smooth CSS Grid animation */}
+                <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
+                   <div className="overflow-hidden">
+                      <p className="text-gray-300 text-sm mt-4 font-medium leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                         {dict[country.key].slogan}
+                      </p>
+                   </div>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      <TornPaper position="bottom" color="white" />
+
     </section>
   );
 }

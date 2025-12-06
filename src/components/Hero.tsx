@@ -1,6 +1,7 @@
-import TornPaper from "./TornPaper";
+
 import { MoveRight } from "lucide-react";
 import Image from "next/image";
+import studentsImg from "../assets/students.jpg";
 
 interface HeroProps {
   lang: string;
@@ -21,14 +22,16 @@ export default function Hero({ lang, dict }: HeroProps) {
             <span className="text-crimson font-serif italic tracking-wider text-sm">Est. 2015</span>
           </div>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black font-montserrat text-gray-900 leading-tight uppercase">
-            {dict.title.split(",").map((part: string, i: number) => (
-               <span key={i} className="block">{part.trim()}{i !== dict.title.split(",").length - 1 && ","}</span>
-            ))}
+          <h1 className="text-4xl md:text-6xl lg:text-5xl font-black font-montserrat text-gray-900 leading-tight uppercase">
+            {dict.title}
           </h1>
           
-          <p className="text-lg md:text-xl text-gray-600 font-light max-w-lg mx-auto md:mx-0">
+          <h2 className="text-xl md:text-2xl font-bold text-gray-700  tracking-wide">
             {dict.subtitle}
+          </h2>
+          
+          <p className="text-lg md:text-xl text-gray-600 font-light max-w-lg mx-auto md:mx-0">
+            {dict.description}
           </p>
 
           <div className="flex justify-center md:justify-start">
@@ -45,19 +48,19 @@ export default function Hero({ lang, dict }: HeroProps) {
             <div className="absolute inset-0 bg-crimson/20 rounded-full blur-[100px] transform translate-x-10 -translate-y-10" />
             <div className="relative h-full w-full rounded-2xl overflow-hidden border-4 border-gray-200 shadow-2xl skew-y-3 md:skew-y-0 md:-rotate-3 hover:rotate-0 transition-transform duration-500">
                <Image 
-                 src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop" 
+                 src={studentsImg}
                  alt="Student looking up" 
                  fill
                  className="object-cover"
                  priority
                />
-               <div className="absolute inset-0 bg-gradient-to-t from-gray-50/80 to-transparent" />
+               <div className="absolute inset-0 bg-gradient-to-t " />
             </div>
         </div>
 
+
       </div>
 
-      <TornPaper position="bottom" color="white" />
     </section>
   );
 }
