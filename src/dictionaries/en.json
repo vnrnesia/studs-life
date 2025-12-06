@@ -66,10 +66,107 @@
     },
     "form": {
         "title": "Quick Application",
-        "name": "Full Name",
-        "phone": "Phone Number",
-        "country": "Preferred Country",
-        "submit": "Quick Submit"
+        "selectService": "Select the service you need",
+        "backButton": "Back to service selection",
+        "services": {
+            "university": {
+                "title": "University Application",
+                "desc": "Apply to universities abroad"
+            },
+            "transfer": {
+                "title": "Transfer Student",
+                "desc": "Transfer to another university"
+            },
+            "school": {
+                "title": "School in China",
+                "desc": "Enroll in Chinese schools"
+            },
+            "umrah": {
+                "title": "Umrah to Mecca",
+                "desc": "14-day pilgrimage package"
+            },
+            "workVisa": {
+                "title": "Work Visa",
+                "desc": "Work permit assistance"
+            },
+            "ticket": {
+                "title": "Flight Tickets",
+                "desc": "Book your flights"
+            }
+        },
+        "fields": {
+            "fullName": "Full Name",
+            "studentName": "Student Name",
+            "parentName": "Parent Name",
+            "phone": "Phone Number",
+            "email": "Email",
+            "dateOfBirth": "Date of Birth",
+            "relationship": "Relationship",
+            "educationLevel": "Education Level",
+            "targetCountry": "Target Country",
+            "fieldOfStudy": "Field of Study",
+            "citizenship": "Citizenship",
+            "region": "Region",
+            "city": "City",
+            "currentEducationLevel": "Current Education Level",
+            "currentUniversity": "Current University",
+            "currentCountry": "Current Country",
+            "currentField": "Current Field of Study",
+            "paymentType": "Payment Type",
+            "transferType": "Transfer Type",
+            "targetUniversity": "Target University",
+            "targetField": "Target Field",
+            "hasPassport": "Has Passport?",
+            "passportExpiry": "Passport Expiry",
+            "travelMonth": "Travel Month",
+            "workPreferences": "Work Preferences",
+            "previousTravel": "Previous Travel/Deportation History",
+            "fromCity": "From City",
+            "toCity": "To City",
+            "travelDate": "Travel Date",
+            "needsBaggage": "Baggage"
+        },
+        "placeholders": {
+            "fullName": "Enter full name",
+            "phone": "+993 XX XXX XXX",
+            "email": "example@email.com",
+            "fieldOfStudy": "e.g. Computer Science",
+            "city": "Enter your city",
+            "fromCity": "e.g. Ashgabat",
+            "toCity": "e.g. Moscow",
+            "workPreferences": "What skills do you have? Where would you like to work?",
+            "previousTravel": "Have you traveled abroad before? Any deportation history?"
+        },
+        "options": {
+            "select": "Select",
+            "selectLevel": "Select level",
+            "selectRelationship": "Select relationship",
+            "selectCountry": "Select country",
+            "selectRegion": "Select region",
+            "selectMonth": "Select month",
+            "self": "Self",
+            "father": "Father",
+            "mother": "Mother",
+            "friend": "Friend",
+            "yes": "Yes",
+            "no": "No",
+            "languageCourses": "Language courses",
+            "preparatory": "Preparatory faculty",
+            "bachelor": "Bachelor/Specialist",
+            "master": "Master",
+            "paid": "Paid",
+            "grant": "Grant (Free)",
+            "sameCountry": "Within same country",
+            "differentCountry": "To different country",
+            "yesBaggage": "Yes, I need baggage",
+            "noBaggage": "No baggage needed"
+        },
+        "buttons": {
+            "submit": "Submit Application",
+            "submitTransfer": "Submit Transfer Request",
+            "submitBooking": "Submit Booking",
+            "bookTicket": "Book Ticket"
+        }
     },
     "footer": {
         "contact": "Contact Us",
@@ -274,6 +371,77 @@
                 "q": "What are the service fees?",
                 "a": "Depends on the package."
             }
+        }
+    },
+    "aboutPage": {
+        "hero": {
+            "title": "Reliable Companion in Global Education",
+            "subtitle": "Empowering students to achieve their dreams worldwide"
+        },
+        "mission": {
+            "title": "Mission",
+            "content": "Providing a future, not just a school."
+        },
+        "vision": {
+            "title": "Vision",
+            "content": "Setting standards in global consultancy."
+        },
+        "values": {
+            "title": "Values",
+            "content": "Trust, Transparency, Sustainability."
+        },
+        "timeline": {
+            "title": "Our Journey",
+            "milestones": [
+                {
+                    "year": "2015",
+                    "title": "Establishment",
+                    "description": "Founded with a vision to transform international education consulting"
+                },
+                {
+                    "year": "2018",
+                    "title": "Expansion & New Branches",
+                    "description": "Opened offices in multiple countries to serve students globally"
+                },
+                {
+                    "year": "2024",
+                    "title": "1200+ Successful Applications",
+                    "description": "Helped over 1200 students achieve their educational dreams"
+                }
+            ]
+        },
+        "departments": {
+            "title": "Our Expertise Areas",
+            "list": [
+                {
+                    "title": "International Cooperation",
+                    "description": "Building partnerships with universities worldwide"
+                },
+                {
+                    "title": "Sales & Consultancy",
+                    "description": "Expert guidance for your educational journey"
+                },
+                {
+                    "title": "Customer Success",
+                    "description": "Ensuring sustainable support throughout your studies"
+                },
+                {
+                    "title": "Media & Content",
+                    "description": "Creating valuable resources for students"
+                },
+                {
+                    "title": "Translation Services",
+                    "description": "Professional document translation and certification"
+                }
+            ]
+        },
+        "licenses": {
+            "title": "Official Authorizations",
+            "subtitle": "Certified and trusted by international institutions"
+        },
+        "cta": {
+            "title": "Ready to start your journey?",
+            "button": "Contact Us"
         }
     }
 }
