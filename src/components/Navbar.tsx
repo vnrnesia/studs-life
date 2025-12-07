@@ -4,15 +4,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type Locale, i18n } from "@/i18n-config";
 import { useState } from "react";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe, ChevronDown, ChevronRight, MapPin } from "lucide-react";
+import { Country } from "@/lib/strapi";
 
 interface NavbarProps {
   lang: Locale;
   dict: any;
+  countries: Country[];
 }
 
-export default function Navbar({ lang, dict }: NavbarProps) {
+export default function Navbar({ lang, dict, countries }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobileCountriesOpen, setIsMobileCountriesOpen] = useState(false);
   const pathname = usePathname();
 
   const redirectedPathName = (locale: Locale) => {
@@ -47,11 +50,64 @@ export default function Navbar({ lang, dict }: NavbarProps) {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-gray-900 hover:text-crimson px-3 py-2 rounded-md text-sm font-bold uppercase transition-colors"
+                  className="text-gray-900 hover:text-crimson px-3 py-2 rounded-md text-sm font-bold  transition-colors"
                 >
                   {link.name}
                 </Link>
               ))}
+
+              {/* Countries Mega Menu (Desktop) */}
+              <div className="relative group">
+                <button className="flex items-center gap-1 text-gray-900 hover:text-crimson px-3 py-2 rounded-md text-sm font-bold  transition-colors">
+                  {dict?.nav?.countries || (lang === 'ru' ? 'Страны' : 'Countries')}
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+
+                {/* Dropdown Panel */}
+                <div className="absolute left-0 pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                  <div className="bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5">
+                    <div className="py-2">
+                       {/* Country List */}
+                      {countries.map((country) => (
+                        <div key={country.id} className="group/country relative">
+                           <button className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-crimson flex items-center justify-between font-medium transition-colors">
+                              <div className="flex items-center gap-2">
+                               
+                                {country.name}
+                              </div>
+                              {/* Show arrow if has cities */}
+                              {country.cities && country.cities.length > 0 && (
+                                <ChevronRight className="w-4 h-4 text-gray-400 group-hover/country:text-crimson" />
+                              )}
+                           </button>
+
+                           {/* Nested Cities List */}
+                           {country.cities && country.cities.length > 0 && (
+                             <div className="absolute left-full top-0 ml-0.5 w-56 opacity-0 invisible group-hover/country:opacity-100 group-hover/country:visible transition-all duration-200">
+                               <div className="bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 py-2">
+                                 <div className="px-4 py-2 border-b border-gray-100 bg-gray-50">
+                                   <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+                                     {lang === 'ru' ? 'Города' : 'Cities'}
+                                   </span>
+                                 </div>
+                                 {country.cities.map((city: any) => (
+                                   <Link
+                                     key={city.id}
+                                     href={`/${lang}/${country.slug}/${city.slug}`}
+                                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-crimson transition-colors"
+                                   >
+                                     {city.name}
+                                   </Link>
+                                 ))}
+                               </div>
+                             </div>
+                           )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -86,7 +142,7 @@ export default function Navbar({ lang, dict }: NavbarProps) {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-gray-50 border-t border-gray-200">
+        <div className="md:hidden bg-gray-50 border-t border-gray-200 max-h-[calc(100vh-80px)] overflow-y-auto">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
               <Link
@@ -98,6 +154,42 @@ export default function Navbar({ lang, dict }: NavbarProps) {
                 {link.name}
               </Link>
             ))}
+
+            {/* Mobile Countries Accordion */}
+            <div className="border-t border-gray-200 pt-2 mt-2">
+               <button 
+                  onClick={() => setIsMobileCountriesOpen(!isMobileCountriesOpen)}
+                  className="w-full flex items-center justify-between px-3 py-2 text-base font-bold uppercase text-gray-900 hover:bg-gray-200 rounded-md"
+               >
+                  {dict?.nav?.countries || (lang === 'ru' ? 'Страны' : 'Countries')}
+                  <ChevronDown className={`w-5 h-5 transition-transform ${isMobileCountriesOpen ? 'rotate-180' : ''}`} />
+               </button>
+               
+               {isMobileCountriesOpen && (
+                 <div className="pl-4 space-y-1 mt-1">
+                    {countries.map((country) => (
+                      <div key={country.id} className="py-1">
+                        <div className="font-bold text-gray-700 px-3 py-1 flex items-center gap-2">
+                        {country.name}
+                        </div>
+                        <div className="pl-4 border-l-2 border-gray-200 ml-3 space-y-1 mt-1">
+                          {country.cities && country.cities.map((city: any) => (
+                            <Link
+                              key={city.id}
+                              href={`/${lang}/${country.slug}/${city.slug}`}
+                              className="block px-3 py-2 text-sm text-gray-600 hover:text-crimson rounded-md"
+                              onClick={() => setIsOpen(false)}
+                            >
+                              {city.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                 </div>
+               )}
+            </div>
+
              <div className="border-t border-gray-200 mt-4 pt-4 flex justify-center gap-6">
                  {i18n.locales.map((locale) => (
                    <Link

@@ -24,6 +24,7 @@ export interface Country {
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
+    cities?: City[];
 }
 
 export interface City {
@@ -203,6 +204,25 @@ export async function getFeaturedCities(locale: string = 'en'): Promise<City[]> 
     });
 
     const { data } = await strapiClient.get<StrapiResponse<City[]>>(`/cities?${query}`);
+    return data.data;
+}
+
+/**
+ * Get countries with cities for the Mega Menu
+ */
+export async function getCountriesWithCities(locale: string = 'en'): Promise<Country[]> {
+    const query = qs.stringify({
+        locale,
+        populate: {
+            cities: {
+                fields: ['name', 'slug'], // Correct way to select fields
+                sort: ['name:asc'],
+            },
+        },
+        sort: ['name:asc'],
+    });
+
+    const { data } = await strapiClient.get<StrapiResponse<Country[]>>(`/countries?${query}`);
     return data.data;
 }
 

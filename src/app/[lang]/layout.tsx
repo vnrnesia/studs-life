@@ -5,6 +5,7 @@ import { i18n, type Locale } from "@/i18n-config";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getDictionary } from "@/get-dictionary";
+import { getCountriesWithCities } from "@/lib/strapi";
 
 const manrope = Manrope({ subsets: ["latin", "cyrillic"], variable: "--font-manrope" });
 
@@ -26,12 +27,13 @@ export default async function RootLayout({
 }>) {
   const { lang } = await params;
   const dict = await getDictionary(lang as Locale);
+  const countries = await getCountriesWithCities(lang);
   console.log('Loaded dictionary for:', lang, 'Keys:', Object.keys(dict || {}));
 
   return (
     <html lang={lang}>
       <body className={`${manrope.variable} font-sans antialiased bg-gray-50 text-gray-900`}>
-        <Navbar lang={lang as Locale} dict={dict} />
+        <Navbar lang={lang as Locale} dict={dict} countries={countries} />
         <div className="pt-20 min-h-screen flex flex-col">
           {children}
         </div>
