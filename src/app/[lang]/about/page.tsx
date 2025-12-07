@@ -1,7 +1,5 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n-config";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import AboutHero from "./components/AboutHero";
 import MissionVisionCards from "./components/MissionVisionCards";
 import CompanyTimeline from "./components/CompanyTimeline";
@@ -19,14 +17,12 @@ export default async function AboutPage({
 
   return (
     <main className="min-h-screen bg-gray-50">
-      <Navbar lang={lang} dict={dict.nav} />
       <AboutHero dict={dict.aboutPage.hero} />
       <MissionVisionCards dict={dict.aboutPage} />
       <CompanyTimeline dict={dict.aboutPage.timeline} />
       <DepartmentsGrid dict={dict.aboutPage.departments} />
       <LicensesCertificates dict={dict.aboutPage.licenses} />
       <CTABanner dict={dict.aboutPage.cta} />
-      <Footer lang={lang} dict={dict.footer} />
     </main>
   );
 }

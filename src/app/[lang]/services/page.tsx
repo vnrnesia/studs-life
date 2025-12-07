@@ -1,7 +1,5 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n-config";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import ServicesHero from "./components/ServicesHero";
 import ServicesGrid from "./components/ServicesGrid";
 import CostOfLiving from "./components/CostOfLiving";
@@ -20,7 +18,6 @@ export default async function ServicesPage({
 
   return (
     <main className="min-h-screen bg-gray-50">
-      <Navbar lang={lang} dict={dict.nav} />
       <ServicesHero dict={dict.servicesPage.hero} />
       <ServicesGrid dict={dict.servicesPage.coreServices} />
       <CostOfLiving dict={dict.servicesPage.costOfLiving} />
@@ -28,7 +25,6 @@ export default async function ServicesPage({
       <AccommodationAssistant dict={dict.servicesPage.accommodationAssistant} />
       <TrustSection dict={dict.servicesPage.trust} />
       <FAQ dict={dict.servicesPage.faq} />
-      <Footer lang={lang} dict={dict.footer} />
     </main>
   );
 }

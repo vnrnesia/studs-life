@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google"; 
 import "../globals.css";
 import { i18n, type Locale } from "@/i18n-config";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { getDictionary } from "@/get-dictionary";
 
 const manrope = Manrope({ subsets: ["latin", "cyrillic"], variable: "--font-manrope" });
 
@@ -22,11 +25,17 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>;
 }>) {
   const { lang } = await params;
+  const dict = await getDictionary(lang as Locale);
+  console.log('Loaded dictionary for:', lang, 'Keys:', Object.keys(dict || {}));
 
   return (
     <html lang={lang}>
       <body className={`${manrope.variable} font-sans antialiased bg-gray-50 text-gray-900`}>
-        {children}
+        <Navbar lang={lang as Locale} dict={dict} />
+        <div className="pt-20 min-h-screen flex flex-col">
+          {children}
+        </div>
+        <Footer lang={lang} dict={dict} />
       </body>
     </html>
   );
