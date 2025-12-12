@@ -235,3 +235,37 @@ export function getStrapiImageUrl(url: string): string {
     }
     return `${strapiUrl}${url}`;
 }
+
+export interface TeamMember {
+    id: number;
+    documentId: string;
+    fullName: string;
+    role: string;
+    photo?: {
+        url: string;
+        alternativeText?: string;
+    };
+    city: string;
+    officeAddress?: string;
+    birthDate?: string;
+    startDate?: string;
+    languages?: string;
+    phone?: string;
+    email?: string;
+    responsibilities?: string;
+    locale: string;
+}
+
+/**
+ * Get all team members
+ */
+export async function getTeamMembers(locale: string = 'en'): Promise<TeamMember[]> {
+    const query = qs.stringify({
+        locale,
+        populate: '*',
+        sort: ['fullName:asc'],
+    });
+
+    const { data } = await strapiClient.get<StrapiResponse<TeamMember[]>>(`/team-members?${query}`);
+    return data.data;
+}

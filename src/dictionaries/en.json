@@ -5,6 +5,14 @@
         "description": "Official Partner Of Universities In Russia, Europe And Asia",
         "cta": "Apply Now"
     },
+    "nav": {
+        "home": "Home",
+        "services": "Services",
+        "team": "Team",
+        "about": "About",
+        "contact": "Contact",
+        "countries": "Countries"
+    },
     "services": {
         "title": "Our Services",
         "visa": "Visa Services",
@@ -63,6 +71,24 @@
     "team": {
         "title": "Meet Our Team",
         "testimonials_title": "Student Stories"
+    },
+    "statistics": {
+        "resultsTitle": "OUR RESULTS AND SCALE",
+        "geographyTitle": "STUDENT GEOGRAPHY",
+        "results": {
+            "totalStudents": "students\nover all time",
+            "lastYearStudents": "students only\nlast academic year",
+            "averageGrowth": "average annual growth",
+            "firstAttempt": "enroll on first\nattempt",
+            "scholarships": "receive scholarships"
+        },
+        "geography": {
+            "turkmenistan": "Turkmenistan",
+            "turkey": "Turkey",
+            "china": "China",
+            "uzbekistan": "Uzbekistan",
+            "tajikistan": "Tajikistan"
+        }
     },
     "form": {
         "title": "Quick Application",
@@ -171,12 +197,6 @@
     "footer": {
         "contact": "Contact Us",
         "socials": "Follow Us"
-    },
-    "nav": {
-        "home": "Home",
-        "services": "Services",
-        "about": "About",
-        "contact": "Contact"
     },
     "servicesPage": {
         "hero": {

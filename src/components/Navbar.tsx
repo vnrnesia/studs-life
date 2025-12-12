@@ -6,6 +6,8 @@ import { type Locale, i18n } from "@/i18n-config";
 import { useState } from "react";
 import { Menu, X, Globe, ChevronDown, ChevronRight, MapPin } from "lucide-react";
 import { Country } from "@/lib/strapi";
+import logo from "../assets/logo.svg";
+import Image from "next/image"; 
 
 interface NavbarProps {
   lang: Locale;
@@ -28,6 +30,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
   const navLinks = [
     { name: dict?.nav?.home, href: `/${lang}` },
     { name: dict?.nav?.services, href: `/${lang}/services` },
+    { name: dict?.nav?.team, href: `/${lang}/teams` },
     { name: dict?.nav?.about, href: `/${lang}/about` },
     { name: dict?.nav?.contact, href: `/${lang}#contact` },
   ];
@@ -38,27 +41,44 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href={`/${lang}`} className="text-2xl font-black text-gray-900 tracking-widest font-montserrat">
-              STUDENTS<span className="text-crimson">LIFE</span>
+            <Link href={`/${lang}`} className="text-2xl font-black text-gray-900 tracking-widest font-montserrat flex items-center">
+             
+              <Image 
+                src={logo} 
+                alt="students life" 
+                priority 
+                className="h-auto w-auto max-h-12" 
+              />
             </Link>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-gray-900 hover:text-crimson px-3 py-2 rounded-md text-sm font-bold  transition-colors"
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {navLinks.slice(0, 2).map((link, index) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={`nav-${index}-${link.href}`}
+                    href={link.href}
+                    className={`${
+                      isActive ? "text-crimson" : "text-gray-900"
+                    } hover:text-crimson px-3 py-2 rounded-md text-sm font-bold transition-colors`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
 
               {/* Countries Mega Menu (Desktop) */}
               <div className="relative group">
-                <button className="flex items-center gap-1 text-gray-900 hover:text-crimson px-3 py-2 rounded-md text-sm font-bold  transition-colors">
+                <button
+                  className={`${
+                    countries?.some((c) => pathname?.includes(`/${c.slug}`))
+                      ? "text-crimson"
+                      : "text-gray-900"
+                  } flex items-center gap-1 hover:text-crimson px-3 py-2 rounded-md text-sm font-bold transition-colors`}
+                >
                   {dict?.nav?.countries || (lang === 'ru' ? 'Страны' : 'Countries')}
                   <ChevronDown className="w-4 h-4" />
                 </button>
@@ -68,11 +88,11 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                   <div className="bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5">
                     <div className="py-2">
                        {/* Country List */}
-                      {countries.map((country) => (
+                      {countries?.map((country) => (
                         <div key={country.id} className="group/country relative">
                            <button className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-crimson flex items-center justify-between font-medium transition-colors">
                               <div className="flex items-center gap-2">
-                               
+                                
                                 {country.name}
                               </div>
                               {/* Show arrow if has cities */}
@@ -108,6 +128,21 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                   </div>
                 </div>
               </div>
+
+               {navLinks.slice(2).map((link, index) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={`nav-${index + 2}-${link.href}`}
+                    href={link.href}
+                    className={`${
+                      isActive ? "text-crimson" : "text-gray-900"
+                    } hover:text-crimson px-3 py-2 rounded-md text-sm font-bold transition-colors`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
@@ -158,11 +193,11 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
             {/* Mobile Countries Accordion */}
             <div className="border-t border-gray-200 pt-2 mt-2">
                <button 
-                  onClick={() => setIsMobileCountriesOpen(!isMobileCountriesOpen)}
-                  className="w-full flex items-center justify-between px-3 py-2 text-base font-bold uppercase text-gray-900 hover:bg-gray-200 rounded-md"
+                 onClick={() => setIsMobileCountriesOpen(!isMobileCountriesOpen)}
+                 className="w-full flex items-center justify-between px-3 py-2 text-base font-bold uppercase text-gray-900 hover:bg-gray-200 rounded-md"
                >
-                  {dict?.nav?.countries || (lang === 'ru' ? 'Страны' : 'Countries')}
-                  <ChevronDown className={`w-5 h-5 transition-transform ${isMobileCountriesOpen ? 'rotate-180' : ''}`} />
+                 {dict?.nav?.countries || (lang === 'ru' ? 'Страны' : 'Countries')}
+                 <ChevronDown className={`w-5 h-5 transition-transform ${isMobileCountriesOpen ? 'rotate-180' : ''}`} />
                </button>
                
                {isMobileCountriesOpen && (

@@ -34,7 +34,7 @@ export default async function RootLayout({
     <html lang={lang}>
       <body className={`${manrope.variable} font-sans antialiased bg-gray-50 text-gray-900`}>
         <Navbar lang={lang as Locale} dict={dict} countries={countries} />
-        <div className="pt-20 min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col">
           {children}
         </div>
         <Footer lang={lang} dict={dict} />

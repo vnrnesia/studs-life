@@ -5,6 +5,14 @@
         "description": "Официальный партнёр университетов России, Европы и Азии",
         "cta": "Подать заявку"
     },
+    "nav": {
+        "home": "Главная",
+        "services": "Услуги",
+        "team": "Команда",
+        "about": "О нас",
+        "contact": "Контакты",
+        "countries": "Страны"
+    },
     "services": {
         "title": "Наши Услуги",
         "visa": "Визовые услуги",
@@ -63,6 +71,24 @@
     "team": {
         "title": "Наша Команда",
         "testimonials_title": "Истории Студентов"
+    },
+    "statistics": {
+        "resultsTitle": "НАШИ РЕЗУЛЬТАТЫ И МАСШТАБ",
+        "geographyTitle": "ГЕОГРАФИЯ СТУДЕНТОВ",
+        "results": {
+            "totalStudents": "студентов\nза всё время",
+            "lastYearStudents": "студентов только\nза прошлый учебный год",
+            "averageGrowth": "средний годовой рост",
+            "firstAttempt": "поступают с первой\nпопытки",
+            "scholarships": "получают стипендии"
+        },
+        "geography": {
+            "turkmenistan": "Туркменистан",
+            "turkey": "Турция",
+            "china": "Китай",
+            "uzbekistan": "Узбекистан",
+            "tajikistan": "Таджикистан"
+        }
     },
     "form": {
         "title": "Быстрая заявка",
@@ -171,12 +197,6 @@
     "footer": {
         "contact": "Контакты",
         "socials": "Мы в соцсетях"
-    },
-    "nav": {
-        "home": "Главная",
-        "services": "Услуги",
-        "about": "О нас",
-        "contact": "Контакты"
     },
     "servicesPage": {
         "hero": {

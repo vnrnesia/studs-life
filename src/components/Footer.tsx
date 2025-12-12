@@ -1,4 +1,7 @@
 import { Facebook, Instagram, Twitter } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import logo from "../assets/logo.svg";
 
 interface FooterProps {
   lang: string;
@@ -11,9 +14,17 @@ export default function Footer({ lang, dict }: FooterProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
          <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="col-span-1 md:col-span-2">
-               <span className="text-2xl font-black font-montserrat tracking-widest block mb-4">
-                 STUDENTS<span className="text-crimson">LIFE</span>
-               </span>
+               <div className="flex-shrink-0">
+            <Link href={`/${lang}`} className="text-2xl font-black text-gray-900 tracking-widest font-montserrat flex items-center">
+             
+              <Image 
+                src={logo} 
+                alt="students life" 
+                priority 
+                className="h-auto w-auto max-h-12" 
+              />
+            </Link>
+          </div>
                <p className="text-gray-600 max-w-sm">
                  Your reliable partner for education abroad and visa services since 2015.
                </p>
