@@ -10,6 +10,8 @@ import Form from "@/components/Form";
 
 import { getTeamMembers } from "@/lib/strapi";
 
+export const revalidate = 60;
+
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: langParam } = await params;
   const lang = langParam as Locale;

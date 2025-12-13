@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   description: "Study Abroad, Visa & Travel Services",
 };
 
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }

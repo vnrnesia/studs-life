@@ -23,8 +23,8 @@ export async function generateStaticParams() {
     }));
 }
 
-// Revalidate every hour
-export const revalidate = 3600;
+// Revalidate every 60 seconds (1 minute)
+export const revalidate = 60;
 
 export default async function CityPage({ params }: CityPageProps) {
   const { country, city: citySlug, lang } = await params;
