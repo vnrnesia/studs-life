@@ -25,22 +25,22 @@ export default function Footer({ lang, dict }: FooterProps) {
               />
             </Link>
           </div>
-               <p className="text-gray-600 max-w-sm">
-                 Your reliable partner for education abroad and visa services since 2015.
+               <p className="text-gray-600 max-w-sm mt-4">
+                 {dict?.footer?.description || "Your reliable partner for education abroad and visa services since 2015."}
                </p>
             </div>
             
             <div>
-               <h3 className="font-bold uppercase mb-4 text-crimson">{dict?.footer?.contact}</h3>
+               <h3 className="font-bold uppercase mb-4 text-crimson">{dict?.footer?.contact || "Contact"}</h3>
                <ul className="space-y-2 text-gray-700">
-                  <li>+1 (234) 567-890</li>
+                  <li>+993 71 832 749</li>
                   <li>info@studentslife.agency</li>
-                  <li>123 Education St, Moscow</li>
+                  <li>Turkmenistan, Turkmenabat</li>
                </ul>
             </div>
 
             <div>
-               <h3 className="font-bold uppercase mb-4 text-crimson">{dict?.footer?.socials}</h3>
+               <h3 className="font-bold uppercase mb-4 text-crimson">{dict?.footer?.socials || "Follow Us"}</h3>
                <div className="flex gap-4">
                   <a href="#" className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center hover:bg-crimson hover:text-white transition-colors">
                      <Instagram className="w-5 h-5" />
@@ -56,7 +56,7 @@ export default function Footer({ lang, dict }: FooterProps) {
          </div>
          
          <div className="border-t border-gray-200 pt-8 text-center text-gray-500 text-sm">
-            © {new Date().getFullYear()} Student's Life Agency. All rights reserved.
+            © {new Date().getFullYear()} Student's Life Agency. {dict?.footer?.copyright || "All rights reserved."}
          </div>
       </div>
     </footer>

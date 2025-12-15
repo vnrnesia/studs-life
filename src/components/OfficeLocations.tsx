@@ -1,0 +1,215 @@
+"use client";
+
+import { MapPin, Phone, Globe, Mail, Clock } from "lucide-react";
+import { motion } from "framer-motion";
+import { useState } from "react";
+
+interface OfficeLocationsProps {
+  lang: string;
+  dict?: any;
+}
+
+export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
+  const [activeOffice, setActiveOffice] = useState<string>("turkmenabat");
+
+  const offices = [
+    {
+      id: "turkmenabat",
+      country: "turkmenistan",
+      flag: "🇹🇲",
+      city: dict?.turkmenabat?.city || "ТУРКМЕНАБАД",
+      address: dict?.turkmenabat?.address || "офисное здание у городского парка, 4° офис слева от входа",
+      phone: "+993 71 832 749",
+      color: "green"
+    },
+    {
+      id: "mary",
+      country: "turkmenistan",
+      flag: "🇹🇲",
+      city: dict?.mary?.city || "МАРЫ",
+      address: dict?.mary?.address || "1ª микрорайон, 9-этажка, 2ª этаж, 2ª дверь справа",
+      phones: ["+993 71 856 226", "+993 71 859 994"],
+      color: "green"
+    },
+    {
+      id: "dashoguz",
+      country: "turkmenistan",
+      flag: "🇹🇲",
+      city: dict?.dashoguz?.city || "ДАШОГУЗ",
+      address: dict?.dashoguz?.address || "ул. А. Новаи, д. 17 (возле Ныгмат базара)",
+      phones: ["+993 71 787 424", "+993 71 787 423"],
+      color: "green"
+    },
+    {
+      id: "ashgabat",
+      country: "turkmenistan",
+      flag: "🇹🇲",
+      city: dict?.ashgabat?.city || "АШХАБАД",
+      address: dict?.ashgabat?.address || "ул. Г. Кулиева (Объездная), здание Hil Gurlusyk (БЦ Regus)",
+      phone: "+993 71 810 797",
+      color: "green"
+    },
+    {
+      id: "kazan",
+      country: "russia",
+      flag: "🇷🇺",
+      city: dict?.kazan?.city || "КАЗАНЬ",
+      address: dict?.kazan?.address || "ул. Пушкина, д. 52, оф. 306/4 (3 этаж)",
+      phone: "+7 919 685 61 94",
+      color: "blue"
+    }
+  ];
+
+  const activeOfficeData = offices.find(o => o.id === activeOffice) || offices[0];
+
+  return (
+    <section className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-20 w-72 h-72 bg-crimson rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-block px-4 py-1.5 rounded-full border border-crimson/20 bg-crimson/5 text-xs font-bold tracking-wider uppercase text-crimson mb-4">
+            <MapPin className="w-3 h-3 inline mr-2" />
+            {dict?.badge || "НАШИ АДРЕСА"}
+          </div>
+          <h2 className="text-4xl md:text-5xl font-black tracking-tight text-gray-900 mb-6">
+            {dict?.title || "Мы рядом с вами"}
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            {dict?.subtitle || "Офисы в Туркменистане и России для вашего удобства"}
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          
+          {/* Left: Office Cards Grid */}
+          <div className="grid sm:grid-cols-2 gap-4">
+            {offices.map((office) => {
+              const isActive = activeOffice === office.id;
+              const borderColor = office.color === "green" ? "border-green-500" : "border-blue-500";
+              const bgColor = office.color === "green" ? "bg-green-50" : "bg-blue-50";
+              const textColor = office.color === "green" ? "text-green-600" : "text-blue-600";
+
+              return (
+                <motion.button
+                  key={office.id}
+                  onClick={() => setActiveOffice(office.id)}
+                  className={`relative p-6 rounded-2xl border-2 text-left transition-all duration-300 ${
+                    isActive 
+                      ? `${borderColor} ${bgColor} shadow-xl scale-105` 
+                      : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-lg"
+                  }`}
+                  whileHover={{ y: -4 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeIndicator"
+                      className={`absolute -top-2 -right-2 w-6 h-6 rounded-full ${office.color === "green" ? "bg-green-500" : "bg-blue-500"} flex items-center justify-center`}
+                      transition={{ type: "spring", bounce: 0.3 }}
+                    >
+                      <div className="w-2 h-2 bg-white rounded-full" />
+                    </motion.div>
+                  )}
+                  
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-3xl">{office.flag}</span>
+                    <div>
+                      <p className="font-black text-gray-900">{office.city}</p>
+                    </div>
+                  </div>
+                  
+                  <p className="text-xs text-gray-600 line-clamp-2">
+                    {office.address}
+                  </p>
+                </motion.button>
+              );
+            })}
+          </div>
+
+          {/* Right: Active Office Details */}
+          <motion.div
+            key={activeOffice}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4 }}
+            className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 md:p-12 text-white shadow-2xl sticky top-8"
+          >
+            <div className="flex items-start gap-4 mb-8">
+              <div className={`w-16 h-16 rounded-2xl ${activeOfficeData.color === "green" ? "bg-green-500" : "bg-blue-500"} flex items-center justify-center text-4xl shadow-lg`}>
+                {activeOfficeData.flag}
+              </div>
+              <div>
+                <h3 className="text-3xl font-black">{activeOfficeData.city}</h3>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              {/* Address */}
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">{dict?.labels?.address || "Адрес"}</p>
+                  <p className="text-white/90">{activeOfficeData.address}</p>
+                </div>
+              </div>
+
+              {/* Phone(s) */}
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">{dict?.labels?.phone || "Телефон"}</p>
+                  {activeOfficeData.phone && (
+                    <a href={`tel:${activeOfficeData.phone}`} className="text-white/90 hover:text-white transition-colors block">
+                      {dict?.labels?.messenger || "ТГ / ВАТСАП / IMO"} {activeOfficeData.phone}
+                    </a>
+                  )}
+                  {activeOfficeData.phones && activeOfficeData.phones.map((phone, idx) => (
+                    <a key={idx} href={`tel:${phone}`} className="text-white/90 hover:text-white transition-colors block">
+                      {dict?.labels?.messenger || "ТГ / ВАТСАП / IMO"} {phone}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Working Hours */}
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                  <Clock className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">{dict?.labels?.workingHours || "Время работы"}</p>
+                  <p className="text-white/90">{dict?.labels?.weekdays || "Пн-Пт"}: 9:00 - 18:00</p>
+                  <p className="text-white/70 text-sm">{dict?.labels?.saturday || "Сб"}: 10:00 - 14:00</p>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="mt-8 pt-8 border-t border-white/10">
+              <a
+                href={`tel:${activeOfficeData.phone || activeOfficeData.phones?.[0]}`}
+                className="w-full bg-crimson hover:bg-crimson/90 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-crimson/20"
+              >
+                <Phone className="w-5 h-5" />
+                {dict?.labels?.callOffice || "Позвонить в офис"}
+              </a>
+            </div>
+          </motion.div>
+        </div>
+
+      
+      </div>
+    </section>
+  );
+}

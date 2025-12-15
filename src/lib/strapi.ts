@@ -256,7 +256,9 @@ export interface TeamMember {
     locale: string;
 }
 
-// ... existing code ...
+/**
+ * Get all team members
+ */
 export async function getTeamMembers(locale: string = 'en'): Promise<TeamMember[]> {
     const query = qs.stringify({
         locale,
@@ -273,51 +275,38 @@ export interface BlogPost {
     documentId: string;
     title: string;
     slug: string;
+    summary: string;
     content: string;
-    excerpt: string;
-    readingTime: string;
     publishedAt: string;
-    cover?: {
+    image?: {
         url: string;
         alternativeText?: string;
     };
+    author?: {
+        fullName: string;
+    };
+    readTime?: string;
     locale: string;
 }
 
 /**
- * Get latest blog posts
+ * Get latest blogs
  */
-export async function getLatestBlogs(locale: string = 'en', limit: number = 3): Promise<BlogPost[]> {
+export async function getLatestBlogs(locale: string = 'en'): Promise<BlogPost[]> {
     const query = qs.stringify({
         locale,
-        populate: {
-            country: true,
-            images: true
-        },
+        populate: '*',
         sort: ['publishedAt:desc'],
         pagination: {
-            pageSize: limit,
+            limit: 3,
         },
     });
 
     try {
-        // Fetch cities instead of blogs, as per user request to use "country writings" (cities)
-        const { data } = await strapiClient.get<StrapiResponse<City[]>>(`/cities?${query}`);
-
-        return data.data.map((city: City) => ({
-            id: city.id,
-            documentId: city.documentId,
-            title: city.title || city.name,
-            slug: `${city.country?.slug}/${city.slug}`, // Construct path: country/city
-            content: city.intro || '',
-            excerpt: city.intro || '',
-            readingTime: '5',
-            publishedAt: city.publishedAt,
-            cover: city.images && city.images.length > 0 ? city.images[0] : undefined,
-            locale: city.locale,
-        }));
+        const { data } = await strapiClient.get<StrapiResponse<BlogPost[]>>(`/blogs?${query}`);
+        return data.data;
     } catch (error) {
-        console.error('Error fetching blogs (cities):', error);
+        // Silently return empty array if blogs endpoint doesn't exist
         return [];
     }
 }

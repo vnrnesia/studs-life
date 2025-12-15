@@ -463,12 +463,6 @@
             "button": "Contact Us"
         }
     },
-    "latestJournal": {
-        "smallTitle": "Insights & Inspiration",
-        "title": "Explore our Latest journal",
-        "viewAll": "View all blogs",
-        "readTime": "min read"
-    },
     "thanksPage": {
         "title": "Thank You!",
         "subtitle": "Your application has been received successfully",
@@ -490,6 +484,103 @@
                 "button": "Chat on WhatsApp"
             },
             "home": "Back to Home"
+        }
+    },
+    "offices": {
+        "badge": "OUR OFFICES",
+        "title": "We're Close to You",
+        "subtitle": "Offices in Turkmenistan and Russia for your convenience",
+        "turkmenabat": {
+            "city": "TURKMENABAT",
+            "address": "Office building near the city park, 4th office on the left from the entrance"
+        },
+        "mary": {
+            "city": "MARY",
+            "address": "1st microdistrict, 9-story building, 2nd floor, 2nd door on the right"
+        },
+        "dashoguz": {
+            "city": "DASHOGUZ",
+            "address": "A. Novai St., building 17 (near Nygmat bazaar)"
+        },
+        "ashgabat": {
+            "city": "ASHGABAT",
+            "address": "G. Kuliyeva St. (Bypass Road), Hil Gurlusyk building (Regus Business Center)"
+        },
+        "kazan": {
+            "city": "KAZAN",
+            "address": "Pushkina St., 52, office 306/4 (3rd floor)"
+        },
+        "labels": {
+            "address": "Address",
+            "phone": "Phone",
+            "messenger": "TG / WHATSAPP / IMO",
+            "workingHours": "Working Hours",
+            "weekdays": "Mon-Fri",
+            "saturday": "Sat",
+            "callOffice": "Call Office",
+            "visitWebsite": "Visit Website"
+        },
+        "countries": {
+            "turkmenistan": "Turkmenistan",
+            "russia": "Russia"
+        },
+        "websites": {
+            "international": "For users abroad",
+            "turkmenistan": "For users in Turkmenistan"
+        }
+    },
+    "howItWorks": {
+        "getStarted": "Get Started",
+        "currentStep": "Current Step",
+        "phase": "Phase"
+    },
+    "latestJournal": {
+        "title": "Latest From Our Journal",
+        "subtitle": "Stay updated with the latest news, tips, and study abroad guides from our experts.",
+        "viewAll": "View All Posts",
+        "noImage": "No Image",
+        "admin": "Admin",
+        "readMore": "Read More"
+    },
+    "featureTabs": {
+        "title": "Comprehensive Student Support",
+        "subtitle": "Detailed assistance at every step of your study abroad journey.",
+        "features": {
+            "admissions": {
+                "title": "University Admissions",
+                "description": "Guiding through top-tier university applications with personalized strategy and detailed roadmap planning."
+            },
+            "visa": {
+                "title": "Visa Assistance",
+                "description": "Hassle-free student visa processing with high success rates and comprehensive document verification."
+            },
+            "accommodation": {
+                "title": "Accommodation",
+                "description": "Finding safe, affordable, and comfortable housing options near your campus."
+            },
+            "career": {
+                "title": "Career Guidance",
+                "description": "Post-graduation planning, resume building, and interview preparation for a successful career launch."
+            }
+        }
+    },
+    "howItWorks": {
+        "getStarted": "Get Started",
+        "currentStep": "Current Step",
+        "phase": "Phase",
+        "steps": {
+            "consultation": {
+                "title": "Free Consultation",
+                "description": "We analyze your academic profile and career goals to recommend the best universities and programs tailored to your aspirations."
+            },
+            "preparation": {
+                "title": "Preparation & Visa",
+                "description": "Our experts handle the entire application process, document verification, and visa submission to ensure a smooth approval."
+            },
+            "departure": {
+                "title": "Departure & Support",
+                "description": "From flight bookings to finding accommodation, we support you until you are settled in your new student life."
+            }
         }
     }
 }

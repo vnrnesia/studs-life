@@ -16,6 +16,8 @@ import {
 } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import Image from "next/image";
+import StudentFlyingImg from "@/assets/student-flying.webp";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -43,7 +45,7 @@ export default function Services({ lang, dict }: ServicesProps) {
       key: "ticket", 
       icon: Ticket,
       className: "md:col-span-2 bg-white",
-      type: "credit-card",
+      type: "flight-ticket",
       label: "Cost-Effective plans"
     },
     { 
@@ -86,6 +88,25 @@ export default function Services({ lang, dict }: ServicesProps) {
 
   const renderCardContent = (service: any) => {
     switch (service.type) {
+      case "flight-ticket":
+        return (
+          <>
+            {/* Image Container representing bottom 75% of the card */}
+            <div className="absolute bottom-0 left-0 right-0 h-[75%] overflow-hidden rounded-b-[2rem]">
+               <Image 
+                 src={StudentFlyingImg} 
+                 alt="Student Flying" 
+                 fill 
+                 className="object-cover object-top opacity-70 group-hover:opacity-100 transform translate-y-8 group-hover:translate-y-0 transition-all duration-700 ease-out"
+                 style={{
+                   maskImage: 'linear-gradient(to bottom, transparent, black 15%)',
+                   WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%)'
+                 }}
+               />
+            </div>
+          </>
+        );
+
       case "credit-card":
         return (
           <div className="mt-8 flex justify-center">
@@ -144,7 +165,7 @@ export default function Services({ lang, dict }: ServicesProps) {
         return (
           <div className="mt-6 grid grid-cols-3 gap-3">
              {[FileText, Zap, Shield, Globe, Cpu, Layout].map((Icon, idx) => (
-               <div key={idx} className="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center mx-auto hover:bg-black hover:text-white transition-colors duration-300">
+               <div key={idx} className="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center mx-auto text-gray-700 hover:bg-black hover:text-white transition-colors duration-300">
                  <Icon className="w-5 h-5" />
                </div>
              ))}
@@ -232,12 +253,12 @@ export default function Services({ lang, dict }: ServicesProps) {
                   </div>
                   
                   <div className="flex-grow">
-                    {renderCardContent(service)}
+                    {service.type !== "flight-ticket" && renderCardContent(service)}
                   </div>
                 </div>
               )}
               
-              {service.type === "image-card" && renderCardContent(service)}
+              {(service.type === "image-card" || service.type === "flight-ticket") && renderCardContent(service)}
             </div>
           ))}
         </div>

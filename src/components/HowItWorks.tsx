@@ -39,13 +39,15 @@ interface HowItWorksProps {
   tagline?: string;
   title?: string;
   className?: string;
+  dict?: any;
 }
 
 export default function HowItWorks({
   steps,
   tagline = "EASY ONBOARDING",
   title = "How it works?",
-  className
+  className,
+  dict
 }: HowItWorksProps) {
   const [activeStepId, setActiveStepId] = useState(steps[0]?.id);
 
@@ -129,7 +131,7 @@ export default function HowItWorks({
                 </p>
                 
                 <button className="bg-neutral-900 text-white px-8 py-4 rounded-full font-bold inline-flex items-center gap-2 hover:bg-neutral-800 transition-colors shadow-lg shadow-neutral-900/20 group">
-                  Get Started
+                  {dict?.getStarted || "Get Started"}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
               </motion.div>
@@ -156,9 +158,6 @@ export default function HowItWorks({
                     priority
                   />
                   
-                  {/* Subtle overlay for better text contrast if we had overlay text */}
-                  {/* <div className="absolute inset-0 bg-black/10" /> */}
-                  
                   {/* Floating badge example */}
                   <div className="absolute bottom-6 left-6 right-6">
                      <div className="bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/50 flex items-center gap-4">
@@ -171,8 +170,8 @@ export default function HowItWorks({
                           ) : <UserCheck className="w-5 h-5"/>}
                        </div>
                        <div>
-                         <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">Current Step</p>
-                         <p className="text-sm font-bold text-gray-900">{activeStep.title} Phase</p>
+                         <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">{dict?.currentStep || "Current Step"}</p>
+                         <p className="text-sm font-bold text-gray-900">{activeStep.title} {dict?.phase || "Phase"}</p>
                        </div>
                      </div>
                   </div>

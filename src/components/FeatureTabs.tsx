@@ -26,7 +26,7 @@ export interface FeatureTab {
   id: string;
   title: string;
   description: string;
-  iconName: string; // Changed from icon: LucideIcon to iconName: string
+  iconName: string; 
   image: string;
 }
 
@@ -145,7 +145,6 @@ export default function FeatureTabs({
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className="relative w-full h-full rounded-2xl overflow-hidden"
               >
-                <div className="absolute inset-0 bg-neutral-900/20 z-10" />
                 
                 {/* We use a generic placeholder if image is missing, or the image provided */}
                 {activeFeature.image ? (
@@ -169,7 +168,7 @@ export default function FeatureTabs({
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
                   >
-                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium text-white mb-3">
+                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-xs font-medium text-white mb-3">
                       <ActiveIcon className="w-3 h-3" />
                       <span>{activeFeature.title}</span>
                    </div>

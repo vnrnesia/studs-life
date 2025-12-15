@@ -1,85 +1,132 @@
 "use client";
 
-import { BlogPost, getStrapiImageUrl } from "@/lib/strapi";
-import { ArrowRight, Sparkles } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight, Calendar, User } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-interface LatestJournalProps {
-    lang: string;
-    dict: any;
-    posts: BlogPost[];
+interface JournalPost {
+  id: string;
+  slug: string;
+  title: string;
+  summary: string;
+  publishedAt: string;
+  image?: string;
+  author?: string;
+  readTime?: string;
 }
 
-export default function LatestJournal({ lang, dict, posts }: LatestJournalProps) {
-    // If no posts, we might still want to show the section if the design requires it, 
-    // but usually better to hide or show placeholders.
-    // For now, if empty, we hide it.
-    if (!posts || posts.length === 0) return null;
+interface LatestJournalProps {
+  lang: string;
+  dict: any;
+  posts: any[]; // Using any[] to match Strapi response structure
+}
 
-    return (
-        <section className="py-24 bg-white relative overflow-hidden">
-             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-center">
-                    {/* Left Column */}
-                    <div className="lg:w-1/3 flex flex-col items-start text-left">
-                        <div className="flex items-center gap-2 mb-6">
-                             <Sparkles className="w-5 h-5 text-black" />
-                             <span className="font-bold text-gray-900">{dict.smallTitle}</span>
-                        </div>
-                        
-                        <h2 className="text-5xl md:text-6xl font-black text-gray-900 leading-[1.1] mb-10">
-                            {/* Best effort to reproduce the style safely across languages by rendering whole string */}
-                            {dict.title}
-                        </h2>
+export default function LatestJournal({ lang, dict, posts = [] }: LatestJournalProps) {
+  // If no posts, don't render section
+  if (!posts || posts.length === 0) return null;
 
-                        <Link
-                            href={`/${lang}/#countries`}
-                            className="inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-gray-800 transition-all group"
-                        >
-                            {dict.viewAll}
-                            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                        </Link>
-                    </div>
+  return (
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Header */}
+        <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
+          <div className="max-w-2xl">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6">
+              {dict?.title || "Latest From Our Journal"}
+            </h2>
+            <p className="text-lg text-gray-600">
+               {dict?.subtitle || "Stay updated with the latest news, tips, and study abroad guides from our experts."}
+            </p>
+          </div>
+          
+          <Link 
+            href={`/${lang}/blog`}
+            className="group hidden md:flex items-center gap-2 text-crimson font-bold hover:gap-3 transition-all"
+          >
+            {dict?.viewAll || "View All Posts"}
+            <ArrowRight className="w-5 h-5" />
+          </Link>
+        </div>
 
-                    {/* Right Column */}
-                    <div className="lg:w-2/3 flex flex-col gap-6 w-full">
-                        {posts.map((post) => (
-                            <Link 
-                                href={`/${lang}/${post.slug}`} 
-                                key={post.id} 
-                                className="group bg-white rounded-3xl p-4 flex flex-col sm:flex-row gap-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 items-center border border-gray-100"
-                            >
-                                <div className="w-full sm:w-48 h-48 sm:h-32 relative rounded-2xl overflow-hidden shrink-0">
-                                    {post.cover ? (
-                                        <Image
-                                            src={getStrapiImageUrl(post.cover.url)}
-                                            alt={post.cover.alternativeText || post.title}
-                                            fill
-                                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                            unoptimized
-                                        />
-                                    ) : (
-                                        <div className="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400">
-                                           <span className="text-4xl">📄</span>
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="flex-1 w-full sm:w-auto">
-                                    <div className="flex items-center gap-2 text-sm text-gray-500 mb-3 font-medium">
-                                        <span>{new Date(post.publishedAt).toLocaleDateString(lang, { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                                        <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-                                        <span>{post.readingTime || '5'} {dict.readTime}</span>
-                                    </div>
-                                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-gray-700 transition-colors line-clamp-2 leading-tight">
-                                        {post.title}
-                                    </h3>
-                                </div>
-                            </Link>
-                        ))}
-                    </div>
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <Link 
+              key={post.id} 
+              href={`/${lang}/blog/${post.slug || '#'}`}
+              className="group flex flex-col h-full bg-gray-50 border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-300 hover:-translate-y-1"
+            >
+              {/* Image */}
+              <div className="relative h-60 w-full overflow-hidden">
+                {post.image ? (
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                    <span className="text-gray-400">{dict?.noImage || "No Image"}</span>
+                  </div>
+                )}
+                {/* Date Badge */}
+                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-gray-900 flex items-center gap-2 shadow-sm">
+                  <Calendar className="w-3 h-3 text-crimson" />
+                  {new Date(post.publishedAt).toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-US', {
+                    month: 'short',
+                    day: 'numeric'
+                  })}
                 </div>
-             </div>
-        </section>
-    );
+              </div>
+
+              {/* Content */}
+              <div className="p-6 flex flex-col flex-grow">
+                {/* Meta */}
+                <div className="flex items-center gap-4 text-xs font-medium text-gray-500 mb-4">
+                  <div className="flex items-center gap-1.5">
+                    <User className="w-3.5 h-3.5" />
+                    {post.author || dict?.admin || "Admin"}
+                  </div>
+                  {post.readTime && (
+                    <>
+                      <div className="w-1 h-1 rounded-full bg-gray-300" />
+                      <div>{post.readTime}</div>
+                    </>
+                  )}
+                </div>
+
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-crimson transition-colors line-clamp-2">
+                  {post.title}
+                </h3>
+                
+                <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-6 flex-grow">
+                  {post.summary || post.description}
+                </p>
+
+                <div className="flex items-center text-crimson text-sm font-bold mt-auto">
+                  {dict?.readMore || "Read More"}
+                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* Mobile View All */}
+        <div className="mt-12 text-center md:hidden">
+           <Link 
+            href={`/${lang}/blog`}
+            className="inline-flex items-center gap-2 text-crimson font-bold"
+          >
+            {dict?.viewAll || "View All Posts"}
+            <ArrowRight className="w-5 h-5" />
+          </Link>
+        </div>
+
+      </div>
+    </section>
+  );
 }
