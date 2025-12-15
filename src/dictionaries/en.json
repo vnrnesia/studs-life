@@ -50,23 +50,22 @@
         }
     },
     "whyUs": {
-        "title": "Why Choose Us",
-        "trust": {
-            "header": "Trust",
-            "desc": "Verified partners and transparent process."
-        },
-        "support": {
-            "header": "Support",
-            "desc": "24/7 assistance for students abroad."
-        },
-        "global": {
-            "header": "Global Reach",
-            "desc": "Connections in over 20 countries."
-        },
-        "team": {
-            "header": "Expert Team",
-            "desc": "Experienced counselors and lawyers."
-        }
+        "titlePart1": "WHY",
+        "titlePart2": "WITH US",
+        "titlePart3": "PROFITABLE?",
+        "decoration": "COOPERATION",
+        "badge": "7 Reasons",
+        "leftFeatures": [
+            "Stable flow of foreign students every year",
+            "Pre-selected and prepared candidates"
+        ],
+        "rightFeatures": [
+            "Full cycle support from application to adaptation",
+            "Legal transparency and official work format",
+            "High-level students increasing university academic rating",
+            "Joint educational and PR projects",
+            "Predictable quota increase and long-term cooperation"
+        ]
     },
     "team": {
         "title": "Meet Our Team",
