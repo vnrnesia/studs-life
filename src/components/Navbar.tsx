@@ -148,19 +148,42 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
 
           {/* Language Switcher & Mobile Menu Button */}
           <div className="flex items-center gap-4">
-            <div className="hidden md:flex items-center gap-2">
-               <Globe className="w-4 h-4 text-gray-600" />
-               <div className="flex gap-2 text-sm font-bold">
-                 {i18n.locales.map((locale) => (
-                   <Link
-                     key={locale}
-                     href={redirectedPathName(locale)}
-                     className={`uppercase ${lang === locale ? "text-crimson decoration-2 underline-offset-4 underline" : "text-gray-900 hover:text-gray-700"}`}
-                   >
-                     {locale}
-                   </Link>
-                 ))}
-               </div>
+            {/* Language Switcher Dropdown (Desktop) */}
+            <div className="hidden md:block relative group">
+              <button className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-bold text-gray-900 hover:text-crimson transition-colors">
+                <Globe className="w-4 h-4" />
+                <span className="uppercase">{lang}</span>
+                <ChevronDown className="w-4 h-4" />
+              </button>
+              
+              {/* Dropdown Panel */}
+              <div className="absolute right-0 pt-2 w-40 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                <div className="bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 py-2">
+                  {i18n.locales.map((locale) => {
+                    const flags = { en: 'gb', ru: 'ru', tk: 'tm' };
+                    const names = { en: 'English', ru: 'Русский', tk: 'Türkmençe' };
+                    return (
+                      <Link
+                        key={locale}
+                        href={redirectedPathName(locale)}
+                        className={`group flex items-center px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${
+                          lang === locale ? 'text-crimson font-bold bg-gray-50' : 'text-gray-700'
+                        }`}
+                      >
+                        <div className="relative w-5 h-3.5 mr-3 shadow-sm rounded-[1px] overflow-hidden">
+                          <Image
+                            src={`https://flagcdn.com/w40/${flags[locale as keyof typeof flags]}.png`}
+                            alt={names[locale as keyof typeof names]}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        {names[locale as keyof typeof names]}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
 
             <div className="-mr-2 flex md:hidden">
@@ -225,17 +248,36 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                )}
             </div>
 
-             <div className="border-t border-gray-200 mt-4 pt-4 flex justify-center gap-6">
-                 {i18n.locales.map((locale) => (
-                   <Link
-                     key={locale}
-                     href={redirectedPathName(locale)}
-                     className={`uppercase font-bold text-lg ${lang === locale ? "text-crimson" : "text-gray-900"}`}
-                   >
-                     {locale}
-                   </Link>
-                 ))}
-            </div>
+             {/* Mobile Language Switcher */}
+             <div className="border-t border-gray-200 mt-4 pt-4">
+               <div className="px-3 py-2 text-xs font-bold text-gray-500 uppercase tracking-wider">Language</div>
+               <div className="space-y-1">
+                 {i18n.locales.map((locale) => {
+                   const flags = { en: 'gb', ru: 'ru', tk: 'tm' };
+                   const names = { en: 'English', ru: 'Русский', tk: 'Türkmençe' };
+                   return (
+                     <Link
+                       key={locale}
+                       href={redirectedPathName(locale)}
+                       className={`flex items-center px-3 py-2 rounded-md text-sm font-bold transition-colors ${
+                         lang === locale ? 'text-crimson bg-white shadow-sm ring-1 ring-gray-200' : 'text-gray-900 hover:bg-gray-100'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                        <div className="relative w-5 h-3.5 mr-3 shadow-sm rounded-[1px] overflow-hidden">
+                          <Image
+                            src={`https://flagcdn.com/w40/${flags[locale as keyof typeof flags]}.png`}
+                            alt={names[locale as keyof typeof names]}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                       {names[locale as keyof typeof names]}
+                     </Link>
+                   );
+                 })}
+               </div>
+             </div>
           </div>
         </div>
       )}

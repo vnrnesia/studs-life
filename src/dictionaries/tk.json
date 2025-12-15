@@ -295,5 +295,106 @@
                 "description": "Awia peteklerini bronlamakdan başlap ýaşaýyş ýeri tapmaga çenli, täze talyp durmuşyňyza ýerleşýänçäňiz goldaw berýäris."
             }
         }
+    },
+    "aboutPage": {
+        "hero": {
+            "title": "Global bilimde ygtybarly ýoldaşyňyz",
+            "subtitle": "Dünýäniň islendik ýerinde arzuwlaryňyza ýetmek üçin talyplara goldaw berýäris"
+        },
+        "mission": {
+            "title": "Missiýamyz",
+            "content": "Diňe bir okuw däl, eýsem geljegi üpjün etmek."
+        },
+        "vision": {
+            "title": "Gözýetimimiz",
+            "content": "Halkara konsultasiýada standartlary kesgitlemek."
+        },
+        "values": {
+            "title": "Gymmatlyklarymyz",
+            "content": "Ynam, Aýdyňlyk, Durnuklylyk."
+        },
+        "timeline": {
+            "title": "Biziň ýolumyz",
+            "milestones": [
+                {
+                    "year": "2015",
+                    "title": "Döredilmegi",
+                    "description": "Halkara bilim maslahatlaryny özgertmek maksady bilen esaslandyryldy"
+                },
+                {
+                    "year": "2018",
+                    "title": "Giňelmek we Täze şahamçalar",
+                    "description": "Dünýä derejesinde talyplara hyzmat etmek üçin birnäçe ýurtda ofisler açyldy"
+                },
+                {
+                    "year": "2024",
+                    "title": "1200+ Üstünlikli arza",
+                    "description": "1200-den gowrak talyba bilim arzuwlaryna ýetmäge kömek etdik"
+                }
+            ]
+        },
+        "departments": {
+            "title": "Biziň ekspertiza ugurlarymyz",
+            "list": [
+                {
+                    "title": "Halkara hyzmatdaşlyk",
+                    "description": "Dünýä boýunça uniwersitetler bilen hyzmatdaşlyk gurmak"
+                },
+                {
+                    "title": "Satuw we Maslahat",
+                    "description": "Bilim syýahatyňyz üçin hünärmen goldawy"
+                },
+                {
+                    "title": "Müşderi üstünligi",
+                    "description": "Okuw döwrüňizde durnukly goldawy üpjün etmek"
+                },
+                {
+                    "title": "Media we Mazmun",
+                    "description": "Talyplar üçin peýdaly resurslary döretmek"
+                },
+                {
+                    "title": "Terjime hyzmatlary",
+                    "description": "Professional resminama terjimesi we tassyklama"
+                }
+            ]
+        },
+        "licenses": {
+            "title": "Resmi ygtyýarnamalar",
+            "subtitle": "Halkara guramalar tarapyndan tassyklanan we ynamdar"
+        },
+        "cta": {
+            "title": "Syýahatyňyza başlamaga taýynmy?",
+            "button": "Habarlaşyň"
+        }
+    },
+    "servicesPage": {
+        "hero": {
+            "title": "BILIMDE, DURMUŞDA WE KARÝERADA SYÝAHATYŇYZ ŞU ÝERDEN BAŞLAÝAR",
+            "subtitle": "Uniwersitete girmekden başlap ýaşaýyş ýeri, wiza proseduralary we şähere uýgunlaşma çenli doly hyzmat.",
+            "cta": "Mugt maslahat"
+        }
+    },
+    "thanksPage": {
+        "title": "Sag boluň!",
+        "subtitle": "Arzaňyz üstünlikli kabul edildi",
+        "message": "Toparymyz indiki ädimleri ara alyp maslahatlaşmak üçin siziň bilen tizara habarlaşar.",
+        "ctas": {
+            "instagram": {
+                "title": "Sosial media",
+                "description": "Täzelikler we talyp hekaýalary üçin bizi Instagram-da yzarlaň",
+                "button": "Instagram-da yzarlamak"
+            },
+            "pdf": {
+                "title": "Ýüklenip alynýan mazmun",
+                "description": "Russiýa Talyp Gollanmasy PDF-ini ýükläp alyň",
+                "button": "PDF ýüklemek"
+            },
+            "whatsapp": {
+                "title": "Habarlaşmak",
+                "description": "Garaşmak islemeýärsiňizmi? Bize WhatsApp-dan ýazyň",
+                "button": "WhatsApp-dan ýazmak"
+            },
+            "home": "Baş sahypa gaýtmak"
+        }
     }
 }
