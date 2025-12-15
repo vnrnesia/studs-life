@@ -242,11 +242,6 @@
             "turkmenistan": "Türkmenistandaky ulanyjylar üçin"
         }
     },
-    "howItWorks": {
-        "getStarted": "Başlamak",
-        "currentStep": "Häzirki ädim",
-        "phase": "Tapgyr"
-    },
     "latestJournal": {
         "title": "Soňky habarlar",
         "subtitle": "Hünärmenlerimizden soňky habarlar, maslahatlar we daşary ýurtda okuw boýunça gollanmalar bilen tanyş boluň.",
@@ -372,6 +367,194 @@
             "title": "BILIMDE, DURMUŞDA WE KARÝERADA SYÝAHATYŇYZ ŞU ÝERDEN BAŞLAÝAR",
             "subtitle": "Uniwersitete girmekden başlap ýaşaýyş ýeri, wiza proseduralary we şähere uýgunlaşma çenli doly hyzmat.",
             "cta": "Mugt maslahat"
+        },
+        "coreServices": {
+            "title": "Biziň Esasy Hyzmatlarymyz",
+            "visa": {
+                "title": "Wizalar we Ýaşaýyş rugsatnamasy",
+                "desc": "Ähli býurokratik prosesleriň ýanynda bolmak."
+            },
+            "university": {
+                "title": "Ýokary Okuw Jaýyna Girmek",
+                "desc": "Fakultet saýlamak we arzalary dolandyrmak."
+            },
+            "accommodation": {
+                "title": "Ýaşaýyş jaýy",
+                "desc": "Umumy ýaşaýyş jaýlary, kwartira kärendesi we goňşy tapmak."
+            },
+            "transport": {
+                "title": "Ulag we Garşylamak",
+                "desc": "Awia petekleri we aeroportdan transfer."
+            },
+            "translation": {
+                "title": "Terjimeler we Resminamalar",
+                "desc": "Resmi terjime we nostrifikasiýa."
+            },
+            "support": {
+                "title": "Uýgunlaşma we Goldaw",
+                "desc": "Şäherde ugur tapmak we 24/7 goldaw liniýasy."
+            }
+        },
+        "costOfLiving": {
+            "title": "Talyp Durmuşynyň Gollanmasy",
+            "subtitle": "Şäherler boýunça ortaça aýlyk çykdajylar",
+            "rent": "Kireý",
+            "food": "Iýmit",
+            "transport": "Ulag",
+            "total": "Jemi / Aý",
+            "data": {
+                "russia": {
+                    "name": "Russiýa",
+                    "cities": [
+                        {
+                            "name": "Moskwa",
+                            "rent": "$400-600",
+                            "food": "$200-300",
+                            "transport": "$30",
+                            "total": "$650-1000"
+                        },
+                        {
+                            "name": "Sankt-Peterburg",
+                            "rent": "$300-500",
+                            "food": "$180-250",
+                            "transport": "$25",
+                            "total": "$500-800"
+                        },
+                        {
+                            "name": "Kazan",
+                            "rent": "$200-350",
+                            "food": "$150-200",
+                            "transport": "$20",
+                            "total": "$350-600"
+                        }
+                    ]
+                },
+                "china": {
+                    "name": "Hytaý",
+                    "cities": [
+                        {
+                            "name": "Pekin",
+                            "rent": "$500-800",
+                            "food": "$250-350",
+                            "transport": "$30",
+                            "total": "$800-1200"
+                        },
+                        {
+                            "name": "Şanhaý",
+                            "rent": "$600-900",
+                            "food": "$300-400",
+                            "transport": "$30",
+                            "total": "$900-1400"
+                        },
+                        {
+                            "name": "Guançžou",
+                            "rent": "$400-600",
+                            "food": "$200-300",
+                            "transport": "$25",
+                            "total": "$650-950"
+                        }
+                    ]
+                },
+                "turkey": {
+                    "name": "Türkiýe",
+                    "cities": [
+                        {
+                            "name": "Stambul",
+                            "rent": "$300-500",
+                            "food": "$200-300",
+                            "transport": "$40",
+                            "total": "$550-850"
+                        },
+                        {
+                            "name": "Ankara",
+                            "rent": "$200-350",
+                            "food": "$150-250",
+                            "transport": "$25",
+                            "total": "$400-650"
+                        },
+                        {
+                            "name": "Izmir",
+                            "rent": "$250-400",
+                            "food": "$180-280",
+                            "transport": "$30",
+                            "total": "$500-750"
+                        }
+                    ]
+                }
+            }
+        },
+        "destinations": {
+            "title": "Meşhur Ugurlar",
+            "cities": [
+                {
+                    "name": "Moskwa",
+                    "country": "Russiýa",
+                    "majors": "Medisina, Inženerçilik",
+                    "img": "https://images.unsplash.com/photo-1513326738677-b964603b136d?q=80&w=1000&auto=format&fit=crop"
+                },
+                {
+                    "name": "Sankt-Peterburg",
+                    "country": "Russiýa",
+                    "majors": "Sungat, Gumanitar ylymlar",
+                    "img": "https://images.unsplash.com/photo-1556610961-2fecc5927173?q=80&w=1000&auto=format&fit=crop"
+                },
+                {
+                    "name": "Pekin",
+                    "country": "Hytaý",
+                    "majors": "Tehnologiýalar, Biznes",
+                    "img": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=1000&auto=format&fit=crop"
+                },
+                {
+                    "name": "Şanhaý",
+                    "country": "Hytaý",
+                    "majors": "Maliýe, Ykdysadyýet",
+                    "img": "https://images.unsplash.com/photo-1548957175-84f0f9af659e?q=80&w=1000&auto=format&fit=crop"
+                },
+                {
+                    "name": "Stambul",
+                    "country": "Türkiýe",
+                    "majors": "Taryh, Hünärmentçilik",
+                    "img": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=80&w=1000&auto=format&fit=crop"
+                },
+                {
+                    "name": "Ankara",
+                    "country": "Türkiýe",
+                    "majors": "Syýasat, Hukuk",
+                    "img": "https://images.unsplash.com/photo-1589030343991-69ea1433b941?q=80&w=1000&auto=format&fit=crop"
+                }
+            ]
+        },
+        "accommodationAssistant": {
+            "title": "Nirede ýaşarsyňyz?",
+            "dorms": {
+                "title": "Umumy ýaşaýyş jaýlary",
+                "price": "$70-$150",
+                "desc": "Iň tygşytly wariant, aragatnaşyk."
+            },
+            "shared": {
+                "title": "Talyp kwartiralary",
+                "price": "$150-$250",
+                "desc": "Has köp azatlyk, umumy çykdajylar."
+            },
+            "private": {
+                "title": "Hususy kwartira",
+                "price": "$300+",
+                "desc": "Doly rahatlyk we şahsy durmuş."
+            }
+        },
+        "trust": {
+            "title": "Resmi Resminamalar we Ygtyýarnamalar"
+        },
+        "faq": {
+            "title": "Ýygy soralýan soraglar",
+            "q1": {
+                "q": "Resminamalary haçan tabşyrmaly?",
+                "a": "Mümkin boldugyça ir."
+            },
+            "q2": {
+                "q": "Hyzmatlaryň bahasy näçe?",
+                "a": "Pakete bagly."
+            }
         }
     },
     "thanksPage": {
