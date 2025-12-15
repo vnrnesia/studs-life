@@ -256,9 +256,7 @@ export interface TeamMember {
     locale: string;
 }
 
-/**
- * Get all team members
- */
+// ... existing code ...
 export async function getTeamMembers(locale: string = 'en'): Promise<TeamMember[]> {
     const query = qs.stringify({
         locale,
@@ -268,4 +266,58 @@ export async function getTeamMembers(locale: string = 'en'): Promise<TeamMember[
 
     const { data } = await strapiClient.get<StrapiResponse<TeamMember[]>>(`/team-members?${query}`);
     return data.data;
+}
+
+export interface BlogPost {
+    id: number;
+    documentId: string;
+    title: string;
+    slug: string;
+    content: string;
+    excerpt: string;
+    readingTime: string;
+    publishedAt: string;
+    cover?: {
+        url: string;
+        alternativeText?: string;
+    };
+    locale: string;
+}
+
+/**
+ * Get latest blog posts
+ */
+export async function getLatestBlogs(locale: string = 'en', limit: number = 3): Promise<BlogPost[]> {
+    const query = qs.stringify({
+        locale,
+        populate: {
+            country: true,
+            images: true
+        },
+        sort: ['publishedAt:desc'],
+        pagination: {
+            pageSize: limit,
+        },
+    });
+
+    try {
+        // Fetch cities instead of blogs, as per user request to use "country writings" (cities)
+        const { data } = await strapiClient.get<StrapiResponse<City[]>>(`/cities?${query}`);
+
+        return data.data.map((city: City) => ({
+            id: city.id,
+            documentId: city.documentId,
+            title: city.title || city.name,
+            slug: `${city.country?.slug}/${city.slug}`, // Construct path: country/city
+            content: city.intro || '',
+            excerpt: city.intro || '',
+            readingTime: '5',
+            publishedAt: city.publishedAt,
+            cover: city.images && city.images.length > 0 ? city.images[0] : undefined,
+            locale: city.locale,
+        }));
+    } catch (error) {
+        console.error('Error fetching blogs (cities):', error);
+        return [];
+    }
 }

@@ -71,7 +71,7 @@ export default function Countries({ lang, dict }: CountriesProps) {
   };
 
   return (
-    <section className="relative py-32 bg-gray-50 overflow-hidden">
+    <section id="countries" className="relative py-32 bg-gray-50 overflow-hidden">
 
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 flex justify-between items-end">
