@@ -11,16 +11,41 @@
         "team": "Team",
         "about": "About",
         "contact": "Contact",
-        "countries": "Countries"
+        "countries": "Countries",
+        "company": "Company",
+        "letsTalk": "Let's Talk",
+        "megaMenu": {
+            "about": "About Us",
+            "aboutDesc": "Learn about our mission and values",
+            "team": "Our Team",
+            "teamDesc": "Meet the experts behind our success",
+            "careers": "Careers",
+            "careersDesc": "Join our growing international team",
+            "services": "Services",
+            "servicesDesc": "Comprehensive educational support",
+            "pricing": "Pricing",
+            "pricingDesc": "Transparent packages and costs",
+            "blog": "Blog",
+            "blogDesc": "Latest news and student guides",
+            "getConsultation": "Get Free Consultation",
+            "ceoRole": "test",
+            "ceoQuote": "We build bridges between dreams and reality for students worldwide."
+        }
     },
     "services": {
         "title": "Our Services",
         "visa": "Visa Services",
+        "visaDesc": "99% Success Rate",
         "university": "University Admission",
+        "universityDesc": "Top Global Universities",
         "translation": "Document Translation",
-        "work": "Work Visas",
-        "umra": "Umra Packages",
-        "ticket": "Flight Tickets"
+        "translationDesc": "Certified & Fast",
+        "work": "Career Support",
+        "workDesc": "Internships & Jobs",
+        "accommodation": "Accommodation",
+        "accommodationDesc": "Dorms & Apartments",
+        "ticket": "Flight Tickets",
+        "ticketDesc": "Student Discounts"
     },
     "countries": {
         "title": "Popular Destinations",

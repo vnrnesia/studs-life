@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type Locale, i18n } from "@/i18n-config";
-import { useState } from "react";
-import { Menu, X, Globe, ChevronDown, ChevronRight, MapPin } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, X, Globe, ChevronDown, ChevronRight, Phone } from "lucide-react";
 import { Country } from "@/lib/strapi";
 import logo from "../assets/logo.svg";
-import Image from "next/image"; 
+import Image from "next/image";
+import { companyLinks, trustBadges, ceoProfile } from "@/data/navData";
 
 interface NavbarProps {
   lang: Locale;
@@ -18,7 +19,19 @@ interface NavbarProps {
 export default function Navbar({ lang, dict, countries }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobileCountriesOpen, setIsMobileCountriesOpen] = useState(false);
+  const [isMobileCompanyOpen, setIsMobileCompanyOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const isHomePage = pathname === `/${lang}` || pathname === "/";
+
+  // Scroll detection
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const redirectedPathName = (locale: Locale) => {
     if (!pathname) return "/";
@@ -29,134 +42,220 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
 
   const navLinks = [
     { name: dict?.nav?.home, href: `/${lang}` },
-    { name: dict?.nav?.services, href: `/${lang}/services` },
-    { name: dict?.nav?.team, href: `/${lang}/teams` },
-    { name: dict?.nav?.about, href: `/${lang}/about` },
+    { name: dict?.nav?.countries, href: "#", type: "countries" }, // Special handling
+    { name: dict?.nav?.company, href: "#", type: "mega" }, // Special handling
     { name: dict?.nav?.contact, href: `/${lang}#contact` },
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-gray-50/90 backdrop-blur-md border-b border-gray-200">
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/95 backdrop-blur-md shadow-md py-2"
+          : "bg-transparent py-4"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href={`/${lang}`} className="text-2xl font-black text-gray-900 tracking-widest font-montserrat flex items-center">
-             
-              <Image 
-                src={logo} 
-                alt="students life" 
-                priority 
-                className="h-auto w-auto max-h-12" 
+          <div className="flex-shrink-0 relative z-50">
+            <Link href={`/${lang}`} className="flex items-center gap-2">
+              <Image
+                src={logo}
+                alt="students life"
+                priority
+                className="h-10 w-auto"
               />
             </Link>
           </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navLinks.slice(0, 2).map((link, index) => {
-                const isActive = pathname === link.href;
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-1">
+            {navLinks.map((link, index) => {
+              // 1. Countries Dropdown
+              if (link.type === 'countries') {
                 return (
-                  <Link
-                    key={`nav-${index}-${link.href}`}
-                    href={link.href}
-                    className={`${
-                      isActive ? "text-crimson" : "text-gray-900"
-                    } hover:text-crimson px-3 py-2 rounded-md text-sm font-bold transition-colors`}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              })}
-
-              {/* Countries Mega Menu (Desktop) */}
-              <div className="relative group">
-                <button
-                  className={`${
-                    countries?.some((c) => pathname?.includes(`/${c.slug}`))
-                      ? "text-crimson"
-                      : "text-gray-900"
-                  } flex items-center gap-1 hover:text-crimson px-3 py-2 rounded-md text-sm font-bold transition-colors`}
-                >
-                  {dict?.nav?.countries || (lang === 'ru' ? 'Страны' : 'Countries')}
-                  <ChevronDown className="w-4 h-4" />
-                </button>
-
-                {/* Dropdown Panel */}
-                <div className="absolute left-0 pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                  <div className="bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5">
-                    <div className="py-2">
-                       {/* Country List */}
-                      {countries?.map((country) => (
-                        <div key={country.id} className="group/country relative">
-                           <button className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-crimson flex items-center justify-between font-medium transition-colors">
-                              <div className="flex items-center gap-2">
-                                
-                                {country.name}
-                              </div>
-                              {/* Show arrow if has cities */}
-                              {country.cities && country.cities.length > 0 && (
-                                <ChevronRight className="w-4 h-4 text-gray-400 group-hover/country:text-crimson" />
-                              )}
-                           </button>
-
-                           {/* Nested Cities List */}
-                           {country.cities && country.cities.length > 0 && (
-                             <div className="absolute left-full top-0 ml-0.5 w-56 opacity-0 invisible group-hover/country:opacity-100 group-hover/country:visible transition-all duration-200">
-                               <div className="bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 py-2">
-                                 <div className="px-4 py-2 border-b border-gray-100 bg-gray-50">
-                                   <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-                                     {lang === 'ru' ? 'Города' : 'Cities'}
-                                   </span>
+                  <div key={index} className="relative group px-3 py-2">
+                    <button className={`flex items-center gap-1 text-sm font-bold uppercase transition-colors ${
+                      (scrolled || !isHomePage) ? "text-gray-900 hover:text-crimson" : "text-white group-hover:text-crimson"
+                    }`}>
+                      {link.name}
+                      <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
+                    </button>
+                    
+                    {/* Countries Dropdown Panel */}
+                    <div className="absolute left-0 top-full pt-4 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                      <div className="bg-white rounded-xl shadow-2xl border border-gray-100">
+                        <div className="py-2">
+                          {countries?.map((country) => (
+                            <div key={country.id} className="group/country relative">
+                               <button className="w-full text-left px-4 py-3 text-sm text-black hover:bg-gray-50 hover:text-crimson flex items-center justify-between font-medium transition-colors">
+                                  <span>{country.name || (country as any).attributes?.name}</span>
+                                  {country.cities && country.cities.length > 0 && (
+                                    <ChevronRight className="w-4 h-4 text-gray-400 group-hover/country:text-crimson" />
+                                  )}
+                               </button>
+    
+                               {/* Nested Cities */}
+                               {country.cities && country.cities.length > 0 && (
+                                 <div className="absolute left-full top-0 ml-2 w-56 opacity-0 invisible group-hover/country:opacity-100 group-hover/country:visible transition-all duration-200">
+                                   <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2">
+                                     <div className="px-4 py-2 border-b border-gray-50 bg-gray-50/50">
+                                       <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+                                         {lang === 'ru' ? 'Города' : 'Cities'}
+                                       </span>
+                                     </div>
+                                     {country.cities.map((city: any) => (
+                                       <Link
+                                         key={city.id}
+                                         href={`/${lang}/${country.slug}/${city.slug}`}
+                                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-crimson transition-colors"
+                                       >
+                                         {city.name}
+                                       </Link>
+                                     ))}
+                                   </div>
                                  </div>
-                                 {country.cities.map((city: any) => (
-                                   <Link
-                                     key={city.id}
-                                     href={`/${lang}/${country.slug}/${city.slug}`}
-                                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-crimson transition-colors"
-                                   >
-                                     {city.name}
-                                   </Link>
-                                 ))}
-                               </div>
-                             </div>
-                           )}
+                               )}
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-
-               {navLinks.slice(2).map((link, index) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={`nav-${index + 2}-${link.href}`}
-                    href={link.href}
-                    className={`${
-                      isActive ? "text-crimson" : "text-gray-900"
-                    } hover:text-crimson px-3 py-2 rounded-md text-sm font-bold transition-colors`}
-                  >
-                    {link.name}
-                  </Link>
                 );
-              })}
-            </div>
+              }
+
+              // 2. Company Mega Menu
+              if (link.type === 'mega') {
+                return (
+                  <div key={index} className="relative group px-3 py-2 cursor-pointer">
+                    <button className={`flex items-center gap-1 text-sm font-bold uppercase transition-colors ${
+                       (scrolled || !isHomePage) ? "text-gray-900 hover:text-crimson" : "text-white hover:text-crimson"
+                    }`}>
+                      {link.name}
+                      <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
+                    </button>
+
+                    {/* Mega Menu Panel */}
+                    <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-screen max-w-4xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                       <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden grid grid-cols-12">
+                          
+                          {/* Left Side: Links */}
+                          <div className="col-span-8 p-8">
+                             <div className="grid grid-cols-2 gap-y-8 gap-x-12">
+                                {companyLinks.map((item, i) => {
+                                   const Icon = item.icon;
+                                   return (
+                                     <Link 
+                                       key={i} 
+                                       href={`/${lang}${item.href}`}
+                                       className="group/item flex items-start gap-4 p-2 -mx-2 rounded-lg hover:bg-gray-200 transition-colors"
+                                     >
+                                        <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-crimson/10 flex items-center justify-center text-crimson group-hover/item:bg-crimson group-hover/item:text-white transition-colors">
+                                           <Icon className="w-5 h-5" />
+                                        </div>
+                                        <div>
+                                           <h4 className="text-sm font-bold text-gray-900 group-hover/item:text-crimson transition-colors">
+                                              {dict?.nav?.megaMenu?.[item.titleKey]}
+                                           </h4>
+                                           <p className="text-xs text-gray-500 mt-1 leading-relaxed">
+                                              {dict?.nav?.megaMenu?.[item.descKey]}
+                                           </p>
+                                        </div>
+                                     </Link>
+                                   );
+                                })}
+                             </div>
+
+                             {/* Bottom Action Area */}
+                             <div className="mt-8 pt-8 border-t border-gray-100 flex items-center justify-between">
+                                <Link 
+                                  href={`/${lang}#contact`}
+                                  className="inline-flex items-center gap-2 text-sm font-bold text-crimson hover:text-red-700 transition-colors"
+                                >
+                                   {dict?.nav?.megaMenu?.getConsultation}
+                                   <ChevronRight className="w-4 h-4" />
+                                </Link>
+                                <div className="flex items-center gap-4 opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
+                                   {trustBadges.map((badge, i) => (
+                                     <div key={i} className="flex flex-col items-center">
+                                        <div className="text-[10px] font-bold text-gray-400">{badge.name}</div>
+                                        <div className="flex text-[#FFB800] text-xs">★★★★★</div>
+                                     </div>
+                                   ))}
+                                </div>
+                             </div>
+                          </div>
+
+                          {/* Right Side: CEO Profile (Dark Sidebar) */}
+                          <div className="col-span-4 bg-slate-900 p-8 text-white relative overflow-hidden">
+                             {/* Abstract Decorative Circle */}
+                             <div className="absolute top-0 right-0 w-32 h-32 bg-crimson blur-[80px] opacity-20 rounded-full translate-x-1/2 -translate-y-1/2"></div>
+                             
+                             <div className="relative z-10 flex flex-col h-full justify-between">
+                                <div>
+                                   <div className="w-16 h-16 rounded-full overflow-hidden mb-4 border-2 border-white/20">
+                                      <Image 
+                                        src={ceoProfile.image} 
+                                        alt={ceoProfile.name}
+                                        width={64}
+                                        height={64}
+                                        className="object-cover w-full h-full"
+                                      />
+                                   </div>
+                                   <h3 className="text-lg font-bold">{ceoProfile.name}</h3>
+                                   <p className="text-sm text-gray-400 mb-6">{dict?.nav?.megaMenu?.[ceoProfile.roleKey]}</p>
+                                   <blockquote className="text-sm italic text-gray-300 border-l-2 border-crimson pl-4">
+                                      "{dict?.nav?.megaMenu?.[ceoProfile.quoteKey]}"
+                                   </blockquote>
+                                </div>
+                                <button className="mt-6 w-full py-3 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors backdrop-blur-sm border border-white/10">
+                                   Linkedin Profile
+                                </button>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              // 3. Simple Link
+              return (
+                <Link
+                  key={index}
+                  href={link.href}
+                  className={`px-3 py-2 text-sm font-bold uppercase transition-colors ${
+                    pathname === link.href 
+                      ? "text-crimson" 
+                      : ((scrolled || !isHomePage) ? "text-gray-900 hover:text-crimson" : "text-white hover:text-crimson") 
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </div>
 
-          {/* Language Switcher & Mobile Menu Button */}
-          <div className="flex items-center gap-4">
-            {/* Language Switcher Dropdown (Desktop) */}
-            <div className="hidden md:block relative group">
-              <button className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-bold text-gray-900 hover:text-crimson transition-colors">
-                <Globe className="w-4 h-4" />
-                <span className="uppercase">{lang}</span>
-                <ChevronDown className="w-4 h-4" />
+          {/* Right Area: Language & CTA */}
+          <div className="hidden md:flex items-center gap-6">
+            {/* Language Switcher */}
+            <div className="relative group">
+              <button className={`flex items-center gap-2 px-2 py-1 rounded-md text-sm font-bold transition-colors ${
+                 (scrolled || !isHomePage) ? "text-gray-900 hover:text-crimson" : "text-white hover:text-crimson"
+              }`}>
+                <div className="relative w-6 h-4 shadow-sm rounded-[2px] overflow-hidden">
+                   <Image
+                     src={`https://flagcdn.com/w40/${{ en: 'gb', ru: 'ru', tk: 'tm' }[lang]}.png`}
+                     alt={lang}
+                     fill
+                     className="object-cover"
+                   />
+                </div>
+                <ChevronDown className="w-4 h-4 ml-1" />
               </button>
               
-              {/* Dropdown Panel */}
               <div className="absolute right-0 pt-2 w-40 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                 <div className="bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 py-2">
                   {i18n.locales.map((locale) => {
@@ -186,101 +285,170 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
               </div>
             </div>
 
-            <div className="-mr-2 flex md:hidden">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-900 hover:text-crimson focus:outline-none"
-              >
-                {isOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
-              </button>
-            </div>
+            {/* CTA Button */}
+            <Link
+              href={`/${lang}#contact`}
+              className="px-6 py-2.5 bg-crimson text-white text-sm font-bold rounded-full shadow-lg hover:bg-red-700 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
+            >
+              {dict?.nav?.letsTalk}
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center gap-4">
+             {/* Small Language Indicator for Mobile */}
+             <div className="flex items-center gap-1">
+                <div className="relative w-6 h-4 shadow-sm rounded-[2px] overflow-hidden">
+                   <Image
+                     src={`https://flagcdn.com/w40/${{ en: 'gb', ru: 'ru', tk: 'tm' }[lang]}.png`}
+                     alt={lang}
+                     fill
+                     className="object-cover"
+                   />
+                </div>
+             </div>
+
+             <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-900 hover:text-crimson focus:outline-none"
+            >
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-gray-50 border-t border-gray-200 max-h-[calc(100vh-80px)] overflow-y-auto">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-gray-900 hover:bg-gray-200 block px-3 py-2 rounded-md text-base font-bold uppercase"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
+      {/* Mobile Drawer */}
+      <div className={`fixed inset-0 z-40 bg-white transform transition-transform duration-300 ease-in-out md:hidden ${
+         isOpen ? "translate-x-0" : "translate-x-full"
+      }`}
+      style={{ top: '80px', height: 'calc(100vh - 80px)' }} // Below navbar
+      >
+        <div className="h-full overflow-y-auto pb-20 px-6 py-8">
+           <div className="space-y-4">
+              {navLinks.map((link, index) => {
+                 // Mobile Countries
+                 if (link.type === 'countries') {
+                    return (
+                       <div key={index} className="border-b border-gray-100 pb-2">
+                          <button 
+                             onClick={() => setIsMobileCountriesOpen(!isMobileCountriesOpen)}
+                             className="w-full flex items-center justify-between py-3 text-lg font-bold text-gray-900"
+                          >
+                             {link.name}
+                             <ChevronDown className={`w-5 h-5 transition-transform ${isMobileCountriesOpen ? 'rotate-180' : ''}`} />
+                          </button>
+                          {isMobileCountriesOpen && (
+                             <div className="pl-4 space-y-4 pb-4">
+                                {countries?.map((country) => (
+                                   <div key={country.id}>
+                                      <div className="font-bold text-gray-500 mb-2">{country.name}</div>
+                                      <div className="grid grid-cols-2 gap-2">
+                                         {country.cities && country.cities.map((city: any) => (
+                                            <Link
+                                               key={city.id}
+                                               href={`/${lang}/${country.slug}/${city.slug}`}
+                                               onClick={() => setIsOpen(false)}
+                                               className="text-sm text-gray-600 py-1 hover:text-crimson"
+                                            >
+                                               {city.name}
+                                            </Link>
+                                         ))}
+                                      </div>
+                                   </div>
+                                ))}
+                             </div>
+                          )}
+                       </div>
+                    );
+                 }
 
-            {/* Mobile Countries Accordion */}
-            <div className="border-t border-gray-200 pt-2 mt-2">
-               <button 
-                 onClick={() => setIsMobileCountriesOpen(!isMobileCountriesOpen)}
-                 className="w-full flex items-center justify-between px-3 py-2 text-base font-bold uppercase text-gray-900 hover:bg-gray-200 rounded-md"
-               >
-                 {dict?.nav?.countries || (lang === 'ru' ? 'Страны' : 'Countries')}
-                 <ChevronDown className={`w-5 h-5 transition-transform ${isMobileCountriesOpen ? 'rotate-180' : ''}`} />
-               </button>
-               
-               {isMobileCountriesOpen && (
-                 <div className="pl-4 space-y-1 mt-1">
-                    {countries.map((country) => (
-                      <div key={country.id} className="py-1">
-                        <div className="font-bold text-gray-700 px-3 py-1 flex items-center gap-2">
-                        {country.name}
-                        </div>
-                        <div className="pl-4 border-l-2 border-gray-200 ml-3 space-y-1 mt-1">
-                          {country.cities && country.cities.map((city: any) => (
-                            <Link
-                              key={city.id}
-                              href={`/${lang}/${country.slug}/${city.slug}`}
-                              className="block px-3 py-2 text-sm text-gray-600 hover:text-crimson rounded-md"
-                              onClick={() => setIsOpen(false)}
-                            >
-                              {city.name}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                 </div>
-               )}
-            </div>
+                 // Mobile Company
+                 if (link.type === 'mega') {
+                    return (
+                       <div key={index} className="border-b border-gray-100 pb-2">
+                          <button 
+                             onClick={() => setIsMobileCompanyOpen(!isMobileCompanyOpen)}
+                             className="w-full flex items-center justify-between py-3 text-lg font-bold text-gray-900"
+                          >
+                             {link.name}
+                             <ChevronDown className={`w-5 h-5 transition-transform ${isMobileCompanyOpen ? 'rotate-180' : ''}`} />
+                          </button>
+                          {isMobileCompanyOpen && (
+                             <div className="pl-4 grid grid-cols-1 gap-4 pb-4">
+                                {companyLinks.map((item, i) => (
+                                   <Link 
+                                     key={i} 
+                                     href={`/${lang}${item.href}`}
+                                     onClick={() => setIsOpen(false)}
+                                     className="flex items-center gap-3 text-gray-600 hover:text-crimson"
+                                   >
+                                      <item.icon className="w-5 h-5 opacity-70" />
+                                      <span className="font-medium">{dict?.nav?.megaMenu?.[item.titleKey]}</span>
+                                   </Link>
+                                ))}
+                             </div>
+                          )}
+                       </div>
+                    );
+                 }
 
-             {/* Mobile Language Switcher */}
-             <div className="border-t border-gray-200 mt-4 pt-4">
-               <div className="px-3 py-2 text-xs font-bold text-gray-500 uppercase tracking-wider">Language</div>
-               <div className="space-y-1">
-                 {i18n.locales.map((locale) => {
-                   const flags = { en: 'gb', ru: 'ru', tk: 'tm' };
-                   const names = { en: 'English', ru: 'Русский', tk: 'Türkmençe' };
-                   return (
-                     <Link
-                       key={locale}
-                       href={redirectedPathName(locale)}
-                       className={`flex items-center px-3 py-2 rounded-md text-sm font-bold transition-colors ${
-                         lang === locale ? 'text-crimson bg-white shadow-sm ring-1 ring-gray-200' : 'text-gray-900 hover:bg-gray-100'
-                       }`}
+                 return (
+                    <Link
+                       key={index}
+                       href={link.href}
                        onClick={() => setIsOpen(false)}
-                     >
-                        <div className="relative w-5 h-3.5 mr-3 shadow-sm rounded-[1px] overflow-hidden">
-                          <Image
-                            src={`https://flagcdn.com/w40/${flags[locale as keyof typeof flags]}.png`}
-                            alt={names[locale as keyof typeof names]}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                       {names[locale as keyof typeof names]}
-                     </Link>
-                   );
-                 })}
-               </div>
-             </div>
-          </div>
+                       className="block py-3 text-lg font-bold text-gray-900 border-b border-gray-100 hover:text-crimson"
+                    >
+                       {link.name}
+                    </Link>
+                 );
+              })}
+           </div>
+
+           {/* Mobile Languages */}
+           <div className="mt-8">
+              <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Language</div>
+              <div className="grid grid-cols-1 gap-2">
+                  {i18n.locales.map((locale) => {
+                     const flags = { en: 'gb', ru: 'ru', tk: 'tm' };
+                     const names = { en: 'English', ru: 'Русский', tk: 'Türkmençe' };
+                     return (
+                       <Link
+                         key={locale}
+                         href={redirectedPathName(locale)}
+                         onClick={() => setIsOpen(false)}
+                         className={`flex items-center gap-3 p-3 rounded-lg border ${
+                           lang === locale ? "border-crimson bg-red-50 text-crimson" : "border-gray-200"
+                         }`}
+                       >
+                         <div className="relative w-6 h-4 shadow-sm rounded-[1px] overflow-hidden">
+                            <Image
+                              src={`https://flagcdn.com/w40/${flags[locale as keyof typeof flags]}.png`}
+                              alt={names[locale as keyof typeof names]}
+                              fill
+                              className="object-cover"
+                            />
+                         </div>
+                         <span className="font-bold">{names[locale as keyof typeof names]}</span>
+                       </Link>
+                     );
+                  })}
+              </div>
+           </div>
+
+           {/* Mobile CTA */}
+           <div className="mt-8">
+              <Link
+                href={`/${lang}#contact`}
+                onClick={() => setIsOpen(false)}
+                className="block w-full py-4 text-center bg-crimson text-white text-lg font-bold rounded-xl shadow-lg"
+              >
+                {dict?.nav?.letsTalk}
+              </Link>
+           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 }

@@ -12,7 +12,9 @@ import {
   MessageCircle,
   Shield,
   Zap,
-  Users
+  Users,
+  Home,
+  CheckCircle2
 } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -46,43 +48,43 @@ export default function Services({ lang, dict }: ServicesProps) {
       icon: Ticket,
       className: "md:col-span-2 bg-white",
       type: "flight-ticket",
-      label: "Cost-Effective plans"
+      label: "Student Discounts"
     },
     { 
       key: "work", 
       icon: Briefcase,
       className: "md:col-span-1 bg-white",
-      type: "reviews",
-      label: "Client Reviews"
+      type: "career-stats",
+      label: "Internships & Jobs"
     },
     {
       key: "visa", 
       icon: FileText,
       className: "md:col-span-1 md:row-span-2 bg-neutral-900 text-white",
       type: "feature-list",
-      label: "Strategic Solutions",
-      features: ["Tailored strategy", "High-Quality output", "Timely delivery", "Transparent process", "Post-Launch support"]
+      label: "99% Success Rate",
+      features: ["Document checklist", "Application filing", "Consulate interview", "Biometrics booking", "Passport collection"]
     },
     { 
       key: "university", 
       icon: GraduationCap,
       className: "md:col-span-1 bg-white",
-      type: "tech-stack",
-      label: "Built with the best"
+      type: "university-logos",
+      label: "Top Global Universities"
     },
     { 
-      key: "umra", 
-      icon: Plane,
+      key: "accommodation", 
+      icon: Home,
       className: "md:col-span-1 relative overflow-hidden text-white min-h-[200px]",
       type: "image-card",
-      label: "Reliable & Future-ready"
+      label: "Dorms & Apartments"
     },
     { 
       key: "translation", 
       icon: Languages,
       className: "md:col-span-1 bg-white",
       type: "support-chat",
-      label: "24/7 Support"
+      label: "Certified & Fast"
     },
   ];
 
@@ -123,24 +125,19 @@ export default function Services({ lang, dict }: ServicesProps) {
           </div>
         );
       
-      case "reviews":
+      case "career-stats":
         return (
           <div className="mt-6 text-center">
-            <div className="flex justify-center -space-x-2 mb-4">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className={`w-10 h-10 rounded-full border-2 border-white bg-gray-200 flex items-center justify-center overflow-hidden`}>
-                   <Users className="w-6 h-6 text-gray-400" />
-                </div>
-              ))}
+            <div className="flex flex-col gap-3">
+               <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                  <div className="p-2 bg-green-100 rounded-full text-green-600 shrink-0"><CheckCircle2 className="w-4 h-4" /></div>
+                  <span className="text-sm font-bold text-gray-700">Resume Building</span>
+               </div>
+               <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                  <div className="p-2 bg-green-100 rounded-full text-green-600 shrink-0"><CheckCircle2 className="w-4 h-4" /></div>
+                  <span className="text-sm font-bold text-gray-700">Job Placement</span>
+               </div>
             </div>
-            <div className="flex items-center justify-center space-x-1 text-yellow-500 mb-1">
-              <Star className="w-4 h-4 fill-current" />
-              <Star className="w-4 h-4 fill-current" />
-              <Star className="w-4 h-4 fill-current" />
-              <Star className="w-4 h-4 fill-current" />
-              <Star className="w-4 h-4 fill-current" />
-            </div>
-            <p className="text-sm text-gray-500 font-medium">4.9/5.0 Rating</p>
           </div>
         );
 
@@ -161,25 +158,26 @@ export default function Services({ lang, dict }: ServicesProps) {
           </div>
         );
       
-      case "tech-stack":
+      case "university-logos":
         return (
           <div className="mt-6 grid grid-cols-3 gap-3">
-             {[FileText, Zap, Shield, Globe, Cpu, Layout].map((Icon, idx) => (
-               <div key={idx} className="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center mx-auto text-gray-700 hover:bg-black hover:text-white transition-colors duration-300">
-                 <Icon className="w-5 h-5" />
-               </div>
-             ))}
+             <div className="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center mx-auto text-gray-700"><GraduationCap className="w-5 h-5" /></div>
+             <div className="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center mx-auto text-gray-700"><Briefcase className="w-5 h-5" /></div>
+             <div className="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center mx-auto text-gray-700"><Languages className="w-5 h-5" /></div>
+             <div className="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center mx-auto text-gray-700"><Users className="w-5 h-5" /></div>
+             <div className="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center mx-auto text-gray-700"><FileText className="w-5 h-5" /></div>
+             <div className="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center mx-auto text-gray-700"><Globe className="w-5 h-5" /></div>
           </div>
         );
         
       case "image-card":
         return (
           <>
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000')] bg-cover bg-center">
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=1000')] bg-cover bg-center">
               <div className="absolute inset-0 bg-black/40 hover:bg-black/30 transition-colors" />
             </div>
             <div className="absolute bottom-6 left-6 right-6">
-              <h4 className="text-xl font-bold text-white mb-1 shadow-sm">Reliable & <br/>Future-ready</h4>
+              <h4 className="text-xl font-bold text-white mb-1 shadow-sm">{dict['accommodation'] || "Accommodation"}</h4>
             </div>
           </>
         );
@@ -248,7 +246,7 @@ export default function Services({ lang, dict }: ServicesProps) {
                       "text-sm font-medium",
                       service.type === "feature-list" ? "text-gray-400" : "text-gray-500"
                     )}>
-                      {service.label}
+                      {dict[service.key + 'Desc'] || service.label}
                     </p>
                   </div>
                   

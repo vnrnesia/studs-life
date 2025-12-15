@@ -11,16 +11,41 @@
         "team": "Topar",
         "about": "Biz barada",
         "contact": "Habarlaşmak",
-        "countries": "Ýurtlar"
+        "countries": "Ýurtlar",
+        "company": "Kompaniýa",
+        "letsTalk": "Habarlaşmak",
+        "megaMenu": {
+            "about": "Biz barada",
+            "aboutDesc": "Bizim missiýamyz we gymmatlyklarymyz barada öwreniň",
+            "team": "Bizim toparymyz",
+            "teamDesc": "Üstünliklerimiziň aňyrsyndaky hünärmenler bilen tanyşyň",
+            "careers": "Karýera",
+            "careersDesc": "Ösüp barýan halkara toparymyza goşulyň",
+            "services": "Hyzmatlar",
+            "servicesDesc": "Giňişleýin bilim goldawy",
+            "pricing": "Bahalar",
+            "pricingDesc": "Açyk paketler we bahalar",
+            "blog": "Blog",
+            "blogDesc": "Talyplar üçin soňky habarlar we gollanmalar",
+            "getConsultation": "Mugt maslahat alyň",
+            "ceoRole": "test",
+            "ceoQuote": "Biz bütin dünýä talyplary üçin arzuwlar we hakykat arasynda köpri gurýarys."
+        }
     },
     "services": {
         "title": "Hyzmatlarymyz",
         "visa": "Wiza hyzmatlary",
-        "university": "Uniwersitetlere kabul edişlik",
+        "visaDesc": "99% Üstünlik",
+        "university": "Uniwersitete Kabul",
+        "universityDesc": "Iň gowy uniwersitetler",
         "translation": "Resminama terjimesi",
-        "work": "Iş wizalary",
-        "umra": "Umra paketleri",
-        "ticket": "Awia petekler"
+        "translationDesc": "Tiz we takyk",
+        "work": "Karýera Goldawy",
+        "workDesc": "Tejribe we iş",
+        "accommodation": "Ýaşaýyş Ýeri",
+        "accommodationDesc": "Umumy ýaşaýyş jaýlary",
+        "ticket": "Awia petekler",
+        "ticketDesc": "Talyplar üçin arzan"
     },
     "countries": {
         "title": "Meşhur ugurlar",
