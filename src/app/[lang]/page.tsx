@@ -84,20 +84,22 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   return (
     <main className="min-h-screen bg-gray-50 overflow-x-hidden">
       <Hero lang={lang} dict={dict.hero} />
-      <Services lang={lang} dict={dict.services} />
-      <Countries lang={lang} dict={dict.countries} />
-      <WhyChooseUs lang={lang} dict={dict.whyUs} />
-      <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestBlogs} />
-      <HowItWorks steps={howItWorksSteps} dict={dict.howItWorks} />
       <FeatureTabs 
         features={features} 
         title={dict.featureTabs?.title || "Comprehensive Student Support"}
         subtitle={dict.featureTabs?.subtitle || "Detailed assistance at every step of your study abroad journey."} 
       />
+      <Services lang={lang} dict={dict.services} />
+      <Countries lang={lang} dict={dict.countries} />
+      <WhyChooseUs lang={lang} dict={dict.whyUs} />
+      <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestBlogs} />
+      <HowItWorks steps={howItWorksSteps} dict={dict.howItWorks} />
+      
       <Team lang={lang} dict={dict.team} teamMembers={teamMembers.slice(0, 4)} showViewAll={true} />
       <Statistics lang={lang} dict={dict.statistics} />
+            <Form lang={lang} dict={dict.form} />
+
       <OfficeLocations lang={lang} dict={dict.offices} />
-      <Form lang={lang} dict={dict.form} />
     </main>
   );
 }

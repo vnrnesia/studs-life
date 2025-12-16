@@ -77,7 +77,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                 return (
                   <div key={index} className="relative group px-3 py-2">
                     <button className={`flex items-center gap-1 text-sm font-bold uppercase transition-colors ${
-                      (scrolled || !isHomePage) ? "text-gray-900 hover:text-crimson" : "text-white group-hover:text-crimson"
+                      (scrolled || !isHomePage) ? "text-gray-900 hover:text-navy" : "text-white group-hover:text-navy"
                     }`}>
                       {link.name}
                       <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
@@ -89,10 +89,10 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                         <div className="py-2">
                           {countries?.map((country) => (
                             <div key={country.id} className="group/country relative">
-                               <button className="w-full text-left px-4 py-3 text-sm text-black hover:bg-gray-50 hover:text-crimson flex items-center justify-between font-medium transition-colors">
+                               <button className="w-full text-left px-4 py-3 text-sm text-black hover:bg-gray-50 hover:text-navy flex items-center justify-between font-medium transition-colors">
                                   <span>{country.name || (country as any).attributes?.name}</span>
                                   {country.cities && country.cities.length > 0 && (
-                                    <ChevronRight className="w-4 h-4 text-gray-400 group-hover/country:text-crimson" />
+                                    <ChevronRight className="w-4 h-4 text-gray-400 group-hover/country:text-navy" />
                                   )}
                                </button>
     
@@ -109,7 +109,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                                        <Link
                                          key={city.id}
                                          href={`/${lang}/${country.slug}/${city.slug}`}
-                                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-crimson transition-colors"
+                                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-navy transition-colors"
                                        >
                                          {city.name}
                                        </Link>
@@ -131,7 +131,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                 return (
                   <div key={index} className="relative group px-3 py-2 cursor-pointer">
                     <button className={`flex items-center gap-1 text-sm font-bold uppercase transition-colors ${
-                       (scrolled || !isHomePage) ? "text-gray-900 hover:text-crimson" : "text-white hover:text-crimson"
+                       (scrolled || !isHomePage) ? "text-gray-900 hover:text-navy" : "text-white hover:text-navy"
                     }`}>
                       {link.name}
                       <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
@@ -152,11 +152,11 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                                        href={`/${lang}${item.href}`}
                                        className="group/item flex items-start gap-4 p-2 -mx-2 rounded-lg hover:bg-gray-200 transition-colors"
                                      >
-                                        <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-crimson/10 flex items-center justify-center text-crimson group-hover/item:bg-crimson group-hover/item:text-white transition-colors">
+                                        <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-navy/10 flex items-center justify-center text-navy group-hover/item:bg-navy group-hover/item:text-white transition-colors">
                                            <Icon className="w-5 h-5" />
                                         </div>
                                         <div>
-                                           <h4 className="text-sm font-bold text-gray-900 group-hover/item:text-crimson transition-colors">
+                                           <h4 className="text-sm font-bold text-gray-900 group-hover/item:text-navy transition-colors">
                                               {dict?.nav?.megaMenu?.[item.titleKey]}
                                            </h4>
                                            <p className="text-xs text-gray-500 mt-1 leading-relaxed">
@@ -172,26 +172,19 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                              <div className="mt-8 pt-8 border-t border-gray-100 flex items-center justify-between">
                                 <Link 
                                   href={`/${lang}#contact`}
-                                  className="inline-flex items-center gap-2 text-sm font-bold text-crimson hover:text-red-700 transition-colors"
+                                  className="inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-blue-900 transition-colors"
                                 >
                                    {dict?.nav?.megaMenu?.getConsultation}
                                    <ChevronRight className="w-4 h-4" />
                                 </Link>
-                                <div className="flex items-center gap-4 opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
-                                   {trustBadges.map((badge, i) => (
-                                     <div key={i} className="flex flex-col items-center">
-                                        <div className="text-[10px] font-bold text-gray-400">{badge.name}</div>
-                                        <div className="flex text-[#FFB800] text-xs">★★★★★</div>
-                                     </div>
-                                   ))}
-                                </div>
+                               
                              </div>
                           </div>
 
                           {/* Right Side: CEO Profile (Dark Sidebar) */}
                           <div className="col-span-4 bg-slate-900 p-8 text-white relative overflow-hidden">
                              {/* Abstract Decorative Circle */}
-                             <div className="absolute top-0 right-0 w-32 h-32 bg-crimson blur-[80px] opacity-20 rounded-full translate-x-1/2 -translate-y-1/2"></div>
+                             <div className="absolute top-0 right-0 w-32 h-32 bg-navy blur-[80px] opacity-20 rounded-full translate-x-1/2 -translate-y-1/2"></div>
                              
                              <div className="relative z-10 flex flex-col h-full justify-between">
                                 <div>
@@ -206,7 +199,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                                    </div>
                                    <h3 className="text-lg font-bold">{ceoProfile.name}</h3>
                                    <p className="text-sm text-gray-400 mb-6">{dict?.nav?.megaMenu?.[ceoProfile.roleKey]}</p>
-                                   <blockquote className="text-sm italic text-gray-300 border-l-2 border-crimson pl-4">
+                                   <blockquote className="text-sm italic text-gray-300 border-l-2 border-navy pl-4">
                                       "{dict?.nav?.megaMenu?.[ceoProfile.quoteKey]}"
                                    </blockquote>
                                 </div>
@@ -228,8 +221,8 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                   href={link.href}
                   className={`px-3 py-2 text-sm font-bold uppercase transition-colors ${
                     pathname === link.href 
-                      ? "text-crimson" 
-                      : ((scrolled || !isHomePage) ? "text-gray-900 hover:text-crimson" : "text-white hover:text-crimson") 
+                      ? "text-navy" 
+                      : ((scrolled || !isHomePage) ? "text-gray-900 hover:text-navy" : "text-white hover:text-navy") 
                   }`}
                 >
                   {link.name}
@@ -243,7 +236,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
             {/* Language Switcher */}
             <div className="relative group">
               <button className={`flex items-center gap-2 px-2 py-1 rounded-md text-sm font-bold transition-colors ${
-                 (scrolled || !isHomePage) ? "text-gray-900 hover:text-crimson" : "text-white hover:text-crimson"
+                 (scrolled || !isHomePage) ? "text-gray-900 hover:text-navy" : "text-white hover:text-navy"
               }`}>
                 <div className="relative w-6 h-4 shadow-sm rounded-[2px] overflow-hidden">
                    <Image
@@ -266,7 +259,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                         key={locale}
                         href={redirectedPathName(locale)}
                         className={`group flex items-center px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${
-                          lang === locale ? 'text-crimson font-bold bg-gray-50' : 'text-gray-700'
+                          lang === locale ? 'text-navy font-bold bg-gray-50' : 'text-gray-700'
                         }`}
                       >
                         <div className="relative w-5 h-3.5 mr-3 shadow-sm rounded-[1px] overflow-hidden">
@@ -288,7 +281,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
             {/* CTA Button */}
             <Link
               href={`/${lang}#contact`}
-              className="px-6 py-2.5 bg-crimson text-white text-sm font-bold rounded-full shadow-lg hover:bg-red-700 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
+              className="px-6 py-2.5 bg-navy text-white text-sm font-bold rounded-full shadow-lg hover:bg-blue-900 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
             >
               {dict?.nav?.letsTalk}
             </Link>
@@ -310,7 +303,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
 
              <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-900 hover:text-crimson focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-900 hover:text-navy focus:outline-none"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -349,7 +342,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                                                key={city.id}
                                                href={`/${lang}/${country.slug}/${city.slug}`}
                                                onClick={() => setIsOpen(false)}
-                                               className="text-sm text-gray-600 py-1 hover:text-crimson"
+                                               className="text-sm text-gray-600 py-1 hover:text-navy"
                                             >
                                                {city.name}
                                             </Link>
@@ -381,7 +374,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                                      key={i} 
                                      href={`/${lang}${item.href}`}
                                      onClick={() => setIsOpen(false)}
-                                     className="flex items-center gap-3 text-gray-600 hover:text-crimson"
+                                     className="flex items-center gap-3 text-gray-600 hover:text-navy"
                                    >
                                       <item.icon className="w-5 h-5 opacity-70" />
                                       <span className="font-medium">{dict?.nav?.megaMenu?.[item.titleKey]}</span>
@@ -398,7 +391,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                        key={index}
                        href={link.href}
                        onClick={() => setIsOpen(false)}
-                       className="block py-3 text-lg font-bold text-gray-900 border-b border-gray-100 hover:text-crimson"
+                       className="block py-3 text-lg font-bold text-gray-900 border-b border-gray-100 hover:text-navy"
                     >
                        {link.name}
                     </Link>
@@ -419,7 +412,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                          href={redirectedPathName(locale)}
                          onClick={() => setIsOpen(false)}
                          className={`flex items-center gap-3 p-3 rounded-lg border ${
-                           lang === locale ? "border-crimson bg-red-50 text-crimson" : "border-gray-200"
+                           lang === locale ? "border-navy bg-blue-50 text-navy" : "border-gray-200"
                          }`}
                        >
                          <div className="relative w-6 h-4 shadow-sm rounded-[1px] overflow-hidden">
@@ -442,7 +435,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
               <Link
                 href={`/${lang}#contact`}
                 onClick={() => setIsOpen(false)}
-                className="block w-full py-4 text-center bg-crimson text-white text-lg font-bold rounded-xl shadow-lg"
+                className="block w-full py-4 text-center bg-navy text-white text-lg font-bold rounded-xl shadow-lg"
               >
                 {dict?.nav?.letsTalk}
               </Link>
