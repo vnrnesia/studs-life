@@ -12,7 +12,8 @@ import LatestJournal from "@/components/LatestJournal";
 import FeatureTabs from "@/components/FeatureTabs";
 import HowItWorks from "@/components/HowItWorks";
 import OfficeLocations from "@/components/OfficeLocations";
-import { getTeamMembers, getLatestBlogs } from "@/lib/strapi";
+import ProcessSection from "@/components/ProcessSection";
+import { getTeamMembers, getLatestBlogs, getLatestCities } from "@/lib/strapi";
 
 export const revalidate = 60;
 
@@ -22,6 +23,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const dict = await getDictionary(lang);
   const teamMembers = await getTeamMembers(lang);
   const latestBlogs = await getLatestBlogs(lang);
+  const latestCities = await getLatestCities(lang);
 
   const features = [
     {
@@ -82,7 +84,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   ];
 
   return (
-    <main className="min-h-screen bg-gray-50 overflow-x-hidden">
+    <main className="min-h-screen bg-gray-50">
       <Hero lang={lang} dict={dict.hero} />
       <FeatureTabs 
         features={features} 
@@ -92,13 +94,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <Services lang={lang} dict={dict.services} />
       <Countries lang={lang} dict={dict.countries} />
       <WhyChooseUs lang={lang} dict={dict.whyUs} />
-      <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestBlogs} />
       <HowItWorks steps={howItWorksSteps} dict={dict.howItWorks} />
       
       <Team lang={lang} dict={dict.team} teamMembers={teamMembers.slice(0, 4)} showViewAll={true} />
+      <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestCities} />
       <Statistics lang={lang} dict={dict.statistics} />
-            <Form lang={lang} dict={dict.form} />
 
+
+      <ProcessSection lang={lang} dict={(dict as any).processWorkflow} />
       <OfficeLocations lang={lang} dict={dict.offices} />
     </main>
   );

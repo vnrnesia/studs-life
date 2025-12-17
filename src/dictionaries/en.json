@@ -555,9 +555,10 @@
         }
     },
     "latestJournal": {
-        "title": "Latest From Our Journal",
-        "subtitle": "Stay updated with the latest news, tips, and study abroad guides from our experts.",
-        "viewAll": "View All Posts",
+        "label": "Insights & Inspiration",
+        "title_part1": "Explore our",
+        "title_part2": "Latest journal",
+        "viewAll": "View all blogs",
         "noImage": "No Image",
         "admin": "Admin",
         "readMore": "Read More"
@@ -600,6 +601,38 @@
             "departure": {
                 "title": "Departure & Support",
                 "description": "From flight bookings to finding accommodation, we support you until you are settled in your new student life."
+            }
+        }
+    },
+    "processWorkflow": {
+        "title": "Our 5-step workflow",
+        "description": "Our Innomax Efficient Workflow in 5 Steps ensures streamlined IT solutions. We start by understanding your needs, then plan the project, design intuitive interfaces, build robust systems, and thoroughly test.",
+        "cta": "Learn more about us",
+        "steps": {
+            "s1": {
+                "number": "01",
+                "title": "Consultation & needs analysis",
+                "desc": "We first understand your challenges to tailor a solution that fits your needs."
+            },
+            "s2": {
+                "number": "02",
+                "title": "Planning & strategy development",
+                "desc": "Our team crafts a strategic plan, defining the project roadmap and setting timelines."
+            },
+            "s3": {
+                "number": "03",
+                "title": "Design & development",
+                "desc": "Our designers create intuitive interfaces, while developers build scalable, robust systems."
+            },
+            "s4": {
+                "number": "04",
+                "title": "Testing & quality assurance",
+                "desc": "We rigorously test for security, performance resolving any issues before deployment."
+            },
+            "s5": {
+                "number": "05",
+                "title": "Deployment & ongoing support",
+                "desc": "We ensure smooth deployment and provide ongoing maintenance and support."
             }
         }
     }

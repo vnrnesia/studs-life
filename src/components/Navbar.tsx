@@ -44,7 +44,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
     { name: dict?.nav?.home, href: `/${lang}` },
     { name: dict?.nav?.countries, href: "#", type: "countries" }, // Special handling
     { name: dict?.nav?.company, href: "#", type: "mega" }, // Special handling
-    { name: dict?.nav?.contact, href: `/${lang}#contact` },
+    { name: dict?.nav?.contact, href: `/${lang}/contact` },
   ];
 
   return (
@@ -171,7 +171,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                              {/* Bottom Action Area */}
                              <div className="mt-8 pt-8 border-t border-gray-100 flex items-center justify-between">
                                 <Link 
-                                  href={`/${lang}#contact`}
+                                  href={`/${lang}/contact`}
                                   className="inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-blue-900 transition-colors"
                                 >
                                    {dict?.nav?.megaMenu?.getConsultation}
@@ -280,7 +280,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
 
             {/* CTA Button */}
             <Link
-              href={`/${lang}#contact`}
+              href={`/${lang}/contact`}
               className="px-6 py-2.5 bg-navy text-white text-sm font-bold rounded-full shadow-lg hover:bg-blue-900 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
             >
               {dict?.nav?.letsTalk}
@@ -433,7 +433,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
            {/* Mobile CTA */}
            <div className="mt-8">
               <Link
-                href={`/${lang}#contact`}
+                href={`/${lang}/contact`}
                 onClick={() => setIsOpen(false)}
                 className="block w-full py-4 text-center bg-navy text-white text-lg font-bold rounded-xl shadow-lg"
               >

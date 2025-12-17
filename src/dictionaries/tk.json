@@ -268,8 +268,9 @@
         }
     },
     "latestJournal": {
-        "title": "Soňky habarlar",
-        "subtitle": "Hünärmenlerimizden soňky habarlar, maslahatlar we daşary ýurtda okuw boýunça gollanmalar bilen tanyş boluň.",
+        "label": "Düşünjeler we Ylham",
+        "title_part1": "Biziň",
+        "title_part2": "Soňky žurnalymyz",
         "viewAll": "Ähli makalalary görmek",
         "noImage": "Surat ýok",
         "admin": "Administrator",
@@ -311,8 +312,40 @@
                 "description": "Hünärmenlerimiz arza bermegiň ähli prosesini, resminama barlagyny we wiza tabşyrmagy rahat tassyklamak üçin dolandyrýarlar."
             },
             "departure": {
-                "title": "Uçuş we goldaw",
-                "description": "Awia peteklerini bronlamakdan başlap ýaşaýyş ýeri tapmaga çenli, täze talyp durmuşyňyza ýerleşýänçäňiz goldaw berýäris."
+                "title": "Uçuş we Goldaw",
+                "description": "Uçuş peteklerini bronlamakdan başlap ýaşaýyş jaý tapmaga çenli, täze talyplyk durmuşyňyza öwrenişýänçäňiz size goldaw berýäris."
+            }
+        }
+    },
+    "processWorkflow": {
+        "title": "Bizim 5 basgançakly iş proçesimiz",
+        "description": "Bizim 5 ädimli netijeli iş proçesimiz, durnukly çözgütleri üpjün edýär. Zerurlyklaryňyzy düşünmekden başlaýarys, soňra meýilnamalaşdyrýarys, dizaýn edýäris, gurýarys we synagdan geçirýäris.",
+        "cta": "Biz barada has giňişleýin",
+        "steps": {
+            "s1": {
+                "number": "01",
+                "title": "Maslahat we seljerme",
+                "desc": "Ilki bilen zerurlyklaryňyza laýyk gelýän çözgüdi saýlamak üçin siziň talaplaryňyzy öwrenýäris."
+            },
+            "s2": {
+                "number": "02",
+                "title": "Meýilnamalaşdyryş",
+                "desc": "Toparymyz taslamanyň ýol kartasyny we möhletlerini kesgitläp, strategik meýilnama düzýär."
+            },
+            "s3": {
+                "number": "03",
+                "title": "Dizaýn we işläp düzmek",
+                "desc": "Dizaýnerlerimiz amatly interfeýsleri döredýär, programmistler bolsa durnukly ulgamlary gurýar."
+            },
+            "s4": {
+                "number": "04",
+                "title": "Synag we hil gözegçiligi",
+                "desc": "Howpsuzlygy we öndürijiligi berk synagdan geçirip, işe girizmezden ozal ähli kemçilikleri düzedýäris."
+            },
+            "s5": {
+                "number": "05",
+                "title": "Işe girizmek we goldaw",
+                "desc": "Bökdençsiz işe girizilmegini üpjün edýäris we dowamly tehniki goldawy hödürleýäris."
             }
         }
     },

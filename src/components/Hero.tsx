@@ -1,4 +1,5 @@
 import { MoveRight } from "lucide-react";
+import Link from "next/link";
 import Image from "next/image";
 import mainBg from "../assets/herobg.png";
 import mainBgMobile from "../assets/mainbg_mobile.png"; 
@@ -66,11 +67,11 @@ export default function Hero({ lang, dict }: HeroProps) {
 
           {/* Buton */}
           <div className="flex justify-center md:justify-start pt-2 sm:pt-4">
-             <a href="#quick-form" className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gray-200 text-crimson font-bold tracking-widest uppercase overflow-hidden hover:text-white hover:bg-red-700 transition-all shadow-[8px_8px_0px_rgba(0,0,0,0.1)] hover:shadow-[4px_4px_0px_rgba(0,0,0,0.1)] hover:translate-x-1 hover:translate-y-1 text-sm sm:text-base">
+             <Link href={`/${lang}/contact`} className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gray-200 text-crimson font-bold tracking-widest uppercase overflow-hidden hover:text-white hover:bg-red-700 transition-all shadow-[8px_8px_0px_rgba(0,0,0,0.1)] hover:shadow-[4px_4px_0px_rgba(0,0,0,0.1)] hover:translate-x-1 hover:translate-y-1 text-sm sm:text-base">
                <span className="relative z-10 flex items-center gap-2">
                  {dict.cta} <MoveRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                </span>
-             </a>
+             </Link>
           </div>
         </div>
 
