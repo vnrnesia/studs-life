@@ -1,6 +1,6 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n-config";
-import Form from "@/components/Form";
+import MultiStepContactForm from "@/components/MultiStepContactForm";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export default async function ContactPage({
 
   return (
     <main className="flex-grow">
-      <Form lang={lang} dict={dict.form} />
+      <MultiStepContactForm lang={lang} dict={dict.form} />
     </main>
   );
 }

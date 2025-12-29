@@ -1,11 +1,12 @@
 "use client";
 
-import { Star, X, Phone, Mail, MapPin, Calendar, Globe, ArrowRight } from "lucide-react";
+import { Star, X, Phone, Mail, MapPin, Globe, ArrowRight, UserPlus } from "lucide-react";
 import { TeamMember, getStrapiImageUrl } from "@/lib/strapi";
 import { useState } from "react";
 import { marked } from "marked";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface TeamProps {
   lang: string;
@@ -15,168 +16,241 @@ interface TeamProps {
 }
 
 export default function Team({ lang, dict, teamMembers, showViewAll = false }: TeamProps) {
-  const testimonials = [1, 2, 3]; // Keeping testimonials static for now as requested only for team
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+  const testimonials = [1, 2, 3];
 
   // Helper to safely parse markdown
   const parseMarkdown = (content?: string) => {
-    if (!content) return { __html: '' };
+    if (!content) return { __html: "" };
     return { __html: marked.parse(content) as string };
   };
 
+  // On home page, show max 6 members to fit the 8-card grid (1 info + 6 members + 1 join)
+  const displayMembers = showViewAll ? teamMembers.slice(0, 6) : teamMembers;
+
   return (
-    <section className="relative py-32 bg-gray-50 text-gray-900 overflow-hidden">
+    <section className="relative py-24 bg-white text-gray-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Team Section */}
-        <div className="mb-32">
-          <h2 className="text-center text-4xl font-black uppercase font-montserrat mb-16">
-            {dict.title}
-          </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
-          <div className="flex flex-wrap justify-center gap-12">
-            {teamMembers.map((member) => (
-              <button 
-                key={member.id} 
-                onClick={() => setSelectedMember(member)}
-                className="group relative flex flex-col items-center text-center focus:outline-none bg-gray-100 p-8 rounded-2xl hover:bg-gray-300  transition-colors duration-300 w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(25%-2.25rem)]"
-              >
-                <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-crimson relative z-10 transform group-hover:scale-110 transition-transform shadow-lg bg-gray-200 mb-4">
-                   {member.photo ? (
-                      <Image 
-                        src={getStrapiImageUrl(member.photo.url)} 
-                        alt={member.fullName} 
-                        fill
-                        className="object-cover"
-                        unoptimized
-                      />
-                   ) : (
-                      <div className="w-full h-full flex items-center justify-center text-4xl bg-gray-300">
-                        👤
-                      </div>
-                   )}
-                </div>
-                <div className="mt-6">
-                   <h3 className="text-xl font-bold uppercase">{member.fullName}</h3>
-                   <p className="text-crimson font-serif italic">{member.role}</p>
-                   <p className="text-sm text-gray-500 mt-1">{member.city}</p>
-                </div>
-              </button>
-            ))}
+          {/* Card 1: Our Team Static Info */}
+          <div className="bg-gray-50/50 rounded-[2rem] p-10 flex flex-col justify-start border border-gray-100 h-[450px]">
+            <h2 className="text-4xl font-bold font-montserrat tracking-tight mb-6">
+              Our<br />Team
+            </h2>
+            <p className="text-gray-500 text-sm leading-relaxed mt-auto">
+              Dedicated individuals passionate about holistic well-being. Meet the diverse team driving innovation and shaping the future of wellness.
+            </p>
           </div>
-          
-          {showViewAll && (
-            <div className="text-center mt-12">
-              <Link 
-                href={`/${lang}/teams`}
-                className="inline-flex items-center gap-2 bg-crimson text-white px-8 py-3 rounded-full font-bold hover:bg-red-700 transition-colors"
-              >
-                {lang === 'ru' ? 'Посмотреть всю команду' : 'View All Team'}
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+
+          {/* Cards 2-7: Team Members */}
+          {displayMembers.map((member, index) => (
+            <motion.div
+              key={member.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              onClick={() => setSelectedMember(member)}
+              className="group relative cursor-pointer h-[450px] rounded-[2rem] overflow-hidden bg-gray-100 shadow-sm hover:shadow-xl transition-all duration-500"
+            >
+              {member.photo ? (
+                <Image
+                  src={getStrapiImageUrl(member.photo.url)}
+                  alt={member.fullName}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  unoptimized
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-6xl bg-gray-200">
+                  👤
+                </div>
+              )}
+              
+              {/* Glassmorphism Overlay */}
+              <div className="absolute bottom-6 left-6 right-6">
+                <div className="backdrop-blur-md bg-white/20 border border-white/20 rounded-2xl p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="text-white font-bold text-lg leading-tight uppercase tracking-tight">
+                    {member.fullName}
+                  </h3>
+                  <p className="text-white/80 text-xs mt-1 font-medium">
+                    {member.role}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+
+          {/* Card 8: Join the Team CTA */}
+          <div className="bg-[#5D7B7D] rounded-[2rem] p-10 flex flex-col justify-between text-white h-[450px] relative overflow-hidden group">
+            <div className="relative z-10">
+              <h3 className="text-3xl font-bold font-montserrat tracking-tight mb-4">
+                Join the<br />Team
+              </h3>
+              <p className="text-white/80 text-xs leading-relaxed max-w-[80%]">
+                Embark on a transformative journey with us. Join the team shaping the future of wellness innovation.
+              </p>
             </div>
-          )}
+            
+            <Link 
+              href={`/${lang}/contact`}
+              className="relative z-10 bg-white text-[#5D7B7D] w-full py-4 rounded-full font-bold text-center hover:bg-white/90 transition-colors mt-auto"
+            >
+              Join Now
+            </Link>
+
+            {/* Subtle decorative element */}
+            <UserPlus className="absolute -top-10 -right-10 w-40 h-40 text-white/5 rotate-12" />
+          </div>
+
         </div>
 
-        {/* Member Detail Modal */}
+        {showViewAll && teamMembers.length > 6 && (
+          <div className="text-center mt-16">
+            <Link 
+              href={`/${lang}/teams`}
+              className="inline-flex items-center gap-2 px-10 py-4 bg-gray-900 text-white rounded-full font-bold hover:bg-crimson transition-all duration-300 shadow-lg"
+            >
+              {lang === 'ru' ? 'Посмотреть всю команду' : 'View All Team'}
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
+        )}
+      </div>
+
+      {/* Member Detail Modal */}
+      <AnimatePresence>
         {selectedMember && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onClick={() => setSelectedMember(null)}>
-            <div 
-              className="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col md:flex-row" 
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md" 
+            onClick={() => setSelectedMember(null)}
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-white rounded-[2.5rem] w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl relative flex flex-col md:flex-row" 
               onClick={(e) => e.stopPropagation()}
             >
               <button 
                 onClick={() => setSelectedMember(null)}
-                className="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-gray-200 z-10"
+                className="absolute top-6 right-6 p-3 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors z-20"
               >
                 <X className="w-6 h-6" />
               </button>
 
               {/* Photo Side */}
-              <div className="w-full md:w-1/3 bg-gray-100 p-8 flex flex-col items-center text-center md:border-r border-gray-200">
-                <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-crimson shadow-lg mb-6 relative">
-                  {selectedMember.photo ? (
-                      <Image 
-                        src={getStrapiImageUrl(selectedMember.photo.url)} 
-                        alt={selectedMember.fullName} 
-                        fill
-                        className="object-cover"
-                        unoptimized
-                      />
-                   ) : (
-                      <div className="w-full h-full flex items-center justify-center text-4xl bg-gray-300">👤</div>
-                   )}
-                </div>
-                <h3 className="text-2xl font-bold uppercase mb-2">{selectedMember.fullName}</h3>
-                <p className="text-crimson font-serif italic text-lg mb-6">{selectedMember.role}</p>
-                
-                <div className="space-y-4 w-full text-left text-sm">
-                   {selectedMember.phone && (
-                     <div className="flex items-center gap-3">
-                       <Phone className="w-4 h-4 text-crimson shrink-0" />
-                       <span>{selectedMember.phone}</span>
-                     </div>
-                   )}
-                   {selectedMember.email && (
-                     <div className="flex items-center gap-3">
-                       <Mail className="w-4 h-4 text-crimson shrink-0" />
-                       <span className="break-all">{selectedMember.email}</span>
-                     </div>
-                   )}
-                   {selectedMember.officeAddress && (
-                     <div className="flex items-start gap-3">
-                       <MapPin className="w-4 h-4 text-crimson shrink-0 mt-1" />
-                       <span>{selectedMember.officeAddress}</span>
-                     </div>
-                   )}
-                   {selectedMember.languages && (
-                     <div className="flex items-start gap-3">
-                       <Globe className="w-4 h-4 text-crimson shrink-0 mt-1" />
-                       <span>{selectedMember.languages}</span>
-                     </div>
-                   )}
-                </div>
+              <div className="w-full md:w-2/5 relative h-[300px] md:h-auto overflow-hidden">
+                {selectedMember.photo ? (
+                    <Image 
+                      src={getStrapiImageUrl(selectedMember.photo.url)} 
+                      alt={selectedMember.fullName} 
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                 ) : (
+                    <div className="w-full h-full flex items-center justify-center text-6xl bg-gray-200">👤</div>
+                 )}
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:hidden" />
+                 <div className="absolute bottom-8 left-8 text-white md:hidden">
+                    <h3 className="text-3xl font-bold uppercase mb-1 tracking-tight">{selectedMember.fullName}</h3>
+                    <p className="text-white/90 italic font-serif">{selectedMember.role}</p>
+                 </div>
               </div>
 
               {/* Info Side */}
-              <div className="w-full md:w-2/3 p-8">
-                 <div className="prose prose-sm max-w-none text-black prose-headings:text-black prose-p:text-black prose-strong:text-black">
-                    <h3 className="text-xl font-bold border-b border-gray-200 pb-2 mb-4">
-                      {lang === 'ru' ? 'Как я могу вам помочь:' : 'How I can help you:'}
-                    </h3>
-                    {selectedMember.responsibilities && (
-                      <div dangerouslySetInnerHTML={parseMarkdown(selectedMember.responsibilities)} />
+              <div className="w-full md:w-3/5 p-8 md:p-14 overflow-y-auto">
+                 <div className="hidden md:block mb-8">
+                    <h3 className="text-4xl font-bold uppercase mb-2 tracking-tight text-gray-900">{selectedMember.fullName}</h3>
+                    <p className="text-crimson font-serif italic text-xl">{selectedMember.role}</p>
+                    <div className="flex items-center gap-2 text-gray-400 mt-2 text-sm font-medium">
+                      <MapPin className="w-4 h-4" />
+                      <span>{selectedMember.city}</span>
+                    </div>
+                 </div>
+                 
+                 <div className="space-y-6 mb-10">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      {selectedMember.phone && (
+                        <div className="flex items-center gap-4 group">
+                          <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center group-hover:bg-crimson group-hover:text-white transition-colors">
+                            <Phone className="w-5 h-5" />
+                          </div>
+                          <span className="text-gray-600 font-medium">{selectedMember.phone}</span>
+                        </div>
+                      )}
+                      {selectedMember.email && (
+                        <div className="flex items-center gap-4 group">
+                          <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center group-hover:bg-crimson group-hover:text-white transition-colors">
+                            <Mail className="w-5 h-5" />
+                          </div>
+                          <span className="text-gray-600 font-medium break-all">{selectedMember.email}</span>
+                        </div>
+                      )}
+                    </div>
+                    {selectedMember.languages && (
+                      <div className="flex items-center gap-4 group">
+                         <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center group-hover:bg-crimson group-hover:text-white transition-colors">
+                            <Globe className="w-5 h-5" />
+                         </div>
+                         <span className="text-gray-600 font-medium">{selectedMember.languages}</span>
+                      </div>
                     )}
                  </div>
-              </div>
-            </div>
-          </div>
-        )}
 
-        {/* Testimonials */}
-        <div>
-           <h2 className="text-center text-4xl font-black uppercase font-montserrat mb-16">
-            {dict.testimonials_title}
-          </h2>
-           <div className="grid md:grid-cols-3 gap-8">
-             {testimonials.map((t) => (
-               <div key={t} className="bg-white p-8 rounded-2xl border border-gray-200 relative shadow-sm hover:shadow-md transition-shadow">
-                 <div className="flex gap-1 mb-4 text-yellow-500">
-                    {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
+                 <div className="prose prose-sm max-w-none">
+                    <h4 className="text-lg font-bold border-b border-gray-100 pb-3 mb-4 text-gray-900">
+                      {lang === 'ru' ? 'Как я могу вам помочь:' : 'Expertise & Help:'}
+                    </h4>
+                    <div 
+                      className="text-gray-600 leading-relaxed"
+                      dangerouslySetInnerHTML={parseMarkdown(selectedMember.responsibilities)} 
+                    />
                  </div>
-                 <p className="text-gray-600 italic mb-6">"Studs Life helped me get into my dream university in Prague. The process was so smooth!"</p>
-                 <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden relative">
-                         <Image src={`https://i.pravatar.cc/100?img=${t + 20}`} alt="Student" fill className="object-cover" unoptimized />
-                    </div>
-                    <div>
-                       <div className="font-bold text-sm">Alexander B.</div>
-                       <div className="text-xs text-gray-500">Studying in Czech Rep.</div>
-                    </div>
-                 </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Testimonials */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-32">
+         <h2 className="text-center text-4xl font-bold font-montserrat tracking-tight mb-16">
+          {dict.testimonials_title}
+        </h2>
+         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+           {testimonials.map((t) => (
+             <motion.div 
+               key={t}
+               initial={{ opacity: 0, scale: 0.95 }}
+               whileInView={{ opacity: 1, scale: 1 }}
+               viewport={{ once: true }}
+               transition={{ delay: t * 0.1 }}
+               className="bg-gray-50/50 p-10 rounded-[2rem] border border-gray-100 relative group hover:bg-white hover:shadow-xl hover:border-transparent transition-all duration-500"
+              >
+               <div className="flex gap-1 mb-6 text-crimson">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
                </div>
-             ))}
-           </div>
-        </div>
+               <p className="text-gray-600 italic mb-8 leading-relaxed">
+                 "Studs Life helped me get into my dream university in Prague. The process was so smooth!"
+               </p>
+               <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                       <Image src={`https://i.pravatar.cc/100?img=${t + 20}`} alt="Student" width={48} height={48} className="object-cover" unoptimized />
+                  </div>
+                  <div>
+                     <div className="font-bold text-gray-900 group-hover:text-crimson transition-colors">Alexander B.</div>
+                     <div className="text-xs text-gray-400 font-medium">Studying in Czech Rep.</div>
+                  </div>
+               </div>
+             </motion.div>
+           ))}
+         </div>
       </div>
     </section>
   );

@@ -96,7 +96,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <WhyChooseUs lang={lang} dict={dict.whyUs} />
       <HowItWorks steps={howItWorksSteps} dict={dict.howItWorks} />
       
-      <Team lang={lang} dict={dict.team} teamMembers={teamMembers.slice(0, 4)} showViewAll={true} />
+      <Team lang={lang} dict={dict.team} teamMembers={teamMembers.slice(0, 6)} showViewAll={true} />
       <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestCities} />
       <Statistics lang={lang} dict={dict.statistics} />
 

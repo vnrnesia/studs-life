@@ -49,29 +49,67 @@
     },
     "countries": {
         "title": "Meşhur ugurlar",
+        "description": "Discover the best countries for your international education journey with our expert guidance.",
+        "viewMore": "Sahypa git",
         "russia": {
             "name": "Russiýa",
-            "slogan": "Çäksiz mümkinçilikler we düýpli bilim dünýäsi"
+            "slogan": "Çäksiz mümkinçilikler we düýpli bilim dünýäsi",
+            "description": "With a rich history of scientific excellence, Russia offers world-class education in medicine, engineering, and the arts at an affordable cost.",
+            "tags": [
+                "AFFORDABLE",
+                "STEM",
+                "CULTURE"
+            ]
         },
         "china": {
             "name": "Hytaý",
-            "slogan": "Gadymy akyldarlyk we geljegiň tehnologiýalarynyň sazlaşygy"
+            "slogan": "Gadymy akyldarlyk we geljegiň tehnologiýalarynyň sazlaşygy",
+            "description": "Experience the pulse of the world's fastest-growing economy while studying at prestigious universities leading in tech and innovation.",
+            "tags": [
+                "TECH",
+                "FUTURE",
+                "GLOBAL HUB"
+            ]
         },
         "turkey": {
             "name": "Türkiýe",
-            "slogan": "Siwilizasiýalaryň çatrygy we joşgunly talyp durmuşy"
+            "slogan": "Siwilizasiýalaryň çatrygy we joşgunly talyp durmuşy",
+            "description": "Enjoy a unique blend of Eastern and Western cultures, modern campuses, and a welcoming atmosphere for international students.",
+            "tags": [
+                "MEDITERRANEAN",
+                "DIVERSITY",
+                "HISTORY"
+            ]
         },
         "cyprus": {
             "name": "Kipr",
-            "slogan": "Ýewropa bilimi we rahatlygyň günli adasy"
+            "slogan": "Ýewropa bilimi we rahatlygyň günli adasy",
+            "description": "Safe, sunny, and strictly following European standards, Cyprus is an ideal location for students seeking quality and relaxation.",
+            "tags": [
+                "EUROPEAN",
+                "ISLAND LIFE",
+                "SECURE"
+            ]
         },
         "belarus": {
             "name": "Belarus",
-            "slogan": "Myhmansöýerlik, howpsuzlyk we akademiki däpler"
+            "slogan": "Hospitality, safety, and academic traditions",
+            "description": "Known for its high academic standards and safe environment, Belarus provides excellent value and traditional European schooling.",
+            "tags": [
+                "TRADITION",
+                "VALUE",
+                "SAFETY"
+            ]
         },
         "bulgaria": {
             "name": "Bolgariýa",
-            "slogan": "Gara deňziň kenarynda elýeterli Ýewropa bilimi"
+            "slogan": "Gara deňziň kenarynda elýeterli Ýewropa bilimi",
+            "description": "Gateway to the European Union with reputable medical and artistic programs in a beautiful Black Sea setting.",
+            "tags": [
+                "EU GATEWAY",
+                "COASTAL",
+                "PRESTIGIOUS"
+            ]
         }
     },
     "whyUs": {
@@ -118,6 +156,24 @@
         "title": "Tiz arza",
         "selectService": "Gerekli hyzmaty saýlaň",
         "backButton": "Yza gaýtmak",
+        "steps": "Ädimler",
+        "navigation": {
+            "back": "Yza",
+            "next": "Indiki",
+            "submit": "Arzany ugratmak"
+        },
+        "stepTitles": {
+            "serviceSelection": "Haýsy hyzmat gerek?",
+            "personalInfo": "Öz barada aýdyň",
+            "serviceDetails": "Hyzmat jikmelikleri",
+            "additionalInfo": "Goşmaça maglumat"
+        },
+        "stepDescriptions": {
+            "serviceSelection": "Size gerekli hyzmaty saýlaň",
+            "personalInfo": "Maglumatlaryňyzy barlamak üçin käbir şahsy maglumatlaryňyz gerek",
+            "serviceDetails": "Haýyşyňyz barada jikme-jik maglumat beriň",
+            "additionalInfo": "Islendik goşmaça maglumat"
+        },
         "services": {
             "university": {
                 "title": "Uniwersitete tabşyrmak",
@@ -547,37 +603,73 @@
                 {
                     "name": "Moskwa",
                     "country": "Russiýa",
-                    "majors": "Medisina, Inženerçilik",
+                    "description": "Russia's vibrant capital, where history and modern innovation collide. Home to world-class medical and engineering universities.",
+                    "majors": "Medicine, Engineering, IT",
+                    "tags": [
+                        "MEDICINE",
+                        "TECH",
+                        "CAPITAL"
+                    ],
                     "img": "https://images.unsplash.com/photo-1513326738677-b964603b136d?q=80&w=1000&auto=format&fit=crop"
                 },
                 {
                     "name": "Sankt-Peterburg",
                     "country": "Russiýa",
-                    "majors": "Sungat, Gumanitar ylymlar",
+                    "description": "The cultural heart of Russia. Known for its breathtaking architecture and prestigious arts and humanities programs.",
+                    "majors": "Arts, Humanities, Architecture",
+                    "tags": [
+                        "CULTURE",
+                        "ARTS",
+                        "HISTORIC"
+                    ],
                     "img": "https://images.unsplash.com/photo-1556610961-2fecc5927173?q=80&w=1000&auto=format&fit=crop"
                 },
                 {
                     "name": "Pekin",
                     "country": "Hytaý",
-                    "majors": "Tehnologiýalar, Biznes",
+                    "description": "The center of China's political and educational world. A top destination for technology and business studies.",
+                    "majors": "Technology, Business, Politics",
+                    "tags": [
+                        "TECH",
+                        "BUSINESS",
+                        "ANCIENT"
+                    ],
                     "img": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=1000&auto=format&fit=crop"
                 },
                 {
                     "name": "Şanhaý",
                     "country": "Hytaý",
-                    "majors": "Maliýe, Ykdysadyýet",
+                    "description": "A global financial hub and future-looking metropolis. Perfect for students pursuing economics and international finance.",
+                    "majors": "Finance, Economics, Trade",
+                    "tags": [
+                        "FINANCE",
+                        "MODERN",
+                        "HUB"
+                    ],
                     "img": "https://images.unsplash.com/photo-1548957175-84f0f9af659e?q=80&w=1000&auto=format&fit=crop"
                 },
                 {
                     "name": "Stambul",
                     "country": "Türkiýe",
-                    "majors": "Taryh, Hünärmentçilik",
+                    "description": "A bridge between continents with a rich academic heritage. Renowned for its history, architecture, and engineering faculties.",
+                    "majors": "History, Architecture, Engineering",
+                    "tags": [
+                        "BRIDGE",
+                        "DIVERSITY",
+                        "HISTORIC"
+                    ],
                     "img": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=80&w=1000&auto=format&fit=crop"
                 },
                 {
                     "name": "Ankara",
                     "country": "Türkiýe",
-                    "majors": "Syýasat, Hukuk",
+                    "description": "Turkey's administrative center and home to top-tier state universities specializing in law, politics, and social sciences.",
+                    "majors": "Politics, Law, Social Sciences",
+                    "tags": [
+                        "POLITICS",
+                        "LAW",
+                        "STATE"
+                    ],
                     "img": "https://images.unsplash.com/photo-1589030343991-69ea1433b941?q=80&w=1000&auto=format&fit=crop"
                 }
             ]

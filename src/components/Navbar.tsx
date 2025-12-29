@@ -20,18 +20,9 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobileCountriesOpen, setIsMobileCountriesOpen] = useState(false);
   const [isMobileCompanyOpen, setIsMobileCompanyOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const isHomePage = pathname === `/${lang}` || pathname === "/";
 
-  // Scroll detection
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+
 
   const redirectedPathName = (locale: Locale) => {
     if (!pathname) return "/";
@@ -49,11 +40,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-md py-2"
-          : "bg-transparent py-4"
-      }`}
+      className="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-md py-2"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -76,9 +63,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
               if (link.type === 'countries') {
                 return (
                   <div key={index} className="relative group px-3 py-2">
-                    <button className={`flex items-center gap-1 text-sm font-bold uppercase transition-colors ${
-                      (scrolled || !isHomePage) ? "text-gray-900 hover:text-navy" : "text-white group-hover:text-navy"
-                    }`}>
+                    <button className="flex items-center gap-1 text-sm font-bold uppercase transition-colors text-gray-900 hover:text-navy">
                       {link.name}
                       <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                     </button>
@@ -130,9 +115,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
               if (link.type === 'mega') {
                 return (
                   <div key={index} className="relative group px-3 py-2 cursor-pointer">
-                    <button className={`flex items-center gap-1 text-sm font-bold uppercase transition-colors ${
-                       (scrolled || !isHomePage) ? "text-gray-900 hover:text-navy" : "text-white hover:text-navy"
-                    }`}>
+                    <button className="flex items-center gap-1 text-sm font-bold uppercase transition-colors text-gray-900 hover:text-navy">
                       {link.name}
                       <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                     </button>
@@ -222,7 +205,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                   className={`px-3 py-2 text-sm font-bold uppercase transition-colors ${
                     pathname === link.href 
                       ? "text-navy" 
-                      : ((scrolled || !isHomePage) ? "text-gray-900 hover:text-navy" : "text-white hover:text-navy") 
+                      : "text-gray-900 hover:text-navy"
                   }`}
                 >
                   {link.name}
@@ -235,9 +218,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
           <div className="hidden md:flex items-center gap-6">
             {/* Language Switcher */}
             <div className="relative group">
-              <button className={`flex items-center gap-2 px-2 py-1 rounded-md text-sm font-bold transition-colors ${
-                 (scrolled || !isHomePage) ? "text-gray-900 hover:text-navy" : "text-white hover:text-navy"
-              }`}>
+              <button className="flex items-center gap-2 px-2 py-1 rounded-md text-sm font-bold transition-colors text-gray-900 hover:text-navy">
                 <div className="relative w-6 h-4 shadow-sm rounded-[2px] overflow-hidden">
                    <Image
                      src={`https://flagcdn.com/w40/${{ en: 'gb', ru: 'ru', tk: 'tm' }[lang]}.png`}

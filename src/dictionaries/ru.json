@@ -49,29 +49,67 @@
     },
     "countries": {
         "title": "Популярные Направления",
+        "description": "Discover the best countries for your international education journey with our expert guidance.",
+        "viewMore": "Перейти на страницу",
         "russia": {
             "name": "Россия",
-            "slogan": "Мир безграничных горизонтов и фундаментальных знаний"
+            "slogan": "Мир безграничных горизонтов и фундаментальных знаний",
+            "description": "With a rich history of scientific excellence, Russia offers world-class education in medicine, engineering, and the arts at an affordable cost.",
+            "tags": [
+                "AFFORDABLE",
+                "STEM",
+                "CULTURE"
+            ]
         },
         "china": {
             "name": "Китай",
-            "slogan": "Синергия древней мудрости и технологий будущего"
+            "slogan": "Синергия древней мудрости и технологий будущего",
+            "description": "Experience the pulse of the world's fastest-growing economy while studying at prestigious universities leading in tech and innovation.",
+            "tags": [
+                "TECH",
+                "FUTURE",
+                "GLOBAL HUB"
+            ]
         },
         "turkey": {
             "name": "Турция",
-            "slogan": "Перекрёсток цивилизаций и яркой студенческой жизни"
+            "slogan": "Перекрёсток цивилизаций и яркой студенческой жизни",
+            "description": "Enjoy a unique blend of Eastern and Western cultures, modern campuses, and a welcoming atmosphere for international students.",
+            "tags": [
+                "MEDITERRANEAN",
+                "DIVERSITY",
+                "HISTORY"
+            ]
         },
         "cyprus": {
             "name": "Кипр",
-            "slogan": "Солнечный остров европейского образования и комфорта"
+            "slogan": "Солнечный остров европейского образования и комфорта",
+            "description": "Safe, sunny, and strictly following European standards, Cyprus is an ideal location for students seeking quality and relaxation.",
+            "tags": [
+                "EUROPEAN",
+                "ISLAND LIFE",
+                "SECURE"
+            ]
         },
         "belarus": {
             "name": "Беларусь",
-            "slogan": "Гостеприимство, безопасность и академические традиции"
+            "slogan": "Гостеприимство, безопасность и академические традиции",
+            "description": "Known for its high academic standards and safe environment, Belarus provides excellent value and traditional European schooling.",
+            "tags": [
+                "TRADITION",
+                "VALUE",
+                "SAFETY"
+            ]
         },
         "bulgaria": {
             "name": "Болгария",
-            "slogan": "Доступное европейское образование на берегу Чёрного моря"
+            "slogan": "Доступное европейское образование на берегу Чёрного моря",
+            "description": "Gateway to the European Union with reputable medical and artistic programs in a beautiful Black Sea setting.",
+            "tags": [
+                "EU GATEWAY",
+                "COASTAL",
+                "PRESTIGIOUS"
+            ]
         }
     },
     "whyUs": {
@@ -118,6 +156,24 @@
         "title": "Быстрая заявка",
         "selectService": "Выберите нужную услугу",
         "backButton": "Назад к выбору услуги",
+        "steps": "Шаги",
+        "navigation": {
+            "back": "Назад",
+            "next": "Далее",
+            "submit": "Отправить заявку"
+        },
+        "stepTitles": {
+            "serviceSelection": "Какая услуга вам нужна?",
+            "personalInfo": "Расскажите о себе",
+            "serviceDetails": "Детали услуги",
+            "additionalInfo": "Дополнительная информация"
+        },
+        "stepDescriptions": {
+            "serviceSelection": "Выберите нужную вам услугу",
+            "personalInfo": "Нам нужно проверить вашу информацию, для этого нам нужны некоторые личные данные",
+            "serviceDetails": "Предоставьте детали вашего запроса",
+            "additionalInfo": "Любая дополнительная информация"
+        },
         "services": {
             "university": {
                 "title": "Для абитуриентов",
@@ -349,37 +405,73 @@
                 {
                     "name": "Москва",
                     "country": "Россия",
-                    "majors": "Медицина, Инженерия",
+                    "description": "Russia's vibrant capital, where history and modern innovation collide. Home to world-class medical and engineering universities.",
+                    "majors": "Medicine, Engineering, IT",
+                    "tags": [
+                        "MEDICINE",
+                        "TECH",
+                        "CAPITAL"
+                    ],
                     "img": "https://images.unsplash.com/photo-1513326738677-b964603b136d?q=80&w=1000&auto=format&fit=crop"
                 },
                 {
                     "name": "Санкт-Петербург",
                     "country": "Россия",
-                    "majors": "Искусство, Гуманитарные",
+                    "description": "The cultural heart of Russia. Known for its breathtaking architecture and prestigious arts and humanities programs.",
+                    "majors": "Arts, Humanities, Architecture",
+                    "tags": [
+                        "CULTURE",
+                        "ARTS",
+                        "HISTORIC"
+                    ],
                     "img": "https://images.unsplash.com/photo-1556610961-2fecc5927173?q=80&w=1000&auto=format&fit=crop"
                 },
                 {
                     "name": "Пекин",
                     "country": "Китай",
-                    "majors": "Технологии, Бизнес",
+                    "description": "The center of China's political and educational world. A top destination for technology and business studies.",
+                    "majors": "Technology, Business, Politics",
+                    "tags": [
+                        "TECH",
+                        "BUSINESS",
+                        "ANCIENT"
+                    ],
                     "img": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=1000&auto=format&fit=crop"
                 },
                 {
                     "name": "Шанхай",
                     "country": "Китай",
-                    "majors": "Финансы, Экономика",
+                    "description": "A global financial hub and future-looking metropolis. Perfect for students pursuing economics and international finance.",
+                    "majors": "Finance, Economics, Trade",
+                    "tags": [
+                        "FINANCE",
+                        "MODERN",
+                        "HUB"
+                    ],
                     "img": "https://images.unsplash.com/photo-1548957175-84f0f9af659e?q=80&w=1000&auto=format&fit=crop"
                 },
                 {
                     "name": "Стамбул",
                     "country": "Турция",
-                    "majors": "История, Архитектура",
+                    "description": "A bridge between continents with a rich academic heritage. Renowned for its history, architecture, and engineering faculties.",
+                    "majors": "History, Architecture, Engineering",
+                    "tags": [
+                        "BRIDGE",
+                        "DIVERSITY",
+                        "HISTORIC"
+                    ],
                     "img": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=80&w=1000&auto=format&fit=crop"
                 },
                 {
                     "name": "Анкара",
                     "country": "Турция",
-                    "majors": "Политика, Право",
+                    "description": "Turkey's administrative center and home to top-tier state universities specializing in law, politics, and social sciences.",
+                    "majors": "Politics, Law, Social Sciences",
+                    "tags": [
+                        "POLITICS",
+                        "LAW",
+                        "STATE"
+                    ],
                     "img": "https://images.unsplash.com/photo-1589030343991-69ea1433b941?q=80&w=1000&auto=format&fit=crop"
                 }
             ]
