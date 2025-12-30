@@ -16,9 +16,9 @@ interface CountryData {
 interface CountriesProps {
   lang: string;
   dict: {
-    badge: string;
+    badge?: string;
     title: string;
-    description: string;
+    description?: string;
     viewMore: string;
     contactCta: string;
     [key: string]: any;

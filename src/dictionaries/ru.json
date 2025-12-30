@@ -33,7 +33,8 @@
         }
     },
     "services": {
-        "title": "Наши Услуги",
+        "badge": "Наши услуги",
+        "title": "Комплексная образовательная поддержка",
         "visa": "Визовые услуги",
         "visaDesc": "99% Успешных кейсов",
         "university": "Поступление в ВУЗы",
@@ -48,7 +49,8 @@
         "ticketDesc": "Студенческие тарифы"
     },
     "countries": {
-        "title": "Популярные Направления",
+        "badge": "Направления",
+        "title": "Популярные направления",
         "description": "Discover the best countries for your international education journey with our expert guidance.",
         "viewMore": "Перейти на страницу",
         "contactCta": "Связаться",
