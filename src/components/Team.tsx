@@ -17,7 +17,6 @@ interface TeamProps {
 
 export default function Team({ lang, dict, teamMembers, showViewAll = false }: TeamProps) {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
-  const testimonials = [1, 2, 3];
 
   // Helper to safely parse markdown
   const parseMarkdown = (content?: string) => {
@@ -29,16 +28,16 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
   const displayMembers = showViewAll ? teamMembers.slice(0, 6) : teamMembers;
 
   return (
-    <section className="relative py-24 bg-white text-gray-900 overflow-hidden">
+    <section className="relative pt-24 bg-white text-gray-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
           {/* Card 1: Our Team Static Info */}
-          <div className="bg-gray-50/50 rounded-[2rem] p-10 flex flex-col justify-start border border-gray-100 h-[450px]">
+          <div className="bg-[#0A2647] rounded-[2rem] p-10 flex flex-col justify-start border border-white/10 h-[450px] text-white">
             <h2 className="text-4xl font-bold font-montserrat tracking-tight mb-6">
               Our<br />Team
             </h2>
-            <p className="text-gray-500 text-sm leading-relaxed mt-auto">
+            <p className="text-white/80 text-sm leading-relaxed mt-auto">
               Dedicated individuals passionate about holistic well-being. Meet the diverse team driving innovation and shaping the future of wellness.
             </p>
           </div>
@@ -83,21 +82,19 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
           ))}
 
           {/* Card 8: Join the Team CTA */}
-          <div className="bg-[#5D7B7D] rounded-[2rem] p-10 flex flex-col justify-between text-white h-[450px] relative overflow-hidden group">
+          <div className="bg-[#5D0E0E] rounded-[2rem] p-10 flex flex-col justify-between text-white h-[450px] relative overflow-hidden group">
             <div className="relative z-10">
-              <h3 className="text-3xl font-bold font-montserrat tracking-tight mb-4">
-                Join the<br />Team
-              </h3>
+              <h3 className="text-3xl font-bold font-montserrat tracking-tight mb-4" dangerouslySetInnerHTML={{ __html: dict.cta_card_title || "Meet Our<br />Whole Team" }} />
               <p className="text-white/80 text-xs leading-relaxed max-w-[80%]">
-                Embark on a transformative journey with us. Join the team shaping the future of wellness innovation.
+                {dict.cta_card_desc || "Explore the full directory of our dedicated professionals."}
               </p>
             </div>
             
             <Link 
-              href={`/${lang}/contact`}
-              className="relative z-10 bg-white text-[#5D7B7D] w-full py-4 rounded-full font-bold text-center hover:bg-white/90 transition-colors mt-auto"
+              href={`/${lang}/teams`}
+              className="relative z-10 bg-white text-[#0A2647] w-full py-4 rounded-full font-bold text-center hover:bg-white/90 transition-colors mt-auto"
             >
-              Join Now
+              {dict.cta_card_button || "View All Team"}
             </Link>
 
             {/* Subtle decorative element */}
@@ -217,41 +214,6 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Testimonials */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-32">
-         <h2 className="text-center text-4xl font-bold font-montserrat tracking-tight mb-16">
-          {dict.testimonials_title}
-        </h2>
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-           {testimonials.map((t) => (
-             <motion.div 
-               key={t}
-               initial={{ opacity: 0, scale: 0.95 }}
-               whileInView={{ opacity: 1, scale: 1 }}
-               viewport={{ once: true }}
-               transition={{ delay: t * 0.1 }}
-               className="bg-gray-50/50 p-10 rounded-[2rem] border border-gray-100 relative group hover:bg-white hover:shadow-xl hover:border-transparent transition-all duration-500"
-              >
-               <div className="flex gap-1 mb-6 text-crimson">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
-               </div>
-               <p className="text-gray-600 italic mb-8 leading-relaxed">
-                 "Studs Life helped me get into my dream university in Prague. The process was so smooth!"
-               </p>
-               <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm">
-                       <Image src={`https://i.pravatar.cc/100?img=${t + 20}`} alt="Student" width={48} height={48} className="object-cover" unoptimized />
-                  </div>
-                  <div>
-                     <div className="font-bold text-gray-900 group-hover:text-crimson transition-colors">Alexander B.</div>
-                     <div className="text-xs text-gray-400 font-medium">Studying in Czech Rep.</div>
-                  </div>
-               </div>
-             </motion.div>
-           ))}
-         </div>
-      </div>
     </section>
   );
 }

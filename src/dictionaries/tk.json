@@ -132,7 +132,30 @@
     },
     "team": {
         "title": "Biziň toparymyz",
-        "testimonials_title": "Talyplaryň hekaýalary"
+        "testimonials_title": "Talyplaryň hekaýalary",
+        "cta_card_title": "Bütin Toparymyz",
+        "cta_card_desc": "Biziň hünärmenlerimiziň doly sanawy bilen tanyşyň.",
+        "cta_card_button": "Ählisini görkez"
+    },
+    "contactForm": {
+        "title": "Habarlaşyň",
+        "subtitle": "Aşakdaky formany dolduryň we biz size mümkin boldugyça tiz wagtda habar bereris.",
+        "fields": {
+            "name": "Doly adyňyz",
+            "email": "E-poçta salgyňyz",
+            "phone": "Telefon belgiňiz",
+            "contactPreference": "Siziň bilen nähili habarlaşmaly?",
+            "telegramUsername": "Telegram ulanyjy ady ýa-da telefon"
+        },
+        "preferences": {
+            "call": "Jaň arkaly",
+            "whatsapp": "WhatsApp",
+            "telegram": "Telegram",
+            "email": "E-poçta"
+        },
+        "privacyModal": "Haýyş edýäris, Telegram gizlinlik sazlamalaryňyzda hemmelerden habar almaga rugsat berendigini anyklaň.",
+        "submit": "Habar iber",
+        "success": "Sag boluň! Biz size basym habar bereris."
     },
     "statistics": {
         "resultsTitle": "NETIJELERIMIZ WE GÖWRÜMIMIZ",

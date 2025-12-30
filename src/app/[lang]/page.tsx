@@ -6,6 +6,8 @@ import Countries from "@/components/Countries";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Team from "@/components/Team";
 import Statistics from "@/components/Statistics";
+import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import ContactFormSection from "@/components/ContactFormSection";
 import Form from "@/components/Form";
 
 import LatestJournal from "@/components/LatestJournal";
@@ -97,8 +99,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <HowItWorks steps={howItWorksSteps} dict={dict.howItWorks} />
       
       <Team lang={lang} dict={dict.team} teamMembers={teamMembers.slice(0, 6)} showViewAll={true} />
-      <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestCities} />
       <Statistics lang={lang} dict={dict.statistics} />
+      <TestimonialsCarousel title={dict.team.testimonials_title} />
+      <ContactFormSection lang={lang} dict={dict.contactForm} />
+
+      <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestCities} />
 
 
       <ProcessSection lang={lang} dict={(dict as any).processWorkflow} />

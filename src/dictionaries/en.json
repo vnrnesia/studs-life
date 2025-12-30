@@ -132,7 +132,30 @@
     },
     "team": {
         "title": "Meet Our Team",
-        "testimonials_title": "Student Stories"
+        "testimonials_title": "Student Testimonials",
+        "cta_card_title": "Meet Our Whole Team",
+        "cta_card_desc": "Explore the full directory of our dedicated professionals.",
+        "cta_card_button": "View All Team"
+    },
+    "contactForm": {
+        "title": "Get in Touch",
+        "subtitle": "Fill out the form below and we will contact you as soon as possible.",
+        "fields": {
+            "name": "Full Name",
+            "email": "Email Address",
+            "phone": "Phone Number",
+            "contactPreference": "How should we contact you?",
+            "telegramUsername": "Telegram Username or Phone"
+        },
+        "preferences": {
+            "call": "Phone Call",
+            "whatsapp": "WhatsApp",
+            "telegram": "Telegram",
+            "email": "Email"
+        },
+        "privacyModal": "Please make sure your Telegram privacy settings allow messages from everyone.",
+        "submit": "Send Message",
+        "success": "Thank you! We'll get back to you soon."
     },
     "statistics": {
         "resultsTitle": "OUR RESULTS AND SCALE",
