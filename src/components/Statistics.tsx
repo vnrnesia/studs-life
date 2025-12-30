@@ -40,21 +40,20 @@ export default function Statistics({ lang, dict }: StatisticsProps) {
   ];
 
   return (
-    <section className="py-24 bg-white overflow-hidden border-t border-gray-50">
+    <section className="py-16 bg-white overflow-hidden border-t border-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Section: Badge & Description */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-20">
           <div className="md:col-span-1">
-            <div className="inline-flex items-center gap-3 py-1 px-3 rounded-full border border-gray-100 bg-gray-50/50">
-              <div className="w-2 h-2 rounded-full bg-[#0A2647] animate-pulse" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#0A2647]">Our Team</span>
+            <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-[10px] md:text-xs font-bold tracking-wider uppercase text-gray-500">
+              {dict.badge || "Statistics"}
             </div>
           </div>
           
           <div className="md:col-span-4">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0A2647] leading-[1.15] tracking-tight">
-              Our dedicated team of education consultants, visa experts, and mentors works tirelessly to ensure your success. With deep expertise across global academic systems, we provide the personalized guidance needed to turn your student journey into a life-changing success story.
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[#0A2647] leading-tight tracking-tight">
+              {dict.description || "Our dedicated team of education consultants, visa experts, and mentors works tirelessly to ensure your success."}
             </h2>
           </div>
         </div>

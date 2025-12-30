@@ -20,6 +20,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import Image from "next/image";
 import StudentFlyingImg from "@/assets/student-flying.webp";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -152,9 +153,9 @@ export default function Services({ lang, dict }: ServicesProps) {
                 </li>
               ))}
             </ul>
-            <button className="mt-10 px-6 py-3 bg-white text-black rounded-full text-sm font-bold flex items-center group-hover:bg-gray-200 transition-colors">
-              Get started <ArrowUpRight className="ml-2 w-4 h-4" />
-            </button>
+            <InteractiveHoverButton className="mt-10 bg-white text-black border-white hover:bg-gray-200">
+              Get started
+            </InteractiveHoverButton>
           </div>
         );
       
@@ -215,13 +216,20 @@ export default function Services({ lang, dict }: ServicesProps) {
   const Layout = Briefcase;
 
   return (
-    <section id="services" className="relative py-24 bg-gray-50/50">
+    <section id="services" className="relative py-16 bg-gray-50/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-black uppercase font-montserrat tracking-wide text-gray-900">
+          <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-[10px] md:text-xs font-bold tracking-wider uppercase text-gray-500 mb-4">
+            {dict.badge || "Our Services"}
+          </div>
+          <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight">
             {dict.title}
           </h2>
-          <div className="mt-4 h-1 w-24 bg-crimson mx-auto rounded-full" />
+          {dict.subtitle && (
+            <p className="text-gray-500 text-base md:text-lg max-w-2xl mx-auto mt-4 font-medium leading-relaxed">
+              {dict.subtitle}
+            </p>
+          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[minmax(240px,auto)]">

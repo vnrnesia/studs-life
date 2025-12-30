@@ -63,7 +63,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
   const activeOfficeData = offices.find(o => o.id === activeOffice) || offices[0];
 
   return (
-    <section className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+    <section className="py-16 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-20 w-72 h-72 bg-crimson rounded-full blur-3xl" />
@@ -74,14 +74,13 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
         
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-block px-4 py-1.5 rounded-full border border-crimson/20 bg-crimson/5 text-xs font-bold tracking-wider uppercase text-crimson mb-4">
-            <MapPin className="w-3 h-3 inline mr-2" />
-            {dict?.badge || "НАШИ АДРЕСА"}
+          <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-[10px] md:text-xs font-bold tracking-wider uppercase text-gray-500 mb-4">
+            {dict?.badge || "HAШИ АДPECА"}
           </div>
           <h2 className="text-4xl md:text-5xl font-black tracking-tight text-gray-900 mb-6">
             {dict?.title || "Мы рядом с вами"}
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
             {dict?.subtitle || "Офисы в Туркменистане и России для вашего удобства"}
           </p>
         </div>

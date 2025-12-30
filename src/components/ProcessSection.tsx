@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Locale } from "@/i18n-config";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 
 interface ProcessSectionProps {
   lang: Locale;
@@ -97,7 +98,7 @@ export default function ProcessSection({ lang, dict }: ProcessSectionProps) {
 
   return (
     // relative ve h-fit kullanarak sticky context'i koruyoruz
-    <section className="bg-gray-50 py-24">
+    <section className="bg-gray-50 py-16">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         
         {/* Ana Grid Yapısı */}
@@ -112,19 +113,20 @@ export default function ProcessSection({ lang, dict }: ProcessSectionProps) {
                 transition={{ duration: 0.8 }}
                 className="flex flex-col gap-8 pr-8"
               >
-                <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">
+                <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-white text-[10px] md:text-xs font-bold tracking-wider uppercase text-gray-500 mb-6 w-fit">
+                  {dict.badge || "Our Process"}
+                </div>
+                <h2 className="text-4xl md:text-5xl font-black tracking-tight text-gray-900 leading-tight">
                   {dict.title}
                 </h2>
-                <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
+                <p className="text-base md:text-lg text-gray-500 font-medium leading-relaxed max-w-lg mt-4">
                   {dict.description}
                 </p>
 
-                <Link
-                  href={`/${lang}/contact`}
-                  className="inline-flex items-center justify-center w-fit gap-3 px-8 py-4 bg-crimson text-white rounded-full font-semibold text-lg transition-all hover:bg-red-700 hover:scale-105 shadow-lg group"
-                >
-                  {dict.cta}
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                <Link href={`/${lang}/contact`}>
+                  <InteractiveHoverButton className="bg-crimson text-white border-crimson hover:bg-red-700 hover:border-red-700">
+                    {dict.cta}
+                  </InteractiveHoverButton>
                 </Link>
               </motion.div>
           </div>

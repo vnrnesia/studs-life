@@ -7,6 +7,7 @@ import { marked } from "marked";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 
 interface TeamProps {
   lang: string;
@@ -34,8 +35,11 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
           
           {/* Card 1: Our Team Static Info */}
           <div className="bg-[#0A2647] rounded-[2rem] p-10 flex flex-col justify-start border border-white/10 h-[450px] text-white">
-            <h2 className="text-4xl font-bold font-montserrat tracking-tight mb-6">
-              Our<br />Team
+            <div className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold tracking-wider uppercase text-white/50 mb-4 w-fit">
+              {dict.badge || "Our Team"}
+            </div>
+            <h2 className="text-4xl font-black text-white tracking-tight leading-tight">
+              {dict.title || "The Experts Behind Us"}
             </h2>
             <p className="text-white/80 text-sm leading-relaxed mt-auto">
               Dedicated individuals passionate about holistic well-being. Meet the diverse team driving innovation and shaping the future of wellness.
@@ -105,12 +109,10 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
 
         {showViewAll && teamMembers.length > 6 && (
           <div className="text-center mt-16">
-            <Link 
-              href={`/${lang}/teams`}
-              className="inline-flex items-center gap-2 px-10 py-4 bg-gray-900 text-white rounded-full font-bold hover:bg-crimson transition-all duration-300 shadow-lg"
-            >
-              {lang === 'ru' ? 'Посмотреть всю команду' : 'View All Team'}
-              <ArrowRight className="w-5 h-5" />
+            <Link href={`/${lang}/teams`}>
+              <InteractiveHoverButton className="bg-navy text-white border-navy hover:bg-blue-900 hover:border-blue-900">
+                {lang === 'ru' ? 'Посмотреть всю команду' : 'View All Team'}
+              </InteractiveHoverButton>
             </Link>
           </div>
         )}

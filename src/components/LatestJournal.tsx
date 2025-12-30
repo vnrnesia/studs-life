@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Calendar } from "lucide-react";
 import { City, getStrapiImageUrl } from "@/lib/strapi";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 
 interface LatestJournalProps {
   lang: string;
@@ -16,29 +17,24 @@ export default function LatestJournal({ lang, dict, posts = [] }: LatestJournalP
   if (!posts || posts.length === 0) return null;
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
           
           {/* Left Side: Text & Button */}
           <div className="lg:w-1/3 flex flex-col justify-center">
-            <div className="mb-2 text-sm font-bold tracking-wider text-gray-500 uppercase">
-              {dict?.label || "Insights & Inspiration"}
+            <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-[10px] md:text-xs font-bold tracking-wider uppercase text-gray-500 mb-6 w-fit">
+              {dict.badge || "Journal"}
             </div>
-            <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-gray-900 mb-8 leading-tight">
-              {dict?.title_part1 || "Explore our"} <br />
-              <span className="font-serif italic font-normal text-6xl md:text-7xl">
-                {dict?.title_part2 || "Latest journal"}
-              </span>
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-gray-900 mb-8 leading-tight">
+              {dict?.title_part1 || "Explore Our"} {dict?.title_part2 || "Latest Journal"}
             </h2>
             
             <div className="flex">
-              <Link 
-                href={`/${lang}/countries`}
-                className="group flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-gray-800 transition-all font-montserrat"
-              >
-                {dict?.viewAll || "View all blogs"}
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <Link href={`/${lang}/countries`}>
+                <InteractiveHoverButton className="bg-navy text-white border-navy hover:bg-blue-900 hover:border-blue-900">
+                  {dict?.viewAll || "View all blogs"}
+                </InteractiveHoverButton>
               </Link>
             </div>
           </div>

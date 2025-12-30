@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Globe, ArrowLeft, ArrowRight } from "lucide-react";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 
 interface CountryData {
   name: string;
@@ -15,15 +16,12 @@ interface CountryData {
 interface CountriesProps {
   lang: string;
   dict: {
+    badge: string;
     title: string;
     description: string;
     viewMore: string;
-    russia: CountryData;
-    china: CountryData;
-    turkey: CountryData;
-    cyprus: CountryData;
-    belarus: CountryData;
-    bulgaria: CountryData;
+    contactCta: string;
+    [key: string]: any;
   };
 }
 
@@ -119,22 +117,24 @@ export default function Countries({ lang, dict }: CountriesProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6 text-center md:text-left">
-          <div className="flex-1">
-            <h2 className="text-4xl md:text-5xl font-bold font-montserrat tracking-tight mb-4">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <div className="flex-1 text-left">
+            <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-[10px] md:text-xs font-bold tracking-wider uppercase text-gray-500 mb-4">
+              {dict.badge || "Destinations"}
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight">
               {dict.title}
             </h2>
-            <p className="text-gray-500 text-lg md:text-xl font-medium">
+            <p className="text-gray-500 text-base md:text-lg max-w-2xl mt-4 font-medium leading-relaxed">
               {dict.description}
             </p>
           </div>
           
-          <button className="group flex items-center gap-4 px-8 py-4 bg-gray-50 border border-gray-200 rounded-full hover:border-gray-900 transition-all duration-300 shadow-sm whitespace-nowrap">
-            <span className="font-bold text-sm tracking-tight">Form doldura git</span>
-            <div className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center transition-transform group-hover:rotate-[-45deg]">
-              <ArrowRight className="w-4 h-4" />
-            </div>
-          </button>
+          <div className="pb-2">
+            <InteractiveHoverButton className="bg-gray-50 text-gray-900 border-gray-200 hover:border-navy">
+              {dict.contactCta}
+            </InteractiveHoverButton>
+          </div>
         </div>
       </div>
 
@@ -188,12 +188,9 @@ export default function Countries({ lang, dict }: CountriesProps) {
                   </div>
 
                   <div className="mt-auto">
-                    <button className="flex items-center gap-2 px-6 py-3 bg-crimson text-white rounded-xl hover:bg-crimson/90 transition-all font-bold tracking-tight shadow-md shadow-crimson/20">
-                      <span className="text-sm">{dict.viewMore}</span>
-                      <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center">
-                        <ArrowRight className="w-3 h-3" />
-                      </div>
-                    </button>
+                    <InteractiveHoverButton className="bg-crimson text-white border-crimson hover:bg-crimson/90">
+                      {dict.viewMore}
+                    </InteractiveHoverButton>
                   </div>
                 </div>
 

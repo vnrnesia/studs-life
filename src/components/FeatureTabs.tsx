@@ -91,7 +91,7 @@ export default function FeatureTabs({
                   onClick={() => setActiveTabId(feature.id)}
                   className={cn(
                     "group relative flex items-start text-left p-6 rounded-2xl transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-crimson/50",
-                    isActive ? "opacity-100" : "opacity-60 hover:opacity-100"
+                    isActive ? "opacity-100" : "opacity-100 hover:opacity-100"
                   )}
                 >
                   {/* Active Background Animation */}

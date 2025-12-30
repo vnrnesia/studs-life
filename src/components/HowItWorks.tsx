@@ -14,6 +14,7 @@ import {
   Rocket
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 
 // Icon mapping for string-based props
 const iconMap: Record<string, LucideIcon> = {
@@ -60,12 +61,17 @@ export default function HowItWorks({
         
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-xs font-bold tracking-wider uppercase text-gray-500 mb-4">
-            {tagline}
+          <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-[10px] md:text-xs font-bold tracking-wider uppercase text-gray-500 mb-4">
+            {dict?.badge || tagline}
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight">
             {title}
           </h2>
+          {dict?.subtitle && (
+            <p className="text-gray-500 text-base md:text-lg max-w-2xl mx-auto mt-4 font-medium leading-relaxed">
+              {dict.subtitle}
+            </p>
+          )}
         </div>
 
         {/* Tab Navigation */}
@@ -130,10 +136,9 @@ export default function HowItWorks({
                   {activeStep.description}
                 </p>
                 
-                <button className="bg-neutral-900 text-white px-8 py-4 rounded-full font-bold inline-flex items-center gap-2 hover:bg-neutral-800 transition-colors shadow-lg shadow-neutral-900/20 group">
+                <InteractiveHoverButton className="bg-navy text-white border-navy hover:bg-blue-900 hover:border-blue-900">
                   {dict?.getStarted || "Get Started"}
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
+                </InteractiveHoverButton>
               </motion.div>
             </AnimatePresence>
           </div>

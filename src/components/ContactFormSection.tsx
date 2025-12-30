@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { Send, CheckCircle2, Info, MessageCircle, PhoneCall, Mail } from "lucide-react";
 import Image from "next/image";
 import ctaBg from "@/assets/ctaform.png";
@@ -20,7 +21,6 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
     email: "",
     phone: "",
     preference: "whatsapp" as ContactPreference,
-    telegramHandle: "",
   });
   const [country, setCountry] = useState<Country>("RU");
   const [submitted, setSubmitted] = useState(false);
@@ -32,6 +32,12 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
   }, [country]);
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // If Telegram is selected, allow free text input (for @username)
+    if (formData.preference === "telegram") {
+      setFormData((prev) => ({ ...prev, phone: e.target.value }));
+      return;
+    }
+
     let raw = e.target.value.replace(/\D/g, "");
     
     if (country === "RU") {
@@ -69,7 +75,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
   };
 
   return (
-    <section className="py-10 bg-white">
+    <section className="py-16 bg-white">
       <div className="container mx-auto px-4 md:px-8">
         <div className="relative overflow-hidden rounded-[2.5rem] bg-[#06182E] max-w-6xl mx-auto">
           {/* Background Image Wrapper */}
@@ -86,7 +92,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
           </div>
 
           <div className="relative z-10 px-8 md:px-16 py-8 md:py-10">
-            <div className="max-w-4xl mx-auto text-center mb-12">
+            <div className="max-w-4xl mx-auto md:mx-0 text-center md:text-left mb-12">
               {/* Badge */}
               <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-xs font-bold tracking-wider uppercase text-gray-500 mb-4">
                 İletişime Geç
@@ -95,12 +101,12 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
               <h2 className="text-3xl md:text-5xl font-black text-white mb-3 tracking-tight leading-tight">
                 {dict.title}
               </h2>
-              <p className="text-blue-100/60 text-base font-medium max-w-2xl mx-auto">
+              <p className="text-blue-100/60 text-base font-medium max-w-2xl mx-auto md:mx-0">
                 {dict.subtitle}
               </p>
             </div>
 
-            <div className="max-w-lg mx-auto text-left">
+            <div className="max-w-lg mx-auto md:mx-0 text-left">
 
               {submitted ? (
                 <motion.div 
@@ -144,50 +150,62 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
                     </div>
                   </div>
 
-                  {/* Phone Number row */}
+                  {/* Phone Number / Telegram row */}
                   <div className="space-y-2">
                     <div className="flex items-center justify-between pl-1">
                       <label className="text-[10px] font-bold text-blue-200/40 uppercase tracking-[0.2em]">
-                        {dict.fields.phone}
+                        {formData.preference === "telegram" ? (dict.fields.telegramUsername || "Phone or Telegram") : dict.fields.phone}
                       </label>
-                      <div className="flex bg-[#0A2647]/60 backdrop-blur-md scale-90 border border-white/10 p-1 rounded-full">
-                        <button
-                          type="button"
-                          onClick={() => setCountry("RU")}
-                          className={`px-3 py-1 text-[9px] font-black rounded-full transition-all ${country === "RU" ? "bg-white text-[#0A2647]" : "text-blue-200/30"}`}
-                        >
-                          RUSSIA
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setCountry("TM")}
-                          className={`px-3 py-1 text-[9px] font-black rounded-full transition-all ${country === "TM" ? "bg-white text-[#0A2647]" : "text-blue-200/30"}`}
-                        >
-                          TM
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setCountry(null)}
-                          className={`px-3 py-1 text-[9px] font-black rounded-full transition-all ${country === null ? "bg-white text-[#0A2647]" : "text-blue-200/30"}`}
-                        >
-                          OTHER
-                        </button>
-                      </div>
+                      {formData.preference !== "telegram" && (
+                        <div className="flex bg-[#0A2647]/60 backdrop-blur-md scale-90 border border-white/10 p-1 rounded-full">
+                          <button
+                            type="button"
+                            onClick={() => setCountry("RU")}
+                            className={`px-3 py-1 text-[9px] font-black rounded-full transition-all ${country === "RU" ? "bg-white text-[#0A2647]" : "text-blue-200/30"}`}
+                          >
+                            RUSSIA
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setCountry("TM")}
+                            className={`px-3 py-1 text-[9px] font-black rounded-full transition-all ${country === "TM" ? "bg-white text-[#0A2647]" : "text-blue-200/30"}`}
+                          >
+                            TM
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setCountry(null)}
+                            className={`px-3 py-1 text-[9px] font-black rounded-full transition-all ${country === null ? "bg-white text-[#0A2647]" : "text-blue-200/30"}`}
+                          >
+                            OTHER
+                          </button>
+                        </div>
+                      )}
                     </div>
                     <div className="relative">
-                      <div className="absolute left-6 top-1/2 -translate-y-1/2 text-white font-bold flex items-center gap-3">
-                        <span>{country === "RU" ? "+7" : country === "TM" ? "+993" : "+"}</span>
-                        <div className="w-[1px] h-4 bg-white/20" />
-                      </div>
+                      {formData.preference !== "telegram" && (
+                        <div className="absolute left-6 top-1/2 -translate-y-1/2 text-white font-bold flex items-center gap-3 z-10 pointer-events-none">
+                          <span className="text-sm">{country === "RU" ? "+7" : country === "TM" ? "+993" : "+"}</span>
+                          <div className="w-[1px] h-4 bg-white/20" />
+                        </div>
+                      )}
                       <input
                         required
                         type="text"
-                        inputMode="tel"
+                        inputMode={formData.preference === "telegram" ? "text" : "tel"}
                         autoComplete="off"
                         value={formData.phone}
                         onChange={handlePhoneChange}
-                        placeholder={country === "RU" ? "(___) ___-__-__" : country === "TM" ? "__ ______" : "Phone number"}
-                        className={`w-full bg-[#0A2647]/60 backdrop-blur-md border border-white/10 focus:border-white/30 outline-none py-3 rounded-xl text-white placeholder-white/10 transition-all font-mono text-sm tracking-wider ${country === "RU" ? "pl-24" : country === "TM" ? "pl-28" : "pl-12"}`}
+                        placeholder={
+                          formData.preference === "telegram" 
+                            ? "@username or phone" 
+                            : country === "RU" 
+                            ? "(___) ___-__-__" 
+                            : country === "TM" 
+                            ? "__ ______" 
+                            : "Phone number"
+                        }
+                        className={`w-full bg-[#0A2647]/60 backdrop-blur-md border border-white/10 focus:border-white/30 outline-none py-3 rounded-xl text-white placeholder-white/10 transition-all ${formData.preference === "telegram" ? "font-medium px-5" : "font-mono tracking-wider"} text-sm ${formData.preference !== "telegram" && (country === "RU" ? "pl-16" : country === "TM" ? "pl-20" : "pl-10")}`}
                       />
                     </div>
                   </div>
@@ -219,29 +237,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
                     </div>
                   </div>
 
-                  {/* Telegram Handle */}
-                  <AnimatePresence>
-                    {formData.preference === "telegram" && (
-                      <motion.div
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -10 }}
-                        className="space-y-2 pt-2"
-                      >
-                        <label className="text-[10px] font-bold text-blue-200/40 uppercase tracking-[0.2em] pl-1">
-                          {dict.fields.telegramUsername}
-                        </label>
-                        <input
-                          required
-                          type="text"
-                          value={formData.telegramHandle}
-                          onChange={(e) => setFormData((prev) => ({ ...prev, telegramHandle: e.target.value }))}
-                          placeholder="@username or phone"
-                          className="w-full bg-[#0A2647]/60 backdrop-blur-md border border-white/10 focus:border-white/30 outline-none px-5 py-3 rounded-xl text-white placeholder-white/10 transition-all font-mono text-sm"
-                        />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+
 
                   {/* Submit Button */}
                   <button

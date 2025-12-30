@@ -33,7 +33,8 @@
         }
     },
     "services": {
-        "title": "Our Services",
+        "badge": "Our Services",
+        "title": "Comprehensive Educational Support",
         "visa": "Visa Services",
         "visaDesc": "99% Success Rate",
         "university": "University Admission",
@@ -48,9 +49,11 @@
         "ticketDesc": "Student Discounts"
     },
     "countries": {
+        "badge": "Destinations",
         "title": "Popular Destinations",
         "description": "Discover the best countries for your international education journey with our expert guidance.",
         "viewMore": "Go to page",
+        "contactCta": "Get in Touch",
         "russia": {
             "name": "Russia",
             "slogan": "A world of boundless horizons and fundamental knowledge",

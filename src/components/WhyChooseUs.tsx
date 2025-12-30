@@ -16,7 +16,7 @@ export default function WhyChooseUs({ lang, dict }: WhyChooseUsProps) {
   const rightFeatures: string[] = dict.rightFeatures || [];
 
   return (
-    <section className="relative w-full min-h-screen bg-[#061832] text-white overflow-hidden flex items-center py-12 px-4 md:px-8">
+    <section className="relative w-full min-h-screen bg-[#061832] text-white overflow-hidden flex items-center py-16 px-4 md:px-8">
       
       {/* Arka Plan Dekoratif Yazısı */}
       <div className="absolute bottom-[-5%] left-0 w-full select-none pointer-events-none opacity-5">
@@ -28,10 +28,13 @@ export default function WhyChooseUs({ lang, dict }: WhyChooseUsProps) {
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
         
         {/* --- SOL KOLON (Başlık ve Sol Alt Liste) --- */}
-        <div className="lg:col-span-4 flex flex-col justify-between h-full">
+        <div className="lg:col-span-4 flex flex-col justify-start h-full">
           
           {/* Ana Başlık */}
-          <div className="mb-10 lg:mb-0 relative">
+          <div className="mb-10 lg:mb-12 relative">
+            <div className="inline-block px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] md:text-xs font-bold tracking-wider uppercase text-white/50 mb-6">
+              {dict.badge || "Why Choose Us"}
+            </div>
             <h2 className="font-black text-5xl md:text-6xl lg:text-7xl leading-[0.9] tracking-tighter">
               <span className="text-[#C62828] block">{dict.titlePart1}</span>
               <span className="text-[#C62828] block">{dict.titlePart2}</span>
