@@ -508,9 +508,21 @@
     },
     "servicesPage": {
         "hero": {
-            "title": "BILIMDE, DURMUŞDA WE KARÝERADA SYÝAHATYŇYZ ŞU ÝERDEN BAŞLAÝAR",
-            "subtitle": "Uniwersitete girmekden başlap ýaşaýyş ýeri, wiza proseduralary we şähere uýgunlaşma çenli doly hyzmat.",
-            "cta": "Mugt maslahat"
+            "companyTitle": "STUDENT'S LIFE - OKUWA GIRIŞ ULGAMYNDAKY ÄHLI NÄZIKLIKLERI BILÝÄN HÜNÄRMENLER TOPARY",
+            "companyDescription": "Kompaniýa 2020-nji ýylda Kazanda esaslandyryldy we hasaba alyndy. 5 ýyldan gowrak wagt bäri dünýäniň öňdebaryjy uniwersitetlerine okuwa girýän daşary ýurtly ýüz tutýanlara üstünlikli ýoldaşlyk edip gelýär, talyplary uýgunlaşmagyň kynçylyklaryndan halas edýär we okuwa girmek işini düşnükli hem ýönekeý edýär.",
+            "officialReps": "Russiýada (Kazan) we Türkmenistanda (Aşgabat, Lebap, Mary, Daşoguz) resmi wekilhanalary bar.",
+            "mainHeading": {
+                "part1": "BIZ SIZE",
+                "part2": "KÖMEK",
+                "part3": "EDERIS"
+            },
+            "services": [
+                "maksatnamalary we uniwersiteti saýlamak",
+                "ähli zerur resminamalar bukjany taýýarlamak we dogry tabşyrmak",
+                "aralykdan giriş synaglaryny tabşyrmak üçin enjamlary guramak",
+                "okuw çakylygy alanyňyzdan soň wiza resmileşdirmek",
+                "geleniňizden soň uýgunlaşmak"
+            ]
         },
         "coreServices": {
             "title": "Biziň Esasy Hyzmatlarymyz",

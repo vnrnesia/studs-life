@@ -313,9 +313,21 @@
     },
     "servicesPage": {
         "hero": {
-            "title": "YOUR JOURNEY IN EDUCATION, LIFE AND CAREER STARTS HERE",
-            "subtitle": "End-to-end service from university admission to accommodation, visa procedures to city adaptation.",
-            "cta": "Free Consultation"
+            "companyTitle": "STUDENT'S LIFE - A TEAM OF PROFESSIONALS WHO KNOW ALL THE NUANCES OF ADMISSION",
+            "companyDescription": "The company was founded and registered in Kazan in 2020 and for more than 5 years has been successfully accompanying international applicants when entering leading universities in the world, saving students from adaptation problems and making the process clear and simple.",
+            "officialReps": "Has official representative offices in Russia (Kazan) and Turkmenistan (Ashgabat, Lebap, Mary, Dashoguz).",
+            "mainHeading": {
+                "part1": "WE WILL",
+                "part2": "HELP",
+                "part3": "YOU"
+            },
+            "services": [
+                "select programs and university",
+                "prepare and correctly submit all necessary document packages",
+                "organize equipment for remote entrance examinations",
+                "apply for a visa after receiving an educational invitation",
+                "adapt upon arrival"
+            ]
         },
         "coreServices": {
             "title": "Our Core Services",
