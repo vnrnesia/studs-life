@@ -2,31 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import { 
-  GraduationCap, 
-  Plane, 
-  Home, 
-  Briefcase, 
-  FileText,
-  type LucideIcon 
-} from "lucide-react";
+import Image, { StaticImageData } from "next/image";
 import { cn } from "@/lib/utils";
-
-// Map of available icons
-const iconMap: Record<string, LucideIcon> = {
-  graduation: GraduationCap,
-  plane: Plane,
-  home: Home,
-  briefcase: Briefcase,
-  file: FileText,
-};
 
 export interface FeatureTab {
   id: string;
   title: string;
   description: string;
-  iconName: string; 
+  icon: StaticImageData; 
   image: string;
 }
 
@@ -53,7 +36,6 @@ export default function FeatureTabs({
   }, [features, activeTabId]);
 
   const activeFeature = features.find(f => f.id === activeTabId) || features[0];
-  const ActiveIcon = activeFeature ? iconMap[activeFeature.iconName] || FileText : FileText;
 
   if (!features.length) return null;
 
@@ -83,7 +65,6 @@ export default function FeatureTabs({
           <div className="flex flex-col space-y-4">
             {features.map((feature) => {
               const isActive = activeTabId === feature.id;
-              const Icon = iconMap[feature.iconName] || FileText;
               
               return (
                 <button
@@ -98,7 +79,7 @@ export default function FeatureTabs({
                   {isActive && (
                     <motion.div
                       layoutId="activeTabBg"
-                      className="absolute inset-0 bg-gray-50 border border-gray-200 rounded-2xl"
+                      className="absolute inset-0 bg-gray-50 border border-gray-200 rounded-2xl shadow-sm"
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
                   )}
@@ -106,18 +87,28 @@ export default function FeatureTabs({
                   {/* Content */}
                   <div className="relative z-10 flex gap-6 items-center">
                     <div className={cn(
-                      "flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-colors duration-300",
+                      "flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 relative",
                       isActive 
-                        ? "bg-crimson text-white shadow-lg shadow-crimson/20" 
+                        ? "bg-[#C40201] text-white shadow-[0_8px_20px_rgba(196,2,1,0.3)]" 
                         : "bg-gray-100 text-gray-500 group-hover:bg-gray-200"
                     )}>
-                      <Icon className="w-6 h-6" />
+                      <div className="relative w-8 h-8">
+                        <Image 
+                          src={feature.icon}
+                          alt={feature.title}
+                          fill
+                          className={cn(
+                            "object-contain transition-all duration-300",
+                            isActive ? "brightness-0 invert" : "opacity-70 grayscale"
+                          )}
+                        />
+                      </div>
                     </div>
                     
                     <div>
                       <h3 className={cn(
-                        "text-xl font-bold mb-2 transition-colors",
-                        isActive ? "text-gray-900" : "text-gray-700"
+                        "text-xl font-bold mb-1 transition-colors",
+                        isActive ? "text-[#06182E]" : "text-gray-700"
                       )}>
                         {feature.title}
                       </h3>
@@ -161,19 +152,7 @@ export default function FeatureTabs({
                    </div>
                 )}
 
-                {/* Optional Overlay Info */}
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-20">
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                  >
-                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-xs font-medium text-white mb-3">
-                      <ActiveIcon className="w-3 h-3" />
-                      <span>{activeFeature.title}</span>
-                   </div>
-                  </motion.div>
-                </div>
+                {/* Optional Overlay Info removed to match reference image cleaner look */}
               </motion.div>
             </AnimatePresence>
           </div>

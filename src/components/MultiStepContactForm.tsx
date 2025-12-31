@@ -3,22 +3,26 @@
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { submitToGoogleSheets } from "@/lib/submitToGoogleSheets";
 import { 
-  GraduationCap, 
-  Users, 
-  School, 
-  Plane as PlaneIcon, 
-  Briefcase, 
-  Ticket,
   Check,
   ChevronLeft,
   User,
   MapPin,
   Smile,
   FileText,
-  LayoutGrid
+  LayoutGrid,
+  GraduationCap
 } from "lucide-react";
+
+// Import custom icons
+import universityIcon from "@/assets/contact_icons/university.png";
+import changeIcon from "@/assets/contact_icons/change.png";
+import chinaIcon from "@/assets/contact_icons/china.png";
+import umrahIcon from "@/assets/contact_icons/umrah.png";
+import visaIcon from "@/assets/contact_icons/visa.png";
+import flightIcon from "@/assets/contact_icons/flight.png";
 
 interface MultiStepContactFormProps {
   lang: string;
@@ -164,43 +168,37 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
   const services = [
     { 
       id: 'university' as const, 
-      icon: GraduationCap, 
-      color: 'bg-blue-500',
+      icon: universityIcon, 
       title: dict.services.university.title,
       desc: dict.services.university.desc
     },
     { 
       id: 'transfer' as const, 
-      icon: Users, 
-      color: 'bg-purple-500',
+      icon: changeIcon, 
       title: dict.services.transfer.title,
       desc: dict.services.transfer.desc
     },
     { 
       id: 'school' as const, 
-      icon: School, 
-      color: 'bg-green-500',
+      icon: chinaIcon, 
       title: dict.services.school.title,
       desc: dict.services.school.desc
     },
     { 
       id: 'umrah' as const, 
-      icon: PlaneIcon, 
-      color: 'bg-teal-500',
+      icon: umrahIcon, 
       title: dict.services.umrah.title,
       desc: dict.services.umrah.desc
     },
     { 
       id: 'workVisa' as const, 
-      icon: Briefcase, 
-      color: 'bg-orange-500',
+      icon: visaIcon, 
       title: dict.services.workVisa.title,
       desc: dict.services.workVisa.desc
     },
     { 
       id: 'ticket' as const, 
-      icon: Ticket, 
-      color: 'bg-pink-500',
+      icon: flightIcon, 
       title: dict.services.ticket.title,
       desc: dict.services.ticket.desc
     },
@@ -376,9 +374,8 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {services.map((service) => {
-              const Icon = service.icon;
               const isSelected = formData.service === service.id;
               
               return (
@@ -386,22 +383,28 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
                   key={service.id}
                   type="button"
                   onClick={() => setFormData({ ...formData, service: service.id })}
-                  className={`w-full flex items-center gap-3 p-3 rounded-xl border-2 transition-all duration-300 ${
+                  className={`w-full flex items-center gap-4 p-3.5 rounded-2xl border-2 transition-all duration-300 ${
                     isSelected 
-                      ? 'border-navy bg-navy/5' 
+                      ? 'border-navy bg-navy/[0.02] shadow-[0_0_0_1px_#06182E]' 
                       : 'border-gray-100 hover:border-gray-200 hover:bg-gray-50/50'
                   }`}
+                  style={{ borderRadius: '1.25rem' }}
                 >
-                  <div className={`w-10 h-10 ${service.color} rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm`}>
-                    <Icon className="w-5 h-5 text-white" />
+                  <div className="w-12 h-12 relative flex-shrink-0">
+                    <Image
+                      src={service.icon}
+                      alt={service.title}
+                      fill
+                      className="object-contain"
+                    />
                   </div>
                   <div className="flex-1 text-left">
-                    <h4 className="font-bold text-gray-900 text-sm leading-tight">{service.title}</h4>
-                    <p className="text-[11px] text-gray-500 mt-0.5 line-clamp-1">{service.desc}</p>
+                    <h4 className="font-bold text-gray-900 text-sm md:text-base leading-tight">{service.title}</h4>
+                    <p className="text-[11px] md:text-xs text-gray-500 mt-1 line-clamp-1">{service.desc}</p>
                   </div>
                   {isSelected && (
-                    <div className="w-5 h-5 bg-navy rounded-full flex items-center justify-center shadow-sm">
-                      <Check className="w-3 h-3 text-white" />
+                    <div className="w-6 h-6 bg-[#06182E] rounded-full flex items-center justify-center shadow-md">
+                      <Check className="w-3.5 h-3.5 text-white stroke-[3px]" />
                     </div>
                   )}
                 </button>

@@ -16,12 +16,21 @@ import HowItWorks from "@/components/HowItWorks";
 import OfficeLocations from "@/components/OfficeLocations";
 import ProcessSection from "@/components/ProcessSection";
 import { getTeamMembers, getLatestBlogs, getLatestCities } from "@/lib/strapi";
+import ScrollReveal from "@/components/ui/ScrollReveal";
+
+// Import Support Icons
+import supportUniversityIcon from "@/assets/support_icons/admission.png";
+import supportVisaIcon from "@/assets/support_icons/visa.png";
+import supportAccommodationIcon from "@/assets/support_icons/accommadation.png";
+import supportCareerIcon from "@/assets/support_icons/career.png";
 
 // Import Student Support Images
 import universityImg from "@/assets/student_support/university.png";
 import visaImg from "@/assets/student_support/visa.png";
 import accommodationImg from "@/assets/student_support/accommadation.png";
 import careerImg from "@/assets/student_support/career.png";
+
+// Import How It Works Images
 import consultationImg from "@/assets/how_it_works/free_consultation.png";
 import preparationImg from "@/assets/how_it_works/visa.png";
 import departureImg from "@/assets/how_it_works/departure_support.png";
@@ -41,28 +50,28 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       id: "admissions",
       title: dict.featureTabs?.features?.admissions?.title || "University Admissions",
       description: dict.featureTabs?.features?.admissions?.description || "Guiding through top-tier university applications with personalized strategy and detailed roadmap planning.",
-      iconName: "graduation",
+      icon: supportUniversityIcon,
       image: universityImg.src
     },
     {
       id: "visa", 
       title: dict.featureTabs?.features?.visa?.title || "Visa Assistance",
       description: dict.featureTabs?.features?.visa?.description || "Hassle-free student visa processing with high success rates and comprehensive document verification.",
-      iconName: "plane",
+      icon: supportVisaIcon,
       image: visaImg.src
     },
     {
       id: "accommodation",
       title: dict.featureTabs?.features?.accommodation?.title || "Accommodation",
       description: dict.featureTabs?.features?.accommodation?.description || "Finding safe, affordable, and comfortable housing options near your campus.",
-      iconName: "home",
+      icon: supportAccommodationIcon,
       image: accommodationImg.src
     },
     {
       id: "career",
       title: dict.featureTabs?.features?.career?.title || "Career Guidance",
       description: dict.featureTabs?.features?.career?.description || "Post-graduation planning, resume building, and interview preparation for a successful career launch.",
-      iconName: "briefcase",
+      icon: supportCareerIcon,
       image: careerImg.src
     }
   ];
@@ -97,26 +106,58 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   return (
     <main className="min-h-screen bg-gray-50">
       <Hero lang={lang} dict={dict.hero} />
-      <FeatureTabs 
-        features={features} 
-        title={dict.featureTabs?.title || "Comprehensive Student Support"}
-        subtitle={dict.featureTabs?.subtitle || "Detailed assistance at every step of your study abroad journey."} 
-      />
-      <Services lang={lang} dict={dict.services} />
-      <Countries lang={lang} dict={dict.countries} />
-      <WhyChooseUs lang={lang} dict={dict.whyUs} />
-      <HowItWorks steps={howItWorksSteps} dict={dict.howItWorks} />
       
-      <Team lang={lang} dict={dict.team} teamMembers={teamMembers.slice(0, 6)} showViewAll={true} />
-      <Statistics lang={lang} dict={dict.statistics} />
-      <TestimonialsCarousel title={dict.team.testimonials_title} />
-      <ContactFormSection lang={lang} dict={dict.contactForm} />
+      <ScrollReveal direction="up" distance={50}>
+        <FeatureTabs 
+          features={features} 
+          title={dict.featureTabs?.title || "Comprehensive Student Support"}
+          subtitle={dict.featureTabs?.subtitle || "Detailed assistance at every step of your study abroad journey."} 
+        />
+      </ScrollReveal>
 
-      <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestCities} />
+      <ScrollReveal direction="up" delay={0.1}>
+        <Services lang={lang} dict={dict.services} />
+      </ScrollReveal>
 
+      <ScrollReveal direction="up">
+        <Countries lang={lang} dict={dict.countries} />
+      </ScrollReveal>
 
-      <ProcessSection lang={lang} dict={(dict as any).processWorkflow} />
-      <OfficeLocations lang={lang} dict={dict.offices} />
+      <ScrollReveal direction="up">
+        <WhyChooseUs lang={lang} dict={dict.whyUs} />
+      </ScrollReveal>
+
+      <ScrollReveal direction="up">
+        <HowItWorks steps={howItWorksSteps} dict={dict.howItWorks} />
+      </ScrollReveal>
+      
+      <ScrollReveal direction="up">
+        <Team lang={lang} dict={dict.team} teamMembers={teamMembers.slice(0, 6)} showViewAll={true} />
+      </ScrollReveal>
+
+      <ScrollReveal direction="up">
+        <Statistics lang={lang} dict={dict.statistics} />
+      </ScrollReveal>
+
+      <ScrollReveal direction="up">
+        <TestimonialsCarousel title={dict.team.testimonials_title} />
+      </ScrollReveal>
+
+      <ScrollReveal direction="up">
+        <ContactFormSection lang={lang} dict={dict.contactForm} />
+      </ScrollReveal>
+
+      <ScrollReveal direction="up">
+        <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestCities} />
+      </ScrollReveal>
+
+      <ScrollReveal direction="up">
+        <ProcessSection lang={lang} dict={(dict as any).processWorkflow} />
+      </ScrollReveal>
+
+      <ScrollReveal direction="up">
+        <OfficeLocations lang={lang} dict={dict.offices} />
+      </ScrollReveal>
     </main>
   );
 }

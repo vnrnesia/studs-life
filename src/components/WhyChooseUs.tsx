@@ -1,6 +1,9 @@
+"use client";
 
 import React from 'react';
 import Image from 'next/image';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 import whyUsStudent from '@/assets/whyus_student.png';
 
 interface WhyChooseUsProps {
@@ -9,6 +12,18 @@ interface WhyChooseUsProps {
 }
 
 export default function WhyChooseUs({ lang, dict }: WhyChooseUsProps) {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Parallax transforms - elements move slightly upwards as we scroll down
+  const yLeft = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
+  const yCenter = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
+  const yRight = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+  const yBgText = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+
   // Sol alttaki maddeler (Left Features)
   const leftFeatures: string[] = dict.leftFeatures || [];
 
@@ -16,19 +31,28 @@ export default function WhyChooseUs({ lang, dict }: WhyChooseUsProps) {
   const rightFeatures: string[] = dict.rightFeatures || [];
 
   return (
-    <section className="relative w-full min-h-screen bg-[#061832] text-white overflow-hidden flex items-center py-16 px-4 md:px-8">
+    <section 
+      ref={containerRef}
+      className="relative w-full md:min-h-[85vh] bg-[#061832] text-white overflow-hidden flex items-center py-20 px-4 md:px-8"
+    >
       
       {/* Arka Plan Dekoratif Yazısı */}
-      <div className="absolute bottom-[-5%] left-0 w-full select-none pointer-events-none opacity-5">
-        <span className="text-[15vw] font-black uppercase tracking-widest text-white leading-none">
+      <motion.div 
+        style={{ y: yBgText }}
+        className="absolute bottom-[-5%] left-0 w-full select-none pointer-events-none opacity-5 px-4"
+      >
+        <span className="text-[15vw] font-black uppercase tracking-widest text-white leading-none whitespace-nowrap">
           {dict.decoration}
         </span>
-      </div>
+      </motion.div>
 
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
         
         {/* --- SOL KOLON (Başlık ve Sol Alt Liste) --- */}
-        <div className="lg:col-span-4 flex flex-col justify-start h-full">
+        <motion.div 
+          style={{ y: yLeft }}
+          className="lg:col-span-4 flex flex-col justify-start h-full"
+        >
           
           {/* Ana Başlık */}
           <div className="mb-10 lg:mb-12 relative">
@@ -48,40 +72,47 @@ export default function WhyChooseUs({ lang, dict }: WhyChooseUsProps) {
               <FeatureItem key={idx} text={item} />
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* --- ORTA KOLON (Görsel Alanı) --- */}
-        <div className="lg:col-span-4 flex flex-col items-center justify-center relative min-h-[400px] md:min-h-[600px]">
+        <motion.div 
+          style={{ y: yCenter }}
+          className="lg:col-span-4 flex flex-col items-center justify-center relative min-h-[400px] md:min-h-[500px]"
+        >
           
           <div className="relative w-full h-full flex items-center justify-center">
             
-            {/* Görsel Placeholder */}
-            <div className="absolute inset-0 flex items-center justify-center z-0 rounded-xl overflow-hidden">
-                {/* Fallback image if no specific image provided */}
+            {/* White Light/Glow behind the image (Reduced opacity) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-white/[0.05] rounded-full blur-[100px] pointer-events-none z-0" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] bg-white/[0.08] rounded-full blur-[60px] pointer-events-none z-0" />
+
+            {/* Görsel Alanı */}
+            <div className="relative w-full h-full flex items-center justify-center z-10">
                <Image 
                  src={whyUsStudent} 
                  alt="Why Choose Us" 
-                 fill
-                 className="object-contain mix-blend-overlay"
-                 placeholder="blur"
+                 width={450}
+                 height={700}
+                 className="object-contain"
+                 priority
                />
-               <div className="absolute inset-0 mix-blend-multiply"></div>
             </div>
 
             {/* "7 Neden" Etiketi */}
-            <div className="absolute top-[20%] right-[5%] z-20">
-                <div className="relative bg-white text-[#061832] font-bold py-1 px-8 shadow-lg transform rotate-[-90deg] origin-bottom-right translate-x-8">
+            <div className="absolute top-[20%] right-[0%] z-20">
+                <div className="relative bg-white text-[#061832] font-bold py-1 px-8 shadow-lg transform rotate-[-90deg] origin-bottom-right translate-x-10">
                     <span className="text-lg tracking-widest uppercase whitespace-nowrap">{dict.badge}</span>
-                    <div className="absolute top-0 right-full h-full w-4 bg-white/0" style={{clipPath: 'polygon(100% 0, 100% 100%, 0 100%)'}}></div>
                 </div>
-               
             </div>
 
           </div>
-        </div>
+        </motion.div>
 
         {/* --- SAĞ KOLON (Liste) --- */}
-        <div className="lg:col-span-4 flex flex-col justify-center gap-8 py-4 lg:pl-8">
+        <motion.div 
+          style={{ y: yRight }}
+          className="lg:col-span-4 flex flex-col justify-center gap-8 py-4 lg:pl-8"
+        >
           {rightFeatures.map((item, idx) => (
             <FeatureItem key={idx} text={item} />
           ))}
@@ -92,7 +123,7 @@ export default function WhyChooseUs({ lang, dict }: WhyChooseUsProps) {
               <FeatureItem key={`mobile-${idx}`} text={item} />
             ))}
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

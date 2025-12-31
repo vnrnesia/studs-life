@@ -34,6 +34,9 @@ export default async function RootLayout({
 
   return (
     <html lang={lang}>
+      <head>
+        <link href="https://fonts.cdnfonts.com/css/octin-stencil" rel="stylesheet" />
+      </head>
       <body className={`${manrope.variable} font-sans antialiased bg-gray-50 text-gray-900`}>
         <Navbar lang={lang as Locale} dict={dict} countries={countries} />
         <div className="min-h-screen flex flex-col">

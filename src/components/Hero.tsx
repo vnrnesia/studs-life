@@ -1,8 +1,11 @@
+"use client";
+
 import { MoveRight } from "lucide-react";
 import Link from "next/link";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import Image from "next/image";
-import mainBg from "../assets/herobg.png";
-import mainBgMobile from "../assets/mainbg_mobile.png"; 
+import heroGuy from "@/assets/hero_guy.png";
 
 interface HeroProps {
   lang: string;
@@ -10,40 +13,64 @@ interface HeroProps {
 }
 
 export default function Hero({ lang, dict }: HeroProps) {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const yBlue = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
+  const yImage = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
+
   return (
-    <section className="relative w-full h-screen md:min-h-screen flex items-center pt-20 overflow-hidden">
+    <section 
+      ref={containerRef}
+      className="relative w-full h-screen md:min-h-screen flex items-center pt-20 bg-[#6d1314] overflow-hidden"
+    >
       
-      {/* Background Images - Desktop and Mobile */}
-      <div className="absolute inset-0 z-0">
-        {/* Desktop Background */}
-        <Image 
-          src={mainBg}
-          alt="Background" 
-          fill
-          className="hidden md:block object-cover"
-          priority
-          quality={100}
-          unoptimized
+      {/* Background Parallax Layers */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Blue Angled Background */}
+        <motion.div 
+          style={{ 
+            y: yBlue,
+            clipPath: "polygon(0 65%, 100% 55%, 100% 100%, 0 100%)",
+            height: "140%",
+            top: "0"
+          }}
+          className="absolute inset-0 bg-navy"
         />
-        {/* Mobile Background */}
-        <Image 
-          src={mainBgMobile}
-          alt="Background Mobile" 
-          fill
-          className="block md:hidden object-cover"
-          priority
-          quality={100}
-          unoptimized
-        />
+
+        {/* Background Lighting Effects (Overlaying Navy) */}
+        <div className="absolute inset-0 z-[1] overflow-hidden">
+          <div className="absolute top-[10%] right-[-10%] w-[80%] h-[80%] bg-white/12 rounded-full blur-[180px]" />
+          <div className="absolute bottom-[-10%] right-[-5%] w-[50%] h-[50%] bg-white/5 rounded-full blur-[140px]" />
+        </div>
+
+        {/* Large Parallax Text */}
+        <motion.div 
+          style={{ y: yText }}
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        >
+          <span 
+            className="text-[28vw] md:text-[18vw] font-black text-[#06182E] font-octin tracking-widest uppercase whitespace-nowrap select-none italic -rotate-[16.5deg] md:-rotate-[3.7deg] translate-y-[30vh] md:translate-y-[20vh]"
+            style={{ WebkitTextStroke: "2px #06182E", opacity: 0.9 }}
+          >
+            STUDENT&apos;S
+          </span>
+        </motion.div>
       </div>
 
-      {/* =========================================
-          ÖN PLAN İÇERİĞİ (TEXT & RESİM)
-          ========================================= */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid md:grid-cols-2 gap-4 md:gap-8 md:items-center pt-10 md:pt-0 h-full py-6 sm:py-8 md:py-0">
         
         {/* --- SOL KOLON: YAZILAR --- */}
-        <div className="space-y-3 sm:space-y-4 md:space-y-6 lg:space-y-8 text-center md:text-left">
+        <motion.div 
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="space-y-3 sm:space-y-4 md:space-y-6 lg:space-y-8 text-center md:text-left"
+        >
           
           {/* Est. Badge */}
           <div className="inline-block px-3 py-1 sm:px-4 border border-white/40 rounded-full bg-white/10 backdrop-blur-sm shadow-sm">
@@ -51,12 +78,12 @@ export default function Hero({ lang, dict }: HeroProps) {
           </div>
           
           {/* Ana Başlık */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black font-montserrat text-white leading-[1.1] uppercase drop-shadow-md px-2 sm:px-0">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black font-montserrat text-white leading-[0.9] uppercase drop-shadow-md px-2 sm:px-0 tracking-tighter">
             {dict.title}
           </h1>
           
           {/* Alt Başlık */}
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-100 tracking-wide px-2 sm:px-0">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-100 tracking-wide px-2 sm:px-0">
             {dict.subtitle}
           </h2>
           
@@ -67,18 +94,31 @@ export default function Hero({ lang, dict }: HeroProps) {
 
           {/* Buton */}
           <div className="flex justify-center md:justify-start pt-2 sm:pt-4">
-             <Link href={`/${lang}/contact`} className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gray-200 text-crimson font-bold tracking-widest uppercase overflow-hidden hover:text-white hover:bg-red-700 transition-all shadow-[8px_8px_0px_rgba(0,0,0,0.1)] hover:shadow-[4px_4px_0px_rgba(0,0,0,0.1)] hover:translate-x-1 hover:translate-y-1 text-sm sm:text-base">
+             <Link href={`/${lang}/contact`} className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-white text-crimson font-bold tracking-widest uppercase overflow-hidden hover:text-white hover:bg-crimson transition-all shadow-[8px_8px_0px_rgba(0,0,0,0.1)] hover:shadow-[4px_4px_0px_rgba(0,0,0,0.1)] hover:translate-x-1 hover:translate-y-1 text-sm sm:text-base">
                <span className="relative z-10 flex items-center gap-2">
                  {dict.cta} <MoveRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                </span>
              </Link>
           </div>
-        </div>
+        </motion.div>
 
-        {/* --- SAĞ KOLON: BOŞ ALAN (Mobilde gizli) --- */}
-        <div className="hidden md:block relative h-[450px] md:h-[550px] lg:h-[650px] w-full">
-          {/* Boş alan - arka plan görseli için */}
-        </div>
+        {/* --- SAĞ KOLON: HERO GUY IMAGE --- */}
+        <motion.div 
+          style={{ y: yImage }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="flex relative h-full w-full justify-center md:justify-end items-end"
+        >
+          <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[90vh] flex items-end justify-center md:justify-end translate-y-12 md:translate-y-20">
+            <Image
+              src={heroGuy}
+              alt="Student"
+              className="object-contain w-auto h-full object-bottom"
+              priority
+            />
+          </div>
+        </motion.div>
 
       </div>
     </section>

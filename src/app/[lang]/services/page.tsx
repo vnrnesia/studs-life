@@ -7,6 +7,7 @@ import DestinationsHub from "./components/DestinationsHub";
 import AccommodationAssistant from "./components/AccommodationAssistant";
 import TrustSection from "./components/TrustSection";
 import FAQ from "./components/FAQ";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default async function ServicesPage({
   params,
@@ -19,12 +20,30 @@ export default async function ServicesPage({
   return (
     <main className="min-h-screen bg-gray-50">
       <ServicesHero dict={dict.servicesPage.hero} />
-      <ServicesGrid dict={dict.servicesPage.coreServices} />
-      <CostOfLiving dict={dict.servicesPage.costOfLiving} />
-      <DestinationsHub dict={dict.servicesPage.destinations} />
-      <AccommodationAssistant dict={dict.servicesPage.accommodationAssistant} />
-      <TrustSection dict={dict.servicesPage.trust} />
-      <FAQ dict={dict.servicesPage.faq} />
+      
+      <ScrollReveal direction="up">
+        <ServicesGrid dict={dict.servicesPage.coreServices} />
+      </ScrollReveal>
+
+      <ScrollReveal direction="up">
+        <CostOfLiving dict={dict.servicesPage.costOfLiving} />
+      </ScrollReveal>
+
+      <ScrollReveal direction="up">
+        <DestinationsHub dict={dict.servicesPage.destinations} />
+      </ScrollReveal>
+
+      <ScrollReveal direction="up">
+        <AccommodationAssistant dict={dict.servicesPage.accommodationAssistant} />
+      </ScrollReveal>
+
+      <ScrollReveal direction="up">
+        <TrustSection dict={dict.servicesPage.trust} />
+      </ScrollReveal>
+
+      <ScrollReveal direction="up">
+        <FAQ dict={dict.servicesPage.faq} />
+      </ScrollReveal>
     </main>
   );
 }
