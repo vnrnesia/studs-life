@@ -51,67 +51,67 @@
     "countries": {
         "badge": "Ugurlar",
         "title": "Meşhur ugurlar",
-        "description": "Discover the best countries for your international education journey with our expert guidance.",
+        "description": "Halkara bilimiňize tarap ýoluňyzda biziň hünärmen goldawymyz bilen iň gowy ýurtlary kşfediň.",
         "viewMore": "Sahypa git",
         "contactCta": "Habarlaşmak",
         "russia": {
             "name": "Russiýa",
             "slogan": "Çäksiz mümkinçilikler we düýpli bilim dünýäsi",
-            "description": "With a rich history of scientific excellence, Russia offers world-class education in medicine, engineering, and the arts at an affordable cost.",
+            "description": "Ylmy üstünlikleriň baý taryhy bilen Russiýa lukmançylyk, inženerçilik we sungat ugurlary boýunça elýeterli bahadan dünýä derejesindäki bilimi hödürleýär.",
             "tags": [
-                "AFFORDABLE",
+                "ELÝETERLI",
                 "STEM",
-                "CULTURE"
+                "MEDENIÝET"
             ]
         },
         "china": {
             "name": "Hytaý",
             "slogan": "Gadymy akyldarlyk we geljegiň tehnologiýalarynyň sazlaşygy",
-            "description": "Experience the pulse of the world's fastest-growing economy while studying at prestigious universities leading in tech and innovation.",
+            "description": "Tehnologiýa we innowasiýa boýunça dünýäde öňdebaryjy uniwersitetlerde okap, dünýäniň iň çalt ösýän ykdysadyýetiniň depginini duýuň.",
             "tags": [
                 "TECH",
-                "FUTURE",
+                "GELJEK",
                 "GLOBAL HUB"
             ]
         },
         "turkey": {
             "name": "Türkiýe",
             "slogan": "Siwilizasiýalaryň çatrygy we joşgunly talyp durmuşy",
-            "description": "Enjoy a unique blend of Eastern and Western cultures, modern campuses, and a welcoming atmosphere for international students.",
+            "description": "Gündogar we Günbatar medeniýetleriniň üýtgeşik garyndysyndan, döwrebap şäherçelerden we halkara talyplar üçin myhmansöýer gurşawdan lezzet alyň.",
             "tags": [
-                "MEDITERRANEAN",
-                "DIVERSITY",
-                "HISTORY"
+                "MEDITERREAN",
+                "DÜRLÜLIK",
+                "TARYH"
             ]
         },
         "cyprus": {
             "name": "Kipr",
             "slogan": "Ýewropa bilimi we rahatlygyň günli adasy",
-            "description": "Safe, sunny, and strictly following European standards, Cyprus is an ideal location for students seeking quality and relaxation.",
+            "description": "Howpsuz, güneşli we Ýewropa standartlaryna doly laýyk gelýän Kipr, hilli bilim we dynç alyş gözleýän talyplar üçin iň amatly ýerdir.",
             "tags": [
-                "EUROPEAN",
-                "ISLAND LIFE",
-                "SECURE"
+                "ÝEWROPA",
+                "ADA DURMUŞY",
+                "HOWPSUZ"
             ]
         },
         "belarus": {
             "name": "Belarus",
-            "slogan": "Hospitality, safety, and academic traditions",
-            "description": "Known for its high academic standards and safe environment, Belarus provides excellent value and traditional European schooling.",
+            "slogan": "Myhmansöýerlik, howpsuzlyk we akademiki däpler",
+            "description": "Akademiki ülňüleri we howpsuz gurşawy bilen tanalýan Belarus, Ýewropa biliminiň iň gowy bahasyny hödürleýär.",
             "tags": [
-                "TRADITION",
-                "VALUE",
-                "SAFETY"
+                "DÄP",
+                "BAHA",
+                "HOWPSUZLYK"
             ]
         },
         "bulgaria": {
             "name": "Bolgariýa",
             "slogan": "Gara deňziň kenarynda elýeterli Ýewropa bilimi",
-            "description": "Gateway to the European Union with reputable medical and artistic programs in a beautiful Black Sea setting.",
+            "description": "Ýewropa Bileleşigine giriş gapysy bolan Bolgariýa, Gara deňziň kenarynda lukmançylyk we sungat ugurlary boýunça abraýly bilim berýär.",
             "tags": [
                 "EU GATEWAY",
-                "COASTAL",
-                "PRESTIGIOUS"
+                "KENAR",
+                "ABRAÝLY"
             ]
         }
     },
@@ -134,7 +134,9 @@
         ]
     },
     "team": {
-        "title": "Biziň toparymyz",
+        "badge": "Biziň toparymyz",
+        "title": "Biziň yzymyzdaky hünärmenler",
+        "description": "Mydamy täzeçillik gözleýän we geljegi gurýan dürli hünärmenlerden ybarat bolan biziň toparymyz bilen tanyşyň.",
         "testimonials_title": "Talyplaryň hekaýalary",
         "cta_card_title": "Bütin Toparymyz",
         "cta_card_desc": "Biziň hünärmenlerimiziň doly sanawy bilen tanyşyň.",
@@ -161,15 +163,16 @@
         "success": "Sag boluň! Biz size basym habar bereris."
     },
     "statistics": {
-        "resultsTitle": "NETIJELERIMIZ WE GÖWRÜMIMIZ",
-        "geographyTitle": "TALYP GEOGRAFIÝASY",
+        "badge": "Statistika",
+        "description": "Bilim geňeşçilerimizden, wiza hünärmenlerimizden we halypalarymyzdan ybarat bolan toparymyz siziň üstünligiňiz üçin ýadaman zähmet çekýär.",
         "results": {
-            "totalStudents": "talyplar\njemi döwür üçin",
-            "lastYearStudents": "talyplar diňe\ngeçen okuw ýylynda",
-            "averageGrowth": "ýyllyk ortaça ösüş",
-            "firstAttempt": "birinji synanyşykda\nokuwa girenler",
-            "scholarships": "grant/stipendiýa\nalanlar"
+            "totalStudents": "Ähli daky talyplar",
+            "lastYearStudents": "Diňe geçen okuw ýylyndaky talyplar",
+            "averageGrowth": "Ortaça ýyllyk ösüş",
+            "firstAttempt": "Birinji synanyşykda kabul edilmek",
+            "scholarships": "Talyp haklaryny almak"
         },
+        "geographyTitle": "TALYPLARYŇ GEOGRAFIÝASY",
         "geography": {
             "turkmenistan": "Türkmenistan",
             "turkey": "Türkiýe",
@@ -400,6 +403,7 @@
         }
     },
     "processWorkflow": {
+        "badge": "Biziň iş meýilnamamyz",
         "title": "Bizim 5 basgançakly iş proçesimiz",
         "description": "Bizim 5 ädimli netijeli iş proçesimiz, durnukly çözgütleri üpjün edýär. Zerurlyklaryňyzy düşünmekden başlaýarys, soňra meýilnamalaşdyrýarys, dizaýn edýäris, gurýarys we synagdan geçirýäris.",
         "cta": "Biz barada has giňişleýin",

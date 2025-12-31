@@ -134,7 +134,9 @@
         ]
     },
     "team": {
-        "title": "Meet Our Team",
+        "badge": "Our Team",
+        "title": "The Experts Behind Us",
+        "description": "Dedicated individuals passionate about holistic well-being. Meet the diverse team driving innovation and shaping the future of wellness.",
         "testimonials_title": "Student Testimonials",
         "cta_card_title": "Meet Our Whole Team",
         "cta_card_desc": "Explore the full directory of our dedicated professionals.",
@@ -161,15 +163,16 @@
         "success": "Thank you! We'll get back to you soon."
     },
     "statistics": {
-        "resultsTitle": "OUR RESULTS AND SCALE",
-        "geographyTitle": "STUDENT GEOGRAPHY",
+        "badge": "Statistics",
+        "description": "Our dedicated team of education consultants, visa experts, and mentors works tirelessly to ensure your success.",
         "results": {
-            "totalStudents": "students\nover all time",
-            "lastYearStudents": "students only\nlast academic year",
-            "averageGrowth": "average annual growth",
-            "firstAttempt": "enroll on first\nattempt",
-            "scholarships": "receive scholarships"
+            "totalStudents": "Students over all time",
+            "lastYearStudents": "Students only last academic year",
+            "averageGrowth": "Average annual growth",
+            "firstAttempt": "Enroll on first attempt",
+            "scholarships": "Receive scholarships"
         },
+        "geographyTitle": "STUDENT GEOGRAPHY",
         "geography": {
             "turkmenistan": "Turkmenistan",
             "turkey": "Turkey",
@@ -302,7 +305,11 @@
     },
     "footer": {
         "contact": "Contact Us",
-        "socials": "Follow Us"
+        "socials": "Follow Us",
+        "quickLinks": "Quick Links",
+        "about": "About Us",
+        "description": "Your reliable partner for education abroad and visa services since 2015.",
+        "copyright": "All rights reserved."
     },
     "servicesPage": {
         "hero": {
@@ -704,6 +711,8 @@
         }
     },
     "howItWorks": {
+        "badge": "EASY ONBOARDING",
+        "title": "How it works?",
         "getStarted": "Get Started",
         "currentStep": "Current Step",
         "phase": "Phase",
@@ -723,6 +732,7 @@
         }
     },
     "processWorkflow": {
+        "badge": "Our Process",
         "title": "Our 5-step workflow",
         "description": "Our Innomax Efficient Workflow in 5 Steps ensures streamlined IT solutions. We start by understanding your needs, then plan the project, design intuitive interfaces, build robust systems, and thoroughly test.",
         "cta": "Learn more about us",

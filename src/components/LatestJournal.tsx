@@ -31,8 +31,11 @@ export default function LatestJournal({ lang, dict, posts = [] }: LatestJournalP
             </h2>
             
             <div className="flex">
-              <Link href={`/${lang}/countries`}>
-                <InteractiveHoverButton className="bg-navy text-white border-navy hover:bg-blue-900 hover:border-blue-900">
+              <Link href={`/${lang}/blog`}>
+                <InteractiveHoverButton 
+                  className="bg-white text-black border-gray-200"
+                  dotClassName="bg-crimson"
+                >
                   {dict?.viewAll || "View all blogs"}
                 </InteractiveHoverButton>
               </Link>
@@ -74,6 +77,7 @@ export default function LatestJournal({ lang, dict, posts = [] }: LatestJournalP
                         alt={post.name || post.title}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        unoptimized
                       />
                     ) : (
                       <div className="w-full h-full bg-gray-200 flex items-center justify-center">

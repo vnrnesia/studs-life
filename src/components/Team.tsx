@@ -42,7 +42,7 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
               {dict.title || "The Experts Behind Us"}
             </h2>
             <p className="text-white/80 text-sm leading-relaxed mt-auto">
-              Dedicated individuals passionate about holistic well-being. Meet the diverse team driving innovation and shaping the future of wellness.
+              {dict.description || "Dedicated individuals passionate about holistic well-being. Meet the diverse team driving innovation and shaping the future of wellness."}
             </p>
           </div>
 
@@ -110,9 +110,12 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
         {showViewAll && teamMembers.length > 6 && (
           <div className="text-center mt-16">
             <Link href={`/${lang}/teams`}>
-              <InteractiveHoverButton className="bg-navy text-white border-navy hover:bg-blue-900 hover:border-blue-900">
-                {lang === 'ru' ? 'Посмотреть всю команду' : 'View All Team'}
-              </InteractiveHoverButton>
+            <InteractiveHoverButton 
+              className="bg-white text-black border-gray-200"
+              dotClassName="bg-crimson"
+            >
+              {lang === 'ru' ? 'Посмотреть всю команду' : 'View All Team'}
+            </InteractiveHoverButton>
             </Link>
           </div>
         )}

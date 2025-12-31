@@ -34,6 +34,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
   const navLinks = [
     { name: dict?.nav?.home, href: `/${lang}` },
     { name: dict?.nav?.countries, href: "#", type: "countries" }, // Special handling
+    { name: dict?.latestJournal?.title_part2 || "Blog", href: `/${lang}/blog` }, // Blog link
     { name: dict?.nav?.company, href: "#", type: "mega" }, // Special handling
     { name: dict?.nav?.contact, href: `/${lang}/contact` },
   ];

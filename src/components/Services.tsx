@@ -153,7 +153,10 @@ export default function Services({ lang, dict }: ServicesProps) {
                 </li>
               ))}
             </ul>
-            <InteractiveHoverButton className="mt-10 bg-white text-black border-white hover:bg-gray-200">
+            <InteractiveHoverButton 
+              className="mt-10 bg-white text-black border-white"
+              dotClassName="bg-crimson"
+            >
               Get started
             </InteractiveHoverButton>
           </div>

@@ -14,27 +14,27 @@ export default function Statistics({ lang, dict }: StatisticsProps) {
   const stats = [
     { 
       number: "1200", 
-      label: "Students over all time", 
+      label: dict.results?.totalStudents || "Students over all time", 
       icon: true 
     },
     { 
       number: "200", 
-      label: "Students only last academic year", 
+      label: dict.results?.lastYearStudents || "Students only last academic year", 
       icon: true 
     },
     { 
       number: "35%", 
-      label: "Average annual growth", 
+      label: dict.results?.averageGrowth || "Average annual growth", 
       icon: true 
     },
     { 
       number: "95%", 
-      label: "Enroll on first attempt", 
+      label: dict.results?.firstAttempt || "Enroll on first attempt", 
       icon: false 
     },
     { 
       number: "70%", 
-      label: "Receive scholarships", 
+      label: dict.results?.scholarships || "Receive scholarships", 
       icon: false 
     },
   ];

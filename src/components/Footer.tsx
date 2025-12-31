@@ -97,7 +97,7 @@ export default function Footer({ lang, dict }: FooterProps) {
             </div>
 
             {/* Copyright */}
-            <div className="border-t border-white/10 pt-6 text-blue-100/60 text-xs">
+            <div className="border-t border-white/10 pt-6 text-blue-100/60 text-xs text-center sm:text-left">
               © {new Date().getFullYear()} Student's Life Agency. {dict?.footer?.copyright || "All rights reserved."}
             </div>
           </div>

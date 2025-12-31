@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { Send, CheckCircle2, Info, MessageCircle, PhoneCall, Mail } from "lucide-react";
 import Image from "next/image";
 import ctaBg from "@/assets/ctaform.png";

@@ -65,7 +65,7 @@ export default function HowItWorks({
             {dict?.badge || tagline}
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight">
-            {title}
+            {dict?.title || title}
           </h2>
           {dict?.subtitle && (
             <p className="text-gray-500 text-base md:text-lg max-w-2xl mx-auto mt-4 font-medium leading-relaxed">
@@ -136,7 +136,10 @@ export default function HowItWorks({
                   {activeStep.description}
                 </p>
                 
-                <InteractiveHoverButton className="bg-navy text-white border-navy hover:bg-blue-900 hover:border-blue-900">
+                <InteractiveHoverButton 
+                  className="bg-white text-black border-gray-200"
+                  dotClassName="bg-crimson"
+                >
                   {dict?.getStarted || "Get Started"}
                 </InteractiveHoverButton>
               </motion.div>

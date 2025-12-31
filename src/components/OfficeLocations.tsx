@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPin, Phone, Globe, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Globe, Mail, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -85,51 +85,87 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 md:gap-12 items-start">
           
-          {/* Left: Office Cards Grid */}
-          <div className="grid sm:grid-cols-2 gap-4">
-            {offices.map((office) => {
-              const isActive = activeOffice === office.id;
-              const borderColor = office.color === "green" ? "border-green-500" : "border-blue-500";
-              const bgColor = office.color === "green" ? "bg-green-50" : "bg-blue-50";
-              const textColor = office.color === "green" ? "text-green-600" : "text-blue-600";
-
-              return (
-                <motion.button
-                  key={office.id}
-                  onClick={() => setActiveOffice(office.id)}
-                  className={`relative p-6 rounded-2xl border-2 text-left transition-all duration-300 ${
-                    isActive 
-                      ? `${borderColor} ${bgColor} shadow-xl scale-105` 
-                      : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-lg"
-                  }`}
-                  whileHover={{ y: -4 }}
-                  whileTap={{ scale: 0.98 }}
+          {/* Office Selection */}
+          <div className="w-full">
+            {/* Mobile Selection (Arrow Navigation) */}
+            <div className="lg:hidden mb-8">
+              <div className="flex items-center justify-between bg-white rounded-2xl border-2 border-gray-100 p-2 shadow-sm">
+                <button 
+                  onClick={() => {
+                    const currentIndex = offices.findIndex(o => o.id === activeOffice);
+                    const prevIndex = (currentIndex - 1 + offices.length) % offices.length;
+                    setActiveOffice(offices[prevIndex].id);
+                  }}
+                  className="w-12 h-12 rounded-xl flex items-center justify-center bg-gray-50 text-gray-900 hover:bg-gray-100 transition-colors"
                 >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeIndicator"
-                      className={`absolute -top-2 -right-2 w-6 h-6 rounded-full ${office.color === "green" ? "bg-green-500" : "bg-blue-500"} flex items-center justify-center`}
-                      transition={{ type: "spring", bounce: 0.3 }}
-                    >
-                      <div className="w-2 h-2 bg-white rounded-full" />
-                    </motion.div>
-                  )}
-                  
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-3xl">{office.flag}</span>
-                    <div>
-                      <p className="font-black text-gray-900">{office.city}</p>
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">{activeOfficeData.flag}</span>
+                  <span className="font-black text-gray-900 text-lg uppercase tracking-tight">
+                    {activeOfficeData.city}
+                  </span>
+                </div>
+
+                <button 
+                  onClick={() => {
+                    const currentIndex = offices.findIndex(o => o.id === activeOffice);
+                    const nextIndex = (currentIndex + 1) % offices.length;
+                    setActiveOffice(offices[nextIndex].id);
+                  }}
+                  className="w-12 h-12 rounded-xl flex items-center justify-center bg-gray-50 text-gray-900 hover:bg-gray-100 transition-colors"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+
+            {/* Desktop Selection (Grid) */}
+            <div className="hidden lg:grid grid-cols-2 gap-4">
+              {offices.map((office) => {
+                const isActive = activeOffice === office.id;
+                const borderColor = office.color === "green" ? "border-green-500" : "border-blue-500";
+                const bgColor = office.color === "green" ? "bg-green-50" : "bg-blue-50";
+
+                return (
+                  <motion.button
+                    key={office.id}
+                    onClick={() => setActiveOffice(office.id)}
+                    className={`relative p-6 rounded-2xl border-2 text-left transition-all duration-300 ${
+                      isActive 
+                        ? `${borderColor} ${bgColor} shadow-xl scale-105` 
+                        : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-lg"
+                    }`}
+                    whileHover={{ y: -4 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeIndicator"
+                        className={`absolute -top-2 -right-2 w-6 h-6 rounded-full ${office.color === "green" ? "bg-green-500" : "bg-blue-500"} flex items-center justify-center`}
+                        transition={{ type: "spring", bounce: 0.3 }}
+                      >
+                        <div className="w-2 h-2 bg-white rounded-full" />
+                      </motion.div>
+                    )}
+                    
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="text-3xl">{office.flag}</span>
+                      <div>
+                        <p className="font-black text-gray-900">{office.city}</p>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <p className="text-xs text-gray-600 line-clamp-2">
-                    {office.address}
-                  </p>
-                </motion.button>
-              );
-            })}
+                    
+                    <p className="text-xs text-gray-600 line-clamp-2">
+                      {office.address}
+                    </p>
+                  </motion.button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Right: Active Office Details */}
@@ -138,14 +174,14 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4 }}
-            className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 md:p-12 text-white shadow-2xl sticky top-8"
+            className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-6 md:p-12 text-white shadow-2xl sticky top-8"
           >
             <div className="flex items-start gap-4 mb-8">
               <div className={`w-16 h-16 rounded-2xl ${activeOfficeData.color === "green" ? "bg-green-500" : "bg-blue-500"} flex items-center justify-center text-4xl shadow-lg`}>
                 {activeOfficeData.flag}
               </div>
               <div>
-                <h3 className="text-3xl font-black">{activeOfficeData.city}</h3>
+                <h3 className="text-2xl md:text-3xl font-black break-words leading-tight">{activeOfficeData.city}</h3>
               </div>
             </div>
 

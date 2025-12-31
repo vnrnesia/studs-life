@@ -51,67 +51,67 @@
     "countries": {
         "badge": "Направления",
         "title": "Популярные направления",
-        "description": "Discover the best countries for your international education journey with our expert guidance.",
+        "description": "Откройте для себя лучшие страны для вашего международного образовательного путешествия с нашей экспертной поддержкой.",
         "viewMore": "Перейти на страницу",
         "contactCta": "Связаться",
         "russia": {
             "name": "Россия",
             "slogan": "Мир безграничных горизонтов и фундаментальных знаний",
-            "description": "With a rich history of scientific excellence, Russia offers world-class education in medicine, engineering, and the arts at an affordable cost.",
+            "description": "Обладая богатой историей научных достижений, Россия предлагает образование мирового уровня в области медицины, инженерии и искусства по доступной цене.",
             "tags": [
-                "AFFORDABLE",
+                "ДОСТУПНО",
                 "STEM",
-                "CULTURE"
+                "КУЛЬТУРА"
             ]
         },
         "china": {
             "name": "Китай",
             "slogan": "Синергия древней мудрости и технологий будущего",
-            "description": "Experience the pulse of the world's fastest-growing economy while studying at prestigious universities leading in tech and innovation.",
+            "description": "Почувствуйте ритм самой быстрорастущей экономики мира, обучаясь в престижных университетах, лидирующих в области технологий и инноваций.",
             "tags": [
-                "TECH",
-                "FUTURE",
-                "GLOBAL HUB"
+                "ТЕХНО",
+                "БУДУЩЕЕ",
+                "ГЛОБАЛ ХАБ"
             ]
         },
         "turkey": {
             "name": "Турция",
             "slogan": "Перекрёсток цивилизаций и яркой студенческой жизни",
-            "description": "Enjoy a unique blend of Eastern and Western cultures, modern campuses, and a welcoming atmosphere for international students.",
+            "description": "Насладитесь уникальным сочетанием восточной и западной культур, современными кампусами и гостеприимной атмосферой для иностранных студентов.",
             "tags": [
-                "MEDITERRANEAN",
-                "DIVERSITY",
-                "HISTORY"
+                "СРЕДИЗЕМНОМОРЬЕ",
+                "МНОГООБРАЗИЕ",
+                "ИСТОРИЯ"
             ]
         },
         "cyprus": {
             "name": "Кипр",
             "slogan": "Солнечный остров европейского образования и комфорта",
-            "description": "Safe, sunny, and strictly following European standards, Cyprus is an ideal location for students seeking quality and relaxation.",
+            "description": "Безопасный, солнечный и строго соответствующий европейским стандартам, Кипр является идеальным местом для студентов, ищущих качество и отдых.",
             "tags": [
-                "EUROPEAN",
-                "ISLAND LIFE",
-                "SECURE"
+                "ЕВРОПЕЙСКИЙ",
+                "ОСТРОВ",
+                "БЕЗОПАСНО"
             ]
         },
         "belarus": {
             "name": "Беларусь",
             "slogan": "Гостеприимство, безопасность и академические традиции",
-            "description": "Known for its high academic standards and safe environment, Belarus provides excellent value and traditional European schooling.",
+            "description": "Известная своими высокими академическими стандартами и безопасной средой, Беларусь обеспечивает отличное соотношение цены и качества классического европейского образования.",
             "tags": [
-                "TRADITION",
-                "VALUE",
-                "SAFETY"
+                "ТРАДИЦИИ",
+                "ЦЕННОСТЬ",
+                "БЕЗОПАСНОСТЬ"
             ]
         },
         "bulgaria": {
             "name": "Болгария",
             "slogan": "Доступное европейское образование на берегу Чёрного моря",
-            "description": "Gateway to the European Union with reputable medical and artistic programs in a beautiful Black Sea setting.",
+            "description": "Ворота в Европейский Союз с признанными медицинскими и художественными программами в красивом прибрежном регионе Черного моря.",
             "tags": [
-                "EU GATEWAY",
-                "COASTAL",
-                "PRESTIGIOUS"
+                "ГРАНИЦА ЕС",
+                "ПОБЕРЕЖЬЕ",
+                "ПРЕСТИЖ"
             ]
         }
     },
@@ -134,7 +134,9 @@
         ]
     },
     "team": {
-        "title": "Наша Команда",
+        "badge": "Наша Команда",
+        "title": "Эксперты, Стоящие За Нами",
+        "description": "Познакомьтесь с нашей разнообразной командой профессионалов, стремящихся к инновациям и формирующих будущее образования.",
         "testimonials_title": "Отзывы студентов",
         "cta_card_title": "Вся Наша Команда",
         "cta_card_desc": "Ознакомьтесь с полным списком наших преданных своему делу профессионалов.",
@@ -161,15 +163,16 @@
         "success": "Спасибо! Мы скоро свяжемся с вами."
     },
     "statistics": {
-        "resultsTitle": "НАШИ РЕЗУЛЬТАТЫ И МАСШТАБ",
-        "geographyTitle": "ГЕОГРАФИЯ СТУДЕНТОВ",
+        "badge": "Статистика",
+        "description": "Наша преданная команда образовательных консультантов, визовых экспертов и наставников неустанно работает для обеспечения вашего успеха.",
         "results": {
-            "totalStudents": "студентов\nза всё время",
-            "lastYearStudents": "студентов только\nза прошлый учебный год",
-            "averageGrowth": "средний годовой рост",
-            "firstAttempt": "поступают с первой\nпопытки",
-            "scholarships": "получают стипендии"
+            "totalStudents": "Студентов за все время",
+            "lastYearStudents": "Студентов только за последний учебный год",
+            "averageGrowth": "Среднегодовой рост",
+            "firstAttempt": "Поступление с первой попытки",
+            "scholarships": "Получают стипендии"
         },
+        "geographyTitle": "ГЕОГРАФИЯ СТУДЕНТОВ",
         "geography": {
             "turkmenistan": "Туркменистан",
             "turkey": "Турция",
@@ -301,8 +304,12 @@
         }
     },
     "footer": {
-        "contact": "Контакты",
-        "socials": "Мы в соцсетях"
+        "contact": "Связаться с нами",
+        "socials": "Подписывайтесь на нас",
+        "quickLinks": "Быстрые ссылки",
+        "about": "О нас",
+        "description": "Ваш надежный партнер в сфере зарубежного образования и визовых услуг с 2015 года.",
+        "copyright": "Все права защищены."
     },
     "servicesPage": {
         "hero": {
@@ -704,6 +711,8 @@
         }
     },
     "howItWorks": {
+        "badge": "ЛЕГКИЙ СТАРТ",
+        "title": "Как это работает?",
         "getStarted": "Начать",
         "currentStep": "Текущий шаг",
         "phase": "Этап",
@@ -723,6 +732,7 @@
         }
     },
     "processWorkflow": {
+        "badge": "Наш Процесс",
         "title": "Наш 5-этапный рабочий процесс",
         "description": "Наш эффективный рабочий процесс из 5 шагов обеспечивает оптимизированные решения. Мы начинаем с понимания ваших потребностей, затем планируем, проектируем, строим и тщательно тестируем.",
         "cta": "Узнать больше о нас",

@@ -124,7 +124,10 @@ export default function ProcessSection({ lang, dict }: ProcessSectionProps) {
                 </p>
 
                 <Link href={`/${lang}/contact`}>
-                  <InteractiveHoverButton className="bg-crimson text-white border-crimson hover:bg-red-700 hover:border-red-700">
+                  <InteractiveHoverButton 
+                    className="bg-white text-black border-gray-200"
+                    dotClassName="bg-crimson"
+                  >
                     {dict.cta}
                   </InteractiveHoverButton>
                 </Link>

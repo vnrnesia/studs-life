@@ -131,7 +131,10 @@ export default function Countries({ lang, dict }: CountriesProps) {
           </div>
           
           <div className="pb-2">
-            <InteractiveHoverButton className="bg-gray-50 text-gray-900 border-gray-200 hover:border-navy">
+            <InteractiveHoverButton 
+              className="bg-white text-black border-gray-200"
+              dotClassName="bg-crimson"
+            >
               {dict.contactCta}
             </InteractiveHoverButton>
           </div>
@@ -188,7 +191,10 @@ export default function Countries({ lang, dict }: CountriesProps) {
                   </div>
 
                   <div className="mt-auto">
-                    <InteractiveHoverButton className="bg-crimson text-white border-crimson hover:bg-crimson/90">
+                    <InteractiveHoverButton 
+                      className="bg-white text-black border-gray-200"
+                      dotClassName="bg-crimson"
+                    >
                       {dict.viewMore}
                     </InteractiveHoverButton>
                   </div>
