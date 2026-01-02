@@ -20,10 +20,36 @@ export async function submitToGoogleSheets(
 
     try {
         // Prepare data with form type and timestamp
+        // Map form data keys to Google Sheet headers (Russian)
+        const mappedData = {
+            'Тип формы': formType,
+            'ФИО': formData.fullName,
+            'Телефон': formData.phone,
+            'Email': formData.email,
+            'Дата рождения': formData.dateOfBirth,
+            'Степень родства': formData.relationship,
+            'Гражданство': formData.citizenship,
+            'Регион': formData.region,
+            'Город': formData.city,
+            'Уровень образования': formData.educationLevel || formData.currentEducationLevel,
+            'Направление': formData.fieldOfStudy || formData.targetField || formData.currentField,
+            'Университет': formData.targetUniversity || formData.currentUniversity,
+            'Страна': formData.targetCountry || formData.currentCountry,
+            'Срок паспорта': formData.passportExpiry,
+            'Есть паспорт': formData.hasPassport,
+            'Месяц поездки': formData.travelMonth,
+            'Предпочтения по работе': formData.workPreferences,
+            'Предыдущие поездки': formData.previousTravel,
+            'Откуда': formData.fromCity,
+            'Куда': formData.toCity,
+            'Дата поездки': formData.travelDate,
+            'Багаж': formData.needsBaggage,
+            ...formData // Keep original keys just in case
+        };
+
         const dataToSend = {
-            formType,
             timestamp: new Date().toISOString(),
-            ...formData,
+            ...mappedData,
         };
 
         // Send POST request to Google Apps Script

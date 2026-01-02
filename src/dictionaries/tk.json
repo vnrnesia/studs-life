@@ -50,7 +50,23 @@
         "accommodation": "Ýaşaýyş Ýeri",
         "accommodationDesc": "Umumy ýaşaýyş jaýlary",
         "ticket": "Awia petekler",
-        "ticketDesc": "Talyplar üçin arzan"
+        "ticketDesc": "Talyplar üçin arzan",
+        "careerStats": {
+            "resume": "Rezýume düzmek",
+            "jobPlacement": "Işe ýerleşdirmek"
+        },
+        "visaFeatures": [
+            "Resminama sanawy",
+            "Arza tabşyrmak",
+            "Konsullyk söhbetdeşligi",
+            "Biometrika ýazylmak",
+            "Pasport almak"
+        ],
+        "getStarted": "Başlamak",
+        "chat": {
+            "greeting": "Salam! 👋",
+            "help": "Nähili kömek edip bilerin?"
+        }
     },
     "countries": {
         "badge": "Ugurlar",

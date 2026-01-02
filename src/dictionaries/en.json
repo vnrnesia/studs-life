@@ -50,7 +50,23 @@
         "accommodation": "Accommodation",
         "accommodationDesc": "Dorms & Apartments",
         "ticket": "Flight Tickets",
-        "ticketDesc": "Student Discounts"
+        "ticketDesc": "Student Discounts",
+        "careerStats": {
+            "resume": "Resume Building",
+            "jobPlacement": "Job Placement"
+        },
+        "visaFeatures": [
+            "Document checklist",
+            "Application filing",
+            "Consulate interview",
+            "Biometrics booking",
+            "Passport collection"
+        ],
+        "getStarted": "Get started",
+        "chat": {
+            "greeting": "Hey there! 👋",
+            "help": "How can I help?"
+        }
     },
     "countries": {
         "badge": "Destinations",

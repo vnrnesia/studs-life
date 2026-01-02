@@ -90,7 +90,7 @@ export default function FeatureTabs({
                       "flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 relative",
                       isActive 
                         ? "bg-[#C40201] text-white shadow-[0_8px_20px_rgba(196,2,1,0.3)]" 
-                        : "bg-gray-100 text-gray-500 group-hover:bg-gray-200"
+                        : "bg-transparent text-gray-500 group-hover:bg-gray-50"
                     )}>
                       <div className="relative w-8 h-8">
                         <Image 
@@ -99,7 +99,7 @@ export default function FeatureTabs({
                           fill
                           className={cn(
                             "object-contain transition-all duration-300",
-                            isActive ? "brightness-0 invert" : "opacity-70 grayscale"
+                            isActive ? "brightness-0 invert" : "opacity-100"
                           )}
                         />
                       </div>

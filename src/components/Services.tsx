@@ -67,7 +67,7 @@ export default function Services({ lang, dict }: ServicesProps) {
       className: "md:col-span-1 md:row-span-2 text-white overflow-hidden",
       type: "feature-list",
       label: "99% Success Rate",
-      features: ["Document checklist", "Application filing", "Consulate interview", "Biometrics booking", "Passport collection"],
+      features: dict.visaFeatures || ["Document checklist", "Application filing", "Consulate interview", "Biometrics booking", "Passport collection"],
       bgImage: visaBg
     },
     { 
@@ -104,11 +104,11 @@ export default function Services({ lang, dict }: ServicesProps) {
             <div className="flex flex-col gap-3">
                <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
                   <div className="p-2 bg-green-500/20 rounded-full text-green-400 shrink-0"><CheckCircle2 className="w-4 h-4" /></div>
-                  <span className="text-sm font-bold text-white">Resume Building</span>
+                  <span className="text-sm font-bold text-white">{dict.careerStats?.resume || "Resume Building"}</span>
                </div>
                <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
                   <div className="p-2 bg-green-500/20 rounded-full text-green-400 shrink-0"><CheckCircle2 className="w-4 h-4" /></div>
-                  <span className="text-sm font-bold text-white">Job Placement</span>
+                  <span className="text-sm font-bold text-white">{dict.careerStats?.jobPlacement || "Job Placement"}</span>
                </div>
             </div>
           </div>
@@ -130,7 +130,7 @@ export default function Services({ lang, dict }: ServicesProps) {
                 className="w-full bg-white text-black border-white"
                 dotClassName="bg-crimson"
               >
-                Get started
+                {dict.getStarted || "Get started"}
               </InteractiveHoverButton>
             </div>
           </div>
@@ -156,12 +156,12 @@ export default function Services({ lang, dict }: ServicesProps) {
                 <Users className="w-4 h-4 text-gray-500" />
               </div>
               <div className="bg-gray-100 p-2 rounded-2xl rounded-tl-none text-xs text-gray-600">
-                Hey there! 👋
+                {dict.chat?.greeting || "Hey there! 👋"}
               </div>
             </div>
             <div className="flex items-center gap-2">
               <div className="bg-neutral-900 text-white p-2 rounded-2xl rounded-tr-none text-xs ml-auto">
-                How can I help?
+                {dict.chat?.help || "How can I help?"}
               </div>
                <div className="w-8 h-8 rounded-full bg-crimson flex items-center justify-center text-white shrink-0">
                 <MessageCircle className="w-4 h-4" />
