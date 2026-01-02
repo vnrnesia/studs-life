@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Send, CheckCircle2, Info, MessageCircle, PhoneCall, Mail } from "lucide-react";
 import Image from "next/image";
 import ctaBg from "@/assets/ctaform.png";
+import { submitToGoogleSheets } from "@/lib/submitToGoogleSheets";
 
 interface ContactFormSectionProps {
   lang: string;
@@ -23,6 +24,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
   });
   const [country, setCountry] = useState<Country>("RU");
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [showTelegramModal, setShowTelegramModal] = useState(false);
 
   // Clear phone when country changes to avoid mask mismatch
@@ -68,9 +70,27 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
     }
   }, [formData.preference]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+
+    const submissionData = {
+      fullName: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      preference: formData.preference,
+      country: country || 'Other'
+    };
+
+    const result = await submitToGoogleSheets('General Inquiry', submissionData);
+
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setSubmitted(true);
+    } else {
+      alert(result.message);
+    }
   };
 
   return (
@@ -241,9 +261,10 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full bg-white text-[#0A2647] py-4 rounded-xl font-black uppercase tracking-[0.2em] hover:bg-blue-50 transition-all transform hover:-translate-y-1 shadow-2xl mt-6 text-sm"
+                    disabled={isSubmitting}
+                    className="w-full bg-white text-[#0A2647] py-4 rounded-xl font-black uppercase tracking-[0.2em] hover:bg-blue-50 transition-all transform hover:-translate-y-1 shadow-2xl mt-6 text-sm disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
                   >
-                    {dict.submit}
+                    {isSubmitting ? 'Sending...' : dict.submit}
                   </button>
                 </form>
               )}

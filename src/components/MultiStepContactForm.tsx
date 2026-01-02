@@ -125,6 +125,31 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, boolean>>({});
+  const [shake, setShake] = useState(false);
+
+  // Shake animation variant
+  const shakeAnimation = {
+    static: { x: 0 },
+    shake: { 
+      x: [0, -10, 10, -10, 10, 0],
+      transition: { duration: 0.4 }
+    }
+  };
+
+  // Helper to check errors
+  const getInputClass = (fieldName: string) => `w-full bg-gray-50 border-2 outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors ${
+    errors[fieldName] 
+      ? 'border-red-500 ring-4 ring-red-500/10' 
+      : 'border-gray-200 focus:border-navy'
+  }`;
+
+  const handleFieldChange = (field: string, value: string) => {
+    setFormData({ ...formData, [field]: value });
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: false }));
+    }
+  };
   
   const [formData, setFormData] = useState<FormData>({
     service: 'university',
@@ -239,8 +264,91 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
   const steps = getSteps();
   const totalSteps = steps.length;
 
+  const validateCurrentStep = () => {
+    const newErrors: Record<string, boolean> = {};
+    let isValid = true;
+
+    const check = (field: string, value: any) => {
+      if (!value || value === '') {
+        newErrors[field] = true;
+        isValid = false;
+      }
+    };
+
+    if (currentStep === 1) {
+      check('fullName', formData.fullName);
+      check('phone', formData.phone);
+      check('email', formData.email);
+      check('dateOfBirth', formData.dateOfBirth);
+    }
+    
+    if (currentStep === 2) {
+      check('service', formData.service);
+    }
+
+    if (currentStep === 3) {
+      if (formData.service === 'university') {
+        check('educationLevel', formData.educationLevel);
+        check('relationship', formData.relationship);
+        check('targetCountry', formData.targetCountry);
+        check('fieldOfStudy', formData.fieldOfStudy);
+      }
+      if (formData.service === 'school') {
+        check('studentName', formData.studentName);
+        check('parentName', formData.parentName);
+        check('relationship', formData.relationship);
+        check('hasPassport', formData.hasPassport);
+        if (formData.hasPassport === 'yes') check('passportExpiry', formData.passportExpiry);
+      }
+      if (formData.service === 'ticket') {
+        check('fromCity', formData.fromCity);
+        check('toCity', formData.toCity);
+        check('travelDate', formData.travelDate);
+        check('needsBaggage', formData.needsBaggage);
+      }
+      if (formData.service === 'transfer') {
+        check('currentEducationLevel', formData.currentEducationLevel);
+        check('paymentType', formData.paymentType);
+        check('currentUniversity', formData.currentUniversity);
+        check('currentCountry', formData.currentCountry);
+        check('currentField', formData.currentField);
+        check('transferType', formData.transferType);
+      }
+      if (formData.service === 'umrah') {
+        check('travelMonth', formData.travelMonth);
+        check('relationship', formData.relationship);
+        check('hasPassport', formData.hasPassport);
+        if (formData.hasPassport === 'yes') check('passportExpiry', formData.passportExpiry);
+      }
+      if (formData.service === 'workVisa') {
+        check('targetCountry', formData.targetCountry);
+        check('relationship', formData.relationship);
+        check('workPreferences', formData.workPreferences);
+        check('previousTravel', formData.previousTravel);
+      }
+    }
+
+    if (currentStep === 4) {
+      check('citizenship', formData.citizenship);
+      if (formData.citizenship === 'Turkmenistan') check('region', formData.region);
+      else if (formData.citizenship) check('city', formData.city);
+
+      if (formData.service === 'transfer') {
+        check('targetUniversity', formData.targetUniversity);
+        check('targetField', formData.targetField);
+      }
+    }
+
+    setErrors(newErrors);
+    if (!isValid) {
+      setShake(true);
+      setTimeout(() => setShake(false), 500);
+    }
+    return isValid;
+  };
+
   const handleNext = () => {
-    if (currentStep < totalSteps) {
+    if (validateCurrentStep() && currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
     }
   };
@@ -256,11 +364,13 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
     
     // Prevent submission if not on the final step
     if (currentStep < totalSteps) {
-      if (canProceed()) {
+      if (validateCurrentStep()) {
         handleNext();
       }
       return;
     }
+    
+    if (!validateCurrentStep()) return;
 
     setIsSubmitting(true);
 
@@ -305,12 +415,14 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
               <label className="block text-sm font-bold text-gray-900 mb-2">
                 {dict.fields.fullName} *
               </label>
-              <input
+              <motion.input
                 type="text"
                 required
+                variants={shakeAnimation}
+                animate={errors.fullName && shake ? "shake" : "static"}
                 value={formData.fullName}
-                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
+                onChange={(e) => handleFieldChange("fullName", e.target.value)}
+                className={getInputClass("fullName")}
                 placeholder={dict.placeholders.fullName}
               />
             </div>
@@ -320,12 +432,14 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
                 <label className="block text-sm font-bold text-gray-900 mb-2">
                   {dict.fields.phone} *
                 </label>
-                <input
+                <motion.input
                   type="tel"
                   required
+                  variants={shakeAnimation}
+                  animate={errors.phone && shake ? "shake" : "static"}
                   value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
+                  onChange={(e) => handleFieldChange("phone", e.target.value)}
+                  className={getInputClass("phone")}
                   placeholder={dict.placeholders.phone}
                 />
               </div>
@@ -333,12 +447,14 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
                 <label className="block text-sm font-bold text-gray-900 mb-2">
                   {dict.fields.email} *
                 </label>
-                <input
+                <motion.input
                   type="email"
                   required
+                  variants={shakeAnimation}
+                  animate={errors.email && shake ? "shake" : "static"}
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
+                  onChange={(e) => handleFieldChange("email", e.target.value)}
+                  className={getInputClass("email")}
                   placeholder={dict.placeholders.email}
                 />
               </div>
@@ -348,12 +464,14 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
               <label className="block text-sm font-bold text-gray-900 mb-2">
                 {dict.fields.dateOfBirth} *
               </label>
-              <input
+              <motion.input
                 type="date"
                 required
+                variants={shakeAnimation}
+                animate={errors.dateOfBirth && shake ? "shake" : "static"}
                 value={formData.dateOfBirth}
-                onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
-                className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
+                onChange={(e) => handleFieldChange("dateOfBirth", e.target.value)}
+                className={getInputClass("dateOfBirth")}
               />
             </div>
           </div>
@@ -422,17 +540,22 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
           <label className="block text-sm font-bold text-gray-900 mb-2">
             {dict.fields.citizenship} *
           </label>
-          <select
+          <motion.select
             required
+            variants={shakeAnimation}
+            animate={errors.citizenship && shake ? "shake" : "static"}
             value={formData.citizenship}
-            onChange={(e) => setFormData({ ...formData, citizenship: e.target.value, region: '', city: '' })}
-            className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
+            onChange={(e) => {
+              handleFieldChange("citizenship", e.target.value);
+              setFormData(prev => ({ ...prev, citizenship: e.target.value, region: '', city: '' }));
+            }}
+            className={getInputClass("citizenship")}
           >
             <option value="">{dict.options.select}</option>
             {COUNTRIES.map(country => (
               <option key={country} value={country}>{country}</option>
             ))}
-          </select>
+          </motion.select>
         </div>
 
         {formData.citizenship === 'Turkmenistan' ? (
@@ -457,12 +580,14 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
             <label className="block text-sm font-bold text-gray-900 mb-2">
               {dict.fields.city} *
             </label>
-            <input
+            <motion.input
               type="text"
               required
+              variants={shakeAnimation}
+              animate={errors.city && shake ? "shake" : "static"}
               value={formData.city}
-              onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-              className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
+              onChange={(e) => handleFieldChange("city", e.target.value)}
+              className={getInputClass("city")}
               placeholder={dict.placeholders.city}
             />
           </div>
@@ -482,40 +607,40 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.educationLevel} *</label>
-                  <select required value={formData.educationLevel} onChange={(e) => setFormData({ ...formData, educationLevel: e.target.value })}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
+                  <motion.select required variants={shakeAnimation} animate={errors.educationLevel && shake ? "shake" : "static"} value={formData.educationLevel} onChange={(e) => handleFieldChange("educationLevel", e.target.value)}
+                    className={getInputClass("educationLevel")}>
                     <option value="">{dict.options.selectLevel}</option>
                     <option value="language">{dict.options.languageCourses}</option>
                     <option value="preparatory">{dict.options.preparatory}</option>
                     <option value="bachelor">{dict.options.bachelor}</option>
                     <option value="master">{dict.options.master}</option>
-                  </select>
+                  </motion.select>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.relationship} *</label>
-                  <select required value={formData.relationship} onChange={(e) => setFormData({ ...formData, relationship: e.target.value })}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
+                  <motion.select required variants={shakeAnimation} animate={errors.relationship && shake ? "shake" : "static"} value={formData.relationship} onChange={(e) => handleFieldChange("relationship", e.target.value)}
+                    className={getInputClass("relationship")}>
                     <option value="">{dict.options.selectRelationship}</option>
                     <option value="self">{dict.options.self}</option>
                     <option value="father">{dict.options.father}</option>
                     <option value="mother">{dict.options.mother}</option>
                     <option value="friend">{dict.options.friend}</option>
-                  </select>
+                  </motion.select>
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.targetCountry} *</label>
-                  <select required value={formData.targetCountry} onChange={(e) => setFormData({ ...formData, targetCountry: e.target.value })}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
+                  <motion.select required variants={shakeAnimation} animate={errors.targetCountry && shake ? "shake" : "static"} value={formData.targetCountry} onChange={(e) => handleFieldChange("targetCountry", e.target.value)}
+                    className={getInputClass("targetCountry")}>
                     <option value="">{dict.options.selectCountry}</option>
                     {TARGET_COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
-                  </select>
+                  </motion.select>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.fieldOfStudy} *</label>
-                  <input type="text" required value={formData.fieldOfStudy} onChange={(e) => setFormData({ ...formData, fieldOfStudy: e.target.value })}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" placeholder={dict.placeholders.fieldOfStudy} />
+                  <motion.input type="text" required variants={shakeAnimation} animate={errors.fieldOfStudy && shake ? "shake" : "static"} value={formData.fieldOfStudy} onChange={(e) => handleFieldChange("fieldOfStudy", e.target.value)}
+                    className={getInputClass("fieldOfStudy")} placeholder={dict.placeholders.fieldOfStudy} />
                 </div>
               </div>
             </div>
@@ -534,40 +659,40 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.studentName} *</label>
-                  <input type="text" required value={formData.studentName} onChange={(e) => setFormData({...formData, studentName: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
+                  <motion.input type="text" required variants={shakeAnimation} animate={errors.studentName && shake ? "shake" : "static"} value={formData.studentName} onChange={(e) => handleFieldChange("studentName", e.target.value)}
+                    className={getInputClass("studentName")} />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.parentName} *</label>
-                  <input type="text" required value={formData.parentName} onChange={(e) => setFormData({...formData, parentName: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
+                  <motion.input type="text" required variants={shakeAnimation} animate={errors.parentName && shake ? "shake" : "static"} value={formData.parentName} onChange={(e) => handleFieldChange("parentName", e.target.value)}
+                    className={getInputClass("parentName")} />
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.relationship} *</label>
-                  <select required value={formData.relationship} onChange={(e) => setFormData({...formData, relationship: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
+                  <motion.select required variants={shakeAnimation} animate={errors.relationship && shake ? "shake" : "static"} value={formData.relationship} onChange={(e) => handleFieldChange("relationship", e.target.value)}
+                    className={getInputClass("relationship")}>
                     <option value="">{dict.options.select}</option>
                     <option value="father">{dict.options.father}</option>
                     <option value="mother">{dict.options.mother}</option>
-                  </select>
+                  </motion.select>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.hasPassport} *</label>
-                  <select required value={formData.hasPassport} onChange={(e) => setFormData({...formData, hasPassport: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
+                  <motion.select required variants={shakeAnimation} animate={errors.hasPassport && shake ? "shake" : "static"} value={formData.hasPassport} onChange={(e) => handleFieldChange("hasPassport", e.target.value)}
+                    className={getInputClass("hasPassport")}>
                     <option value="">{dict.options.select}</option>
                     <option value="yes">{dict.options.yes}</option>
                     <option value="no">{dict.options.no}</option>
-                  </select>
+                  </motion.select>
                 </div>
               </div>
               {formData.hasPassport === 'yes' && (
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.passportExpiry} *</label>
-                  <input type="date" required value={formData.passportExpiry} onChange={(e) => setFormData({...formData, passportExpiry: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
+                  <motion.input type="date" required variants={shakeAnimation} animate={errors.passportExpiry && shake ? "shake" : "static"} value={formData.passportExpiry} onChange={(e) => handleFieldChange("passportExpiry", e.target.value)}
+                    className={getInputClass("passportExpiry")} />
                 </div>
               )}
             </div>
@@ -586,29 +711,29 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.fromCity} *</label>
-                  <input type="text" required value={formData.fromCity} onChange={(e) => setFormData({...formData, fromCity: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" placeholder={dict.placeholders.fromCity} />
+                  <motion.input type="text" required variants={shakeAnimation} animate={errors.fromCity && shake ? "shake" : "static"} value={formData.fromCity} onChange={(e) => handleFieldChange("fromCity", e.target.value)}
+                    className={getInputClass("fromCity")} placeholder={dict.placeholders.fromCity} />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.toCity} *</label>
-                  <input type="text" required value={formData.toCity} onChange={(e) => setFormData({...formData, toCity: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" placeholder={dict.placeholders.toCity} />
+                  <motion.input type="text" required variants={shakeAnimation} animate={errors.toCity && shake ? "shake" : "static"} value={formData.toCity} onChange={(e) => handleFieldChange("toCity", e.target.value)}
+                    className={getInputClass("toCity")} placeholder={dict.placeholders.toCity} />
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.travelDate} *</label>
-                  <input type="date" required value={formData.travelDate} onChange={(e) => setFormData({...formData, travelDate: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
+                  <motion.input type="date" required variants={shakeAnimation} animate={errors.travelDate && shake ? "shake" : "static"} value={formData.travelDate} onChange={(e) => handleFieldChange("travelDate", e.target.value)}
+                    className={getInputClass("travelDate")} />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.needsBaggage} *</label>
-                  <select required value={formData.needsBaggage} onChange={(e) => setFormData({...formData, needsBaggage: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
+                  <motion.select required variants={shakeAnimation} animate={errors.needsBaggage && shake ? "shake" : "static"} value={formData.needsBaggage} onChange={(e) => handleFieldChange("needsBaggage", e.target.value)}
+                    className={getInputClass("needsBaggage")}>
                     <option value="">{dict.options.select}</option>
                     <option value="yes">{dict.options.yesBaggage}</option>
                     <option value="no">{dict.options.noBaggage}</option>
-                  </select>
+                  </motion.select>
                 </div>
               </div>
             </div>
@@ -627,50 +752,50 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.currentEducationLevel} *</label>
-                  <select required value={formData.currentEducationLevel} onChange={(e) => setFormData({...formData, currentEducationLevel: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
+                  <motion.select required variants={shakeAnimation} animate={errors.currentEducationLevel && shake ? "shake" : "static"} value={formData.currentEducationLevel} onChange={(e) => handleFieldChange("currentEducationLevel", e.target.value)}
+                    className={getInputClass("currentEducationLevel")}>
                     <option value="">{dict.options.select}</option>
                     <option value="preparatory">{dict.options.preparatory}</option>
                     <option value="bachelor">{dict.options.bachelor}</option>
                     <option value="master">{dict.options.master}</option>
-                  </select>
+                  </motion.select>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.paymentType} *</label>
-                  <select required value={formData.paymentType} onChange={(e) => setFormData({...formData, paymentType: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
+                  <motion.select required variants={shakeAnimation} animate={errors.paymentType && shake ? "shake" : "static"} value={formData.paymentType} onChange={(e) => handleFieldChange("paymentType", e.target.value)}
+                    className={getInputClass("paymentType")}>
                     <option value="">{dict.options.select}</option>
                     <option value="paid">{dict.options.paid}</option>
                     <option value="grant">{dict.options.grant}</option>
-                  </select>
+                  </motion.select>
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.currentUniversity} *</label>
-                  <input type="text" required value={formData.currentUniversity} onChange={(e) => setFormData({...formData, currentUniversity: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
+                  <motion.input type="text" required variants={shakeAnimation} animate={errors.currentUniversity && shake ? "shake" : "static"} value={formData.currentUniversity} onChange={(e) => handleFieldChange("currentUniversity", e.target.value)}
+                    className={getInputClass("currentUniversity")} />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.currentCountry} *</label>
-                  <input type="text" required value={formData.currentCountry} onChange={(e) => setFormData({...formData, currentCountry: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
+                  <motion.input type="text" required variants={shakeAnimation} animate={errors.currentCountry && shake ? "shake" : "static"} value={formData.currentCountry} onChange={(e) => handleFieldChange("currentCountry", e.target.value)}
+                    className={getInputClass("currentCountry")} />
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.currentField} *</label>
-                  <input type="text" required value={formData.currentField} onChange={(e) => setFormData({...formData, currentField: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
+                  <motion.input type="text" required variants={shakeAnimation} animate={errors.currentField && shake ? "shake" : "static"} value={formData.currentField} onChange={(e) => handleFieldChange("currentField", e.target.value)}
+                    className={getInputClass("currentField")} />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.transferType} *</label>
-                  <select required value={formData.transferType} onChange={(e) => setFormData({...formData, transferType: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
+                  <motion.select required variants={shakeAnimation} animate={errors.transferType && shake ? "shake" : "static"} value={formData.transferType} onChange={(e) => handleFieldChange("transferType", e.target.value)}
+                    className={getInputClass("transferType")}>
                     <option value="">{dict.options.select}</option>
                     <option value="same">{dict.options.sameCountry}</option>
                     <option value="different">{dict.options.differentCountry}</option>
-                  </select>
+                  </motion.select>
                 </div>
               </div>
             </div>
@@ -689,38 +814,38 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.travelMonth} *</label>
-                  <select required value={formData.travelMonth} onChange={(e) => setFormData({...formData, travelMonth: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
+                  <motion.select required variants={shakeAnimation} animate={errors.travelMonth && shake ? "shake" : "static"} value={formData.travelMonth} onChange={(e) => handleFieldChange("travelMonth", e.target.value)}
+                    className={getInputClass("travelMonth")}>
                     <option value="">{dict.options.selectMonth}</option>
                     {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map(m => <option key={m} value={m}>{m}</option>)}
-                  </select>
+                  </motion.select>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.relationship} *</label>
-                  <select required value={formData.relationship} onChange={(e) => setFormData({...formData, relationship: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
+                  <motion.select required variants={shakeAnimation} animate={errors.relationship && shake ? "shake" : "static"} value={formData.relationship} onChange={(e) => handleFieldChange("relationship", e.target.value)}
+                    className={getInputClass("relationship")}>
                     <option value="">{dict.options.selectRelationship}</option>
                     <option value="self">{dict.options.self}</option>
                     <option value="father">{dict.options.father}</option>
                     <option value="mother">{dict.options.mother}</option>
-                  </select>
+                  </motion.select>
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.hasPassport} *</label>
-                  <select required value={formData.hasPassport} onChange={(e) => setFormData({...formData, hasPassport: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
+                  <motion.select required variants={shakeAnimation} animate={errors.hasPassport && shake ? "shake" : "static"} value={formData.hasPassport} onChange={(e) => handleFieldChange("hasPassport", e.target.value)}
+                    className={getInputClass("hasPassport")}>
                     <option value="">{dict.options.select}</option>
                     <option value="yes">{dict.options.yes}</option>
                     <option value="no">{dict.options.no}</option>
-                  </select>
+                  </motion.select>
                 </div>
                 {formData.hasPassport === 'yes' && (
                   <div>
                     <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.passportExpiry} *</label>
-                    <input type="date" required value={formData.passportExpiry} onChange={(e) => setFormData({...formData, passportExpiry: e.target.value})}
-                      className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
+                    <motion.input type="date" required variants={shakeAnimation} animate={errors.passportExpiry && shake ? "shake" : "static"} value={formData.passportExpiry} onChange={(e) => handleFieldChange("passportExpiry", e.target.value)}
+                      className={getInputClass("passportExpiry")} />
                   </div>
                 )}
               </div>
@@ -740,33 +865,33 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.targetCountry} *</label>
-                  <select required value={formData.targetCountry} onChange={(e) => setFormData({...formData, targetCountry: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
+                  <motion.select required variants={shakeAnimation} animate={errors.targetCountry && shake ? "shake" : "static"} value={formData.targetCountry} onChange={(e) => handleFieldChange("targetCountry", e.target.value)}
+                    className={getInputClass("targetCountry")}>
                     <option value="">{dict.options.select}</option>
                     <option value="Russia">Russia</option>
                     <option value="Belarus">Belarus</option>
-                  </select>
+                  </motion.select>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.relationship} *</label>
-                  <select required value={formData.relationship} onChange={(e) => setFormData({...formData, relationship: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
+                  <motion.select required variants={shakeAnimation} animate={errors.relationship && shake ? "shake" : "static"} value={formData.relationship} onChange={(e) => handleFieldChange("relationship", e.target.value)}
+                    className={getInputClass("relationship")}>
                     <option value="">{dict.options.selectRelationship}</option>
                     <option value="self">{dict.options.self}</option>
                     <option value="father">{dict.options.father}</option>
                     <option value="mother">{dict.options.mother}</option>
-                  </select>
+                  </motion.select>
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.workPreferences} *</label>
-                <textarea required value={formData.workPreferences} onChange={(e) => setFormData({...formData, workPreferences: e.target.value})}
-                  className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" rows={2} placeholder={dict.placeholders.workPreferences} />
+                <motion.textarea required variants={shakeAnimation} animate={errors.workPreferences && shake ? "shake" : "static"} value={formData.workPreferences} onChange={(e) => handleFieldChange("workPreferences", e.target.value)}
+                  className={getInputClass("workPreferences")} rows={2} placeholder={dict.placeholders.workPreferences} />
               </div>
               <div>
                 <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.previousTravel} *</label>
-                <textarea required value={formData.previousTravel} onChange={(e) => setFormData({...formData, previousTravel: e.target.value})}
-                  className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" rows={2} placeholder={dict.placeholders.previousTravel} />
+                <motion.textarea required variants={shakeAnimation} animate={errors.previousTravel && shake ? "shake" : "static"} value={formData.previousTravel} onChange={(e) => handleFieldChange("previousTravel", e.target.value)}
+                  className={getInputClass("previousTravel")} rows={2} placeholder={dict.placeholders.previousTravel} />
               </div>
             </div>
           </div>
@@ -791,13 +916,13 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
               <div className="grid md:grid-cols-2 gap-4 pb-4 border-b border-gray-100">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.targetUniversity} *</label>
-                  <input type="text" required value={formData.targetUniversity} onChange={(e) => setFormData({...formData, targetUniversity: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
+                  <motion.input type="text" required variants={shakeAnimation} animate={errors.targetUniversity && shake ? "shake" : "static"} value={formData.targetUniversity} onChange={(e) => handleFieldChange("targetUniversity", e.target.value)}
+                    className={getInputClass("targetUniversity")} />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.targetField} *</label>
-                  <input type="text" required value={formData.targetField} onChange={(e) => setFormData({...formData, targetField: e.target.value})}
-                    className="w-full bg-gray-50 border-2 border-gray-200 focus:border-navy outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
+                  <motion.input type="text" required variants={shakeAnimation} animate={errors.targetField && shake ? "shake" : "static"} value={formData.targetField} onChange={(e) => handleFieldChange("targetField", e.target.value)}
+                    className={getInputClass("targetField")} />
                 </div>
               </div>
             )}
@@ -1015,15 +1140,14 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
                     <button
                       type="button"
                       onClick={handleNext}
-                      disabled={!canProceed()}
-                      className="flex-1 py-4 bg-crimson/80 text-white font-black uppercase tracking-widest rounded-full hover:bg-crimson transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5  disabled:cursor-not-allowed disabled:transform-none"
+                      className="flex-1 py-4 bg-crimson/80 text-white font-black uppercase tracking-widest rounded-full hover:bg-crimson transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                     >
                       {dict.navigation?.next || "Next"}
                     </button>
                   ) : (
                     <button
                       type="submit"
-                      disabled={isSubmitting || !canProceed()}
+                      disabled={isSubmitting}
                       className="flex-1 py-4 bg-navy text-white font-black uppercase tracking-widest rounded-full hover:bg-crimson transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                     >
                       {isSubmitting ? 'Submitting...' : (dict.navigation?.submit || dict.buttons.submit)}
