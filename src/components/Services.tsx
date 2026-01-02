@@ -212,7 +212,7 @@ export default function Services({ lang, dict }: ServicesProps) {
                   <div className="absolute inset-0 z-0">
                     <Image 
                       src={service.bgImage || "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=1000"} 
-                      alt={service.label} 
+                      alt={dict[service.key] || service.label} 
                       fill 
                       className="object-cover"
                     />

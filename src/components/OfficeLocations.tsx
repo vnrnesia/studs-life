@@ -4,6 +4,8 @@ import { MapPin, Phone, Globe, Mail, Clock, ChevronLeft, ChevronRight } from "lu
 import { motion } from "framer-motion";
 import { useState } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import JsonLd from "@/components/JsonLd";
+import { EducationalOrganization, WithContext } from "schema-dts";
 
 interface OfficeLocationsProps {
   lang: string;
@@ -63,8 +65,29 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
 
   const activeOfficeData = offices.find(o => o.id === activeOffice) || offices[0];
 
+  const localBusinessSchema: WithContext<EducationalOrganization> = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    name: "Student's Life",
+    description: dict?.subtitle || "Offices in Turkmenistan and Russia for your convenience",
+    url: "https://studs-life.com",
+    areaServed: ["Turkmenistan", "Russia"],
+    subOrganization: offices.map((office) => ({
+      "@type": "EducationalOrganization",
+      name: `Student's Life - ${office.city}`,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: office.address,
+        addressLocality: office.city,
+        addressCountry: office.country === "turkmenistan" ? "TM" : "RU",
+      },
+      telephone: office.phone || office.phones?.[0],
+    })),
+  };
+
   return (
     <section className="py-16 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+      <JsonLd<EducationalOrganization> data={localBusinessSchema} />
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-20 w-72 h-72 bg-crimson rounded-full blur-3xl" />

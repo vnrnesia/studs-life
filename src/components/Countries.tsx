@@ -48,10 +48,23 @@ export default function Countries({ lang, dict }: CountriesProps) {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // Helper to get dynamic card width
+  const getCardWidth = () => {
+    if (scrollContainerRef.current) {
+      // Get the first card width + gap (32px = 2rem)
+      // We can query the first child directly.
+      const firstCard = scrollContainerRef.current.querySelector('div > div > div') as HTMLElement;
+      if (firstCard) {
+        return firstCard.offsetWidth + 32;
+      }
+    }
+    return 932; // Fallback
+  };
+
   // Initialize scroll to the second card (index 1)
   useEffect(() => {
     if (scrollContainerRef.current) {
-      const cardWidth = 900 + 32; // card width + gap
+      const cardWidth = getCardWidth();
       scrollContainerRef.current.scrollLeft = cardWidth * 0.8; // Approximate position for partial 1st card visibility
       setActiveIndex(1);
     }
@@ -60,7 +73,7 @@ export default function Countries({ lang, dict }: CountriesProps) {
   const handleScroll = () => {
     if (scrollContainerRef.current && !isDragging) {
       const { scrollLeft } = scrollContainerRef.current;
-      const cardWidth = 900 + 32;
+      const cardWidth = getCardWidth();
       const index = Math.round(scrollLeft / cardWidth);
       setActiveIndex(index);
     }
@@ -68,7 +81,7 @@ export default function Countries({ lang, dict }: CountriesProps) {
 
   const scrollToIndex = (index: number) => {
     if (scrollContainerRef.current) {
-      const cardWidth = 900 + 32;
+      const cardWidth = getCardWidth();
       scrollContainerRef.current.scrollTo({
         left: index * cardWidth,
         behavior: 'smooth'

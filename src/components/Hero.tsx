@@ -113,7 +113,7 @@ export default function Hero({ lang, dict }: HeroProps) {
           <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[90vh] flex items-end justify-center md:justify-end translate-y-12 md:translate-y-20">
             <Image
               src={heroGuy}
-              alt="Student"
+              alt="International student celebrating study abroad success"
               className="object-contain w-auto h-full object-bottom"
               priority
             />

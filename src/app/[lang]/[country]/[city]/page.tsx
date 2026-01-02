@@ -2,6 +2,9 @@ import { notFound } from 'next/navigation';
 import { getCity, getCities, getStrapiImageUrl } from '@/lib/strapi';
 import Image from 'next/image';
 import { marked } from 'marked';
+import { Metadata } from 'next';
+import JsonLd from '@/components/JsonLd';
+import { Article, BreadcrumbList, WithContext } from 'schema-dts';
 
 interface CityPageProps {
   params: Promise<{
@@ -21,6 +24,28 @@ export async function generateStaticParams() {
       country: city.country.slug,
       city: city.slug,
     }));
+}
+
+// Metadata Generation
+export async function generateMetadata({ params }: CityPageProps): Promise<Metadata> {
+  const { country, city: citySlug, lang } = await params;
+  const city = await getCity(country, citySlug, lang);
+
+  if (!city) {
+    return {
+      title: 'City Not Found',
+    };
+  }
+
+  return {
+    title: `${city.title} | Student's Life`,
+    description: city.intro ? city.intro.substring(0, 160) : `Study in ${city.title}, ${city.country?.name}. Comprehensive guide for international students.`,
+    openGraph: {
+      title: `${city.title} | Student's Life`,
+      description: city.intro ? city.intro.substring(0, 160) : `Study in ${city.title}, ${city.country?.name}.`,
+      images: city.images && city.images.length > 0 ? [getStrapiImageUrl(city.images[0].url)] : [],
+    },
+  };
 }
 
 // Revalidate every 60 seconds (1 minute)
@@ -45,15 +70,14 @@ export default async function CityPage({ params }: CityPageProps) {
     climateTable,
     conclusion,
     images: cityImages,
-    country: cityCountry 
+    country: cityCountry,
+    publishedAt,
+    updatedAt
   } = city;
 
   // Access images array directly if it exists
   const heroImage = cityImages?.[0];
-  if (heroImage) {
-    console.log('Hero Image URL (raw):', heroImage.url);
-    console.log('Hero Image URL (full):', getStrapiImageUrl(heroImage.url));
-  }
+  const heroImageUrl = heroImage ? getStrapiImageUrl(heroImage.url) : '';
 
   // Helper to safely parse markdown
   const parseMarkdown = (content?: string) => {
@@ -61,15 +85,66 @@ export default async function CityPage({ params }: CityPageProps) {
     return { __html: marked.parse(content) as string };
   };
 
+  // Structured Data
+  const articleSchema: WithContext<Article> = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    description: intro ? intro.substring(0, 160) : undefined,
+    image: heroImageUrl ? [heroImageUrl] : undefined,
+    datePublished: publishedAt,
+    dateModified: updatedAt,
+    author: {
+      "@type": "Organization",
+      name: "Student's Life",
+      url: "https://studs-life.com",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Student's Life",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://studs-life.com/logo.png",
+      },
+    },
+  };
+
+  const breadcrumbSchema: WithContext<BreadcrumbList> = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: `https://studs-life.com/${lang}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: cityCountry?.name || country,
+        item: `https://studs-life.com/${lang}/${country}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: title,
+        item: `https://studs-life.com/${lang}/${country}/${citySlug}`,
+      },
+    ],
+  };
+
   return (
     // DEĞİŞİKLİK BURADA: bg-gray-50 ve text-black eklendi
     <main className="min-h-screen bg-gray-50 text-black">
+      <JsonLd<Article> data={articleSchema} />
+      <JsonLd<BreadcrumbList> data={breadcrumbSchema} />
       
       {/* Hero Section */}
       <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center">
         {heroImage && (
           <Image
-            src={getStrapiImageUrl(heroImage.url)}
+            src={heroImageUrl}
             alt={heroImage.alternativeText || title}
             fill
             className="object-cover"

@@ -3,6 +3,8 @@
 import React from "react";
 import { Carousel } from "@/components/ui/apple-cards-carousel";
 import { VideoCard } from "./VideoCard";
+import JsonLd from "@/components/JsonLd";
+import { Review, WithContext } from "schema-dts";
 
 interface Testimonial {
   category: string;
@@ -18,8 +20,31 @@ export default function TestimonialsCarousel({ title }: { title?: React.ReactNod
     <VideoCard key={card.src} card={card} index={index} />
   ));
 
+  const reviewSchema: WithContext<Review>[] = rawTestimonials.map((item) => ({
+    "@context": "https://schema.org",
+    "@type": "Review",
+    author: {
+      "@type": "Person",
+      name: item.studentName,
+    },
+    reviewBody: item.content, 
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: "5",
+      bestRating: "5",
+    },
+    itemReviewed: {
+      "@type": "Organization",
+      name: "Student's Life",
+      image: item.src,
+    },
+  }));
+
   return (
     <div className="w-full h-full">
+      {reviewSchema.map((schema, idx) => (
+        <JsonLd<Review> key={idx} data={schema} />
+      ))}
       <Carousel items={cards} title={title} />
     </div>
   );
@@ -39,7 +64,8 @@ const DummyContent = ({ content, studentName, university }: { content: string; s
   );
 };
 
-const data = [
+// Define raw data with string content first
+const rawTestimonials = [
   {
     category: "Studying in Prague",
     title: "Studs Life helped me get into my dream university.",
@@ -85,7 +111,10 @@ const data = [
     university: "Kazan Federal University",
     content: "Kazan is a beautiful city for students. Studs Life helped me secure a scholarship which covered a significant part of my tuition. Their connections with universities are impressive and genuinely benefit the students.",
   },
-].map((item) => ({
+];
+
+// Map raw data for the carousel component (inserting React components)
+const data = rawTestimonials.map((item) => ({
   ...item,
   content: <DummyContent content={item.content} studentName={item.studentName} university={item.university} />,
 }));
