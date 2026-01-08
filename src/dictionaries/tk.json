@@ -151,7 +151,13 @@
             "Uniwersitetiň akademiki derejesini ýokarlandyrýan güýçli talyplar",
             "Bilelikdäki bilim we PR taslamalar",
             "Kwotalaryň ösdürilmegi we uzak möhletleýin hyzmatdaşlyk"
-        ]
+        ],
+        "partnersContact": "Hyzmatdaşlar üçin:",
+        "partnersEmail": "partners@stud-life.com",
+        "partnersPhone": "+99371250041",
+        "universitiesContact": "Uniwersitetler üçin:",
+        "universitiesEmail": "uni@stud-life.com",
+        "universitiesPhone": "+99371199151"
     },
     "team": {
         "badge": "Biziň toparymyz",
@@ -760,12 +766,24 @@
         "faq": {
             "title": "Ýygy soralýan soraglar",
             "q1": {
-                "q": "Resminamalary haçan tabşyrmaly?",
-                "a": "Mümkin boldugyça ir."
+                "q": "Russiýa we Türkiýe üçin talyp wizasy şertleri nähili?",
+                "a": "Esasy talaplara möhleti geçmedik pasport, uniwersitetiň resmi çakylyk haty, doldurylan wiza anketasy, saglyk ätiýaçlandyryşy we bilim resminamalary degişlidir. Russiýa üçin köplenç AIW synagy (HIV test) talap edilýär. Biziň toparymyz 99% netije üpjün etmek üçin her ýurt üçin ýörite sanawy size berer."
             },
             "q2": {
-                "q": "Hyzmatlaryň bahasy näçe?",
-                "a": "Pakete bagly."
+                "q": "Daşary ýurtda uniwersitete kabul edilmek prosesine nähili kömek edýärsiňiz?",
+                "a": "Biz doly siklly goldaw ulgamyny hödürleýäris: siziň akademiki profiliňize laýyk gelýän programmany we uniwersiteti saýlamakdan başlap, ähli zerur resminamalary taýýarlamak we terjime etmek, arza tabşyrmak we kabul ediş bölümi bilen aragatnaşygy dolandyrmak ýaly hyzmatlary öz içine alýar."
+            },
+            "q3": {
+                "q": "Halkara talyplar üçin talyp haky (stipendiýa) mümkinçilikleri barmy?",
+                "a": "Hawa, Russiýa, Hytaý we Türkiýe ýaly döwletler hökümet we uniwersitet derejesinde ýörite stipendiýalary hödürleýärler. Biz talyplara bilim çykdajylaryny azaltmak üçin grantlara we tapawutlylyk sylaglaryna ýüz tutmakda ýol görkezýäris."
+            },
+            "q4": {
+                "q": "Resmi terjime we tassyklama hyzmatlaryny hödürleýärsiňizmi?",
+                "a": "Elbetde. Biz bilim resminamalarynyň, şahadatnamalaryň we şahsyýetnamalaryň köp dillere professional terjimesi boýunça ýöriteleşýäris. Biziň terjimelerimiz uniwersitetler we ilçihanalar tarapyndan resmi taýdan ykrar edilýär."
+            },
+            "q5": {
+                "q": "Howpsuz ýaşaýyş jaýy we göçmek goldawy nähili işleýär?",
+                "a": "Biz size uniwersitet umumy ýaşaýyş jaýlaryny, talyplar üçin kwartiralary ýa-da hususy kärendeleri saýlamakda kömek edýäris. Siz baranyňyzdan soň, biziň ýerli toparlarymyz aeroportda garşylamak, şähere uýgunlaşmak we howpsuz ýerleşmekde goldaw berýärler."
             }
         }
     },
@@ -790,6 +808,30 @@
                 "button": "WhatsApp-dan ýazmak"
             },
             "home": "Baş sahypa gaýtmak"
+        }
+    },
+    "cookies": {
+        "title": "Gizliligiňize ähmiýet berýäris",
+        "description": "Sahypamyzdaky tejribäňizi gowulandyrmak we trafigimizi seljermek üçin çerezleri ulanýarys. \"Kabul et\" düwmesine basmak bilen, çerezleri ulanmagymyza razylyk berýärsiňiz.",
+        "accept": "Kabul et",
+        "decline": "Ret et",
+        "policy": "Çerez syýasaty"
+    },
+    "legal": {
+        "privacyPolicy": {
+            "title": "Gizlinlik syýasaty",
+            "lastUpdated": "Soňky täzelenme: Ýanwar 2026",
+            "content": "Siziň gizlinligiňiz biziň üçin örän möhümdir. Student's Life Agency-niň https://studs-life.com sahypasynda we beýleki degişli sahypalarymyzda sizden ýygnap biljek maglumatlarymyz barada gizlinligiňize hormat goýmak biziň esasy ýörelgämizdir."
+        },
+        "termsOfUse": {
+            "title": "Ulanyş düzgünleri",
+            "lastUpdated": "Soňky täzelenme: Ýanwar 2026",
+            "content": "https://studs-life.com sahypasyna girip, siz bu hyzmat şertlerine, ähli degişli kanunlara we düzgünlere boýun egmäge razylaşýarsyňyz we islendik degişli ýerli kanunlara laýyklykda jogapkärçilik çekýärsiňiz."
+        },
+        "cookiePolicy": {
+            "title": "Çerez syýasaty",
+            "lastUpdated": "Soňky täzelenme: Ýanwar 2026",
+            "content": "Bu web sahypasy, sahypada gezen wagtyňyz tejribäňizi gowulandyrmak üçin çerezleri ulanýar. Bularyň arasynda zerur diýlip klassifikasiýa edilen çerezler, sahypanyň esasy funksiýalarynyň işlemegi üçin brauzeriňizde saklanýar."
         }
     }
 }

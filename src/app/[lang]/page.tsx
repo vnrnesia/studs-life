@@ -15,6 +15,7 @@ import FeatureTabs from "@/components/FeatureTabs";
 import HowItWorks from "@/components/HowItWorks";
 import OfficeLocations from "@/components/OfficeLocations";
 import ProcessSection from "@/components/ProcessSection";
+import LeadMagnet from "@/components/LeadMagnet";
 import { getTeamMembers, getLatestBlogs, getLatestCities } from "@/lib/strapi";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
@@ -54,7 +55,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       image: universityImg.src
     },
     {
-      id: "visa", 
+      id: "visa",
       title: dict.featureTabs?.features?.visa?.title || "Visa Assistance",
       description: dict.featureTabs?.features?.visa?.description || "Hassle-free student visa processing with high success rates and comprehensive document verification.",
       icon: supportVisaIcon,
@@ -106,12 +107,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   return (
     <main className="min-h-screen bg-gray-50">
       <Hero lang={lang} dict={dict.hero} />
-      
+
       <ScrollReveal direction="up" distance={50}>
-        <FeatureTabs 
-          features={features} 
+        <FeatureTabs
+          features={features}
           title={dict.featureTabs?.title || "Comprehensive Student Support"}
-          subtitle={dict.featureTabs?.subtitle || "Detailed assistance at every step of your study abroad journey."} 
+          subtitle={dict.featureTabs?.subtitle || "Detailed assistance at every step of your study abroad journey."}
         />
       </ScrollReveal>
 
@@ -130,7 +131,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <ScrollReveal direction="up">
         <HowItWorks steps={howItWorksSteps} dict={dict.howItWorks} />
       </ScrollReveal>
-      
+
       <ScrollReveal direction="up">
         <Team lang={lang} dict={dict.team} teamMembers={teamMembers.slice(0, 6)} showViewAll={true} />
       </ScrollReveal>
@@ -151,9 +152,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestCities} />
       </ScrollReveal>
 
-      <ScrollReveal direction="up">
-        <ProcessSection lang={lang} dict={(dict as any).processWorkflow} />
-      </ScrollReveal>
+      {/* Lead Magnet - Below Blog */}
+      <LeadMagnet lang={lang} />
+
+      {/* ProcessSection - No ScrollReveal to preserve sticky animation */}
+      <ProcessSection lang={lang} dict={(dict as any).processWorkflow} />
 
       <ScrollReveal direction="up">
         <OfficeLocations lang={lang} dict={dict.offices} />

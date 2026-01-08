@@ -36,11 +36,11 @@ export default function Footer({ lang, dict }: FooterProps) {
             {/* Logo and Description */}
             <div>
               <Link href={`/${lang}`} className="inline-block mb-4">
-                <Image 
-                  src={logo} 
-                  alt="students life" 
-                  priority 
-                  className="h-auto w-auto max-h-12 brightness-0 invert" 
+                <Image
+                  src={logo}
+                  alt="students life"
+                  priority
+                  className="h-auto w-auto max-h-12 brightness-0 invert"
                 />
               </Link>
               <p className="text-blue-100/80 max-w-md text-sm leading-relaxed">
@@ -68,24 +68,24 @@ export default function Footer({ lang, dict }: FooterProps) {
                   {dict?.footer?.socials || "Follow Us"}
                 </h3>
                 <div className="flex gap-3">
-                  <a 
-                    href="https://instagram.com/defyzerglobal" 
+                  <a
+                    href="https://instagram.com/defyzerglobal"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#06182E] transition-all duration-300"
                   >
                     <Instagram className="w-5 h-5" />
                   </a>
-                  <a 
-                    href="https://facebook.com/defyzerglobal" 
+                  <a
+                    href="https://facebook.com/defyzerglobal"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#06182E] transition-all duration-300"
                   >
                     <Facebook className="w-5 h-5" />
                   </a>
-                  <a 
-                    href="https://twitter.com/defyzerglobal" 
+                  <a
+                    href="https://twitter.com/defyzerglobal"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#06182E] transition-all duration-300"
@@ -97,8 +97,19 @@ export default function Footer({ lang, dict }: FooterProps) {
             </div>
 
             {/* Copyright */}
-            <div className="border-t border-white/10 pt-6 text-blue-100/60 text-xs text-center sm:text-left">
-              © {new Date().getFullYear()} Student's Life Agency. {dict?.footer?.copyright || "All rights reserved."}
+            <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-blue-100/60 text-xs">
+              <p className="whitespace-normal break-words">© {new Date().getFullYear()} Student's Life Agency. {dict?.footer?.copyright || "All rights reserved."}</p>
+              <div className="flex flex-wrap gap-4">
+                <Link href={`/${lang}/privacy-policy`} className="hover:text-white transition-colors whitespace-nowrap">
+                  {dict.legal?.privacyPolicy?.title || "Privacy Policy"}
+                </Link>
+                <Link href={`/${lang}/terms-of-use`} className="hover:text-white transition-colors whitespace-nowrap">
+                  {dict.legal?.termsOfUse?.title || "Terms of Use"}
+                </Link>
+                <Link href={`/${lang}/cookie-policy`} className="hover:text-white transition-colors whitespace-nowrap">
+                  {dict.legal?.cookiePolicy?.title || "Cookie Policy"}
+                </Link>
+              </div>
             </div>
           </div>
         </div>

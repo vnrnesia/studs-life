@@ -1,11 +1,11 @@
 "use client";
 
-import { 
-  FileText, 
-  GraduationCap, 
-  Languages, 
-  Briefcase, 
-  Plane, 
+import {
+  FileText,
+  GraduationCap,
+  Languages,
+  Briefcase,
+  Plane,
   Ticket,
   Check,
   Star,
@@ -27,12 +27,12 @@ import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 // New Background Images
-import planeBg from "@/assets/our_services/plane.png";
+import planeBg from "@/assets/our_services/flight_tickets_photo.png";
 import universityBg from "@/assets/our_services/university.png";
 import visaBg from "@/assets/our_services/visa.png";
 import translationBg from "@/assets/our_services/translation.png";
 import careerSupportBg from "@/assets/our_services/career_support.png";
-import accommodationBg from "@/assets/our_services/accommadation.png";
+import accommodationBg from "@/assets/our_services/accommodation_photo.png";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -46,15 +46,15 @@ interface ServicesProps {
 export default function Services({ lang, dict }: ServicesProps) {
   const services = [
     {
-      key: "ticket", 
+      key: "ticket",
       icon: Ticket,
       className: "md:col-span-2 text-white overflow-hidden",
       type: "image-bg",
       label: "Student Discounts",
       bgImage: planeBg
     },
-    { 
-      key: "work", 
+    {
+      key: "work",
       icon: Briefcase,
       className: "md:col-span-1 text-white overflow-hidden",
       type: "career-stats",
@@ -62,7 +62,7 @@ export default function Services({ lang, dict }: ServicesProps) {
       bgImage: careerSupportBg
     },
     {
-      key: "visa", 
+      key: "visa",
       icon: FileText,
       className: "md:col-span-1 md:row-span-2 text-white overflow-hidden",
       type: "feature-list",
@@ -70,24 +70,24 @@ export default function Services({ lang, dict }: ServicesProps) {
       features: dict.visaFeatures || ["Document checklist", "Application filing", "Consulate interview", "Biometrics booking", "Passport collection"],
       bgImage: visaBg
     },
-    { 
-      key: "university", 
+    {
+      key: "university",
       icon: GraduationCap,
       className: "md:col-span-1 text-white overflow-hidden",
       type: "university-logos",
       label: "Top Global Universities",
       bgImage: universityBg
     },
-    { 
-      key: "accommodation", 
+    {
+      key: "accommodation",
       icon: Home,
       className: "md:col-span-1 relative overflow-hidden text-white min-h-[200px]",
       type: "image-card",
       label: "Dorms & Apartments",
       bgImage: accommodationBg
     },
-    { 
-      key: "translation", 
+    {
+      key: "translation",
       icon: Languages,
       className: "md:col-span-1 text-white overflow-hidden",
       type: "support-chat",
@@ -102,14 +102,14 @@ export default function Services({ lang, dict }: ServicesProps) {
         return (
           <div className="mt-6 text-center">
             <div className="flex flex-col gap-3">
-               <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
-                  <div className="p-2 bg-green-500/20 rounded-full text-green-400 shrink-0"><CheckCircle2 className="w-4 h-4" /></div>
-                  <span className="text-sm font-bold text-white">{dict.careerStats?.resume || "Resume Building"}</span>
-               </div>
-               <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
-                  <div className="p-2 bg-green-500/20 rounded-full text-green-400 shrink-0"><CheckCircle2 className="w-4 h-4" /></div>
-                  <span className="text-sm font-bold text-white">{dict.careerStats?.jobPlacement || "Job Placement"}</span>
-               </div>
+              <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
+                <div className="p-2 bg-green-500/20 rounded-full text-green-400 shrink-0"><CheckCircle2 className="w-4 h-4" /></div>
+                <span className="text-sm font-bold text-white">{dict.careerStats?.resume || "Resume Building"}</span>
+              </div>
+              <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
+                <div className="p-2 bg-green-500/20 rounded-full text-green-400 shrink-0"><CheckCircle2 className="w-4 h-4" /></div>
+                <span className="text-sm font-bold text-white">{dict.careerStats?.jobPlacement || "Job Placement"}</span>
+              </div>
             </div>
           </div>
         );
@@ -126,7 +126,7 @@ export default function Services({ lang, dict }: ServicesProps) {
               ))}
             </ul>
             <div className="mt-auto pb-24">
-              <InteractiveHoverButton 
+              <InteractiveHoverButton
                 className="w-full bg-white text-black border-white"
                 dotClassName="bg-crimson"
               >
@@ -135,16 +135,16 @@ export default function Services({ lang, dict }: ServicesProps) {
             </div>
           </div>
         );
-      
+
       case "university-logos":
         return (
           <div className="mt-6 grid grid-cols-3 gap-3">
-             <div className="h-10 w-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mx-auto text-white"><GraduationCap className="w-5 h-5" /></div>
-             <div className="h-10 w-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mx-auto text-white"><Briefcase className="w-5 h-5" /></div>
-             <div className="h-10 w-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mx-auto text-white"><Languages className="w-5 h-5" /></div>
-             <div className="h-10 w-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mx-auto text-white"><Users className="w-5 h-5" /></div>
-             <div className="h-10 w-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mx-auto text-white"><FileText className="w-5 h-5" /></div>
-             <div className="h-10 w-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mx-auto text-white"><Globe className="w-5 h-5" /></div>
+            <div className="h-10 w-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mx-auto text-white"><GraduationCap className="w-5 h-5" /></div>
+            <div className="h-10 w-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mx-auto text-white"><Briefcase className="w-5 h-5" /></div>
+            <div className="h-10 w-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mx-auto text-white"><Languages className="w-5 h-5" /></div>
+            <div className="h-10 w-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mx-auto text-white"><Users className="w-5 h-5" /></div>
+            <div className="h-10 w-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mx-auto text-white"><FileText className="w-5 h-5" /></div>
+            <div className="h-10 w-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mx-auto text-white"><Globe className="w-5 h-5" /></div>
           </div>
         );
 
@@ -163,13 +163,13 @@ export default function Services({ lang, dict }: ServicesProps) {
               <div className="bg-neutral-900 text-white p-2 rounded-2xl rounded-tr-none text-xs ml-auto">
                 {dict.chat?.help || "How can I help?"}
               </div>
-               <div className="w-8 h-8 rounded-full bg-crimson flex items-center justify-center text-white shrink-0">
+              <div className="w-8 h-8 rounded-full bg-crimson flex items-center justify-center text-white shrink-0">
                 <MessageCircle className="w-4 h-4" />
               </div>
             </div>
           </div>
         );
-        
+
       default:
         return null;
     }
@@ -196,13 +196,13 @@ export default function Services({ lang, dict }: ServicesProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[minmax(240px,auto)]">
           {services.map((service, index) => (
-            <ScrollReveal 
-              key={service.key} 
-              direction="up" 
+            <ScrollReveal
+              key={service.key}
+              direction="up"
               delay={index * 0.1}
               className={service.className}
             >
-              <div 
+              <div
                 className={cn(
                   "group relative overflow-hidden rounded-[2rem] transition-all duration-300 hover:shadow-xl border border-gray-100 h-full w-full"
                 )}
@@ -210,10 +210,10 @@ export default function Services({ lang, dict }: ServicesProps) {
                 {/* Background Layer (Full Size) */}
                 {(service.bgImage || service.type === "image-card") && (
                   <div className="absolute inset-0 z-0">
-                    <Image 
-                      src={service.bgImage || "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=1000"} 
-                      alt={dict[service.key] || service.label} 
-                      fill 
+                    <Image
+                      src={service.bgImage || "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=1000"}
+                      alt={dict[service.key] || service.label}
+                      fill
                       className="object-cover"
                     />
                   </div>
@@ -248,7 +248,7 @@ export default function Services({ lang, dict }: ServicesProps) {
                       {dict[service.key + 'Desc'] || service.label}
                     </p>
                   </div>
-                  
+
                   <div className="flex-grow">
                     {renderCardContent(service)}
                   </div>

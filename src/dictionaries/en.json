@@ -151,7 +151,13 @@
             "High-level students increasing university academic rating",
             "Joint educational and PR projects",
             "Predictable quota increase and long-term cooperation"
-        ]
+        ],
+        "partnersContact": "For partners:",
+        "partnersEmail": "partners@stud-life.com",
+        "partnersPhone": "+99371250041",
+        "universitiesContact": "For universities:",
+        "universitiesEmail": "uni@stud-life.com",
+        "universitiesPhone": "+99371199151"
     },
     "team": {
         "badge": "Our Team",
@@ -563,14 +569,26 @@
             "title": "Official Competencies and Documents"
         },
         "faq": {
-            "title": "Frequent Questions",
+            "title": "Frequently Asked Questions",
             "q1": {
-                "q": "When should I apply?",
-                "a": "As soon as possible."
+                "q": "What are the common student visa requirements for Russia and Turkey?",
+                "a": "General requirements include a valid passport, official university invitation letter, completed visa application form, medical insurance, and proof of academic background. For Russia, an HIV test is often required. Our team provides a specific checklist for each country to ensure a 99% success rate."
             },
             "q2": {
-                "q": "What are the service fees?",
-                "a": "Depends on the package."
+                "q": "How do you assist with the university admission process abroad?",
+                "a": "We offer a full-cycle support system: from choosing the right program and university tailored to your academic profile, preparing and translating all necessary documents, to submitting the application and managing communications with the admissions office."
+            },
+            "q3": {
+                "q": "Are there scholarship opportunities for international students?",
+                "a": "Yes, many countries like Russia, China, and Turkey offer government and university-specific scholarships. We guide students through the competitive application process for grants and merit-based awards to help reduce educational costs."
+            },
+            "q4": {
+                "q": "Do you provide certified document translation services?",
+                "a": "Absolutely. We specialize in certified translations of educational documents, transcripts, and personal IDs into multiple languages. Our translations are officially recognized by universities and embassies, ensuring your documents meet all legal standards."
+            },
+            "q5": {
+                "q": "How do safe accommodation and relocation support work?",
+                "a": "We guide you through choosing between university dormitories, shared student apartments, or private rentals. Upon arrival, our local teams assist with airport transfers, city orientation, and settling into your new living environment safely."
             }
         }
     },
@@ -794,6 +812,30 @@
                 "title": "Deployment & ongoing support",
                 "desc": "We ensure smooth deployment and provide ongoing maintenance and support."
             }
+        }
+    },
+    "cookies": {
+        "title": "We value your privacy",
+        "description": "We use cookies to enhance your browsing experience and analyze our traffic. By clicking \"Accept\", you consent to our use of cookies.",
+        "accept": "Accept",
+        "decline": "Decline",
+        "policy": "Cookie Policy"
+    },
+    "legal": {
+        "privacyPolicy": {
+            "title": "Privacy Policy",
+            "lastUpdated": "Last updated: January 2026",
+            "content": "Your privacy is important to us. It is Student's Life Agency's policy to respect your privacy regarding any information we may collect from you across our website, https://studs-life.com, and other sites we own and operate."
+        },
+        "termsOfUse": {
+            "title": "Terms of Use",
+            "lastUpdated": "Last updated: January 2026",
+            "content": "By accessing the website at https://studs-life.com, you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws."
+        },
+        "cookiePolicy": {
+            "title": "Cookie Policy",
+            "lastUpdated": "Last updated: January 2026",
+            "content": "This website uses cookies to improve your experience while you navigate through the website. Out of these, the cookies that are categorized as necessary are stored on your browser as they are essential for the working of basic functionalities of the website."
         }
     }
 }

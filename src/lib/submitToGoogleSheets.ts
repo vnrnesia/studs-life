@@ -19,32 +19,105 @@ export async function submitToGoogleSheets(
     }
 
     try {
+        // Mapping from English values to Russian
+        const valueMapping: Record<string, string> = {
+            // Service types
+            'university': 'Для абитуриентов',
+            'transfer': 'Для переводников',
+            'school': 'Для школьников в Китай',
+            'umrah': 'Умра в Мекку',
+            'workVisa': 'Рабочая виза',
+            'ticket': 'Покупка билета',
+            'University': 'Для абитуриентов',
+            'Transfer': 'Для переводников',
+            'School': 'Для школьников в Китай',
+            'Umrah': 'Умра в Мекку',
+            'Work Visa': 'Рабочая виза',
+            'Ticket': 'Покупка билета',
+
+            // Education levels / Form of study
+            'language': 'Языковые курсы',
+            'preparatory': 'Подготовительный факультет',
+            'bachelor': 'Бакалавриат',
+            'master': 'Магистратура',
+            'paid': 'Платное обучение',
+            'grant': 'Грант/Бюджет',
+
+            // Relationships
+            'self': 'Сам(а)',
+            'father': 'Отец',
+            'mother': 'Мать',
+            'friend': 'Друг/Знакомый',
+
+            // Passport / Baggage / Yes-No
+            'yes': 'Да',
+            'no': 'Нет',
+            'yesBaggage': 'С багажом',
+            'noBaggage': 'Без багажа',
+
+            // Countries
+            'Turkmenistan': 'Туркменистан',
+            'China': 'Китай',
+            'Turkey': 'Турция',
+            'Uzbekistan': 'Узбекистан',
+            'Tajikistan': 'Таджикистан',
+            'Russia': 'Россия',
+            'Kazakhstan': 'Казахстан',
+            'Kyrgyzstan': 'Киргизия',
+            'Afghanistan': 'Афганистан',
+            'Iran': 'Иран',
+            'Belarus': 'Беларусь',
+            'Cyprus': 'Кипр',
+            'Europe': 'Европа',
+
+            // Regions (Turkmenistan)
+            'Lebap': 'Лебап',
+            'Mary': 'Мары',
+            'Dashoguz': 'Дашогуз',
+            'Balkan': 'Балкан',
+            'Ahal': 'Ахал',
+            'Ashgabat': 'Ашхабад',
+
+            // Transfer types
+            'same': 'В той же стране',
+            'different': 'В другую страну'
+        };
+
+        const mapValue = (val: any) => {
+            if (typeof val !== 'string') return val;
+            return valueMapping[val] || val;
+        };
+
         // Prepare data with form type and timestamp
         // Map form data keys to Google Sheet headers (Russian)
         const mappedData = {
-            'Тип формы': formType,
+            'Тип формы': mapValue(formType),
             'ФИО': formData.fullName,
             'Телефон': formData.phone,
             'Email': formData.email,
             'Дата рождения': formData.dateOfBirth,
-            'Степень родства': formData.relationship,
-            'Гражданство': formData.citizenship,
-            'Регион': formData.region,
+            'Степень родства': mapValue(formData.relationship),
+            'Гражданство': mapValue(formData.citizenship),
+            'Регион': mapValue(formData.region),
             'Город': formData.city,
-            'Уровень образования': formData.educationLevel || formData.currentEducationLevel,
-            'Направление': formData.fieldOfStudy || formData.targetField || formData.currentField,
+            'Уровень образования': mapValue(formData.educationLevel || formData.currentEducationLevel),
+            'Направление обучения': formData.fieldOfStudy || formData.targetField || formData.currentField,
             'Университет': formData.targetUniversity || formData.currentUniversity,
-            'Страна': formData.targetCountry || formData.currentCountry,
+            'Страна назначения': mapValue(formData.targetCountry || formData.currentCountry),
             'Срок паспорта': formData.passportExpiry,
-            'Есть паспорт': formData.hasPassport,
-            'Месяц поездки': formData.travelMonth,
+            'Есть паспорт': mapValue(formData.hasPassport),
+            'Месяц поездки': mapValue(formData.travelMonth),
             'Предпочтения по работе': formData.workPreferences,
             'Предыдущие поездки': formData.previousTravel,
             'Откуда': formData.fromCity,
             'Куда': formData.toCity,
             'Дата поездки': formData.travelDate,
-            'Багаж': formData.needsBaggage,
-            ...formData // Keep original keys just in case
+            'Багаж': mapValue(formData.needsBaggage),
+            // Fallback for any other values that might need mapping
+            ...Object.keys(formData).reduce((acc: any, key) => {
+                acc[key] = mapValue(formData[key]);
+                return acc;
+            }, {})
         };
 
         const dataToSend = {

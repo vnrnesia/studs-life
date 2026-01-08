@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google"; 
+import { Manrope } from "next/font/google";
 import "../globals.css";
 import { i18n, type Locale } from "@/i18n-config";
 import Navbar from "@/components/Navbar";
@@ -8,6 +8,7 @@ import { getDictionary } from "@/get-dictionary";
 import { getCountriesWithCities } from "@/lib/strapi";
 import JsonLd from "@/components/JsonLd";
 import { Organization } from "schema-dts";
+import CookieConsent from "@/components/CookieConsent";
 
 const manrope = Manrope({ subsets: ["latin", "cyrillic"], variable: "--font-manrope" });
 
@@ -79,11 +80,11 @@ export default async function RootLayout({
   console.log('Loaded dictionary for:', lang, 'Keys:', Object.keys(dict || {}));
 
   return (
-    <html lang={lang}>
+    <html lang={lang} className="overflow-x-hidden">
       <head>
         <link href="https://fonts.cdnfonts.com/css/octin-stencil" rel="stylesheet" />
       </head>
-      <body className={`${manrope.variable} font-sans antialiased bg-gray-50 text-gray-900`}>
+      <body className={`${manrope.variable} font-sans antialiased bg-gray-50 text-gray-900 overflow-x-hidden w-full`}>
         <JsonLd<Organization>
           data={{
             "@context": "https://schema.org",
@@ -102,6 +103,7 @@ export default async function RootLayout({
           {children}
         </div>
         <Footer lang={lang} dict={dict} />
+        <CookieConsent lang={lang} dict={dict} />
       </body>
     </html>
   );
