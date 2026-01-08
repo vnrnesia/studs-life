@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { 
-  UserCheck, 
-  FileCheck, 
-  PlaneTakeoff, 
+import {
+  UserCheck,
+  FileCheck,
+  PlaneTakeoff,
   ArrowRight,
   type LucideIcon,
   Search,
@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
+import Link from "next/link";
 
 // Icon mapping for string-based props
 const iconMap: Record<string, LucideIcon> = {
@@ -41,6 +42,7 @@ interface HowItWorksProps {
   title?: string;
   className?: string;
   dict?: any;
+  lang: string;
 }
 
 export default function HowItWorks({
@@ -48,7 +50,8 @@ export default function HowItWorks({
   tagline = "EASY ONBOARDING",
   title = "How it works?",
   className,
-  dict
+  dict,
+  lang
 }: HowItWorksProps) {
   const [activeStepId, setActiveStepId] = useState(steps[0]?.id);
 
@@ -58,7 +61,7 @@ export default function HowItWorks({
   return (
     <section className={cn("py-24 bg-white text-gray-900", className)}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-[10px] md:text-xs font-bold tracking-wider uppercase text-gray-500 mb-4">
@@ -96,12 +99,12 @@ export default function HowItWorks({
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
-                
+
                 <div className="relative z-10 flex items-center gap-3">
                   <Icon className={cn("w-5 h-5", isActive ? "text-crimson" : "text-gray-400")} />
                   <span className="font-bold text-sm md:text-base">{step.title}</span>
                 </div>
-                
+
                 <span className={cn(
                   "relative z-10 font-mono text-xs md:text-sm font-medium",
                   isActive ? "text-gray-900" : "text-gray-400"
@@ -115,7 +118,7 @@ export default function HowItWorks({
 
         {/* Content Area */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          
+
           {/* Text Content */}
           <div className="order-2 lg:order-1">
             <AnimatePresence mode="wait">
@@ -135,13 +138,15 @@ export default function HowItWorks({
                 <p className="text-lg text-gray-600 leading-relaxed mb-8">
                   {activeStep.description}
                 </p>
-                
-                <InteractiveHoverButton 
-                  className="bg-white text-black border-gray-200"
-                  dotClassName="bg-crimson"
-                >
-                  {dict?.getStarted || "Get Started"}
-                </InteractiveHoverButton>
+
+                <Link href={`/${lang}/contact`}>
+                  <InteractiveHoverButton
+                    className="bg-white text-black border-gray-200"
+                    dotClassName="bg-crimson"
+                  >
+                    {dict?.getStarted || "Get Started"}
+                  </InteractiveHoverButton>
+                </Link>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -165,23 +170,23 @@ export default function HowItWorks({
                     className="object-cover"
                     priority
                   />
-                  
+
                   {/* Floating badge example */}
                   <div className="absolute bottom-6 left-6 right-6">
-                     <div className="bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/50 flex items-center gap-4">
-                       <div className="w-10 h-10 rounded-full bg-crimson/10 flex items-center justify-center text-crimson">
-                          {iconMap[activeStep.iconName] ? (
-                            (() => {
-                               const Icon = iconMap[activeStep.iconName];
-                               return <Icon className="w-5 h-5"/>
-                            })()
-                          ) : <UserCheck className="w-5 h-5"/>}
-                       </div>
-                       <div>
-                         <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">{dict?.currentStep || "Current Step"}</p>
-                         <p className="text-sm font-bold text-gray-900">{activeStep.title} {dict?.phase || "Phase"}</p>
-                       </div>
-                     </div>
+                    <div className="bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/50 flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-crimson/10 flex items-center justify-center text-crimson">
+                        {iconMap[activeStep.iconName] ? (
+                          (() => {
+                            const Icon = iconMap[activeStep.iconName];
+                            return <Icon className="w-5 h-5" />
+                          })()
+                        ) : <UserCheck className="w-5 h-5" />}
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">{dict?.currentStep || "Current Step"}</p>
+                        <p className="text-sm font-bold text-gray-900">{activeStep.title} {dict?.phase || "Phase"}</p>
+                      </div>
+                    </div>
                   </div>
 
                 </motion.div>

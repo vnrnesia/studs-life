@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Download, Gift, ArrowRight } from "lucide-react";
+import { submitToGoogleSheets } from "@/lib/submitToGoogleSheets";
 
 interface LeadMagnetProps {
     lang: string;
@@ -70,16 +71,21 @@ export default function LeadMagnet({ lang }: LeadMagnetProps) {
 
         setIsSubmitting(true);
 
-        // Simulate API call
-        setTimeout(() => {
-            setIsSubmitted(true);
-            setIsSubmitting(false);
+        const result = await submitToGoogleSheets('Лид-магнит', {
+            email: email,
+            preference: 'Лид-магнит'
+        });
 
-            // Hide after showing success message
+        setIsSubmitting(false);
+
+        if (result.success) {
+            setIsSubmitted(true);
             setTimeout(() => {
                 setIsVisible(false);
-            }, 3000);
-        }, 1000);
+            }, 5000);
+        } else {
+            alert(result.message);
+        }
     };
 
     if (!isVisible) return null;

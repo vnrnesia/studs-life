@@ -29,7 +29,7 @@
             "servicesDesc": "Comprehensive educational support",
             "pricing": "Pricing",
             "pricingDesc": "Transparent packages and costs",
-            "blog": "Blog",
+            "blog": "News",
             "blogDesc": "Latest news and student guides",
             "getConsultation": "Get Free Consultation",
             "ceoRole": "test",
@@ -45,16 +45,9 @@
         "universityDesc": "Top Global Universities",
         "translation": "Document Translation",
         "translationDesc": "Certified & Fast",
-        "work": "Career Support",
-        "workDesc": "Internships & Jobs",
-        "accommodation": "Accommodation",
         "accommodationDesc": "Dorms & Apartments",
         "ticket": "Flight Tickets",
         "ticketDesc": "Student Discounts",
-        "careerStats": {
-            "resume": "Resume Building",
-            "jobPlacement": "Job Placement"
-        },
         "visaFeatures": [
             "Document checklist",
             "Application filing",
@@ -167,26 +160,6 @@
         "cta_card_title": "Meet Our Whole Team",
         "cta_card_desc": "Explore the full directory of our dedicated professionals.",
         "cta_card_button": "View All Team"
-    },
-    "contactForm": {
-        "title": "Get in Touch",
-        "subtitle": "Fill out the form below and we will contact you as soon as possible.",
-        "fields": {
-            "name": "Full Name",
-            "email": "Email Address",
-            "phone": "Phone Number",
-            "contactPreference": "How should we contact you?",
-            "telegramUsername": "Telegram Username or Phone"
-        },
-        "preferences": {
-            "call": "Phone Call",
-            "whatsapp": "WhatsApp",
-            "telegram": "Telegram",
-            "email": "Email"
-        },
-        "privacyModal": "Please make sure your Telegram privacy settings allow messages from everyone.",
-        "submit": "Send Message",
-        "success": "Thank you! We'll get back to you soon."
     },
     "statistics": {
         "badge": "Statistics",
@@ -365,10 +338,6 @@
                 "title": "University Admission",
                 "desc": "Department selection and application management."
             },
-            "accommodation": {
-                "title": "Accommodation Solutions",
-                "desc": "Dormitory, house rental, and roommate finding support."
-            },
             "transport": {
                 "title": "Transport & Welcome",
                 "desc": "Fight tickets and airport transfer."
@@ -472,10 +441,15 @@
         },
         "destinations": {
             "title": "Explore Destinations",
+            "description": "Explore our most popular study destinations and find the perfect city for your academic journey.",
+            "viewAll": "View all destinations",
+            "viewDetails": "View details",
             "cities": [
                 {
                     "name": "Moscow",
+                    "slug": "moscow",
                     "country": "Russia",
+                    "countrySlug": "russia",
                     "description": "Russia's vibrant capital, where history and modern innovation collide. Home to world-class medical and engineering universities.",
                     "majors": "Medicine, Engineering, IT",
                     "tags": [
@@ -487,7 +461,9 @@
                 },
                 {
                     "name": "St. Petersburg",
+                    "slug": "st-petersburg",
                     "country": "Russia",
+                    "countrySlug": "russia",
                     "description": "The cultural heart of Russia. Known for its breathtaking architecture and prestigious arts and humanities programs.",
                     "majors": "Arts, Humanities, Architecture",
                     "tags": [
@@ -499,7 +475,9 @@
                 },
                 {
                     "name": "Beijing",
+                    "slug": "beijing",
                     "country": "China",
+                    "countrySlug": "china",
                     "description": "The center of China's political and educational world. A top destination for technology and business studies.",
                     "majors": "Technology, Business, Politics",
                     "tags": [
@@ -511,7 +489,9 @@
                 },
                 {
                     "name": "Shanghai",
+                    "slug": "shanghai",
                     "country": "China",
+                    "countrySlug": "china",
                     "description": "A global financial hub and future-looking metropolis. Perfect for students pursuing economics and international finance.",
                     "majors": "Finance, Economics, Trade",
                     "tags": [
@@ -523,7 +503,9 @@
                 },
                 {
                     "name": "Istanbul",
+                    "slug": "istanbul",
                     "country": "Turkey",
+                    "countrySlug": "turkey",
                     "description": "A bridge between continents with a rich academic heritage. Renowned for its history, architecture, and engineering faculties.",
                     "majors": "History, Architecture, Engineering",
                     "tags": [
@@ -535,7 +517,9 @@
                 },
                 {
                     "name": "Ankara",
+                    "slug": "ankara",
                     "country": "Turkey",
+                    "countrySlug": "turkey",
                     "description": "Turkey's administrative center and home to top-tier state universities specializing in law, politics, and social sciences.",
                     "majors": "Politics, Law, Social Sciences",
                     "tags": [
@@ -571,24 +555,56 @@
         "faq": {
             "title": "Frequently Asked Questions",
             "q1": {
-                "q": "What are the common student visa requirements for Russia and Turkey?",
-                "a": "General requirements include a valid passport, official university invitation letter, completed visa application form, medical insurance, and proof of academic background. For Russia, an HIV test is often required. Our team provides a specific checklist for each country to ensure a 99% success rate."
+                "q": "1. What is the minimum passport validity required for admission?",
+                "a": "Most countries require the passport to be valid for at least 12–18 months at the time of application or entry."
             },
             "q2": {
-                "q": "How do you assist with the university admission process abroad?",
-                "a": "We offer a full-cycle support system: from choosing the right program and university tailored to your academic profile, preparing and translating all necessary documents, to submitting the application and managing communications with the admissions office."
+                "q": "2. Can I get a certificate to replace my passport?",
+                "a": "Yes, an Acceptance Letter from the university serves as a basis for passport replacement or extension."
             },
             "q3": {
-                "q": "Are there scholarship opportunities for international students?",
-                "a": "Yes, many countries like Russia, China, and Turkey offer government and university-specific scholarships. We guide students through the competitive application process for grants and merit-based awards to help reduce educational costs."
+                "q": "3. What is the minimum age for admission? Are there age limits?",
+                "a": "Usually, admission starts from 17–18 years old. There is typically no upper age limit for paid education, but scholarships may have limits (25–30 years)."
             },
             "q4": {
-                "q": "Do you provide certified document translation services?",
-                "a": "Absolutely. We specialize in certified translations of educational documents, transcripts, and personal IDs into multiple languages. Our translations are officially recognized by universities and embassies, ensuring your documents meet all legal standards."
+                "q": "4. What documents are needed for contract-based admission?",
+                "a": "Standard package: passport, photo, high school diploma/degree with translation. Sometimes a medical certificate and bank statement are required."
             },
             "q5": {
-                "q": "How do safe accommodation and relocation support work?",
-                "a": "We guide you through choosing between university dormitories, shared student apartments, or private rentals. Upon arrival, our local teams assist with airport transfers, city orientation, and settling into your new living environment safely."
+                "q": "5. What documents are needed for scholarship admission?",
+                "a": "Passport, photo, translated educational documents, motivation letter, recommendation letters, certificates (IELTS/TOEFL/HSK), portfolio, and good academic standing."
+            },
+            "q6": {
+                "q": "6. What are the application deadlines?",
+                "a": "Depends on the country. Fall intake generally runs from February to July, Spring intake from September to November. Scholarship deadlines are often earlier (winter)."
+            },
+            "q7": {
+                "q": "7. How much money is needed to start?",
+                "a": "Initial expenses (visa, tickets, initial fees) usually range from $500 to $1500, depending on the country."
+            },
+            "q8": {
+                "q": "8. Is diploma nostrification required?",
+                "a": "Yes, many countries (Turkey, Germany, Czech Republic, etc.) require the recognition (nostrification) procedure for foreign educational documents."
+            },
+            "q9": {
+                "q": "9. Can I study in English?",
+                "a": "Yes, English-taught programs are available in most major universities worldwide, but the choice of majors might be limited compared to the national language."
+            },
+            "q10": {
+                "q": "10. What is the approximate cost of education and living?",
+                "a": "Education: from $1500 to $8000+ per year. Living: from $300 (China, Turkey) to $800+ (Canada, EU) per month."
+            },
+            "q11": {
+                "q": "11. Are there free programs or scholarships?",
+                "a": "Yes, there are government grants (CSC, Türkiye Bursları, Russian grants) and university scholarships covering from 25% to 100% of the cost."
+            },
+            "q12": {
+                "q": "12. How do I get a student visa and how long does it take?",
+                "a": "You will need a university invitation, passport, finances, and insurance. The processing time varies from 2 weeks to 3 months."
+            },
+            "q13": {
+                "q": "13. Can I work while studying?",
+                "a": "In most countries (Russia, Turkey, Germany, Canada), students are allowed to work up to 20 hours per week during studies and full-time during holidays."
             }
         }
     },
@@ -610,22 +626,22 @@
             "content": "Trust, Transparency, Sustainability."
         },
         "timeline": {
-            "title": "Our Journey",
+            "title": "Our Path",
             "milestones": [
                 {
-                    "year": "2015",
+                    "year": "2019",
                     "title": "Establishment",
-                    "description": "Founded with a vision to transform international education consulting"
+                    "description": "Founded in 2019"
                 },
                 {
-                    "year": "2018",
-                    "title": "Expansion & New Branches",
-                    "description": "Opened offices in multiple countries to serve students globally"
+                    "year": "2022",
+                    "title": "Expansion and new branches",
+                    "description": "Expansion and new branches in 2022"
                 },
                 {
-                    "year": "2024",
-                    "title": "1200+ Successful Applications",
-                    "description": "Helped over 1200 students achieve their educational dreams"
+                    "year": "2025",
+                    "title": "1200+ successful applications",
+                    "description": "1200+ successful applications in 2025"
                 }
             ]
         },
@@ -730,9 +746,9 @@
         }
     },
     "latestJournal": {
-        "label": "Insights & Inspiration",
+        "label": "News",
         "title_part1": "Explore our",
-        "title_part2": "Latest journal",
+        "title_part2": "Latest News",
         "viewAll": "View all blogs",
         "noImage": "No Image",
         "admin": "Admin",
@@ -773,7 +789,7 @@
             },
             "preparation": {
                 "title": "Preparation & Visa",
-                "description": "Our experts handle the entire application process, document verification, and visa submission to ensure a smooth approval."
+                "description": "Our experts handle the entire application process, document verification, and correct submission of documents for the visa."
             },
             "departure": {
                 "title": "Departure & Support",
@@ -820,6 +836,40 @@
         "accept": "Accept",
         "decline": "Decline",
         "policy": "Cookie Policy"
+    },
+    "contactForm": {
+        "badge": "Get in Touch",
+        "title": "Contact Us",
+        "subtitle": "Fill out the form below, and we'll get back to you shortly.",
+        "success": "Message sent successfully!",
+        "submit": "Send Message",
+        "sending": "Sending...",
+        "privacyModal": "We respect your privacy. Your information is safe with us.",
+        "telegramPrivacyTitle": "Telegram Privacy",
+        "fields": {
+            "name": "Full Name",
+            "email": "Email Address",
+            "phone": "Phone Number",
+            "telegramUsername": "Telegram Username",
+            "contactPreference": "Contact Preference"
+        },
+        "placeholders": {
+            "name": "Full Name",
+            "email": "Email Address",
+            "phone": "Phone Number",
+            "telegram": "@username or phone"
+        },
+        "preferences": {
+            "whatsapp": "WhatsApp",
+            "telegram": "Telegram",
+            "call": "Call",
+            "email": "Email"
+        },
+        "countryLabels": {
+            "russia": "RUSSIA",
+            "turkmenistan": "TM",
+            "other": "OTHER"
+        }
     },
     "legal": {
         "privacyPolicy": {

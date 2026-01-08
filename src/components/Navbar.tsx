@@ -127,7 +127,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                     </button>
 
                     {/* Mega Menu Panel */}
-                    <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-full max-w-4xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                    <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-[90vw] md:w-[600px] lg:w-[800px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                       <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden grid grid-cols-12">
 
                         {/* Left Side: Links */}

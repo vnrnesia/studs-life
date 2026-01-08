@@ -5,7 +5,7 @@ import ServicesGrid from "./components/ServicesGrid";
 import CostOfLiving from "./components/CostOfLiving";
 import DestinationsHub from "./components/DestinationsHub";
 import AccommodationAssistant from "./components/AccommodationAssistant";
-import TrustSection from "./components/TrustSection";
+
 import FAQ from "./components/FAQ";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/JsonLd";
@@ -63,7 +63,7 @@ export default async function ServicesPage({
       <JsonLd<FAQPage> data={jsonLdData} />
       <JsonLd<BreadcrumbList> data={breadcrumbData} />
       <ServicesHero dict={dict.servicesPage.hero} />
-      
+
       <ScrollReveal direction="up">
         <ServicesGrid dict={dict.servicesPage.coreServices} />
       </ScrollReveal>
@@ -73,16 +73,14 @@ export default async function ServicesPage({
       </ScrollReveal>
 
       <ScrollReveal direction="up">
-        <DestinationsHub dict={dict.servicesPage.destinations} />
+        <DestinationsHub dict={dict.servicesPage.destinations} lang={lang} />
       </ScrollReveal>
 
       <ScrollReveal direction="up">
-        <AccommodationAssistant dict={dict.servicesPage.accommodationAssistant} />
+        <AccommodationAssistant dict={dict.servicesPage.accommodationAssistant} lang={lang} />
       </ScrollReveal>
 
-      <ScrollReveal direction="up">
-        <TrustSection dict={dict.servicesPage.trust} />
-      </ScrollReveal>
+
 
       <ScrollReveal direction="up">
         <FAQ dict={dict.servicesPage.faq} />

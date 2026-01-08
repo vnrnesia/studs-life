@@ -39,9 +39,9 @@ export default function WhyChooseUs({ lang, dict }: WhyChooseUsProps) {
       {/* Arka Plan Dekoratif Yazısı */}
       <motion.div
         style={{ y: yBgText }}
-        className="absolute bottom-[5%] left-0 w-full select-none pointer-events-none opacity-5 px-4"
+        className="absolute bottom-[0%] left-0 w-full select-none pointer-events-none opacity-5 px-4 text-center"
       >
-        <span className="text-[15vw] font-black uppercase tracking-widest text-white leading-none whitespace-nowrap block max-w-full">
+        <span className="text-[12vw] md:text-[9vw] font-black uppercase tracking-widest text-white leading-none whitespace-nowrap block w-full">
           {dict.decoration}
         </span>
       </motion.div>

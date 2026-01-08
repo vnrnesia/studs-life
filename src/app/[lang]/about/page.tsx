@@ -4,8 +4,10 @@ import AboutHero from "./components/AboutHero";
 import MissionVisionCards from "./components/MissionVisionCards";
 import CompanyTimeline from "./components/CompanyTimeline";
 import DepartmentsGrid from "./components/DepartmentsGrid";
-import LicensesCertificates from "./components/LicensesCertificates";
-import CTABanner from "./components/CTABanner";
+
+
+import TrustSection from "../services/components/TrustSection";
+import ContactFormSection from "@/components/ContactFormSection";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/JsonLd";
 import { BreadcrumbList, WithContext } from "schema-dts";
@@ -41,7 +43,7 @@ export default async function AboutPage({
     <main className="min-h-screen bg-gray-50">
       <JsonLd<BreadcrumbList> data={breadcrumbData} />
       <AboutHero dict={dict.aboutPage.hero} />
-      
+
       <ScrollReveal direction="up">
         <MissionVisionCards dict={dict.aboutPage} />
       </ScrollReveal>
@@ -50,16 +52,20 @@ export default async function AboutPage({
         <CompanyTimeline dict={dict.aboutPage.timeline} />
       </ScrollReveal>
 
+
+
+      <ScrollReveal direction="up">
+        <TrustSection dict={dict.servicesPage.trust} />
+      </ScrollReveal>
+
       <ScrollReveal direction="up">
         <DepartmentsGrid dict={dict.aboutPage.departments} />
       </ScrollReveal>
 
-      <ScrollReveal direction="up">
-        <LicensesCertificates dict={dict.aboutPage.licenses} />
-      </ScrollReveal>
+
 
       <ScrollReveal direction="up">
-        <CTABanner dict={dict.aboutPage.cta} />
+        <ContactFormSection lang={lang} dict={dict.contactForm} />
       </ScrollReveal>
     </main>
   );

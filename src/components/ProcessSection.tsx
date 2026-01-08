@@ -4,6 +4,7 @@ import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { Locale } from "@/i18n-config";
 
 interface ProcessSectionProps {
@@ -31,20 +32,21 @@ const Card = ({
 
   return (
     <div
-      className="flex flex-col items-center justify-center sticky top-0"
+      // Sticky kapsayıcı
+      className="h-screen flex items-center justify-center sticky top-0"
       style={{
-        // Sticky top pozisyonu
-        top: `calc(120px + ${i * 40}px)`,
-        // Scroll mesafesi oluşturmak için margin
-        marginBottom: i === totalSteps - 1 ? "10vh" : "40vh",
-        zIndex: i,
+        // Kartlar arası dikey mesafe (Top ofset)
+        top: `calc(5vh + ${i * 25}px)`,
+        marginBottom: "-10vh", // Bir sonraki kartın bunun üzerine binmesini sağlar
       }}
     >
       <motion.div
         style={{
           scale,
+          // Kart yukarı çıkarken biraz şeffaflaşsın istersen açabilirsin:
+          // opacity: useTransform(progress, range, [1, 0.5]), 
         }}
-        className="relative flex flex-col h-[400px] w-full max-w-xl rounded-3xl border border-gray-200 bg-white shadow-2xl p-8 origin-top"
+        className="relative flex flex-col h-[450px] w-full max-w-xl rounded-3xl border border-gray-200 bg-white shadow-2xl p-8 origin-top"
       >
         {/* Numara Alanı */}
         <div className="absolute top-0 left-0 bg-red-50 px-6 py-4 rounded-br-3xl border-b border-r border-red-100">
@@ -69,7 +71,6 @@ const Card = ({
 export default function ProcessSection({ lang, dict }: ProcessSectionProps) {
   const container = useRef(null);
 
-  // Tüm section'ın scroll ilerlemesini takip et
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start start", "end end"],
@@ -86,43 +87,54 @@ export default function ProcessSection({ lang, dict }: ProcessSectionProps) {
   ];
 
   return (
-    <section ref={container} className="bg-gray-50 py-24 relative">
+    // mt-32 vb. yerine padding kullanarak scroll alanı yaratıyoruz
+    <section ref={container} className="bg-gray-50 relative pt-24 pb-48">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
-        {/* Ana Grid Yapısı - items-start önemli */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 relative items-start">
+        {/* ÖNEMLİ DÜZELTME: items-start kaldırıldı. 
+            Böylece sol ve sağ kolon aynı yüksekliğe sahip olur, 
+            bu da sticky elementin hareket edebileceği bir 'ray' (track) oluşturur. */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 relative">
 
           {/* SOL KOLON - Sticky Başlık */}
-          <div className="w-full lg:sticky lg:top-32 h-fit">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="flex flex-col gap-8 pr-8"
-            >
-              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">
-                {dict.title}
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
-                {dict.description}
-              </p>
-
-              <Link
-                href={`/${lang}/contact`}
-                className="inline-flex items-center justify-center w-fit gap-3 px-8 py-4 bg-crimson text-white rounded-full font-semibold text-lg transition-all hover:bg-red-700 hover:scale-105 shadow-lg group"
+          <div className="w-full h-full">
+            {/* Sticky kapsayıcı */}
+            <div className="lg:sticky lg:top-32 flex flex-col gap-8 pr-8">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="flex flex-col gap-8"
               >
-                {dict.cta}
-                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </motion.div>
+                <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">
+                  {dict.title}
+                </h2>
+                <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
+                  {dict.description}
+                </p>
+
+                <Link href={`/${lang}/contact`}>
+                  <InteractiveHoverButton
+                    className="bg-white text-black border-gray-200"
+                    dotClassName="bg-crimson"
+                  >
+                    {dict.cta}
+                  </InteractiveHoverButton>
+                </Link>
+              </motion.div>
+            </div>
           </div>
 
           {/* SAĞ KOLON - Kartlar */}
           <div className="w-full relative">
             {steps.map((step: any, i: number) => {
-              // Kartların arkaya doğru küçülmesi için animasyon scale hedefi
+              // Animasyonun başlayacağı ve biteceği aralıkları daha hassas ayarladık
               const targetScale = 1 - (steps.length - i - 1) * 0.05;
+
+              // range hesabı: her kartın animasyonu scroll'un belli bir yüzdesinde tetiklenir
+              const rangeStart = i * (1 / steps.length);
+              const rangeEnd = 1;
 
               return (
                 <Card
@@ -130,7 +142,7 @@ export default function ProcessSection({ lang, dict }: ProcessSectionProps) {
                   i={i}
                   step={step}
                   progress={scrollYProgress}
-                  range={[i * (1 / steps.length), 1]}
+                  range={[rangeStart, rangeEnd]}
                   targetScale={targetScale}
                   totalSteps={steps.length}
                 />
@@ -140,6 +152,9 @@ export default function ProcessSection({ lang, dict }: ProcessSectionProps) {
 
         </div>
       </div>
+      {/* Scroll mesafesi için alt kısma ekstra boşluk bırakmamız gerekebilir, 
+        padding-bottom (pb-48) bunu hallediyor ama gerekirse buraya spacer eklenebilir.
+      */}
     </section>
   );
 }

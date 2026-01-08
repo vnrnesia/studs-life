@@ -12,7 +12,7 @@ interface CountryPageProps {
 // Generate static params for all countries
 export async function generateStaticParams() {
   const countries = await import('@/lib/strapi').then(m => m.getCountries());
-  
+
   return countries.map((country) => ({
     country: country.slug,
   }));
@@ -31,7 +31,7 @@ export default async function CountryPage({ params }: CountryPageProps) {
   }
 
   return (
-    <main className="min-h-screen py-16">
+    <main className="min-h-screen pt-32 pb-16">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
@@ -75,8 +75,8 @@ export default async function CountryPage({ params }: CountryPageProps) {
         {cities.length === 0 && (
           <div className="text-center py-16">
             <p className="text-xl text-gray-500">
-              {lang === 'ru' 
-                ? 'Города скоро появятся' 
+              {lang === 'ru'
+                ? 'Города скоро появятся'
                 : 'Cities coming soon'}
             </p>
           </div>

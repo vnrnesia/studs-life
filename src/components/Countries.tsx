@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Globe, ArrowLeft, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 
 interface CountryData {
@@ -152,12 +153,14 @@ export default function Countries({ lang, dict }: CountriesProps) {
           </div>
 
           <div className="pb-2">
-            <InteractiveHoverButton
-              className="bg-white text-black border-gray-200"
-              dotClassName="bg-crimson"
-            >
-              {dict.contactCta}
-            </InteractiveHoverButton>
+            <Link href={`/${lang}/contact`}>
+              <InteractiveHoverButton
+                className="bg-white text-black border-gray-200"
+                dotClassName="bg-crimson"
+              >
+                {dict.contactCta}
+              </InteractiveHoverButton>
+            </Link>
           </div>
         </div>
       </div>

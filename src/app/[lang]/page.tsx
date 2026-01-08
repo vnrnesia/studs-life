@@ -125,11 +125,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </ScrollReveal>
 
       <ScrollReveal direction="up">
-        <WhyChooseUs lang={lang} dict={dict.whyUs} />
+        <HowItWorks steps={howItWorksSteps} dict={dict.howItWorks} lang={lang} />
       </ScrollReveal>
 
       <ScrollReveal direction="up">
-        <HowItWorks steps={howItWorksSteps} dict={dict.howItWorks} />
+        <WhyChooseUs lang={lang} dict={dict.whyUs} />
       </ScrollReveal>
 
       <ScrollReveal direction="up">

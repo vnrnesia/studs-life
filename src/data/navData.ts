@@ -26,7 +26,7 @@ export const companyLinks = [
         icon: Briefcase,
         titleKey: 'careers',
         descKey: 'careersDesc',
-        href: '/careers'
+        href: '/#contact'
     },
     {
         icon: LayoutGrid,
@@ -38,7 +38,7 @@ export const companyLinks = [
         icon: Award,
         titleKey: 'pricing',
         descKey: 'pricingDesc',
-        href: '/pricing'
+        href: '/#contact'
     },
     {
         icon: BookOpen,

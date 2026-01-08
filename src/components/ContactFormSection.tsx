@@ -40,7 +40,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
     }
 
     let raw = e.target.value.replace(/\D/g, "");
-    
+
     if (country === "RU") {
       if (raw.startsWith("7")) raw = raw.slice(1);
       raw = raw.slice(0, 10);
@@ -94,7 +94,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
   };
 
   return (
-    <section className="py-16 bg-white">
+    <section id="contact" className="py-16 bg-white">
       <div className="container mx-auto px-4 md:px-8">
         <div className="relative overflow-hidden rounded-[2.5rem] bg-[#06182E] max-w-6xl mx-auto">
           {/* Background Image Wrapper */}
@@ -114,9 +114,9 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
             <div className="max-w-4xl mx-auto md:mx-0 text-center md:text-left mb-12">
               {/* Badge */}
               <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-xs font-bold tracking-wider uppercase text-gray-500 mb-4">
-                İletişime Geç
+                {dict.badge}
               </div>
-              
+
               <h2 className="text-3xl md:text-5xl font-black text-white mb-3 tracking-tight leading-tight">
                 {dict.title}
               </h2>
@@ -128,7 +128,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
             <div className="max-w-lg mx-auto md:mx-0 text-left">
 
               {submitted ? (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-10 text-left"
@@ -149,7 +149,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="Full Name"
+                        placeholder={dict.placeholders.name}
                         className="w-full bg-[#0A2647]/60 backdrop-blur-md border border-white/10 focus:border-white/30 outline-none px-5 py-3 rounded-xl text-white placeholder-white/10 transition-all font-medium text-sm"
                       />
                     </div>
@@ -163,7 +163,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="Email Address"
+                        placeholder={dict.placeholders.email}
                         className="w-full bg-[#0A2647]/60 backdrop-blur-md border border-white/10 focus:border-white/30 outline-none px-5 py-3 rounded-xl text-white placeholder-white/10 transition-all font-medium text-sm"
                       />
                     </div>
@@ -182,21 +182,21 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
                             onClick={() => setCountry("RU")}
                             className={`px-3 py-1 text-[9px] font-black rounded-full transition-all ${country === "RU" ? "bg-white text-[#0A2647]" : "text-blue-200/30"}`}
                           >
-                            RUSSIA
+                            {dict.countryLabels?.russia || "RUSSIA"}
                           </button>
                           <button
                             type="button"
                             onClick={() => setCountry("TM")}
                             className={`px-3 py-1 text-[9px] font-black rounded-full transition-all ${country === "TM" ? "bg-white text-[#0A2647]" : "text-blue-200/30"}`}
                           >
-                            TM
+                            {dict.countryLabels?.turkmenistan || "TM"}
                           </button>
                           <button
                             type="button"
                             onClick={() => setCountry(null)}
                             className={`px-3 py-1 text-[9px] font-black rounded-full transition-all ${country === null ? "bg-white text-[#0A2647]" : "text-blue-200/30"}`}
                           >
-                            OTHER
+                            {dict.countryLabels?.other || "OTHER"}
                           </button>
                         </div>
                       )}
@@ -216,13 +216,13 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
                         value={formData.phone}
                         onChange={handlePhoneChange}
                         placeholder={
-                          formData.preference === "telegram" 
-                            ? "@username or phone" 
-                            : country === "RU" 
-                            ? "(___) ___-__-__" 
-                            : country === "TM" 
-                            ? "__ ______" 
-                            : "Phone number"
+                          formData.preference === "telegram"
+                            ? (dict.placeholders?.telegram || "@username or phone")
+                            : country === "RU"
+                              ? "(___) ___-__-__"
+                              : country === "TM"
+                                ? "__ ______"
+                                : (dict.placeholders?.phone || "Phone number")
                         }
                         className={`w-full bg-[#0A2647]/60 backdrop-blur-md border border-white/10 focus:border-white/30 outline-none py-3 rounded-xl text-white placeholder-white/10 transition-all ${formData.preference === "telegram" ? "font-medium px-5" : "font-mono tracking-wider"} text-sm ${formData.preference !== "telegram" && (country === "RU" ? "pl-16" : country === "TM" ? "pl-20" : "pl-10")}`}
                       />
@@ -240,11 +240,10 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
                           key={pref}
                           type="button"
                           onClick={() => setFormData((prev) => ({ ...prev, preference: pref }))}
-                          className={`flex items-center justify-center gap-2 px-3 py-3 rounded-xl border transition-all text-[9px] font-black uppercase tracking-widest ${
-                            formData.preference === pref 
-                              ? "bg-white border-white text-[#0A2647]" 
-                              : "bg-[#0A2647]/60 backdrop-blur-md border-white/10 text-white/70 hover:border-white/20 hover:text-white"
-                          }`}
+                          className={`flex items-center justify-center gap-2 px-3 py-3 rounded-xl border transition-all text-[9px] font-black uppercase tracking-widest ${formData.preference === pref
+                            ? "bg-white border-white text-[#0A2647]"
+                            : "bg-[#0A2647]/60 backdrop-blur-md border-white/10 text-white/70 hover:border-white/20 hover:text-white"
+                            }`}
                         >
                           {pref === "whatsapp" && <MessageCircle className="w-3.5 h-3.5" />}
                           {pref === "telegram" && <Send className="w-3.5 h-3.5" />}
@@ -264,7 +263,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
                     disabled={isSubmitting}
                     className="w-full bg-white text-[#0A2647] py-4 rounded-xl font-black uppercase tracking-[0.2em] hover:bg-blue-50 transition-all transform hover:-translate-y-1 shadow-2xl mt-6 text-sm disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
                   >
-                    {isSubmitting ? 'Sending...' : dict.submit}
+                    {isSubmitting ? (dict.sending || "Sending...") : dict.submit}
                   </button>
                 </form>
               )}
@@ -287,12 +286,12 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
                 <Info className="w-6 h-6" />
               </div>
               <div>
-                <p className="text-sm font-black uppercase tracking-tight mb-1">Telegram Privacy</p>
+                <p className="text-sm font-black uppercase tracking-tight mb-1">{dict.telegramPrivacyTitle || "Telegram Privacy"}</p>
                 <p className="text-xs font-bold text-gray-400">
                   {dict.privacyModal}
                 </p>
               </div>
-              <button 
+              <button
                 onClick={() => setShowTelegramModal(false)}
                 className="ml-auto bg-[#0A2647] text-white p-2.5 rounded-xl transition-all hover:scale-105"
               >

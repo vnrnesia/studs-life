@@ -80,11 +80,11 @@ export default async function RootLayout({
   console.log('Loaded dictionary for:', lang, 'Keys:', Object.keys(dict || {}));
 
   return (
-    <html lang={lang} className="overflow-x-hidden">
+    <html lang={lang}>
       <head>
         <link href="https://fonts.cdnfonts.com/css/octin-stencil" rel="stylesheet" />
       </head>
-      <body className={`${manrope.variable} font-sans antialiased bg-gray-50 text-gray-900 overflow-x-hidden w-full`}>
+      <body className={`${manrope.variable} font-sans antialiased bg-gray-50 text-gray-900 w-full`}>
         <JsonLd<Organization>
           data={{
             "@context": "https://schema.org",

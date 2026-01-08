@@ -1,6 +1,7 @@
 "use client";
 
 import { MapPin, Phone, Globe, Mail, Clock, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -19,6 +20,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
     {
       id: "turkmenabat",
       country: "turkmenistan",
+      countryCode: "tm",
       flag: "🇹🇲",
       city: dict?.turkmenabat?.city || "ТУРКМЕНАБАД",
       address: dict?.turkmenabat?.address || "офисное здание у городского парка, 4° офис слева от входа",
@@ -28,6 +30,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
     {
       id: "mary",
       country: "turkmenistan",
+      countryCode: "tm",
       flag: "🇹🇲",
       city: dict?.mary?.city || "МАРЫ",
       address: dict?.mary?.address || "1ª микрорайон, 9-этажка, 2ª этаж, 2ª дверь справа",
@@ -37,6 +40,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
     {
       id: "dashoguz",
       country: "turkmenistan",
+      countryCode: "tm",
       flag: "🇹🇲",
       city: dict?.dashoguz?.city || "ДАШОГУЗ",
       address: dict?.dashoguz?.address || "ул. А. Новаи, д. 17 (возле Ныгмат базара)",
@@ -46,6 +50,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
     {
       id: "ashgabat",
       country: "turkmenistan",
+      countryCode: "tm",
       flag: "🇹🇲",
       city: dict?.ashgabat?.city || "АШХАБАД",
       address: dict?.ashgabat?.address || "ул. Г. Кулиева (Объездная), здание Hil Gurlusyk (БЦ Regus)",
@@ -55,6 +60,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
     {
       id: "kazan",
       country: "russia",
+      countryCode: "ru",
       flag: "🇷🇺",
       city: dict?.kazan?.city || "КАЗАНЬ",
       address: dict?.kazan?.address || "ул. Пушкина, д. 52, оф. 306/4 (3 этаж)",
@@ -95,7 +101,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Header */}
         <ScrollReveal direction="up">
           <div className="text-center mb-16">
@@ -112,14 +118,14 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
         </ScrollReveal>
 
         <div className="flex flex-col lg:grid lg:grid-cols-2 md:gap-12 items-start">
-          
+
           {/* Office Selection */}
           <div className="w-full">
             {/* Mobile Selection (Arrow Navigation) */}
             <div className="lg:hidden mb-8">
               <ScrollReveal direction="up">
                 <div className="flex items-center justify-between bg-white rounded-2xl border-2 border-gray-100 p-2 shadow-sm">
-                  <button 
+                  <button
                     onClick={() => {
                       const currentIndex = offices.findIndex(o => o.id === activeOffice);
                       const prevIndex = (currentIndex - 1 + offices.length) % offices.length;
@@ -129,15 +135,22 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                   >
                     <ChevronLeft className="w-6 h-6" />
                   </button>
-                  
+
                   <div className="flex items-center gap-3">
-                    <span className="text-2xl">{activeOfficeData.flag}</span>
+                    <div className="relative w-8 h-6 overflow-hidden rounded shadow-sm">
+                      <Image
+                        src={`https://flagcdn.com/w80/${activeOfficeData.countryCode}.png`}
+                        alt={activeOfficeData.country}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
                     <span className="font-black text-gray-900 text-lg uppercase tracking-tight">
                       {activeOfficeData.city}
                     </span>
                   </div>
 
-                  <button 
+                  <button
                     onClick={() => {
                       const currentIndex = offices.findIndex(o => o.id === activeOffice);
                       const nextIndex = (currentIndex + 1) % offices.length;
@@ -159,18 +172,17 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                 const bgColor = office.color === "green" ? "bg-green-50" : "bg-blue-50";
 
                 return (
-                  <ScrollReveal 
-                    key={office.id} 
-                    direction="up" 
+                  <ScrollReveal
+                    key={office.id}
+                    direction="up"
                     delay={index * 0.1}
                   >
                     <motion.button
                       onClick={() => setActiveOffice(office.id)}
-                      className={`relative p-6 rounded-2xl border-2 text-left transition-all duration-300 w-full h-full ${
-                        isActive 
-                          ? `${borderColor} ${bgColor} shadow-xl scale-105` 
+                      className={`relative p-6 rounded-2xl border-2 text-left transition-all duration-300 w-full h-full ${isActive
+                          ? `${borderColor} ${bgColor} shadow-xl scale-105`
                           : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-lg"
-                      }`}
+                        }`}
                       whileHover={{ y: -4 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -183,14 +195,21 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                           <div className="w-2 h-2 bg-white rounded-full" />
                         </motion.div>
                       )}
-                      
+
                       <div className="flex items-center gap-3 mb-3">
-                        <span className="text-3xl">{office.flag}</span>
+                        <div className="relative w-10 h-7 overflow-hidden rounded shadow-sm">
+                          <Image
+                            src={`https://flagcdn.com/w80/${office.countryCode}.png`}
+                            alt={office.country}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
                         <div>
                           <p className="font-black text-gray-900">{office.city}</p>
                         </div>
                       </div>
-                      
+
                       <p className="text-xs text-gray-600 line-clamp-2">
                         {office.address}
                       </p>
@@ -211,8 +230,13 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
               className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-6 md:p-12 text-white shadow-2xl sticky top-8"
             >
               <div className="flex items-start gap-4 mb-8">
-                <div className={`w-16 h-16 rounded-2xl ${activeOfficeData.color === "green" ? "bg-green-500" : "bg-blue-500"} flex items-center justify-center text-4xl shadow-lg`}>
-                  {activeOfficeData.flag}
+                <div className={`w-16 h-16 rounded-2xl ${activeOfficeData.color === "green" ? "bg-green-500" : "bg-blue-500"} flex items-center justify-center shadow-lg overflow-hidden relative`}>
+                  <Image
+                    src={`https://flagcdn.com/w160/${activeOfficeData.countryCode}.png`}
+                    alt={activeOfficeData.country}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <div>
                   <h3 className="text-2xl md:text-3xl font-black break-words leading-tight">{activeOfficeData.city}</h3>

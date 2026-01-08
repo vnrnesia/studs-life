@@ -19,6 +19,7 @@ import {
   CheckCircle2,
   Globe
 } from "lucide-react";
+import Link from "next/link";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import Image from "next/image";
@@ -31,6 +32,7 @@ import planeBg from "@/assets/our_services/flight_tickets_photo.png";
 import universityBg from "@/assets/our_services/university.png";
 import visaBg from "@/assets/our_services/visa.png";
 import translationBg from "@/assets/our_services/translation.png";
+import accommodationBg from "@/assets/our_services/accommodation_photo.png";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -52,14 +54,6 @@ export default function Services({ lang, dict }: ServicesProps) {
       bgImage: planeBg
     },
     {
-      key: "university",
-      icon: GraduationCap,
-      className: "md:col-span-1 text-white overflow-hidden",
-      type: "university-logos",
-      label: "Top Global Universities",
-      bgImage: universityBg
-    },
-    {
       key: "visa",
       icon: FileText,
       className: "md:col-span-1 md:row-span-2 text-white overflow-hidden",
@@ -69,9 +63,25 @@ export default function Services({ lang, dict }: ServicesProps) {
       bgImage: visaBg
     },
     {
+      key: "university",
+      icon: GraduationCap,
+      className: "md:col-span-1 text-white overflow-hidden",
+      type: "university-logos",
+      label: "Top Global Universities",
+      bgImage: universityBg
+    },
+    {
+      key: "accommodation",
+      icon: Home,
+      className: "md:col-span-2 relative overflow-hidden text-white min-h-[200px]",
+      type: "image-card",
+      label: "Dorms & Apartments",
+      bgImage: accommodationBg
+    },
+    {
       key: "translation",
       icon: Languages,
-      className: "md:col-span-3 text-white overflow-hidden",
+      className: "md:col-span-1 text-white overflow-hidden",
       type: "support-chat",
       label: "Certified & Fast",
       bgImage: translationBg
@@ -80,22 +90,6 @@ export default function Services({ lang, dict }: ServicesProps) {
 
   const renderCardContent = (service: any) => {
     switch (service.type) {
-      case "career-stats":
-        return (
-          <div className="mt-6 text-center">
-            <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
-                <div className="p-2 bg-green-500/20 rounded-full text-green-400 shrink-0"><CheckCircle2 className="w-4 h-4" /></div>
-                <span className="text-sm font-bold text-white">{dict.careerStats?.resume || "Resume Building"}</span>
-              </div>
-              <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10">
-                <div className="p-2 bg-green-500/20 rounded-full text-green-400 shrink-0"><CheckCircle2 className="w-4 h-4" /></div>
-                <span className="text-sm font-bold text-white">{dict.careerStats?.jobPlacement || "Job Placement"}</span>
-              </div>
-            </div>
-          </div>
-        );
-
       case "feature-list":
         return (
           <div className="h-full flex flex-col pt-16">
@@ -108,12 +102,14 @@ export default function Services({ lang, dict }: ServicesProps) {
               ))}
             </ul>
             <div className="mt-auto pb-24">
-              <InteractiveHoverButton
-                className="w-full bg-white text-black border-white"
-                dotClassName="bg-crimson"
-              >
-                {dict.getStarted || "Get started"}
-              </InteractiveHoverButton>
+              <Link href={`/${lang}/contact`} className="w-full">
+                <InteractiveHoverButton
+                  className="w-full bg-white text-black border-white"
+                  dotClassName="bg-crimson"
+                >
+                  {dict.getStarted || "Get started"}
+                </InteractiveHoverButton>
+              </Link>
             </div>
           </div>
         );
@@ -204,7 +200,7 @@ export default function Services({ lang, dict }: ServicesProps) {
                 {/* Content Layer */}
                 <div className={cn(
                   "relative z-10 h-full pb-8 flex flex-col",
-                  (service.key === "accommodation" || service.key === "ticket") ? "px-6 pt-5" : "px-8 pt-6"
+                  (service.key === "accommodation" || service.key === "ticket" || service.key === "translation") ? "px-6 pt-5" : "px-8 pt-6"
                 )}>
                   {/* Quarter Circle Decoration */}
                   {(service.key === "ticket" || service.key === "accommodation") && (
@@ -217,14 +213,14 @@ export default function Services({ lang, dict }: ServicesProps) {
                   <div className="relative z-10">
                     <h3 className={cn(
                       "font-bold font-montserrat mb-1",
-                      service.key === "accommodation" ? "text-lg" : "text-xl",
+                      (service.key === "accommodation" || service.key === "translation") ? "text-lg" : "text-xl",
                       (service.bgImage || service.type === "image-card" || service.type === "feature-list") ? "text-white" : "text-gray-900"
                     )}>
                       {dict[service.key] || service.label}
                     </h3>
                     <p className={cn(
                       "font-medium",
-                      service.key === "accommodation" ? "text-[11px]" : "text-sm",
+                      (service.key === "accommodation" || service.key === "translation") ? "text-xs" : "text-sm",
                       (service.bgImage || service.type === "image-card" || service.type === "feature-list") ? "text-gray-100" : "text-gray-500"
                     )}>
                       {dict[service.key + 'Desc'] || service.label}
