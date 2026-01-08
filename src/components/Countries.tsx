@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
@@ -42,6 +43,7 @@ const countriesList = [
 ];
 
 export default function Countries({ lang, dict }: CountriesProps) {
+  const router = useRouter();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -125,10 +127,16 @@ export default function Countries({ lang, dict }: CountriesProps) {
     scrollContainerRef.current.scrollLeft = scrollLeft - walk;
   };
 
+  const handleCardClick = (key: string) => {
+    if (!isDragging) {
+      router.push(`/${lang}/${key}`);
+    }
+  };
+
   return (
     <section className="relative py-16 bg-[#F8F9FA] text-gray-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div className="flex-1 text-left">
@@ -142,9 +150,9 @@ export default function Countries({ lang, dict }: CountriesProps) {
               {dict.description}
             </p>
           </div>
-          
+
           <div className="pb-2">
-            <InteractiveHoverButton 
+            <InteractiveHoverButton
               className="bg-white text-black border-gray-200"
               dotClassName="bg-crimson"
             >
@@ -155,7 +163,7 @@ export default function Countries({ lang, dict }: CountriesProps) {
       </div>
 
       {/* Slider Container */}
-      <div 
+      <div
         ref={scrollContainerRef}
         onScroll={handleScroll}
         className="relative w-full overflow-x-auto pb-12 hide-scrollbar cursor-grab active:cursor-grabbing"
@@ -174,7 +182,8 @@ export default function Countries({ lang, dict }: CountriesProps) {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="bg-white rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row w-[350px] md:w-[900px] h-[480px] md:h-[420px] border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-500 group"
+                onClick={() => handleCardClick(country.key)}
+                className="bg-white rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row w-[350px] md:w-[900px] h-[480px] md:h-[420px] border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-500 group cursor-pointer"
               >
                 {/* Content Left */}
                 <div className="flex-[1.2] p-8 md:p-10 flex flex-col justify-between bg-white z-10">
@@ -182,18 +191,18 @@ export default function Countries({ lang, dict }: CountriesProps) {
                     <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center mb-6 border border-gray-100 group-hover:bg-crimson group-hover:text-white transition-colors duration-300">
                       <Globe className="w-6 h-6" />
                     </div>
-                    
+
                     <h3 className="text-2xl md:text-3xl font-bold mb-3 group-hover:text-crimson transition-colors font-montserrat tracking-tight">
                       {countryData.name}
                     </h3>
-                    
+
                     <p className="text-gray-500 line-clamp-2 md:line-clamp-3 leading-relaxed text-sm md:text-base mb-6">
                       {countryData.description}
                     </p>
 
                     <div className="flex flex-wrap gap-2 mb-6">
                       {countryData.tags?.map((tag, tIdx) => (
-                        <span 
+                        <span
                           key={tIdx}
                           className="text-[11px] font-bold tracking-widest uppercase px-4 py-2 bg-gray-50 text-gray-400 rounded-full border border-gray-100 group-hover:border-crimson/20 group-hover:bg-crimson/5 group-hover:text-crimson transition-colors"
                         >
@@ -204,7 +213,7 @@ export default function Countries({ lang, dict }: CountriesProps) {
                   </div>
 
                   <div className="mt-auto">
-                    <InteractiveHoverButton 
+                    <InteractiveHoverButton
                       className="bg-white text-black border-gray-200"
                       dotClassName="bg-crimson"
                     >
@@ -235,9 +244,8 @@ export default function Countries({ lang, dict }: CountriesProps) {
           <button
             key={index}
             onClick={() => scrollToIndex(index)}
-            className={`h-2.5 rounded-full transition-all duration-300 ${
-              activeIndex === index ? "w-8 bg-crimson" : "w-2.5 bg-gray-300 hover:bg-gray-400"
-            }`}
+            className={`h-2.5 rounded-full transition-all duration-300 ${activeIndex === index ? "w-8 bg-crimson" : "w-2.5 bg-gray-300 hover:bg-gray-400"
+              }`}
           />
         ))}
       </div>

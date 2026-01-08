@@ -31,8 +31,6 @@ import planeBg from "@/assets/our_services/flight_tickets_photo.png";
 import universityBg from "@/assets/our_services/university.png";
 import visaBg from "@/assets/our_services/visa.png";
 import translationBg from "@/assets/our_services/translation.png";
-import careerSupportBg from "@/assets/our_services/career_support.png";
-import accommodationBg from "@/assets/our_services/accommodation_photo.png";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -54,12 +52,12 @@ export default function Services({ lang, dict }: ServicesProps) {
       bgImage: planeBg
     },
     {
-      key: "work",
-      icon: Briefcase,
+      key: "university",
+      icon: GraduationCap,
       className: "md:col-span-1 text-white overflow-hidden",
-      type: "career-stats",
-      label: "Internships & Jobs",
-      bgImage: careerSupportBg
+      type: "university-logos",
+      label: "Top Global Universities",
+      bgImage: universityBg
     },
     {
       key: "visa",
@@ -71,25 +69,9 @@ export default function Services({ lang, dict }: ServicesProps) {
       bgImage: visaBg
     },
     {
-      key: "university",
-      icon: GraduationCap,
-      className: "md:col-span-1 text-white overflow-hidden",
-      type: "university-logos",
-      label: "Top Global Universities",
-      bgImage: universityBg
-    },
-    {
-      key: "accommodation",
-      icon: Home,
-      className: "md:col-span-1 relative overflow-hidden text-white min-h-[200px]",
-      type: "image-card",
-      label: "Dorms & Apartments",
-      bgImage: accommodationBg
-    },
-    {
       key: "translation",
       icon: Languages,
-      className: "md:col-span-1 text-white overflow-hidden",
+      className: "md:col-span-3 text-white overflow-hidden",
       type: "support-chat",
       label: "Certified & Fast",
       bgImage: translationBg

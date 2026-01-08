@@ -57,7 +57,7 @@ export default function Footer({ lang, dict }: FooterProps) {
                 </h3>
                 <ul className="space-y-2 text-blue-100/70 text-sm">
                   <li>+993 71 832 749</li>
-                  <li>info@studentslife.agency</li>
+                  <li className="break-all">info@studentslife.agency</li>
                   <li>Turkmenistan, Turkmenabat</li>
                 </ul>
               </div>

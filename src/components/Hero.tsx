@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import heroGuy from "@/assets/hero_student_photo.png";
+import heroGuy from "@/assets/hero_guy.png";
 
 interface HeroProps {
     lang: string;
