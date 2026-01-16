@@ -1,7 +1,7 @@
 import { Instagram, Facebook, Twitter } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../assets/logo.svg";
+import footerLogo from "../assets/footer_logo.png";
 import footerBg from "../assets/footerbg.png";
 
 interface FooterProps {
@@ -22,7 +22,7 @@ export default function Footer({ lang, dict }: FooterProps) {
           priority
         />
         {/* Gradient Overlay for better text readability on the right */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#06182E]/60 to-[#06182E]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#06182E]/20 to-[#06182E]/60" />
       </div>
 
       {/* Content Container */}
@@ -37,14 +37,14 @@ export default function Footer({ lang, dict }: FooterProps) {
             <div>
               <Link href={`/${lang}`} className="inline-block mb-4">
                 <Image
-                  src={logo}
+                  src={footerLogo}
                   alt="students life"
                   priority
-                  className="h-auto w-auto max-h-12 brightness-0 invert"
+                  className="h-auto w-auto max-h-12"
                 />
               </Link>
               <p className="text-blue-100/80 max-w-md text-sm leading-relaxed">
-                {dict?.footer?.description || "Your reliable partner for education abroad and visa services since 2015."}
+                {dict?.footer?.description || "Your reliable partner for education abroad and visa services since 2019."}
               </p>
             </div>
 

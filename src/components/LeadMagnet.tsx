@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Download, Gift, ArrowRight } from "lucide-react";
 import { submitToGoogleSheets } from "@/lib/submitToGoogleSheets";
@@ -58,7 +58,15 @@ const content = {
 };
 
 export default function LeadMagnet({ lang }: LeadMagnetProps) {
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsVisible(true);
+        }, 10000);
+
+        return () => clearTimeout(timer);
+    }, []);
     const [email, setEmail] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -96,7 +104,7 @@ export default function LeadMagnet({ lang }: LeadMagnetProps) {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 50 }}
-                transition={{ duration: 0.5, delay: 3 }}
+                transition={{ duration: 0.5 }}
                 className="fixed bottom-6 right-6 z-50 max-w-md w-full mx-4 md:mx-0"
             >
                 <div className="relative bg-gradient-to-br from-[#C62828] to-[#8B1E1E] rounded-2xl shadow-2xl overflow-hidden border border-white/10">

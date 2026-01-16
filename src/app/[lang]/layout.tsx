@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     description,
     metadataBase: new URL(BASE_URL),
     icons: {
-      icon: '/favicon.webp',
+      icon: '/favicon.ico',
     },
     alternates: {
       canonical: `/${lang}`,
