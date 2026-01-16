@@ -1,23 +1,28 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n-config";
+import { Metadata } from "next";
+import { generateSEOMetadata } from "@/lib/seo";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Countries from "@/components/Countries";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Team from "@/components/Team";
 import Statistics from "@/components/Statistics";
-import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import ContactFormSection from "@/components/ContactFormSection";
 import Form from "@/components/Form";
-
-import LatestJournal from "@/components/LatestJournal";
 import FeatureTabs from "@/components/FeatureTabs";
 import HowItWorks from "@/components/HowItWorks";
-import OfficeLocations from "@/components/OfficeLocations";
-import ProcessSection from "@/components/ProcessSection";
-import LeadMagnet from "@/components/LeadMagnet";
+
 import { getTeamMembers, getLatestBlogs, getLatestCities } from "@/lib/strapi";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import dynamic from "next/dynamic";
+
+// Dynamic imports for below-the-fold components
+const TestimonialsCarousel = dynamic(() => import("@/components/TestimonialsCarousel"));
+const LatestJournal = dynamic(() => import("@/components/LatestJournal"));
+const OfficeLocations = dynamic(() => import("@/components/OfficeLocations"));
+const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
+const LeadMagnet = dynamic(() => import("@/components/LeadMagnet"));
 
 // Import Support Icons
 import supportUniversityIcon from "@/assets/support_icons/admission.webp";
@@ -37,6 +42,26 @@ import preparationImg from "@/assets/how_it_works/visa.webp";
 import departureImg from "@/assets/how_it_works/departure_support.webp";
 
 export const revalidate = 60;
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang as Locale);
+
+  const pageMeta = dict.metadata?.title ? {
+    title: dict.metadata.title,
+    description: dict.metadata.description
+  } : {
+    title: "Student's Life | Study Abroad, Visa & Travel Services",
+    description: "Guiding students through university applications, visa processing, and relocation support for a successful study abroad experience."
+  };
+
+  return generateSEOMetadata({
+    lang,
+    path: '', // Home page
+    title: pageMeta.title,
+    description: pageMeta.description,
+  });
+}
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: langParam } = await params;

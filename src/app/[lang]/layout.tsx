@@ -92,9 +92,18 @@ export default async function RootLayout({
         <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'} />
 
         {/* Custom font with display swap for better CLS */}
-        <link
-          href="https://fonts.cdnfonts.com/css/octin-stencil"
-          rel="stylesheet"
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              @font-face {
+                font-family: 'Octin Stencil';
+                font-style: normal;
+                font-weight: 400;
+                font-display: swap;
+                src: url('/fonts/octin-stencil.woff') format('woff');
+              }
+            `
+          }}
         />
       </head>
       <body className={`${manrope.variable} font-sans antialiased bg-gray-50 text-gray-900 w-full`}>
@@ -110,13 +119,32 @@ export default async function RootLayout({
           data={{
             "@context": "https://schema.org",
             "@type": "Organization",
-            name: "Student's Life",
-            url: BASE_URL,
-            logo: `${BASE_URL}/logo.png`,
-            sameAs: [
-              "https://instagram.com/defyzerglobal",
-              "https://twitter.com/defyzerglobal",
+            "name": "Student's Life",
+            "url": BASE_URL,
+            "logo": `${BASE_URL}/logo.webp`,
+            "sameAs": [
+              "https://instagram.com/studentslife_agency",
+              "https://facebook.com/studentslife.agency",
+              "https://twitter.com/studentslife",
+              "https://linkedin.com/company/students-life-agency",
+              "https://vk.com/studentslife_agency"
             ],
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "telephone": "+993 71 832 749",
+                "contactType": "customer service",
+                "areaServed": ["TM", "RU", "BG", "TR", "KZ"],
+                "availableLanguage": ["Russian", "English", "Turkmen"]
+              }
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Pushkina 52",
+              "addressLocality": "Kazan",
+              "addressRegion": "Tatarstan",
+              "addressCountry": "RU"
+            }
           }}
         />
         <Navbar lang={lang as Locale} dict={dict} countries={countries} />

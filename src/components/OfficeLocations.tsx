@@ -78,6 +78,11 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
     description: dict?.subtitle || "Offices in Turkmenistan and Russia for your convenience",
     url: "https://studs-life.com",
     areaServed: ["Turkmenistan", "Russia"],
+    parentOrganization: {
+      "@type": "Organization",
+      "name": "Student's Life",
+      "url": "https://studs-life.com"
+    },
     subOrganization: offices.map((office) => ({
       "@type": "EducationalOrganization",
       name: `Student's Life - ${office.city}`,
@@ -180,8 +185,8 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                     <motion.button
                       onClick={() => setActiveOffice(office.id)}
                       className={`relative p-6 rounded-2xl border-2 text-left transition-all duration-300 w-full h-full ${isActive
-                          ? `${borderColor} ${bgColor} shadow-xl scale-105`
-                          : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-lg"
+                        ? `${borderColor} ${bgColor} shadow-xl scale-105`
+                        : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-lg"
                         }`}
                       whileHover={{ y: -4 }}
                       whileTap={{ scale: 0.98 }}
