@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import girlImg from "@/assets/girl.png";
+import girlImg from "@/assets/girl.webp";
 
 interface ServicesHeroProps {
   dict: any;
@@ -18,9 +18,9 @@ export default function ServicesHero({ dict }: ServicesHeroProps) {
 
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 md:px-12 lg:px-20 h-full flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full py-10 lg:py-0">
-          
+
           {/* Left Column - Company Info */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -43,7 +43,7 @@ export default function ServicesHero({ dict }: ServicesHeroProps) {
           </motion.div>
 
           {/* Center Column - Girl on Globe */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
@@ -60,7 +60,7 @@ export default function ServicesHero({ dict }: ServicesHeroProps) {
           </motion.div>
 
           {/* Right Column - Heading and Services */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
@@ -78,7 +78,7 @@ export default function ServicesHero({ dict }: ServicesHeroProps) {
             {/* Services List */}
             <ul className="space-y-2 md:space-y-3 lg:text-right px-4 lg:px-0">
               {dict.services.map((service: string, index: number) => (
-                <motion.li 
+                <motion.li
                   key={index}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -92,7 +92,7 @@ export default function ServicesHero({ dict }: ServicesHeroProps) {
             </ul>
 
             <div className="lg:hidden text-center pt-6">
-               <p className="text-white/40 text-[9px] leading-relaxed max-w-xs mx-auto font-medium italic">
+              <p className="text-white/40 text-[9px] leading-relaxed max-w-xs mx-auto font-medium italic">
                 {dict.officialReps}
               </p>
             </div>
@@ -100,7 +100,7 @@ export default function ServicesHero({ dict }: ServicesHeroProps) {
 
         </div>
       </div>
-      
+
       {/* Subtle Bottom Glow */}
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
     </section>

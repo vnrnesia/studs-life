@@ -27,12 +27,12 @@ interface CountriesProps {
   };
 }
 
-import russiaImg from "../assets/images/russia.png";
-import chinaImg from "../assets/images/china.png";
-import turkeyImg from "../assets/images/turkey.png";
-import cyprusImg from "../assets/images/cyprus.png";
-import belarusImg from "../assets/images/belarus.png";
-import bulgariaImg from "../assets/images/bulgaria.png";
+import russiaImg from "../assets/images/russia.webp";
+import chinaImg from "../assets/images/china.webp";
+import turkeyImg from "../assets/images/turkey.webp";
+import cyprusImg from "../assets/images/cyprus.webp";
+import belarusImg from "../assets/images/belarus.webp";
+import bulgariaImg from "../assets/images/bulgaria.webp";
 
 const countriesList = [
   { key: "china", img: chinaImg },
@@ -233,6 +233,7 @@ export default function Countries({ lang, dict }: CountriesProps) {
                     fill
                     className="object-cover transition-transform duration-1000 group-hover:scale-110 pointer-events-none"
                     draggable={false}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
               </motion.div>

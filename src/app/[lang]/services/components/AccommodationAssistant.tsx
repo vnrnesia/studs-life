@@ -36,7 +36,7 @@ export default function AccommodationAssistant({ dict, lang }: AccommodationAssi
             }
 
             return (
-              <Link key={option.key} href={`/${lang}/#contact`} className="block">
+              <Link key={option.key} href={`/${lang}/contact`} className="block">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}

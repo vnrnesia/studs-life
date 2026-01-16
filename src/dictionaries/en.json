@@ -1,7 +1,29 @@
 {
     "metadata": {
         "title": "Student's Life | Study Abroad, Visa & Travel Services",
-        "description": "Expert guidance for university admissions, visa processing, and relocation support in Russia, China, Turkey, and Europe."
+        "description": "Expert guidance for university admissions, visa processing, and relocation support in Russia, China, Turkey, and Europe.",
+        "pages": {
+            "services": {
+                "title": "Services | Student's Life",
+                "description": "Complete student support: university admissions, visa assistance, accommodation, document translation. 99% success rate. Free consultation."
+            },
+            "about": {
+                "title": "About Us | Student's Life",
+                "description": "Student's Life - international education consultancy since 2019. 1200+ successful admissions. Offices in Russia and Turkmenistan."
+            },
+            "contact": {
+                "title": "Contact Us | Student's Life",
+                "description": "Get in touch for a free consultation. Offices in Ashgabat, Turkmenabat, Mary, Dashoguz, and Kazan."
+            },
+            "teams": {
+                "title": "Our Team | Student's Life",
+                "description": "Meet our expert team of education consultants. Visa specialists, mentors, and advisors dedicated to your success."
+            },
+            "blog": {
+                "title": "News & Blog | Student's Life",
+                "description": "Helpful articles, guides, and news for students. Tips on admissions, visas, and life abroad."
+            }
+        }
     },
     "hero": {
         "title": "INTERNATIONAL PARTNERSHIP",
@@ -157,6 +179,7 @@
         "title": "The Experts Behind Us",
         "description": "Dedicated individuals passionate about holistic well-being. Meet the diverse team driving innovation and shaping the future of wellness.",
         "testimonials_title": "Student Testimonials",
+        "videoTestimonialCategory": "Video Testimonial",
         "cta_card_title": "Meet Our Whole Team",
         "cta_card_desc": "Explore the full directory of our dedicated professionals.",
         "cta_card_button": "View All Team"

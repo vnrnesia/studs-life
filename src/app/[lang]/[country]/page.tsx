@@ -1,12 +1,17 @@
 import { notFound } from 'next/navigation';
 import { getCountry, getCities } from '@/lib/strapi';
+import { generateSEOMetadata } from '@/lib/seo';
+import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
+import JsonLd from '@/components/JsonLd';
+import { BreadcrumbList, WithContext } from 'schema-dts';
 
 interface CountryPageProps {
-  params: {
+  params: Promise<{
     lang: string;
     country: string;
-  };
+  }>;
 }
 
 // Generate static params for all countries
@@ -21,6 +26,25 @@ export async function generateStaticParams() {
 // Revalidate every 60 seconds (1 minute)
 export const revalidate = 60;
 
+// Generate metadata with canonical and hreflang
+export async function generateMetadata({ params }: CountryPageProps): Promise<Metadata> {
+  const { country: countrySlug, lang } = await params;
+  const country = await getCountry(countrySlug, lang);
+
+  if (!country) {
+    return {
+      title: 'Country Not Found',
+    };
+  }
+
+  return generateSEOMetadata({
+    lang,
+    path: `/${countrySlug}`,
+    title: `${country.name} | Student's Life`,
+    description: country.description || `Discover study opportunities in ${country.name}. Universities, cities, and student life guide.`,
+  });
+}
+
 export default async function CountryPage({ params }: CountryPageProps) {
   const { country: countrySlug, lang } = await params;
   const country = await getCountry(countrySlug, lang);
@@ -30,8 +54,28 @@ export default async function CountryPage({ params }: CountryPageProps) {
     notFound();
   }
 
+  const breadcrumbData: WithContext<BreadcrumbList> = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: `https://studs-life.com/${lang}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: country.name,
+        item: `https://studs-life.com/${lang}/${countrySlug}`,
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen pt-32 pb-16">
+      <JsonLd<BreadcrumbList> data={breadcrumbData} />
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
@@ -53,10 +97,13 @@ export default async function CountryPage({ params }: CountryPageProps) {
             >
               {city.images?.[0] && (
                 <div className="relative h-48 overflow-hidden">
-                  <img
+                  <Image
                     src={`${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}${city.images[0].url}`}
-                    alt={city.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    alt={`${city.name} - Student life and universities`}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    unoptimized
                   />
                 </div>
               )}
@@ -86,19 +133,3 @@ export default async function CountryPage({ params }: CountryPageProps) {
   );
 }
 
-// Generate metadata
-export async function generateMetadata({ params }: CountryPageProps) {
-  const { country: countrySlug, lang } = await params;
-  const country = await getCountry(countrySlug, lang);
-
-  if (!country) {
-    return {
-      title: 'Country Not Found',
-    };
-  }
-
-  return {
-    title: `${country.name} | Student's Life`,
-    description: country.description || `Discover student cities in ${country.name}`,
-  };
-}

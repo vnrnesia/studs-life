@@ -20,21 +20,21 @@ import { getTeamMembers, getLatestBlogs, getLatestCities } from "@/lib/strapi";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 // Import Support Icons
-import supportUniversityIcon from "@/assets/support_icons/admission.png";
-import supportVisaIcon from "@/assets/support_icons/visa.png";
-import supportAccommodationIcon from "@/assets/support_icons/accommadation.png";
-import supportCareerIcon from "@/assets/support_icons/career.png";
+import supportUniversityIcon from "@/assets/support_icons/admission.webp";
+import supportVisaIcon from "@/assets/support_icons/visa.webp";
+import supportAccommodationIcon from "@/assets/support_icons/accommadation.webp";
+import supportCareerIcon from "@/assets/support_icons/career.webp";
 
 // Import Student Support Images
-import universityImg from "@/assets/student_support/university.png";
-import visaImg from "@/assets/student_support/visa.png";
-import accommodationImg from "@/assets/student_support/accommadation.png";
-import careerImg from "@/assets/student_support/career.png";
+import universityImg from "@/assets/student_support/university.webp";
+import visaImg from "@/assets/student_support/visa.webp";
+import accommodationImg from "@/assets/student_support/accommadation.webp";
+import careerImg from "@/assets/student_support/career.webp";
 
 // Import How It Works Images
-import consultationImg from "@/assets/how_it_works/free_consultation.png";
-import preparationImg from "@/assets/how_it_works/visa.png";
-import departureImg from "@/assets/how_it_works/departure_support.png";
+import consultationImg from "@/assets/how_it_works/free_consultation.webp";
+import preparationImg from "@/assets/how_it_works/visa.webp";
+import departureImg from "@/assets/how_it_works/departure_support.webp";
 
 export const revalidate = 60;
 
@@ -141,7 +141,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </ScrollReveal>
 
       <ScrollReveal direction="up">
-        <TestimonialsCarousel title={dict.team.testimonials_title} />
+        <TestimonialsCarousel title={dict.team.testimonials_title} videoCategory={dict.team.videoTestimonialCategory} />
       </ScrollReveal>
 
       <ScrollReveal direction="up">

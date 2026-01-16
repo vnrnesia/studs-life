@@ -21,6 +21,7 @@ interface VideoCardProps {
 
 export const VideoCard = ({ card, index, layout = false }: VideoCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const getYouTubeId = (url: string) => {
@@ -35,23 +36,40 @@ export const VideoCard = ({ card, index, layout = false }: VideoCardProps) => {
 
   const handleClick = () => {
     if (card.videoUrl) {
-      window.open(card.videoUrl, "_blank", "noopener,noreferrer");
+      setIsPlaying(true);
     }
   };
 
   return (
     <>
+      {/* CSS to hide YouTube logo and branding */}
+      <style jsx global>{`
+        .youtube-container iframe {
+          pointer-events: auto;
+        }
+        .youtube-container::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 60px;
+          background: linear-gradient(transparent, rgba(0,0,0,0.8));
+          pointer-events: none;
+          z-index: 30;
+        }
+      `}</style>
       <motion.button
         layoutId={layout ? `card-${card.title}` : undefined}
         onClick={handleClick}
         onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        className="relative z-10 flex h-80 w-56 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 md:h-[35rem] md:w-96 dark:bg-neutral-900 group"
+        onMouseLeave={() => { setIsHovered(false); if (!isPlaying) setIsPlaying(false); }}
+        className="relative z-10 flex h-80 w-56 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 md:h-[35rem] md:w-96 dark:bg-neutral-900 group youtube-container"
       >
-        {/* Gray Overlay by default, disappears on hover */}
+        {/* Gray Overlay - disappears when playing or hovering */}
         <div className={cn(
           "absolute inset-0 z-20 bg-black/20 transition-opacity duration-300",
-          isHovered ? "opacity-0" : "opacity-100"
+          (isHovered || isPlaying) ? "opacity-0" : "opacity-100"
         )} />
 
         {/* Content Overlay */}
@@ -64,11 +82,22 @@ export const VideoCard = ({ card, index, layout = false }: VideoCardProps) => {
           </p>
         </div>
 
+        {/* Play Button Overlay */}
+        {card.videoUrl && !isPlaying && (
+          <div className="absolute inset-0 z-30 flex items-center justify-center">
+            <div className="w-16 h-16 md:w-20 md:h-20 bg-white/90 rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110">
+              <svg className="w-6 h-6 md:w-8 md:h-8 text-crimson ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+        )}
+
         {/* Video Layer */}
         {card.videoUrl && (
           <div className={cn(
             "absolute inset-0 z-10 transition-opacity duration-500",
-            isHovered ? "opacity-100" : "opacity-0"
+            (isHovered || isPlaying) ? "opacity-100" : "opacity-0"
           )}>
             {isNativeVideo ? (
               <video
@@ -76,14 +105,18 @@ export const VideoCard = ({ card, index, layout = false }: VideoCardProps) => {
                 src={card.videoUrl}
                 loop
                 playsInline
-                autoPlay={isHovered}
+                autoPlay={isHovered || isPlaying}
                 className="h-full w-full object-cover"
               />
             ) : youtubeId ? (
               <iframe
-                src={`https://www.youtube.com/embed/${youtubeId}?autoplay=${isHovered ? 1 : 0}&mute=0&controls=0&loop=1&playlist=${youtubeId}&modestbranding=1&rel=0`}
-                className="h-full w-full scale-[1.5] object-cover pointer-events-none"
+                src={`https://www.youtube.com/embed/${youtubeId}?autoplay=${(isHovered || isPlaying) ? 1 : 0}&mute=0&controls=${isPlaying ? 1 : 0}&loop=1&playlist=${youtubeId}&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1`}
+                className={cn(
+                  "h-full w-full object-cover",
+                  isPlaying ? "" : "scale-[1.5] pointer-events-none"
+                )}
                 allow="autoplay; encrypted-media"
+                allowFullScreen={false}
               />
             ) : null}
           </div>

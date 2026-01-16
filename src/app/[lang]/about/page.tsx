@@ -1,16 +1,31 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n-config";
+import { Metadata } from "next";
+import { generateSEOMetadata } from "@/lib/seo";
 import AboutHero from "./components/AboutHero";
 import MissionVisionCards from "./components/MissionVisionCards";
 import CompanyTimeline from "./components/CompanyTimeline";
 import DepartmentsGrid from "./components/DepartmentsGrid";
-
 
 import TrustSection from "../services/components/TrustSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/JsonLd";
 import { BreadcrumbList, WithContext } from "schema-dts";
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang as Locale);
+
+  const pageMeta = dict.metadata?.pages?.about;
+
+  return generateSEOMetadata({
+    lang,
+    path: '/about',
+    title: pageMeta?.title || `${dict.nav?.about || 'About Us'} | Student's Life`,
+    description: pageMeta?.description || "Learn about Student's Life - your trusted partner for international education consulting.",
+  });
+}
 
 export default async function AboutPage({
   params,

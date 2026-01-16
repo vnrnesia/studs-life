@@ -1,5 +1,19 @@
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
+import { generateSEOMetadata } from "@/lib/seo";
+import { Metadata } from "next";
+import { BreadcrumbList, WithContext } from "schema-dts";
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+    const { lang } = await params;
+    const dict = await getDictionary(lang as Locale);
+    return generateSEOMetadata({
+        lang,
+        title: dict.legal?.cookiePolicy?.title || "Cookie Policy",
+        description: dict.legal?.cookiePolicy?.content?.substring(0, 160) || "",
+        path: "/cookie-policy"
+    });
+}
 
 export default async function CookiePolicy({
     params,
@@ -9,8 +23,31 @@ export default async function CookiePolicy({
     const { lang } = await params;
     const dict = await getDictionary(lang as Locale);
 
+    const jsonLd: WithContext<BreadcrumbList> = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": lang === 'ru' ? 'Главная' : lang === 'tk' ? 'Baş sahypa' : 'Home',
+                "item": `https://students-life.com/${lang}`
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": dict.legal?.cookiePolicy?.title || "Cookie Policy",
+                "item": `https://students-life.com/${lang}/cookie-policy`
+            }
+        ]
+    };
+
     return (
         <main className="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <div className="max-w-4xl mx-auto">
                 <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 uppercase tracking-tighter">
                     {dict.legal?.cookiePolicy?.title}

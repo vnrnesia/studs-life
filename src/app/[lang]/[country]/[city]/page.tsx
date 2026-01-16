@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getCity, getCities, getStrapiImageUrl } from '@/lib/strapi';
+import { generateSEOMetadata } from '@/lib/seo';
 import Image from 'next/image';
 import { marked } from 'marked';
 import { Metadata } from 'next';
@@ -17,7 +18,7 @@ interface CityPageProps {
 // Generate static params for all cities
 export async function generateStaticParams() {
   const cities = await getCities();
-  
+
   return cities
     .filter((city) => city?.country?.slug) // Filter out cities without country
     .map((city) => ({
@@ -37,15 +38,17 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     };
   }
 
-  return {
-    title: `${city.title} | Student's Life`,
-    description: city.intro ? city.intro.substring(0, 160) : `Study in ${city.title}, ${city.country?.name}. Comprehensive guide for international students.`,
-    openGraph: {
-      title: `${city.title} | Student's Life`,
-      description: city.intro ? city.intro.substring(0, 160) : `Study in ${city.title}, ${city.country?.name}.`,
-      images: city.images && city.images.length > 0 ? [getStrapiImageUrl(city.images[0].url)] : [],
-    },
-  };
+  const title = city.metaDescription || `${city.title} | Student's Life`;
+  const description = city.intro ? city.intro.substring(0, 160) : `Study in ${city.title}, ${city.country?.name}. Comprehensive guide for international students.`;
+  const image = city.images && city.images.length > 0 ? getStrapiImageUrl(city.images[0].url) : undefined;
+
+  return generateSEOMetadata({
+    lang,
+    path: `/${country}/${citySlug}`,
+    title,
+    description,
+    image,
+  });
 }
 
 // Revalidate every 60 seconds (1 minute)
@@ -60,12 +63,12 @@ export default async function CityPage({ params }: CityPageProps) {
   }
 
   // Destructure directly from city object (flattened structure)
-  const { 
-    title, 
-    intro, 
-    economyContent, 
-    housingContent, 
-    transportContent, 
+  const {
+    title,
+    intro,
+    economyContent,
+    housingContent,
+    transportContent,
     climateContent,
     climateTable,
     conclusion,
@@ -107,6 +110,10 @@ export default async function CityPage({ params }: CityPageProps) {
         url: "https://studs-life.com/logo.png",
       },
     },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://studs-life.com/${lang}/${country}/${citySlug}`,
+    },
   };
 
   const breadcrumbSchema: WithContext<BreadcrumbList> = {
@@ -139,7 +146,7 @@ export default async function CityPage({ params }: CityPageProps) {
     <main className="min-h-screen bg-gray-50 text-black">
       <JsonLd<Article> data={articleSchema} />
       <JsonLd<BreadcrumbList> data={breadcrumbSchema} />
-      
+
       {/* Hero Section */}
       <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center">
         {heroImage && (
@@ -149,11 +156,12 @@ export default async function CityPage({ params }: CityPageProps) {
             fill
             className="object-cover"
             priority
+            sizes="100vw"
             unoptimized
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
-        
+
         {/* Buradaki text-white, yukarıdaki text-black'i ezer (istenilen durum) */}
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
           <div className="mb-4">
@@ -169,7 +177,7 @@ export default async function CityPage({ params }: CityPageProps) {
       <div className="container mx-auto px-4 py-16 max-w-4xl">
         {/* Introduction */}
         {intro && (
-          <div 
+          <div
             className="prose prose-lg max-w-none mb-16 text-black prose-headings:text-black prose-p:text-black prose-strong:text-black"
             dangerouslySetInnerHTML={parseMarkdown(intro) || { __html: '' }}
           />
@@ -182,7 +190,7 @@ export default async function CityPage({ params }: CityPageProps) {
               <span className="text-4xl">💰</span>
               {lang === 'ru' ? 'Экономика и стоимость жизни' : 'Economy & Cost of Living'}
             </h2>
-            <div 
+            <div
               className="prose prose-lg max-w-none text-black prose-headings:text-black prose-p:text-black prose-strong:text-black"
               dangerouslySetInnerHTML={parseMarkdown(economyContent) || { __html: '' }}
             />
@@ -196,7 +204,7 @@ export default async function CityPage({ params }: CityPageProps) {
               <span className="text-4xl">🏠</span>
               {lang === 'ru' ? 'Варианты проживания студентов' : 'Student Accommodation'}
             </h2>
-            <div 
+            <div
               className="prose prose-lg max-w-none text-black prose-headings:text-black prose-p:text-black prose-strong:text-black"
               dangerouslySetInnerHTML={parseMarkdown(housingContent) || { __html: '' }}
             />
@@ -210,7 +218,7 @@ export default async function CityPage({ params }: CityPageProps) {
               <span className="text-4xl">🚇</span>
               {lang === 'ru' ? 'Городская инфраструктура и транспорт' : 'Transport & Infrastructure'}
             </h2>
-            <div 
+            <div
               className="prose prose-lg max-w-none text-black prose-headings:text-black prose-p:text-black prose-strong:text-black"
               dangerouslySetInnerHTML={parseMarkdown(transportContent) || { __html: '' }}
             />
@@ -224,11 +232,11 @@ export default async function CityPage({ params }: CityPageProps) {
               <span className="text-4xl">🌦️</span>
               {lang === 'ru' ? 'Климат' : 'Climate'}
             </h2>
-            <div 
+            <div
               className="prose prose-lg max-w-none text-black prose-headings:text-black prose-p:text-black prose-strong:text-black"
               dangerouslySetInnerHTML={parseMarkdown(climateContent) || { __html: '' }}
             />
-            
+
             {/* Climate Table */}
             {climateTable && (
               <div className="mt-8 overflow-x-auto">
@@ -268,7 +276,7 @@ export default async function CityPage({ params }: CityPageProps) {
               <span className="text-4xl">🎯</span>
               {lang === 'ru' ? 'Итог' : 'Conclusion'}
             </h2>
-            <div 
+            <div
               className="prose prose-lg max-w-none text-black prose-headings:text-black prose-p:text-black prose-strong:text-black"
               dangerouslySetInnerHTML={parseMarkdown(conclusion) || { __html: '' }}
             />
@@ -289,6 +297,7 @@ export default async function CityPage({ params }: CityPageProps) {
                     alt={image.alternativeText || ''}
                     fill
                     className="object-cover hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 50vw, 33vw"
                     unoptimized
                   />
                 </div>

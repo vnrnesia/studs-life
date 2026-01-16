@@ -153,14 +153,21 @@ export default function LeadMagnet({ lang }: LeadMagnetProps) {
 
                                 {/* Email Form */}
                                 <form onSubmit={handleSubmit} className="space-y-3">
-                                    <input
-                                        type="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        placeholder={dict.inputPlaceholder}
-                                        required
-                                        className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
-                                    />
+                                    <div className="space-y-1">
+                                        <label htmlFor="lead-magnet-email" className="sr-only">
+                                            {dict.inputPlaceholder}
+                                        </label>
+                                        <input
+                                            id="lead-magnet-email"
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            placeholder={dict.inputPlaceholder}
+                                            required
+                                            className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
+                                            aria-label={dict.inputPlaceholder}
+                                        />
+                                    </div>
 
                                     <button
                                         type="submit"

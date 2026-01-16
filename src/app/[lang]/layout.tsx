@@ -82,9 +82,30 @@ export default async function RootLayout({
   return (
     <html lang={lang}>
       <head>
-        <link href="https://fonts.cdnfonts.com/css/octin-stencil" rel="stylesheet" />
+        {/* Preconnect to external domains for faster loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://img.youtube.com" />
+        <link rel="preconnect" href="https://flagcdn.com" />
+
+        {/* DNS Prefetch for Strapi */}
+        <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'} />
+
+        {/* Custom font with display swap for better CLS */}
+        <link
+          href="https://fonts.cdnfonts.com/css/octin-stencil"
+          rel="stylesheet"
+        />
       </head>
       <body className={`${manrope.variable} font-sans antialiased bg-gray-50 text-gray-900 w-full`}>
+        {/* Skip to main content link for accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-crimson focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:font-bold"
+        >
+          Skip to main content
+        </a>
+
         <JsonLd<Organization>
           data={{
             "@context": "https://schema.org",
@@ -99,9 +120,9 @@ export default async function RootLayout({
           }}
         />
         <Navbar lang={lang as Locale} dict={dict} countries={countries} />
-        <div className="min-h-screen flex flex-col">
+        <main id="main-content" className="min-h-screen flex flex-col" role="main">
           {children}
-        </div>
+        </main>
         <Footer lang={lang} dict={dict} />
         <CookieConsent lang={lang} dict={dict} />
       </body>

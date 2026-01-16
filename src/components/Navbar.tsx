@@ -52,6 +52,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                 src={logo}
                 alt="students life"
                 priority
+                sizes="(max-width: 768px) 120px, 150px"
                 className="h-10 w-auto"
               />
             </Link>
@@ -230,6 +231,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                     alt={lang}
                     fill
                     className="object-cover"
+                    sizes="24px"
                   />
                 </div>
                 <ChevronDown className="w-4 h-4 ml-1" />
@@ -253,6 +255,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                             alt={names[locale as keyof typeof names]}
                             fill
                             className="object-cover"
+                            sizes="20px"
                           />
                         </div>
                         {names[locale as keyof typeof names]}

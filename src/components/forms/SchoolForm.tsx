@@ -23,7 +23,7 @@ export default function SchoolForm({ onBack, dict }: SchoolFormProps) {
   const router = useRouter();
   const params = useParams();
   const lang = params.lang as string;
-  
+
   const [formData, setFormData] = useState({
     studentName: '', parentName: '', relationship: '', phone: '', email: '',
     dateOfBirth: '', hasPassport: '', passportExpiry: '', citizenship: '', region: '', city: ''
@@ -35,7 +35,7 @@ export default function SchoolForm({ onBack, dict }: SchoolFormProps) {
     setIsSubmitting(true);
 
     const result = await submitToGoogleSheets('School', formData);
-    
+
     if (result.success) {
       router.push(`/${lang}/thanks`);
     } else {
@@ -51,26 +51,26 @@ export default function SchoolForm({ onBack, dict }: SchoolFormProps) {
           ← {dict.backButton}
         </button>
       </div>
-      
+
       <h3 className="text-3xl font-black text-gray-900 mb-8 text-center">{dict.services.school.title}</h3>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.studentName} *</label>
-            <input type="text" required value={formData.studentName} onChange={(e) => setFormData({...formData, studentName: e.target.value})}
+            <label htmlFor="school-studentName" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.studentName} *</label>
+            <input id="school-studentName" type="text" required value={formData.studentName} onChange={(e) => setFormData({ ...formData, studentName: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
           </div>
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.parentName} *</label>
-            <input type="text" required value={formData.parentName} onChange={(e) => setFormData({...formData, parentName: e.target.value})}
+            <label htmlFor="school-parentName" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.parentName} *</label>
+            <input id="school-parentName" type="text" required value={formData.parentName} onChange={(e) => setFormData({ ...formData, parentName: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.relationship} *</label>
-          <select required value={formData.relationship} onChange={(e) => setFormData({...formData, relationship: e.target.value})}
+          <label htmlFor="school-relationship" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.relationship} *</label>
+          <select id="school-relationship" required value={formData.relationship} onChange={(e) => setFormData({ ...formData, relationship: e.target.value })}
             className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
             <option value="">{dict.options.select}</option>
             <option value="self">{dict.options.self}</option>
@@ -82,29 +82,29 @@ export default function SchoolForm({ onBack, dict }: SchoolFormProps) {
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.phone} *</label>
-            <input type="tel" required value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})}
+            <label htmlFor="school-phone" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.phone} *</label>
+            <input id="school-phone" type="tel" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
               placeholder={dict.placeholders.phone} />
           </div>
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.email} *</label>
-            <input type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})}
+            <label htmlFor="school-email" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.email} *</label>
+            <input id="school-email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
               placeholder={dict.placeholders.email} />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.dateOfBirth} *</label>
-          <input type="date" required value={formData.dateOfBirth} onChange={(e) => setFormData({...formData, dateOfBirth: e.target.value})}
+          <label htmlFor="school-dateOfBirth" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.dateOfBirth} *</label>
+          <input id="school-dateOfBirth" type="date" required value={formData.dateOfBirth} onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
             className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.hasPassport} *</label>
-            <select required value={formData.hasPassport} onChange={(e) => setFormData({...formData, hasPassport: e.target.value})}
+            <label htmlFor="school-hasPassport" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.hasPassport} *</label>
+            <select id="school-hasPassport" required value={formData.hasPassport} onChange={(e) => setFormData({ ...formData, hasPassport: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
               <option value="">{dict.options.select}</option>
               <option value="yes">{dict.options.yes}</option>
@@ -112,15 +112,15 @@ export default function SchoolForm({ onBack, dict }: SchoolFormProps) {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.passportExpiry} {formData.hasPassport === 'yes' && '*'}</label>
-            <input type="date" required={formData.hasPassport === 'yes'} value={formData.passportExpiry} onChange={(e) => setFormData({...formData, passportExpiry: e.target.value})}
+            <label htmlFor="school-passportExpiry" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.passportExpiry} {formData.hasPassport === 'yes' && '*'}</label>
+            <input id="school-passportExpiry" type="date" required={formData.hasPassport === 'yes'} value={formData.passportExpiry} onChange={(e) => setFormData({ ...formData, passportExpiry: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.citizenship} *</label>
-          <select required value={formData.citizenship} onChange={(e) => setFormData({...formData, citizenship: e.target.value, region: '', city: ''})}
+          <label htmlFor="school-citizenship" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.citizenship} *</label>
+          <select id="school-citizenship" required value={formData.citizenship} onChange={(e) => setFormData({ ...formData, citizenship: e.target.value, region: '', city: '' })}
             className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
             <option value="">{dict.options.select}</option>
             {COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
@@ -129,8 +129,8 @@ export default function SchoolForm({ onBack, dict }: SchoolFormProps) {
 
         {formData.citizenship === 'Turkmenistan' ? (
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.region} *</label>
-            <select required value={formData.region} onChange={(e) => setFormData({...formData, region: e.target.value})}
+            <label htmlFor="school-region" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.region} *</label>
+            <select id="school-region" required value={formData.region} onChange={(e) => setFormData({ ...formData, region: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
               <option value="">{dict.options.select}</option>
               {TURKMEN_REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
@@ -138,8 +138,8 @@ export default function SchoolForm({ onBack, dict }: SchoolFormProps) {
           </div>
         ) : formData.citizenship ? (
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.city} *</label>
-            <input type="text" required value={formData.city} onChange={(e) => setFormData({...formData, city: e.target.value})}
+            <label htmlFor="school-city" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.city} *</label>
+            <input id="school-city" type="text" required value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
               placeholder={dict.placeholders.city} />
           </div>

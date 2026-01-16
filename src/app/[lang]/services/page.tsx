@@ -1,5 +1,7 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n-config";
+import { Metadata } from "next";
+import { generateSEOMetadata } from "@/lib/seo";
 import ServicesHero from "./components/ServicesHero";
 import ServicesGrid from "./components/ServicesGrid";
 import CostOfLiving from "./components/CostOfLiving";
@@ -10,6 +12,20 @@ import FAQ from "./components/FAQ";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/JsonLd";
 import { FAQPage, BreadcrumbList, WithContext } from "schema-dts";
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang as Locale);
+
+  const pageMeta = dict.metadata?.pages?.services;
+
+  return generateSEOMetadata({
+    lang,
+    path: '/services',
+    title: pageMeta?.title || `${dict.nav?.services || 'Services'} | Student's Life`,
+    description: pageMeta?.description || "Comprehensive educational support including university admissions, visa assistance, accommodation, and more.",
+  });
+}
 
 export default async function ServicesPage({
   params,
@@ -58,10 +74,78 @@ export default async function ServicesPage({
     ],
   };
 
+  // Service schema for all services
+  const serviceSchemas = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: dict.services?.university || "University Admissions",
+      description: dict.services?.universityDesc || "Comprehensive university admission support",
+      provider: {
+        "@type": "Organization",
+        name: "Student's Life",
+        url: "https://studs-life.com"
+      },
+      serviceType: "Educational Consulting",
+      areaServed: ["Russia", "China", "Turkey", "Cyprus", "Belarus", "Bulgaria"]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: dict.services?.visa || "Visa Assistance",
+      description: dict.services?.visaDesc || "Student visa processing with 99% success rate",
+      provider: {
+        "@type": "Organization",
+        name: "Student's Life"
+      },
+      serviceType: "Visa Consulting"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: "Accommodation",
+      description: dict.services?.accommodationDesc || "Student housing and dormitory arrangements",
+      provider: {
+        "@type": "Organization",
+        name: "Student's Life"
+      },
+      serviceType: "Housing Services"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: dict.services?.translation || "Document Translation",
+      description: dict.services?.translationDesc || "Certified document translation services",
+      provider: {
+        "@type": "Organization",
+        name: "Student's Life"
+      },
+      serviceType: "Translation Services"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: dict.services?.ticket || "Flight Tickets",
+      description: dict.services?.ticketDesc || "Student discount flight bookings",
+      provider: {
+        "@type": "Organization",
+        name: "Student's Life"
+      },
+      serviceType: "Travel Services"
+    }
+  ];
+
   return (
     <main className="min-h-screen bg-gray-50">
       <JsonLd<FAQPage> data={jsonLdData} />
       <JsonLd<BreadcrumbList> data={breadcrumbData} />
+      {serviceSchemas.map((schema, idx) => (
+        <script
+          key={idx}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
       <ServicesHero dict={dict.servicesPage.hero} />
 
       <ScrollReveal direction="up">

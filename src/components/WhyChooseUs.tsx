@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import whyUsStudent from '@/assets/whyus_student.png';
+import whyUsStudent from '@/assets/whyus_student.webp';
 
 interface WhyChooseUsProps {
   lang: string;

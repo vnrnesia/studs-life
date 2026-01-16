@@ -1,8 +1,8 @@
 import { Instagram, Facebook, Twitter } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import footerLogo from "../assets/footer_logo.png";
-import footerBg from "../assets/footerbg.png";
+import footerLogo from "../assets/footer_logo.webp";
+import footerBg from "../assets/footerbg.webp";
 
 interface FooterProps {
   lang: string;

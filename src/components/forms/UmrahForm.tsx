@@ -24,7 +24,7 @@ export default function UmrahForm({ onBack, dict }: UmrahFormProps) {
   const router = useRouter();
   const params = useParams();
   const lang = params.lang as string;
-  
+
   const [formData, setFormData] = useState({
     fullName: '', phone: '', email: '', dateOfBirth: '', relationship: '',
     hasPassport: '', passportExpiry: '', citizenship: '', region: '', city: '', travelMonth: ''
@@ -36,7 +36,7 @@ export default function UmrahForm({ onBack, dict }: UmrahFormProps) {
     setIsSubmitting(true);
 
     const result = await submitToGoogleSheets('Umrah', formData);
-    
+
     if (result.success) {
       router.push(`/${lang}/thanks`);
     } else {
@@ -52,27 +52,27 @@ export default function UmrahForm({ onBack, dict }: UmrahFormProps) {
           ← {dict.backButton}
         </button>
       </div>
-      
+
       <h3 className="text-3xl font-black text-gray-900 mb-8 text-center">{dict.services.umrah.title}</h3>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.fullName} *</label>
-          <input type="text" required value={formData.fullName} onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+          <label htmlFor="umrah-fullName" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.fullName} *</label>
+          <input id="umrah-fullName" type="text" required value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
             className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
             placeholder={dict.placeholders.fullName} />
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.phone} *</label>
-            <input type="tel" required value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})}
+            <label htmlFor="umrah-phone" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.phone} *</label>
+            <input id="umrah-phone" type="tel" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
               placeholder={dict.placeholders.phone} />
           </div>
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.email} *</label>
-            <input type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})}
+            <label htmlFor="umrah-email" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.email} *</label>
+            <input id="umrah-email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
               placeholder={dict.placeholders.email} />
           </div>
@@ -80,13 +80,13 @@ export default function UmrahForm({ onBack, dict }: UmrahFormProps) {
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.dateOfBirth} *</label>
-            <input type="date" required value={formData.dateOfBirth} onChange={(e) => setFormData({...formData, dateOfBirth: e.target.value})}
+            <label htmlFor="umrah-dateOfBirth" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.dateOfBirth} *</label>
+            <input id="umrah-dateOfBirth" type="date" required value={formData.dateOfBirth} onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
           </div>
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.relationship} *</label>
-            <select required value={formData.relationship} onChange={(e) => setFormData({...formData, relationship: e.target.value})}
+            <label htmlFor="umrah-relationship" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.relationship} *</label>
+            <select id="umrah-relationship" required value={formData.relationship} onChange={(e) => setFormData({ ...formData, relationship: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
               <option value="">{dict.options.select}</option>
               <option value="self">{dict.options.self}</option>
@@ -99,8 +99,8 @@ export default function UmrahForm({ onBack, dict }: UmrahFormProps) {
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.hasPassport} *</label>
-            <select required value={formData.hasPassport} onChange={(e) => setFormData({...formData, hasPassport: e.target.value})}
+            <label htmlFor="umrah-hasPassport" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.hasPassport} *</label>
+            <select id="umrah-hasPassport" required value={formData.hasPassport} onChange={(e) => setFormData({ ...formData, hasPassport: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
               <option value="">{dict.options.select}</option>
               <option value="yes">{dict.options.yes}</option>
@@ -108,15 +108,15 @@ export default function UmrahForm({ onBack, dict }: UmrahFormProps) {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.passportExpiry} {formData.hasPassport === 'yes' && '*'}</label>
-            <input type="date" required={formData.hasPassport === 'yes'} value={formData.passportExpiry} onChange={(e) => setFormData({...formData, passportExpiry: e.target.value})}
+            <label htmlFor="umrah-passportExpiry" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.passportExpiry} {formData.hasPassport === 'yes' && '*'}</label>
+            <input id="umrah-passportExpiry" type="date" required={formData.hasPassport === 'yes'} value={formData.passportExpiry} onChange={(e) => setFormData({ ...formData, passportExpiry: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.citizenship} *</label>
-          <select required value={formData.citizenship} onChange={(e) => setFormData({...formData, citizenship: e.target.value, region: '', city: ''})}
+          <label htmlFor="umrah-citizenship" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.citizenship} *</label>
+          <select id="umrah-citizenship" required value={formData.citizenship} onChange={(e) => setFormData({ ...formData, citizenship: e.target.value, region: '', city: '' })}
             className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
             <option value="">{dict.options.select}</option>
             {COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
@@ -125,8 +125,8 @@ export default function UmrahForm({ onBack, dict }: UmrahFormProps) {
 
         {formData.citizenship === 'Turkmenistan' ? (
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.region} *</label>
-            <select required value={formData.region} onChange={(e) => setFormData({...formData, region: e.target.value})}
+            <label htmlFor="umrah-region" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.region} *</label>
+            <select id="umrah-region" required value={formData.region} onChange={(e) => setFormData({ ...formData, region: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
               <option value="">{dict.options.select}</option>
               {TURKMEN_REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
@@ -134,16 +134,16 @@ export default function UmrahForm({ onBack, dict }: UmrahFormProps) {
           </div>
         ) : formData.citizenship ? (
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.city} *</label>
-            <input type="text" required value={formData.city} onChange={(e) => setFormData({...formData, city: e.target.value})}
+            <label htmlFor="umrah-city" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.city} *</label>
+            <input id="umrah-city" type="text" required value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
               placeholder={dict.placeholders.city} />
           </div>
         ) : null}
 
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.travelMonth} *</label>
-          <select required value={formData.travelMonth} onChange={(e) => setFormData({...formData, travelMonth: e.target.value})}
+          <label htmlFor="umrah-travelMonth" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.travelMonth} *</label>
+          <select id="umrah-travelMonth" required value={formData.travelMonth} onChange={(e) => setFormData({ ...formData, travelMonth: e.target.value })}
             className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
             <option value="">{dict.options.selectMonth}</option>
             {MONTHS.map(m => <option key={m} value={m}>{m}</option>)}

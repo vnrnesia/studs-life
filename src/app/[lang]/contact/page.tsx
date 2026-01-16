@@ -1,14 +1,24 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n-config";
+import { Metadata } from "next";
+import { generateSEOMetadata } from "@/lib/seo";
 import MultiStepContactForm from "@/components/MultiStepContactForm";
-import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { BreadcrumbList, WithContext } from "schema-dts";
 
-export const metadata: Metadata = {
-  title: "Contact Us | Student's Life",
-  description: "Get in touch with us for your study abroad journey.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang as Locale);
+
+  const pageMeta = dict.metadata?.pages?.contact;
+
+  return generateSEOMetadata({
+    lang,
+    path: '/contact',
+    title: pageMeta?.title || `${dict.nav?.contact || 'Contact'} | Student's Life`,
+    description: pageMeta?.description || "Get in touch with us for your study abroad journey. Free consultation available.",
+  });
+}
 
 export default async function ContactPage({
   params,

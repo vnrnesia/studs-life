@@ -15,9 +15,20 @@ interface Testimonial {
   university: string;
 }
 
-export default function TestimonialsCarousel({ title }: { title?: React.ReactNode }) {
-  const cards = data.map((card, index) => (
-    <VideoCard key={card.src} card={card} index={index} />
+interface TestimonialsCarouselProps {
+  title?: React.ReactNode;
+  videoCategory?: string;
+}
+
+export default function TestimonialsCarousel({ title, videoCategory = "Video Testimonial" }: TestimonialsCarouselProps) {
+  // Apply category from props (i18n)
+  const localizedTestimonials = rawTestimonials.map(item => ({
+    ...item,
+    category: videoCategory
+  }));
+
+  const cards = localizedTestimonials.map((card, index) => (
+    <VideoCard key={card.src} card={{ ...card, content: <DummyContent content={card.content} studentName={card.studentName} university={card.university} /> }} index={index} />
   ));
 
   const reviewSchema: WithContext<Review>[] = rawTestimonials.map((item) => ({
@@ -27,7 +38,7 @@ export default function TestimonialsCarousel({ title }: { title?: React.ReactNod
       "@type": "Person",
       name: item.studentName,
     },
-    reviewBody: item.content, 
+    reviewBody: item.content,
     reviewRating: {
       "@type": "Rating",
       ratingValue: "5",
@@ -67,54 +78,30 @@ const DummyContent = ({ content, studentName, university }: { content: string; s
 // Define raw data with string content first
 const rawTestimonials = [
   {
-    category: "Studying in Prague",
-    title: "Studs Life helped me get into my dream university.",
-    src: "https://images.unsplash.com/photo-1523240715630-975bb4799fd3?q=80&w=2070&auto=format&fit=crop",
-    videoUrl: "https://www.youtube.com/shorts/ezst-qhEB6E",
-    studentName: "Alexander B.",
-    university: "Charles University",
-    content: "The process was so smooth! From the initial consultation to getting my visa, the team was incredibly supportive. I never felt lost or stressed because they handled everything. Now I'm enjoying my student life in Prague thanks to Studs Life.",
+    category: "Video Testimonial",
+    title: "Салим Х, 21 год",
+    src: "https://img.youtube.com/vi/p8sXo2xIiXo/maxresdefault.jpg",
+    videoUrl: "https://youtube.com/shorts/p8sXo2xIiXo",
+    studentName: "Салим Х",
+    university: "Student's Life",
+    content: "Отзыв студента о поступлении и обучении через Student's Life.",
   },
   {
-    category: "Studying in Moscow",
-    title: "The best decision for my academic career.",
-    src: "https://images.unsplash.com/photo-1541339907198-e08756ebafe3?q=80&w=2070&auto=format&fit=crop",
-    videoUrl: "https://www.youtube.com/shorts/ezst-qhEB6E",
-    studentName: "Mariya S.",
-    university: "HSE University",
-    content: "I wanted to study Economics at HSE but didn't know where to start. Studs Life provided me with a clear roadmap and assisted with all the documentation. Their expertise made a huge difference. I highly recommend them to anyone looking to study in Russia.",
+    category: "Video Testimonial",
+    title: "Максат С, 28 лет",
+    src: "https://img.youtube.com/vi/4RbetlccZcg/maxresdefault.jpg",
+    videoUrl: "https://youtube.com/shorts/4RbetlccZcg",
+    studentName: "Максат С",
+    university: "Student's Life",
+    content: "Студент делится своим опытом обучения с помощью Student's Life.",
   },
   {
-    category: "Studying in Istanbul",
-    title: "Seamless transition and amazing support.",
-    src: "https://images.unsplash.com/photo-1527891751199-7225231a68dd?q=80&w=2070&auto=format&fit=crop",
-    videoUrl: "https://www.youtube.com/shorts/ezst-qhEB6E",
-    studentName: "Dmitry K.",
-    university: "Istanbul University",
-    content: "Turkish education is top-notch, and Studs Life made sure I got the best. They helped me find a great dormitory and even picked me up from the airport. The adaptation process was much easier with their guidance.",
-  },
-  {
-    category: "Studying in Warsaw",
-    title: "Professional and reliable education partners.",
-    src: "https://images.unsplash.com/photo-1492533268752-9457b01d4323?q=80&w=2070&auto=format&fit=crop",
-    videoUrl: "https://www.youtube.com/shorts/ezst-qhEB6E",
-    studentName: "Elena V.",
-    university: "University of Warsaw",
-    content: "I was worried about the language barrier and visa requirements for Poland, but the Studs Life team had all the answers. They are true professionals who care about your success. I'm now halfway through my Master's degree!",
-  },
-  {
-    category: "Studying in Kazan",
-    title: "High quality education at an affordable price.",
-    src: "https://images.unsplash.com/photo-1517486808906-6ca8b3f0484c?q=80&w=2070&auto=format&fit=crop",
-    videoUrl: "https://www.youtube.com/shorts/ezst-qhEB6E",
-    studentName: "Ruslan M.",
-    university: "Kazan Federal University",
-    content: "Kazan is a beautiful city for students. Studs Life helped me secure a scholarship which covered a significant part of my tuition. Their connections with universities are impressive and genuinely benefit the students.",
+    category: "Video Testimonial",
+    title: "Александр Ц, 22 года",
+    src: "https://img.youtube.com/vi/EPnt8XUGm4A/maxresdefault.jpg",
+    videoUrl: "https://youtube.com/shorts/EPnt8XUGm4A",
+    studentName: "Александр Ц",
+    university: "Student's Life",
+    content: "История успешного поступления через агентство Student's Life.",
   },
 ];
-
-// Map raw data for the carousel component (inserting React components)
-const data = rawTestimonials.map((item) => ({
-  ...item,
-  content: <DummyContent content={item.content} studentName={item.studentName} university={item.university} />,
-}));

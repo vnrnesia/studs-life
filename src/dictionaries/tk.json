@@ -1,7 +1,29 @@
 {
     "metadata": {
         "title": "Student's Life | Daşary ýurtda okamak, wiza we syýahat gulluklary",
-        "description": "Russiýa, Hytaý, Türkiýe we Ýewropada uniwersitetlere kabul edilmek, wiza resminamalar we göçmek barada hünärmen kömegi."
+        "description": "Russiýa, Hytaý, Türkiýe we Ýewropada uniwersitetlere kabul edilmek, wiza resminamalar we göçmek barada hünärmen kömegi.",
+        "pages": {
+            "services": {
+                "title": "Hyzmatlar | Student's Life",
+                "description": "Talyplara doly goldaw: uniwersitete kabul, wiza kömegi, ýaşaýyş jaý, resminama terjimesi. 99% üstünlik. Mugt maslahat."
+            },
+            "about": {
+                "title": "Biz barada | Student's Life",
+                "description": "Student's Life - 2019-njy ýyldan bäri halkara bilim geňeşçiligi. 1200+ üstünlikli kabul ediş. Russiýada we Türkmenistanda ofisler."
+            },
+            "contact": {
+                "title": "Habarlaşmak | Student's Life",
+                "description": "Mugt maslahat üçin habarlaşyň. Aşgabat, Türkmenabat, Mary, Daşoguz we Kazanda ofislerimiz bar."
+            },
+            "teams": {
+                "title": "Biziň toparymyz | Student's Life",
+                "description": "Bilim geňeşçilerinden ybarat hünärmen toparymyz bilen tanyşyň. Wiza hünärmenleri we maslahatçylar."
+            },
+            "blog": {
+                "title": "Habarlar we blog | Student's Life",
+                "description": "Talyplar üçin peýdaly makalalar, gollanmalar we habarlar. Kabul ediş, wiza we daşary ýurtda ýaşamak barada maslahatlar."
+            }
+        }
     },
     "hero": {
         "title": "HALKARA HYZMATDAŞLYK",
@@ -157,6 +179,7 @@
         "title": "Biziň yzymyzdaky hünärmenler",
         "description": "Mydamy täzeçillik gözleýän we geljegi gurýan dürli hünärmenlerden ybarat bolan biziň toparymyz bilen tanyşyň.",
         "testimonials_title": "Talyplaryň hekaýalary",
+        "videoTestimonialCategory": "Wideo syn",
         "cta_card_title": "Bütin Toparymyz",
         "cta_card_desc": "Biziň hünärmenlerimiziň doly sanawy bilen tanyşyň.",
         "cta_card_button": "Ählisini görkez"

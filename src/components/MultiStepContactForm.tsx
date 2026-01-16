@@ -5,7 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { submitToGoogleSheets } from "@/lib/submitToGoogleSheets";
-import { 
+import {
   Check,
   ChevronLeft,
   User,
@@ -17,12 +17,12 @@ import {
 } from "lucide-react";
 
 // Import custom icons
-import universityIcon from "@/assets/contact_icons/university.png";
-import changeIcon from "@/assets/contact_icons/change.png";
-import chinaIcon from "@/assets/contact_icons/china.png";
-import umrahIcon from "@/assets/contact_icons/umrah.png";
-import visaIcon from "@/assets/contact_icons/visa.png";
-import flightIcon from "@/assets/contact_icons/flight.png";
+import universityIcon from "@/assets/contact_icons/university.webp";
+import changeIcon from "@/assets/contact_icons/change.webp";
+import chinaIcon from "@/assets/contact_icons/china.webp";
+import umrahIcon from "@/assets/contact_icons/umrah.webp";
+import visaIcon from "@/assets/contact_icons/visa.webp";
+import flightIcon from "@/assets/contact_icons/flight.webp";
 
 interface MultiStepContactFormProps {
   lang: string;
@@ -73,7 +73,7 @@ interface FormData {
   phone: string;
   email: string;
   dateOfBirth: string;
-  
+
   // University specific
   educationLevel?: string;
   relationship?: string;
@@ -82,7 +82,7 @@ interface FormData {
   citizenship?: string;
   region?: string;
   city?: string;
-  
+
   // Transfer specific
   currentEducationLevel?: string;
   currentUniversity?: string;
@@ -92,20 +92,20 @@ interface FormData {
   transferType?: string;
   targetUniversity?: string;
   targetField?: string;
-  
+
   // School specific
   studentName?: string;
   parentName?: string;
-  
+
   // Umrah specific
   hasPassport?: string;
   passportExpiry?: string;
   travelMonth?: string;
-  
+
   // Work Visa specific
   workPreferences?: string;
   previousTravel?: string;
-  
+
   // Ticket specific
   fromCity?: string;
   toCity?: string;
@@ -114,7 +114,7 @@ interface FormData {
 }
 
 const COUNTRIES = [
-  'Turkmenistan', 'China', 'Turkey', 'Uzbekistan', 'Tajikistan', 
+  'Turkmenistan', 'China', 'Turkey', 'Uzbekistan', 'Tajikistan',
   'Russia', 'Kazakhstan', 'Kyrgyzstan', 'Afghanistan', 'Iran'
 ];
 
@@ -131,18 +131,17 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
   // Shake animation variant
   const shakeAnimation = {
     static: { x: 0 },
-    shake: { 
+    shake: {
       x: [0, -10, 10, -10, 10, 0],
       transition: { duration: 0.4 }
     }
   };
 
   // Helper to check errors
-  const getInputClass = (fieldName: string) => `w-full bg-gray-50 border-2 outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors ${
-    errors[fieldName] 
-      ? 'border-red-500 ring-4 ring-red-500/10' 
+  const getInputClass = (fieldName: string) => `w-full bg-gray-50 border-2 outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors ${errors[fieldName]
+      ? 'border-red-500 ring-4 ring-red-500/10'
       : 'border-gray-200 focus:border-navy'
-  }`;
+    }`;
 
   const handleFieldChange = (field: string, value: string) => {
     setFormData({ ...formData, [field]: value });
@@ -150,7 +149,7 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
       setErrors(prev => ({ ...prev, [field]: false }));
     }
   };
-  
+
   const [formData, setFormData] = useState<FormData>({
     service: 'university',
     fullName: '',
@@ -191,39 +190,39 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
   });
 
   const services = [
-    { 
-      id: 'university' as const, 
-      icon: universityIcon, 
+    {
+      id: 'university' as const,
+      icon: universityIcon,
       title: dict.services.university.title,
       desc: dict.services.university.desc
     },
-    { 
-      id: 'transfer' as const, 
-      icon: changeIcon, 
+    {
+      id: 'transfer' as const,
+      icon: changeIcon,
       title: dict.services.transfer.title,
       desc: dict.services.transfer.desc
     },
-    { 
-      id: 'school' as const, 
-      icon: chinaIcon, 
+    {
+      id: 'school' as const,
+      icon: chinaIcon,
       title: dict.services.school.title,
       desc: dict.services.school.desc
     },
-    { 
-      id: 'umrah' as const, 
-      icon: umrahIcon, 
+    {
+      id: 'umrah' as const,
+      icon: umrahIcon,
       title: dict.services.umrah.title,
       desc: dict.services.umrah.desc
     },
-    { 
-      id: 'workVisa' as const, 
-      icon: visaIcon, 
+    {
+      id: 'workVisa' as const,
+      icon: visaIcon,
       title: dict.services.workVisa.title,
       desc: dict.services.workVisa.desc
     },
-    { 
-      id: 'ticket' as const, 
-      icon: flightIcon, 
+    {
+      id: 'ticket' as const,
+      icon: flightIcon,
       title: dict.services.ticket.title,
       desc: dict.services.ticket.desc
     },
@@ -232,29 +231,29 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
   // Define steps based on selected service
   const getSteps = () => {
     const baseSteps = [
-      { 
-        id: 1, 
+      {
+        id: 1,
         title: dict.stepTitles?.personalInfo || "Tell us about yourself",
         shortTitle: "Personal Info",
         icon: User
       },
-      { 
-        id: 2, 
+      {
+        id: 2,
         title: dict.stepTitles?.serviceSelection || "Which service do you need?",
         shortTitle: (formData.service && (dict.services as any)[formData.service]) ? (dict.services as any)[formData.service].title : "Service",
         icon: LayoutGrid
       },
-      { 
-        id: 3, 
-        title: dict.stepTitles?.serviceDetails || "Service Details", 
-        shortTitle: "Details", 
-        icon: GraduationCap 
+      {
+        id: 3,
+        title: dict.stepTitles?.serviceDetails || "Service Details",
+        shortTitle: "Details",
+        icon: GraduationCap
       },
-      { 
-        id: 4, 
-        title: dict.stepTitles?.additionalInfo || "Location Details", 
-        shortTitle: "Location", 
-        icon: MapPin 
+      {
+        id: 4,
+        title: dict.stepTitles?.additionalInfo || "Location Details",
+        shortTitle: "Location",
+        icon: MapPin
       }
     ];
 
@@ -281,7 +280,7 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
       check('email', formData.email);
       check('dateOfBirth', formData.dateOfBirth);
     }
-    
+
     if (currentStep === 2) {
       check('service', formData.service);
     }
@@ -361,7 +360,7 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Prevent submission if not on the final step
     if (currentStep < totalSteps) {
       if (validateCurrentStep()) {
@@ -369,7 +368,7 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
       }
       return;
     }
-    
+
     if (!validateCurrentStep()) return;
 
     setIsSubmitting(true);
@@ -384,10 +383,10 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
     };
 
     const result = await submitToGoogleSheets(
-      serviceMap[formData.service as keyof typeof serviceMap], 
+      serviceMap[formData.service as keyof typeof serviceMap],
       formData
     );
-    
+
     if (result.success) {
       router.push(`/${lang}/thanks`);
     } else {
@@ -495,17 +494,16 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {services.map((service) => {
               const isSelected = formData.service === service.id;
-              
+
               return (
                 <button
                   key={service.id}
                   type="button"
                   onClick={() => setFormData({ ...formData, service: service.id })}
-                  className={`w-full flex items-center gap-4 p-3.5 rounded-2xl border-2 transition-all duration-300 ${
-                    isSelected 
-                      ? 'border-navy bg-navy/[0.02] shadow-[0_0_0_1px_#06182E]' 
+                  className={`w-full flex items-center gap-4 p-3.5 rounded-2xl border-2 transition-all duration-300 ${isSelected
+                      ? 'border-navy bg-navy/[0.02] shadow-[0_0_0_1px_#06182E]'
                       : 'border-gray-100 hover:border-gray-200 hover:bg-gray-50/50'
-                  }`}
+                    }`}
                   style={{ borderRadius: '1.25rem' }}
                 >
                   <div className="w-12 h-12 relative flex-shrink-0">
@@ -910,7 +908,7 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
               {formData.service === 'transfer' ? "Provide target university and your location." : (dict.stepDescriptions?.additionalInfo || "Where are you from?")}
             </p>
           </div>
-          
+
           <div className="space-y-4">
             {formData.service === 'transfer' && (
               <div className="grid md:grid-cols-2 gap-4 pb-4 border-b border-gray-100">
@@ -942,7 +940,7 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
     if (currentStep === 2) {
       return formData.service !== '';
     }
-    
+
     // Step 3 Validation
     if (currentStep === 3) {
       if (formData.service === 'university') {
@@ -992,8 +990,8 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
                 const isLast = index === steps.length - 1;
 
                 return (
-                  <motion.div 
-                    key={step.id} 
+                  <motion.div
+                    key={step.id}
                     className="relative"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -1001,13 +999,12 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
                   >
                     {/* Connecting Line */}
                     {!isLast && (
-                      <div 
-                        className={`absolute left-[36px] -translate-x-1/2 top-[52px] w-[2px] h-[calc(100%-44px)] transition-colors duration-500 z-0 ${
-                          isCompleted ? 'bg-navy' : 'bg-gray-200'
-                        }`} 
+                      <div
+                        className={`absolute left-[36px] -translate-x-1/2 top-[52px] w-[2px] h-[calc(100%-44px)] transition-colors duration-500 z-0 ${isCompleted ? 'bg-navy' : 'bg-gray-200'
+                          }`}
                       >
                         {isCompleted && (
-                          <motion.div 
+                          <motion.div
                             className="absolute top-0 left-0 w-full bg-navy"
                             initial={{ height: 0 }}
                             animate={{ height: "100%" }}
@@ -1018,14 +1015,13 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
                     )}
 
                     <motion.div
-                      className={`flex items-start gap-4 p-5 rounded-2xl transition-all duration-300 ${
-                        isCurrent ? 'bg-white shadow-xl ring-1 ring-gray-100 scale-[1.02]' : ''
-                      }`}
+                      className={`flex items-start gap-4 p-5 rounded-2xl transition-all duration-300 ${isCurrent ? 'bg-white shadow-xl ring-1 ring-gray-100 scale-[1.02]' : ''
+                        }`}
                       whileHover={{ scale: isCurrent ? 1.02 : 1.01 }}
                     >
                       <div className="relative z-10 flex-shrink-0">
                         {isCompleted ? (
-                          <motion.div 
+                          <motion.div
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             className="w-8 h-8 bg-navy rounded-full flex items-center justify-center shadow-lg shadow-blue-100"
@@ -1033,8 +1029,8 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
                             <Check className="w-5 h-5 text-white" />
                           </motion.div>
                         ) : isCurrent ? (
-                          <motion.div 
-                            animate={{ 
+                          <motion.div
+                            animate={{
                               boxShadow: ["0px 0px 0px 0px rgba(0, 0, 128, 0.2)", "0px 0px 0px 10px rgba(0, 0, 128, 0)"]
                             }}
                             transition={{ repeat: Infinity, duration: 2 }}
@@ -1050,19 +1046,16 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
                       </div>
 
                       <div className="flex-1 min-w-0 pt-0.5">
-                        <div className={`text-[11px] font-bold tracking-wider uppercase transition-colors duration-300 ${
-                          isCompleted ? 'text-navy' : isCurrent ? 'text-navy' : 'text-gray-400'
-                        }`}>
+                        <div className={`text-[11px] font-bold tracking-wider uppercase transition-colors duration-300 ${isCompleted ? 'text-navy' : isCurrent ? 'text-navy' : 'text-gray-400'
+                          }`}>
                           Step {step.id}
                         </div>
-                        <div className={`text-[15px] font-bold mt-0.5 break-words transition-colors duration-300 ${
-                          isCurrent ? 'text-gray-900' : isCompleted ? 'text-gray-700' : 'text-gray-400'
-                        }`}>
+                        <div className={`text-[15px] font-bold mt-0.5 break-words transition-colors duration-300 ${isCurrent ? 'text-gray-900' : isCompleted ? 'text-gray-700' : 'text-gray-400'
+                          }`}>
                           {step.title}
                         </div>
-                        <div className={`text-[11px] mt-1 font-bold transition-colors duration-300 ${
-                          isCompleted ? 'text-blue-600' : isCurrent ? 'text-blue-600' : 'text-gray-300'
-                        }`}>
+                        <div className={`text-[11px] mt-1 font-bold transition-colors duration-300 ${isCompleted ? 'text-blue-600' : isCurrent ? 'text-blue-600' : 'text-gray-300'
+                          }`}>
                           {isCompleted ? 'Complete' : isCurrent ? 'In progress' : 'Pending'}
                         </div>
                       </div>
@@ -1080,19 +1073,18 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
                 type="button"
                 onClick={handleBack}
                 disabled={currentStep === 1}
-                className={`flex items-center gap-2 font-bold transition-colors ${
-                  currentStep === 1 ? 'opacity-0 pointer-events-none' : 'text-gray-600'
-                }`}
+                className={`flex items-center gap-2 font-bold transition-colors ${currentStep === 1 ? 'opacity-0 pointer-events-none' : 'text-gray-600'
+                  }`}
               >
                 <ChevronLeft className="w-5 h-5" />
                 {dict.navigation?.back || dict.backButton || "Back"}
               </button>
-              
+
               <div className="bg-gray-100 px-3 py-1 rounded-md text-sm font-bold text-gray-600">
                 {dict.steps || "Steps"} {currentStep}/{totalSteps}
               </div>
             </div>
-            
+
             <div className="relative pt-1">
               <div className="overflow-hidden h-1.5 mb-4 text-xs flex rounded bg-gray-200">
                 <motion.div

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import heroGuy from "@/assets/hero_guy.png";
+import heroGuy from "@/assets/hero_guy.webp";
 
 interface HeroProps {
     lang: string;
@@ -111,6 +111,7 @@ export default function Hero({ lang, dict }: HeroProps) {
                             alt="International student celebrating study abroad success"
                             className="object-contain w-auto h-full object-bottom"
                             priority
+                            sizes="(max-width: 768px) 100vw, 50vw"
                         />
                     </div>
                 </motion.div>

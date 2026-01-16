@@ -23,7 +23,7 @@ export default function TransferForm({ onBack, dict }: TransferFormProps) {
   const router = useRouter();
   const params = useParams();
   const lang = params.lang as string;
-  
+
   const [formData, setFormData] = useState({
     fullName: '', phone: '', email: '', relationship: '', currentEducationLevel: '',
     currentUniversity: '', currentCountry: '', currentField: '', paymentType: '',
@@ -36,7 +36,7 @@ export default function TransferForm({ onBack, dict }: TransferFormProps) {
     setIsSubmitting(true);
 
     const result = await submitToGoogleSheets('Transfer', formData);
-    
+
     if (result.success) {
       router.push(`/${lang}/thanks`);
     } else {
@@ -52,35 +52,35 @@ export default function TransferForm({ onBack, dict }: TransferFormProps) {
           ← {dict.backButton}
         </button>
       </div>
-      
+
       <h3 className="text-3xl font-black text-gray-900 mb-8 text-center">{dict.services.transfer.title}</h3>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.fullName} *</label>
-          <input type="text" required value={formData.fullName} onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+          <label htmlFor="transfer-fullName" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.fullName} *</label>
+          <input id="transfer-fullName" type="text" required value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
             className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
             placeholder={dict.placeholders.fullName} />
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.phone} *</label>
-            <input type="tel" required value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})}
+            <label htmlFor="transfer-phone" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.phone} *</label>
+            <input id="transfer-phone" type="tel" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
               placeholder={dict.placeholders.phone} />
           </div>
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.email} *</label>
-            <input type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})}
+            <label htmlFor="transfer-email" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.email} *</label>
+            <input id="transfer-email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
               placeholder={dict.placeholders.email} />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.relationship} *</label>
-          <select required value={formData.relationship} onChange={(e) => setFormData({...formData, relationship: e.target.value})}
+          <label htmlFor="transfer-relationship" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.relationship} *</label>
+          <select id="transfer-relationship" required value={formData.relationship} onChange={(e) => setFormData({ ...formData, relationship: e.target.value })}
             className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
             <option value="">{dict.options.select}</option>
             <option value="self">{dict.options.self}</option>
@@ -92,8 +92,8 @@ export default function TransferForm({ onBack, dict }: TransferFormProps) {
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.currentEducationLevel} *</label>
-            <select required value={formData.currentEducationLevel} onChange={(e) => setFormData({...formData, currentEducationLevel: e.target.value})}
+            <label htmlFor="transfer-currentEducationLevel" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.currentEducationLevel} *</label>
+            <select id="transfer-currentEducationLevel" required value={formData.currentEducationLevel} onChange={(e) => setFormData({ ...formData, currentEducationLevel: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
               <option value="">{dict.options.select}</option>
               <option value="preparatory">{dict.options.preparatory}</option>
@@ -102,8 +102,8 @@ export default function TransferForm({ onBack, dict }: TransferFormProps) {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.paymentType} *</label>
-            <select required value={formData.paymentType} onChange={(e) => setFormData({...formData, paymentType: e.target.value})}
+            <label htmlFor="transfer-paymentType" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.paymentType} *</label>
+            <select id="transfer-paymentType" required value={formData.paymentType} onChange={(e) => setFormData({ ...formData, paymentType: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
               <option value="">{dict.options.select}</option>
               <option value="paid">{dict.options.paid}</option>
@@ -114,26 +114,26 @@ export default function TransferForm({ onBack, dict }: TransferFormProps) {
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.currentUniversity} *</label>
-            <input type="text" required value={formData.currentUniversity} onChange={(e) => setFormData({...formData, currentUniversity: e.target.value})}
+            <label htmlFor="transfer-currentUniversity" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.currentUniversity} *</label>
+            <input id="transfer-currentUniversity" type="text" required value={formData.currentUniversity} onChange={(e) => setFormData({ ...formData, currentUniversity: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
           </div>
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.currentCountry} *</label>
-            <input type="text" required value={formData.currentCountry} onChange={(e) => setFormData({...formData, currentCountry: e.target.value})}
+            <label htmlFor="transfer-currentCountry" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.currentCountry} *</label>
+            <input id="transfer-currentCountry" type="text" required value={formData.currentCountry} onChange={(e) => setFormData({ ...formData, currentCountry: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.currentField} *</label>
-          <input type="text" required value={formData.currentField} onChange={(e) => setFormData({...formData, currentField: e.target.value})}
+          <label htmlFor="transfer-currentField" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.currentField} *</label>
+          <input id="transfer-currentField" type="text" required value={formData.currentField} onChange={(e) => setFormData({ ...formData, currentField: e.target.value })}
             className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
         </div>
 
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.transferType} *</label>
-          <select required value={formData.transferType} onChange={(e) => setFormData({...formData, transferType: e.target.value})}
+          <label htmlFor="transfer-transferType" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.transferType} *</label>
+          <select id="transfer-transferType" required value={formData.transferType} onChange={(e) => setFormData({ ...formData, transferType: e.target.value })}
             className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
             <option value="">{dict.options.select}</option>
             <option value="same">{dict.options.sameCountry}</option>
@@ -143,20 +143,20 @@ export default function TransferForm({ onBack, dict }: TransferFormProps) {
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.targetUniversity} *</label>
-            <input type="text" required value={formData.targetUniversity} onChange={(e) => setFormData({...formData, targetUniversity: e.target.value})}
+            <label htmlFor="transfer-targetUniversity" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.targetUniversity} *</label>
+            <input id="transfer-targetUniversity" type="text" required value={formData.targetUniversity} onChange={(e) => setFormData({ ...formData, targetUniversity: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
           </div>
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.targetField} *</label>
-            <input type="text" required value={formData.targetField} onChange={(e) => setFormData({...formData, targetField: e.target.value})}
+            <label htmlFor="transfer-targetField" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.targetField} *</label>
+            <input id="transfer-targetField" type="text" required value={formData.targetField} onChange={(e) => setFormData({ ...formData, targetField: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors" />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.citizenship} *</label>
-          <select required value={formData.citizenship} onChange={(e) => setFormData({...formData, citizenship: e.target.value, region: '', city: ''})}
+          <label htmlFor="transfer-citizenship" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.citizenship} *</label>
+          <select id="transfer-citizenship" required value={formData.citizenship} onChange={(e) => setFormData({ ...formData, citizenship: e.target.value, region: '', city: '' })}
             className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
             <option value="">{dict.options.select}</option>
             {COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
@@ -165,8 +165,8 @@ export default function TransferForm({ onBack, dict }: TransferFormProps) {
 
         {formData.citizenship === 'Turkmenistan' ? (
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.region} *</label>
-            <select required value={formData.region} onChange={(e) => setFormData({...formData, region: e.target.value})}
+            <label htmlFor="transfer-region" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.region} *</label>
+            <select id="transfer-region" required value={formData.region} onChange={(e) => setFormData({ ...formData, region: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
               <option value="">{dict.options.select}</option>
               {TURKMEN_REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
@@ -174,8 +174,8 @@ export default function TransferForm({ onBack, dict }: TransferFormProps) {
           </div>
         ) : formData.citizenship ? (
           <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.city} *</label>
-            <input type="text" required value={formData.city} onChange={(e) => setFormData({...formData, city: e.target.value})}
+            <label htmlFor="transfer-city" className="block text-sm font-bold text-gray-900 mb-2 uppercase">{dict.fields.city} *</label>
+            <input id="transfer-city" type="text" required value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })}
               className="w-full bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors"
               placeholder={dict.placeholders.city} />
           </div>

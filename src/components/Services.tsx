@@ -28,11 +28,11 @@ import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 // New Background Images
-import planeBg from "@/assets/our_services/flight_tickets_photo.png";
-import universityBg from "@/assets/our_services/university.png";
-import visaBg from "@/assets/our_services/visa.png";
-import translationBg from "@/assets/our_services/translation.png";
-import accommodationBg from "@/assets/our_services/accommodation_photo.png";
+import planeBg from "@/assets/our_services/flight_tickets_photo.webp";
+import universityBg from "@/assets/our_services/university.webp";
+import visaBg from "@/assets/our_services/visa.webp";
+import translationBg from "@/assets/our_services/translation.webp";
+import accommodationBg from "@/assets/our_services/accommodation_photo.webp";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
