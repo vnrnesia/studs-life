@@ -33,7 +33,7 @@ export default function WhyChooseUs({ lang, dict }: WhyChooseUsProps) {
   return (
     <section
       ref={containerRef}
-      className="relative w-full md:min-h-[85vh] bg-[#061832] text-white overflow-hidden flex items-center py-20 px-4 md:px-8"
+      className="relative w-full md:min-h-[85vh] bg-[#061832] text-white overflow-hidden flex flex-col lg:flex-row lg:items-center py-20 px-4 md:px-8"
     >
 
       {/* Arka Plan Dekoratif Yazısı */}
@@ -167,7 +167,7 @@ export default function WhyChooseUs({ lang, dict }: WhyChooseUsProps) {
           )}
 
           {/* Mobilde Sol Alt Listeyi de buraya ekliyoruz */}
-          <div className="lg:hidden flex flex-col gap-8 pt-4 border-t border-white/10">
+          <div className="lg:hidden flex flex-col gap-8 pt-4 md:border-t border-white/10">
             {leftFeatures.map((item, idx) => (
               <FeatureItem key={`mobile-${idx}`} text={item} />
             ))}
@@ -178,49 +178,47 @@ export default function WhyChooseUs({ lang, dict }: WhyChooseUsProps) {
 
       {/* Contact Information - Mobile only: after all features */}
       {dict.partnersContact && (
-        <div className="lg:hidden max-w-7xl mx-auto w-full px-4 sm:px-6 relative z-10 mt-8">
-          <div className="pt-6 border-t border-white/20">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Partners Contact */}
-              <div className="space-y-2">
-                <p className="text-white/70 text-xs font-semibold uppercase tracking-wider">
-                  {dict.partnersContact}
-                </p>
-                <div className="space-y-1">
-                  <a
-                    href={`mailto:${dict.partnersEmail}`}
-                    className="block text-white/90 hover:text-white text-sm transition-colors"
-                  >
-                    {dict.partnersEmail}
-                  </a>
-                  <a
-                    href={`tel:${dict.partnersPhone}`}
-                    className="block text-white/90 hover:text-white text-sm transition-colors"
-                  >
-                    {dict.partnersPhone}
-                  </a>
-                </div>
+        <div className="lg:hidden max-w-7xl mx-auto w-full px-4 sm:px-6 relative z-10 mt-4">
+          <div className="pt-4 border-t border-white/20 flex flex-col gap-6">
+            {/* Partners Contact */}
+            <div className="space-y-3">
+              <p className="text-[#2196F3] text-sm font-bold uppercase tracking-widest">
+                {dict.partnersContact}
+              </p>
+              <div className="flex flex-col gap-2">
+                <a
+                  href={`mailto:${dict.partnersEmail}`}
+                  className="text-white text-lg font-medium hover:text-[#2196F3] transition-colors"
+                >
+                  {dict.partnersEmail}
+                </a>
+                <a
+                  href={`tel:${dict.partnersPhone}`}
+                  className="text-white text-lg font-medium hover:text-[#2196F3] transition-colors"
+                >
+                  {dict.partnersPhone}
+                </a>
               </div>
+            </div>
 
-              {/* Universities Contact */}
-              <div className="space-y-2">
-                <p className="text-white/70 text-xs font-semibold uppercase tracking-wider">
-                  {dict.universitiesContact}
-                </p>
-                <div className="space-y-1">
-                  <a
-                    href={`mailto:${dict.universitiesEmail}`}
-                    className="block text-white/90 hover:text-white text-sm transition-colors"
-                  >
-                    {dict.universitiesEmail}
-                  </a>
-                  <a
-                    href={`tel:${dict.universitiesPhone}`}
-                    className="block text-white/90 hover:text-white text-sm transition-colors"
-                  >
-                    {dict.universitiesPhone}
-                  </a>
-                </div>
+            {/* Universities Contact */}
+            <div className="space-y-3">
+              <p className="text-[#2196F3] text-sm font-bold uppercase tracking-widest">
+                {dict.universitiesContact}
+              </p>
+              <div className="flex flex-col gap-2">
+                <a
+                  href={`mailto:${dict.universitiesEmail}`}
+                  className="text-white text-lg font-medium hover:text-[#2196F3] transition-colors"
+                >
+                  {dict.universitiesEmail}
+                </a>
+                <a
+                  href={`tel:${dict.universitiesPhone}`}
+                  className="text-white text-lg font-medium hover:text-[#2196F3] transition-colors"
+                >
+                  {dict.universitiesPhone}
+                </a>
               </div>
             </div>
           </div>

@@ -63,7 +63,7 @@ export default async function TeamsPage({ params }: { params: Promise<{ lang: st
   }));
 
   return (
-    <main className="min-h-screen bg-gray-50 pt-10">
+    <div className="bg-gray-50 pt-10 pb-40">
       <JsonLd<BreadcrumbList> data={breadcrumbData} />
       {personSchemas.map((schema, idx) => (
         <script
@@ -73,6 +73,6 @@ export default async function TeamsPage({ params }: { params: Promise<{ lang: st
         />
       ))}
       <Team lang={lang} dict={dict.team} teamMembers={teamMembers} />
-    </main>
+    </div>
   );
 }

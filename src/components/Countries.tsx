@@ -64,11 +64,17 @@ export default function Countries({ lang, dict }: CountriesProps) {
     return 932; // Fallback
   };
 
-  // Initialize scroll to the second card (index 1)
+  // Initialize scroll to center the second card (index 1) on mobile
   useEffect(() => {
     if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
       const cardWidth = getCardWidth();
-      scrollContainerRef.current.scrollLeft = cardWidth * 0.8; // Approximate position for partial 1st card visibility
+      const containerWidth = container.offsetWidth;
+
+      // Center Russia (index 1)
+      const targetScroll = (cardWidth * 1) - (containerWidth / 2) + (cardWidth / 2);
+
+      container.scrollLeft = targetScroll;
       setActiveIndex(1);
     }
   }, []);
@@ -139,7 +145,7 @@ export default function Countries({ lang, dict }: CountriesProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
           <div className="flex-1 text-left">
             <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-[10px] md:text-xs font-bold tracking-wider uppercase text-gray-500 mb-4">
               {dict.badge || "Destinations"}
@@ -189,7 +195,7 @@ export default function Countries({ lang, dict }: CountriesProps) {
                 className="bg-white rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row w-[350px] md:w-[900px] h-[480px] md:h-[420px] border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-500 group cursor-pointer"
               >
                 {/* Content Left */}
-                <div className="flex-[1.2] p-8 md:p-10 flex flex-col justify-between bg-white z-10">
+                <div className="flex-[1.2] p-8 md:p-10 flex flex-col justify-between items-start bg-white z-10">
                   <div>
                     <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center mb-6 border border-gray-100 group-hover:bg-crimson group-hover:text-white transition-colors duration-300">
                       <Globe className="w-6 h-6" />

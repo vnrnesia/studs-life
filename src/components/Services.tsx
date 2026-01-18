@@ -101,10 +101,10 @@ export default function Services({ lang, dict }: ServicesProps) {
                 </li>
               ))}
             </ul>
-            <div className="mt-auto pb-24">
+            <div className="mt-auto pb-14 md:pb-24">
               <Link href={`/${lang}/contact`} className="w-full">
                 <InteractiveHoverButton
-                  className="w-full bg-white text-black border-white"
+                  className="w-full bg-white text-black mt-10 md:mt-0 border-white"
                   dotClassName="bg-crimson"
                 >
                   {dict.getStarted || "Get started"}

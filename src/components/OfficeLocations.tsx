@@ -234,7 +234,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
               transition={{ duration: 0.4 }}
               className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-6 md:p-12 text-white shadow-2xl sticky top-8"
             >
-              <div className="flex items-start gap-4 mb-8">
+              <div className="flex items-center gap-4 mb-8">
                 <div className={`w-16 h-16 rounded-2xl ${activeOfficeData.color === "green" ? "bg-green-500" : "bg-blue-500"} flex items-center justify-center shadow-lg overflow-hidden relative`}>
                   <Image
                     src={`https://flagcdn.com/w160/${activeOfficeData.countryCode}.png`}

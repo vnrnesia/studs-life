@@ -105,7 +105,7 @@ export default function LeadMagnet({ lang }: LeadMagnetProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 50 }}
                 transition={{ duration: 0.5 }}
-                className="fixed bottom-6 right-6 z-50 max-w-md w-full mx-4 md:mx-0"
+                className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 z-50 w-auto md:w-full md:max-w-md"
             >
                 <div className="relative bg-gradient-to-br from-[#C62828] to-[#8B1E1E] rounded-2xl shadow-2xl overflow-hidden border border-white/10">
 

@@ -33,11 +33,11 @@ const Card = ({
   return (
     <div
       // Sticky kapsayıcı
-      className="h-screen flex items-center justify-center sticky top-0"
+      className="h-[500px] lg:h-screen flex items-start lg:items-center justify-center sticky top-0 pt-14 lg:pt-0"
       style={{
         // Kartlar arası dikey mesafe (Top ofset)
         top: `calc(5vh + ${i * 25}px)`,
-        marginBottom: "-10vh", // Bir sonraki kartın bunun üzerine binmesini sağlar
+        marginBottom: "-5vh", // Daha sıkı bir dizilim için mobilde azaltıldı
       }}
     >
       <motion.div
@@ -88,24 +88,24 @@ export default function ProcessSection({ lang, dict }: ProcessSectionProps) {
 
   return (
     // mt-32 vb. yerine padding kullanarak scroll alanı yaratıyoruz
-    <section ref={container} className="bg-gray-50 relative pt-24 pb-48">
+    <section ref={container} className="bg-gray-50 relative pt-12 md:pt-24 pb-24 md:pb-48">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
         {/* ÖNEMLİ DÜZELTME: items-start kaldırıldı. 
             Böylece sol ve sağ kolon aynı yüksekliğe sahip olur, 
             bu da sticky elementin hareket edebileceği bir 'ray' (track) oluşturur. */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-16 relative">
 
           {/* SOL KOLON - Sticky Başlık */}
           <div className="w-full h-full">
             {/* Sticky kapsayıcı */}
-            <div className="lg:sticky lg:top-32 flex flex-col gap-8 pr-8">
+            <div className="lg:sticky lg:top-32 flex flex-col gap-4 md:gap-8 pr-0 md:pr-8">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="flex flex-col gap-8"
+                className="flex flex-col gap-4 md:gap-8"
               >
                 <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">
                   {dict.title}

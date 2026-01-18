@@ -34,20 +34,20 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
     );
   }
 
-  // On home page, show max 6 members to fit the 8-card grid (1 info + 6 members + 1 join)
-  const displayMembers = showViewAll ? filteredMembers.slice(0, 6) : filteredMembers;
+  // On home page, show max 4 members to fit the 6-card grid (1 info + 4 members + 1 join)
+  const displayMembers = showViewAll ? filteredMembers.slice(0, 4) : filteredMembers;
 
   return (
     <section className="relative pt-24 bg-white text-gray-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
 
           {/* Card 1: Our Team Static Info */}
-          <div className="bg-[#0A2647] rounded-[2rem] p-10 flex flex-col justify-start border border-white/10 h-[450px] text-white">
+          <div className="bg-[#0A2647] rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-10 flex flex-col justify-start border border-white/10 h-[300px] md:h-[450px] text-white">
             <div className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold tracking-wider uppercase text-white/50 mb-4 w-fit">
               {dict.badge || "Our Team"}
             </div>
-            <h2 className="text-4xl font-black text-white tracking-tight leading-tight">
+            <h2 className="text-2xl md:text-4xl font-black text-white tracking-tight leading-tight">
               {dict.title || "The Experts Behind Us"}
             </h2>
             <p className="text-white/80 text-sm leading-relaxed mt-auto">
@@ -64,7 +64,7 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
               onClick={() => setSelectedMember(member)}
-              className="group relative cursor-pointer h-[450px] rounded-[2rem] overflow-hidden bg-gray-100 shadow-sm hover:shadow-xl transition-all duration-500"
+              className="group relative cursor-pointer h-[300px] md:h-[450px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden bg-gray-100 shadow-sm hover:shadow-xl transition-all duration-500"
             >
               {member.photo ? (
                 <Image
@@ -80,13 +80,12 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
                 </div>
               )}
 
-              {/* Glassmorphism Overlay */}
-              <div className="absolute bottom-6 left-6 right-6">
-                <div className="backdrop-blur-md bg-white/20 border border-white/20 rounded-2xl p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                  <h3 className="text-white font-bold text-lg leading-tight uppercase tracking-tight">
+              <div className="absolute bottom-3 left-3 right-3 md:bottom-6 md:left-6 md:right-6">
+                <div className="backdrop-blur-md bg-white/20 border border-white/20 rounded-xl md:rounded-2xl p-3 md:p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="text-white font-bold text-sm md:text-lg leading-tight uppercase tracking-tight">
                     {member.fullName}
                   </h3>
-                  <p className="text-white/80 text-xs mt-1 font-medium">
+                  <p className="text-white/70 text-[10px] md:text-xs mt-1 font-medium">
                     {member.role}
                   </p>
                 </div>
@@ -95,17 +94,17 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
           ))}
 
           {/* Card 8: Join the Team CTA */}
-          <div className="bg-[#5D0E0E] rounded-[2rem] p-10 flex flex-col justify-between text-white h-[450px] relative overflow-hidden group">
+          <div className="bg-[#5D0E0E] rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-10 flex flex-col justify-between text-white h-[300px] md:h-[450px] relative overflow-hidden group">
             <div className="relative z-10">
-              <h3 className="text-3xl font-bold font-montserrat tracking-tight mb-4" dangerouslySetInnerHTML={{ __html: dict.cta_card_title || "Meet Our<br />Whole Team" }} />
-              <p className="text-white/80 text-xs leading-relaxed max-w-[80%]">
+              <h3 className="text-xl md:text-3xl font-bold font-montserrat tracking-tight mb-4" dangerouslySetInnerHTML={{ __html: dict.cta_card_title || "Meet Our<br />Whole Team" }} />
+              <p className="text-white/80 text-[10px] md:text-xs leading-relaxed max-w-[90%]">
                 {dict.cta_card_desc || "Explore the full directory of our dedicated professionals."}
               </p>
             </div>
 
             <Link
               href={`/${lang}/teams`}
-              className="relative z-10 bg-white text-[#0A2647] w-full py-4 rounded-full font-bold text-center hover:bg-white/90 transition-colors mt-auto"
+              className="relative z-10 bg-white text-[#0A2647] w-full py-3 md:py-4 rounded-full font-bold text-xs md:text-base text-center hover:bg-white/90 transition-colors mt-auto"
             >
               {dict.cta_card_button || "View All Team"}
             </Link>
