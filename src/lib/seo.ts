@@ -20,7 +20,7 @@ export function generateSEOMetadata({
     path,
     title,
     description,
-    image = '/logo.webp',
+    image = '/og-image.png',
     noIndex = false,
 }: SEOMetadataParams): Metadata {
     const canonicalUrl = `${BASE_URL}/${lang}${path}`;

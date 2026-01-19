@@ -16,6 +16,8 @@ import HowItWorks from "@/components/HowItWorks";
 import { getTeamMembers, getLatestBlogs, getLatestCities } from "@/lib/strapi";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import dynamic from "next/dynamic";
+import JsonLd from "@/components/JsonLd";
+import { WebSite, WebPage, WithContext } from "schema-dts";
 
 // Dynamic imports for below-the-fold components
 const TestimonialsCarousel = dynamic(() => import("@/components/TestimonialsCarousel"));
@@ -129,8 +131,47 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     }
   ];
 
+  const BASE_URL = 'https://studs-life.com';
+
+  const websiteSchema: WithContext<WebSite> = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Student's Life",
+    "url": BASE_URL,
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `${BASE_URL}/${lang}/search?q={search_term_string}`
+      },
+      // @ts-ignore - query-input is valid but not in types
+      "query-input": "required name=search_term_string"
+    },
+    "inLanguage": lang === 'tk' ? 'tk' : lang === 'ru' ? 'ru' : 'en'
+  };
+
+  const webPageSchema: WithContext<WebPage> = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": dict.metadata?.title || "Student's Life | Study Abroad Services",
+    "description": dict.metadata?.description || "Expert guidance for university admissions, visa processing, and relocation support.",
+    "url": `${BASE_URL}/${lang}`,
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Student's Life",
+      "url": BASE_URL
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Study Abroad Services"
+    },
+    "inLanguage": lang === 'tk' ? 'tk' : lang === 'ru' ? 'ru' : 'en'
+  };
+
   return (
     <main className="min-h-screen bg-gray-50">
+      <JsonLd<WebSite> data={websiteSchema} />
+      <JsonLd<WebPage> data={webPageSchema} />
       <Hero lang={lang} dict={dict.hero} />
 
       <ScrollReveal direction="up" distance={50}>

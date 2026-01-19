@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
-import { BreadcrumbList, WithContext } from "schema-dts";
+import { BreadcrumbList, CollectionPage, WithContext } from "schema-dts";
 
 export const revalidate = 60;
 
@@ -52,9 +52,31 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
     ],
   };
 
+  const collectionPageSchema: WithContext<CollectionPage> = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": blogDict.title_part1 + " " + blogDict.title_part2 || "Blog | Student's Life",
+    "description": lang === 'ru'
+      ? 'Узнайте больше об обучении и жизни в разных странах через наши подробные статьи.'
+      : 'Learn more about studying and living in different countries through our detailed articles.',
+    "url": `https://studs-life.com/${lang}/blog`,
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": cities.length,
+      "itemListElement": cities.slice(0, 10).map((city, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "url": `https://studs-life.com/${lang}/${city.country?.slug}/${city.slug}`,
+        "name": city.title
+      }))
+    },
+    "inLanguage": lang === 'tk' ? 'tk' : lang === 'ru' ? 'ru' : 'en'
+  };
+
   return (
     <main className="min-h-screen bg-gray-50 pt-24 pb-16">
       <JsonLd<BreadcrumbList> data={breadcrumbData} />
+      <JsonLd<CollectionPage> data={collectionPageSchema} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}

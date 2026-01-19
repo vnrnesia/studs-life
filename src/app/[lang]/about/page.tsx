@@ -11,7 +11,7 @@ import TrustSection from "../services/components/TrustSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/JsonLd";
-import { BreadcrumbList, WithContext } from "schema-dts";
+import { BreadcrumbList, AboutPage as AboutPageSchema, WithContext } from "schema-dts";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
@@ -54,9 +54,31 @@ export default async function AboutPage({
     ],
   };
 
+  const aboutPageSchema: WithContext<AboutPageSchema> = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": dict.aboutPage?.hero?.title || "About Student's Life",
+    "description": dict.metadata?.pages?.about?.description || "Learn about Student's Life - your trusted partner for international education consulting.",
+    "url": `https://studs-life.com/${lang}/about`,
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Student's Life",
+      "foundingDate": "2018",
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "minValue": 10,
+        "maxValue": 50
+      },
+      "areaServed": ["Russia", "Turkey", "China", "Belarus", "Bulgaria", "Cyprus", "Kazakhstan"],
+      "knowsAbout": ["University Admissions", "Student Visa", "Study Abroad", "International Education"]
+    },
+    "inLanguage": lang === 'tk' ? 'tk' : lang === 'ru' ? 'ru' : 'en'
+  };
+
   return (
     <main className="min-h-screen bg-gray-50">
       <JsonLd<BreadcrumbList> data={breadcrumbData} />
+      <JsonLd<AboutPageSchema> data={aboutPageSchema} />
       <AboutHero dict={dict.aboutPage.hero} />
 
       <ScrollReveal direction="up">
