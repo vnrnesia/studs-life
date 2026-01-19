@@ -341,7 +341,7 @@
         },
         "mary": {
             "city": "MARY",
-            "address": "1-nji mikraýon, 9 gatly jaý, 2-nji gat, sag tarapda 2-nji gapy"
+            "address": "40 ýyl köçesi, Merw bazary."
         },
         "dashoguz": {
             "city": "DAŞOGUZ",
@@ -432,28 +432,28 @@
         "steps": {
             "s1": {
                 "number": "01",
-                "title": "Maslahat we seljerme",
-                "desc": "Ilki bilen zerurlyklaryňyza laýyk gelýän çözgüdi saýlamak üçin siziň talaplaryňyzy öwrenýäris."
+                "title": "Mugt maslahat",
+                "desc": "Maksatlary, mümkinçilikleri we islegleri öwrenýäris, amatly ugruny we ýokary okuw mekdebini saýlaýarys"
             },
             "s2": {
                 "number": "02",
-                "title": "Meýilnamalaşdyryş",
-                "desc": "Toparymyz taslamanyň ýol kartasyny we möhletlerini kesgitläp, strategik meýilnama düzýär."
+                "title": "Çözgütleri we strategiýany saýlamak",
+                "desc": "Şahsy hereket meýilnamasyny düzýäris we iň gowy wariantlary hödürleýäris."
             },
             "s3": {
                 "number": "03",
-                "title": "Dizaýn we işläp düzmek",
-                "desc": "Dizaýnerlerimiz amatly interfeýsleri döredýär, programmistler bolsa durnukly ulgamlary gurýar."
+                "title": "Taýýarlyk we resmileşdirme",
+                "desc": "Her ädimde hemralyk edýäris: resminamalar, möhletler, talaplar, jikme-jiklikleriň gözegçiligi."
             },
             "s4": {
                 "number": "04",
-                "title": "Synag we hil gözegçiligi",
-                "desc": "Howpsuzlygy we öndürijiligi berk synagdan geçirip, işe girizmezden ozal ähli kemçilikleri düzedýäris."
+                "title": "Amala aşyrmak we goldaw",
+                "desc": "Işi guraýarys, habarlaşyp durýarys we ähli meseleleri çalt çözýäris."
             },
             "s5": {
                 "number": "05",
-                "title": "Işe girizmek we goldaw",
-                "desc": "Bökdençsiz işe girizilmegini üpjün edýäris we dowamly tehniki goldawy hödürleýäris."
+                "title": "Netije we mundan beýläkki goldaw",
+                "desc": "Ahyrky maksada ýetirýäris we ösüşiň indiki tapgyrynda kömek edýäris."
             }
         }
     },

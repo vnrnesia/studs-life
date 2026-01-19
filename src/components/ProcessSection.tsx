@@ -4,8 +4,16 @@ import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { Locale } from "@/i18n-config";
+
+// Import images
+import step1Img from "@/assets/five_steps/01.png";
+import step2Img from "@/assets/five_steps/02.png";
+import step3Img from "@/assets/five_steps/03.png";
+import step4Img from "@/assets/five_steps/04.png";
+import step5Img from "@/assets/five_steps/05.png";
 
 interface ProcessSectionProps {
   lang: Locale;
@@ -46,22 +54,35 @@ const Card = ({
           // Kart yukarı çıkarken biraz şeffaflaşsın istersen açabilirsin:
           // opacity: useTransform(progress, range, [1, 0.5]), 
         }}
-        className="relative flex flex-col h-[450px] w-full max-w-xl rounded-3xl border border-gray-200 bg-white shadow-2xl p-8 origin-top"
+        className="relative flex flex-col h-[480px] w-full max-w-xl rounded-3xl border border-gray-200 bg-white shadow-2xl p-6 md:p-8 origin-top overflow-hidden"
       >
         {/* Numara Alanı */}
-        <div className="absolute top-0 left-0 bg-red-50 px-6 py-4 rounded-br-3xl border-b border-r border-red-100">
+        <div className="absolute top-0 left-0 bg-red-50 px-6 py-4 rounded-br-3xl border-b border-r border-red-100 z-10">
           <span className="text-3xl font-bold text-red-600">
             0{step.number}
           </span>
         </div>
 
-        <div className="mt-12 flex flex-col justify-center h-full px-4">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">
-            {step.title}
-          </h3>
-          <p className="text-gray-600 leading-relaxed text-base">
-            {step.desc}
-          </p>
+        <div className="mt-8 flex flex-col h-full">
+          {/* Image Container */}
+          <div className="relative w-full h-48 md:h-56 mb-6 rounded-2xl overflow-hidden bg-gray-100 flex-shrink-0">
+            <Image
+              src={step.image}
+              alt={step.title}
+              fill
+              className="object-cover"
+              priority={i === 0}
+            />
+          </div>
+
+          <div className="px-2">
+            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
+              {step.title}
+            </h3>
+            <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+              {step.desc}
+            </p>
+          </div>
         </div>
       </motion.div>
     </div>
@@ -79,11 +100,11 @@ export default function ProcessSection({ lang, dict }: ProcessSectionProps) {
   if (!dict) return null;
 
   const steps = [
-    dict.steps.s1,
-    dict.steps.s2,
-    dict.steps.s3,
-    dict.steps.s4,
-    dict.steps.s5,
+    { ...dict.steps?.s1, image: step1Img },
+    { ...dict.steps?.s2, image: step2Img },
+    { ...dict.steps?.s3, image: step3Img },
+    { ...dict.steps?.s4, image: step4Img },
+    { ...dict.steps?.s5, image: step5Img },
   ];
 
   return (
@@ -107,6 +128,9 @@ export default function ProcessSection({ lang, dict }: ProcessSectionProps) {
                 transition={{ duration: 0.8 }}
                 className="flex flex-col gap-4 md:gap-8"
               >
+                <div className="inline-block w-fit px-4 py-1.5 rounded-full border border-red-100 bg-red-50 text-[10px] md:text-xs font-bold tracking-wider uppercase text-red-600">
+                  {dict.badge || "Наш Процесс"}
+                </div>
                 <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">
                   {dict.title}
                 </h2>
@@ -119,7 +143,7 @@ export default function ProcessSection({ lang, dict }: ProcessSectionProps) {
                     className="bg-white text-black border-gray-200"
                     dotClassName="bg-crimson"
                   >
-                    {dict.cta}
+                    {dict.cta || "Связаться"}
                   </InteractiveHoverButton>
                 </Link>
               </motion.div>

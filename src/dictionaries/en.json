@@ -735,7 +735,7 @@
         },
         "mary": {
             "city": "MARY",
-            "address": "1st microdistrict, 9-story building, 2nd floor, 2nd door on the right"
+            "address": "40 Years Street, Merv Bazaar."
         },
         "dashoguz": {
             "city": "DASHOGUZ",
@@ -828,28 +828,28 @@
         "steps": {
             "s1": {
                 "number": "01",
-                "title": "Consultation & needs analysis",
-                "desc": "We first understand your challenges to tailor a solution that fits your needs."
+                "title": "Free Consultation",
+                "desc": "We study goals, opportunities and wishes, select the optimal direction and university."
             },
             "s2": {
                 "number": "02",
-                "title": "Planning & strategy development",
-                "desc": "Our team crafts a strategic plan, defining the project roadmap and setting timelines."
+                "title": "Selection of solutions and strategy",
+                "desc": "We form an individual action plan and offer the best options."
             },
             "s3": {
                 "number": "03",
-                "title": "Design & development",
-                "desc": "Our designers create intuitive interfaces, while developers build scalable, robust systems."
+                "title": "Preparation and registration",
+                "desc": "We accompany at every stage: documents, deadlines, requirements, control of details."
             },
             "s4": {
                 "number": "04",
-                "title": "Testing & quality assurance",
-                "desc": "We rigorously test for security, performance resolving any issues before deployment."
+                "title": "Implementation and support",
+                "desc": "We organize the process, stay in touch and promptly solve all issues."
             },
             "s5": {
                 "number": "05",
-                "title": "Deployment & ongoing support",
-                "desc": "We ensure smooth deployment and provide ongoing maintenance and support."
+                "title": "Result and further support",
+                "desc": "We bring to the final goal and help at the next stage of development."
             }
         }
     },

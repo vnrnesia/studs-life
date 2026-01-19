@@ -54,7 +54,7 @@ export default function Hero({ lang, dict }: HeroProps) {
                     className="absolute inset-0 flex items-center justify-center pointer-events-none"
                 >
                     <span
-                        className="text-[28vw] md:text-[18vw] font-black text-[#06182E] font-octin tracking-widest uppercase whitespace-nowrap select-none italic -rotate-[16.5deg] md:-rotate-[3.7deg] translate-y-[30vh] md:translate-y-[20vh]"
+                        className="text-[28vw] md:text-[15vw] font-black text-[#06182E] font-[family-name:var(--font-octin)] tracking-widest uppercase whitespace-nowrap select-none italic -rotate-[16.5deg] md:-rotate-[4.0deg] translate-y-[30vh] md:translate-y-[25vh] 2xl:translate-y-[23vh]"
                         style={{ WebkitTextStroke: "2px #06182E", opacity: 0.9 }}
                     >
                         STUDENT&apos;S
