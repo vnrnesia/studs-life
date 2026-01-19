@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useContext } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { IconX } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { useOutsideClick } from "@/hooks/use-outside-click";

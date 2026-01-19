@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Manrope, Montserrat } from "next/font/google";
 import "../globals.css";
 import { i18n, type Locale } from "@/i18n-config";
 import Navbar from "@/components/Navbar";
@@ -11,6 +11,7 @@ import { Organization } from "schema-dts";
 import CookieConsent from "@/components/CookieConsent";
 
 const manrope = Manrope({ subsets: ["latin", "cyrillic"], variable: "--font-manrope" });
+const montserrat = Montserrat({ subsets: ["latin", "cyrillic"], variable: "--font-montserrat", weight: ["400", "700", "800", "900"] });
 
 const BASE_URL = 'https://studs-life.com';
 
@@ -106,7 +107,7 @@ export default async function RootLayout({
           }}
         />
       </head>
-      <body className={`${manrope.variable} font-sans antialiased bg-gray-50 text-gray-900 w-full`}>
+      <body className={`${manrope.variable} ${montserrat.variable} font-sans antialiased bg-gray-50 text-gray-900 w-full`}>
         {/* Skip to main content link for accessibility */}
         <a
           href="#main-content"

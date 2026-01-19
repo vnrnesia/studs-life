@@ -54,7 +54,7 @@ export default function Hero({ lang, dict }: HeroProps) {
                     className="absolute inset-0 flex items-center justify-center pointer-events-none"
                 >
                     <span
-                        className="text-[28vw] md:text-[15vw] font-black text-[#06182E] font-[family-name:var(--font-octin)] tracking-widest uppercase whitespace-nowrap select-none italic -rotate-[16.5deg] md:-rotate-[4.0deg] translate-y-[30vh] md:translate-y-[25vh] 2xl:translate-y-[23vh]"
+                        className="text-[14vw] md:text-[15vw] font-black text-[#06182E] font-[family-name:var(--font-octin)] tracking-widest uppercase whitespace-nowrap select-none italic -rotate-[16.5deg] md:-rotate-[4.0deg] translate-y-[30vh] md:translate-y-[25vh] 2xl:translate-y-[23vh]"
                         style={{ WebkitTextStroke: "2px #06182E", opacity: 0.9 }}
                     >
                         STUDENT&apos;S
@@ -73,17 +73,17 @@ export default function Hero({ lang, dict }: HeroProps) {
                 >
 
                     {/* Ana Başlık */}
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black font-montserrat text-white leading-[0.9] uppercase drop-shadow-md px-2 sm:px-0 tracking-tighter">
+                    <h1 className="text-[1.75rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black font-montserrat text-white leading-[0.9] uppercase drop-shadow-md px-4 sm:px-0 tracking-tight sm:tracking-tighter">
                         {dict.title}
                     </h1>
 
                     {/* Alt Başlık */}
-                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-100 tracking-wide px-2 sm:px-0">
+                    <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-gray-100 tracking-wide px-4 sm:px-0">
                         {dict.subtitle}
                     </h2>
 
                     {/* Açıklama */}
-                    <p className="text-base sm:text-lg text-gray-100 font-medium max-w-lg mx-auto md:mx-0 leading-relaxed opacity-90 px-4 sm:px-0">
+                    <p className="text-sm sm:text-lg text-gray-100 font-medium max-w-lg mx-auto md:mx-0 leading-relaxed opacity-90 px-6 sm:px-0">
                         {dict.description}
                     </p>
 
@@ -111,6 +111,7 @@ export default function Hero({ lang, dict }: HeroProps) {
                             alt="International student celebrating study abroad success"
                             className="object-contain w-auto h-full object-bottom"
                             priority
+                            fetchPriority="high"
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
                     </div>

@@ -8,6 +8,7 @@
   --font-sans: var(--font-manrope);
   --font-mono: var(--font-geist-mono);
   --font-octin: 'Octin Stencil', sans-serif;
+  --font-montserrat: var(--font-montserrat);
   --color-navy: #06182E;
   --color-crimson: #C00000;
   --color-sidebar-ring: var(--sidebar-ring);
