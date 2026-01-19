@@ -1,5 +1,6 @@
 "use client";
 
+// 19.01.26 vercel deploy fix
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Home, ArrowLeft } from "lucide-react";
@@ -14,7 +15,7 @@ export default function NotFound() {
                 <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#0A2647] rounded-full blur-[120px] opacity-30" />
             </div>
 
-            <div className="max-w-3xl w-full text-center relative z-10">
+            <div className="max-w-3xl w-full text-center relative z-9">
 
                 {/* Animated 404 Text */}
                 <motion.div
