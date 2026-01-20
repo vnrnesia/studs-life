@@ -91,7 +91,7 @@ export const Carousel = ({ items, initialScroll = 0, title }: CarouselProps) => 
     <CarouselContext.Provider
       value={{ onCardClose: handleCardClose, currentIndex }}
     >
-      <div className="relative w-full py-10">
+      <div className="relative w-full py-10 overflow-x-hidden">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 pb-4 md:px-8">
           {title && (
             <div className="text-left font-sans text-xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200">
