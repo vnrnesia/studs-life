@@ -29,9 +29,9 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 
 // New Background Images
 import planeBg from "@/assets/our_services/flight_tickets_photo.webp";
-import universityBg from "@/assets/our_services/university.webp";
-import visaBg from "@/assets/our_services/visa.webp";
-import translationBg from "@/assets/our_services/translation.webp";
+import universityBg from "@/assets/our_services/university.png";
+import visaBg from "@/assets/our_services/visa.png";
+import translationBg from "@/assets/our_services/document.png";
 import accommodationBg from "@/assets/our_services/accommodation_photo.webp";
 
 function cn(...inputs: ClassValue[]) {
@@ -93,14 +93,16 @@ export default function Services({ lang, dict }: ServicesProps) {
       case "feature-list":
         return (
           <div className="h-full flex flex-col pt-10">
-            <ul className="space-y-4">
-              {service.features.map((feature: string, idx: number) => (
-                <li key={idx} className="flex items-center text-gray-100 text-sm">
-                  <span className="mr-3 text-crimson">✦</span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
+            <div className="bg-black/20 backdrop-blur-md border border-white/10 p-4 rounded-2xl w-full">
+              <ul className="space-y-4">
+                {service.features.map((feature: string, idx: number) => (
+                  <li key={idx} className="flex items-center text-gray-100 text-sm font-medium">
+                    <span className="mr-3 text-crimson drop-shadow-md">✦</span>
+                    <span className="drop-shadow-sm">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
             <div className="mt-auto pb-14 md:pb-24">
               <Link href={`/${lang}/contact`} className="w-full">
                 <InteractiveHoverButton
@@ -180,9 +182,10 @@ export default function Services({ lang, dict }: ServicesProps) {
               delay={index * 0.1}
               className={service.className}
             >
-              <div
+              <Link
+                href={`/${lang}/contact`}
                 className={cn(
-                  "group relative overflow-hidden rounded-[2rem] transition-all duration-300 hover:shadow-xl border border-gray-100 h-full w-full"
+                  "group relative overflow-hidden rounded-[2rem] transition-all duration-300 hover:shadow-xl border border-gray-100 h-full w-full block"
                 )}
               >
                 {/* Background Layer (Full Size) */}
@@ -194,7 +197,7 @@ export default function Services({ lang, dict }: ServicesProps) {
                       fill
                       loading="lazy"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                     />
                   </div>
                 )}
@@ -204,36 +207,57 @@ export default function Services({ lang, dict }: ServicesProps) {
                   "relative z-10 h-full pb-8 flex flex-col",
                   (service.key === "accommodation" || service.key === "ticket" || service.key === "translation") ? "px-6 pt-5" : "px-8 pt-6"
                 )}>
-                  {/* Quarter Circle Decoration */}
-                  {(service.key === "ticket" || service.key === "accommodation") && (
-                    <div className={cn(
-                      "absolute top-0 left-0 bg-crimson z-0 opacity-100 rounded-br-[4rem]",
-                      service.key === "ticket" ? "w-52 h-28" : "w-72 h-24"
-                    )} />
-                  )}
-
-                  <div className="relative z-10">
+                  {/* Glass Container for All Check */}
+                  <div className={cn(
+                    "relative z-10 backdrop-blur-md border border-white/10 p-4 rounded-2xl bg-crimson/20",
+                    (service.key === "ticket" || service.key === "accommodation")
+                      ? "w-fit flex flex-col"
+                      : "inline-block"
+                  )}>
                     <h3 className={cn(
                       "font-bold font-montserrat mb-1",
                       (service.key === "accommodation" || service.key === "translation") ? "text-lg" : "text-xl",
-                      (service.bgImage || service.type === "image-card" || service.type === "feature-list") ? "text-white" : "text-gray-900"
+                      "text-white"
                     )}>
                       {dict[service.key] || service.label}
                     </h3>
                     <p className={cn(
                       "font-medium",
                       (service.key === "accommodation" || service.key === "translation") ? "text-xs" : "text-sm",
-                      (service.bgImage || service.type === "image-card" || service.type === "feature-list") ? "text-gray-100" : "text-gray-500"
+                      "text-gray-100"
                     )}>
                       {dict[service.key + 'Desc'] || service.label}
                     </p>
                   </div>
 
                   <div className="flex-grow">
-                    {renderCardContent(service)}
+                    {/* Render Card Content with Custom Button for Feature List */}
+                    {service.type === "feature-list" ? (
+                      <div className="h-full flex flex-col pt-10">
+                        <div className="bg-crimson/20 backdrop-blur-md border border-white/10 p-4 rounded-2xl w-full">
+                          <ul className="space-y-4">
+                            {service.features.map((feature: string, idx: number) => (
+                              <li key={idx} className="flex items-center text-gray-100 text-sm font-medium">
+                                <span className="mr-3 text-crimson drop-shadow-md">✦</span>
+                                <span className="drop-shadow-sm">{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="mt-auto pb-14 md:pb-24">
+                          <div className="w-full inline-block mt-10 md:mt-0">
+                            <div className="w-full bg-crimson/20 backdrop-blur-md border border-white/20 text-white py-3 px-6 rounded-xl text-center font-bold transition-all hover:bg-crimson/30 shadow-lg">
+                              {dict.getStarted || "Get started"}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      renderCardContent(service)
+                    )}
                   </div>
                 </div>
-              </div>
+              </Link>
             </ScrollReveal>
           ))}
         </div>

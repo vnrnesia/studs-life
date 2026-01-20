@@ -1,3 +1,10 @@
+import Image from "next/image";
+import icon1 from "@/assets/departments_grid/1.png";
+import icon2 from "@/assets/departments_grid/2.png";
+import icon3 from "@/assets/departments_grid/3.png";
+import icon4 from "@/assets/departments_grid/4.png";
+import icon5 from "@/assets/departments_grid/5.png";
+
 interface DepartmentsGridProps {
   dict: {
     title: string;
@@ -9,7 +16,7 @@ interface DepartmentsGridProps {
 }
 
 export default function DepartmentsGrid({ dict }: DepartmentsGridProps) {
-  const icons = ["🌍", "💼", "🤝", "📱", "📝"];
+  const icons = [icon1, icon2, icon3, icon4, icon5];
 
   return (
     <section className="py-24 bg-white">
@@ -20,11 +27,18 @@ export default function DepartmentsGrid({ dict }: DepartmentsGridProps) {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {dict.list.map((dept: any, index: number) => (
-            <div 
+            <div
               key={index}
-              className="group bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+              className="group bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center"
             >
-              <div className="text-5xl mb-6">{icons[index]}</div>
+              <div className="mb-6 relative w-20 h-20">
+                <Image
+                  src={icons[index] || icon1}
+                  alt={dept.title}
+                  fill
+                  className="object-contain"
+                />
+              </div>
               <h3 className="text-xl font-bold text-slate-800 mb-3">
                 {dept.title}
               </h3>

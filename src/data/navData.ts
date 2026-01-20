@@ -4,7 +4,6 @@ import {
     Briefcase,
     BookOpen,
     LayoutGrid,
-    Award,
     Globe,
     GraduationCap
 } from 'lucide-react';
@@ -33,12 +32,6 @@ export const companyLinks = [
         titleKey: 'services',
         descKey: 'servicesDesc',
         href: '/services'
-    },
-    {
-        icon: Award,
-        titleKey: 'pricing',
-        descKey: 'pricingDesc',
-        href: '/#contact'
     },
     {
         icon: BookOpen,
