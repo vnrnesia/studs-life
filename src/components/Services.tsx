@@ -192,6 +192,8 @@ export default function Services({ lang, dict }: ServicesProps) {
                       src={service.bgImage || "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=1000"}
                       alt={dict[service.key] || service.label}
                       fill
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                       className="object-cover"
                     />
                   </div>

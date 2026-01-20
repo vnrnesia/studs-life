@@ -107,7 +107,7 @@ export default function HowItWorks({
 
                 <span className={cn(
                   "relative z-10 font-mono text-xs md:text-sm font-medium",
-                  isActive ? "text-gray-900" : "text-gray-400"
+                  isActive ? "text-gray-900" : "text-gray-500"
                 )}>
                   {step.stepNumber}
                 </span>
@@ -129,7 +129,7 @@ export default function HowItWorks({
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="text-6xl font-black text-gray-100 mb-6">
+                <div className="text-6xl font-black text-gray-200 mb-6">
                   {activeStep.stepNumber}
                 </div>
                 <h3 className="text-3xl font-bold text-gray-900 mb-6">

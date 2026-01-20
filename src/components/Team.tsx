@@ -44,7 +44,7 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
 
           {/* Card 1: Our Team Static Info */}
           <div className="bg-[#0A2647] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-10 flex flex-col justify-start border border-white/10 h-[340px] md:h-[450px] text-white overflow-hidden">
-            <div className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold tracking-wider uppercase text-white/50 mb-3 md:mb-4 w-fit">
+            <div className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold tracking-wider uppercase text-white/70 mb-3 md:mb-4 w-fit">
               {dict.badge || "Our Team"}
             </div>
             <h2 className="text-xl md:text-4xl font-black text-white tracking-tight leading-tight">
@@ -178,7 +178,7 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
                 <div className="hidden md:block mb-8">
                   <h3 className="text-4xl font-bold uppercase mb-2 tracking-tight text-gray-900">{selectedMember.fullName}</h3>
                   <p className="text-crimson font-serif italic text-xl">{selectedMember.role}</p>
-                  <div className="flex items-center gap-2 text-gray-400 mt-2 text-sm font-medium">
+                  <div className="flex items-center gap-2 text-gray-500 mt-2 text-sm font-medium">
                     <MapPin className="w-4 h-4" />
                     <span>{selectedMember.city}</span>
                   </div>

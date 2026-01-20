@@ -95,7 +95,16 @@ export default async function RootLayout({
         {/* DNS Prefetch for Strapi */}
         <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'} />
 
-        {/* Custom font with display swap for better CLS */}
+        {/* Preload critical font to reduce LCP blocking */}
+        <link
+          rel="preload"
+          href="/fonts/octin-stencil.woff"
+          as="font"
+          type="font/woff"
+          crossOrigin="anonymous"
+        />
+
+        {/* Custom font with display optional for better LCP */}
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -103,7 +112,7 @@ export default async function RootLayout({
                 font-family: 'Octin Stencil';
                 font-style: normal;
                 font-weight: 400;
-                font-display: swap;
+                font-display: optional;
                 src: url('/fonts/octin-stencil.woff') format('woff');
               }
             `

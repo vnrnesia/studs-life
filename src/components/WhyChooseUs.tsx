@@ -56,7 +56,7 @@ export default function WhyChooseUs({ lang, dict }: WhyChooseUsProps) {
 
           {/* Ana Başlık */}
           <div className="mb-10 lg:mb-12 relative">
-            <div className="inline-block px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] md:text-xs font-bold tracking-wider uppercase text-white/50 mb-6">
+            <div className="inline-block px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] md:text-xs font-bold tracking-wider uppercase text-white/70 mb-6">
               {dict.badge || "Why Choose Us"}
             </div>
             <h2 className="font-black text-5xl md:text-6xl lg:text-7xl leading-[0.9] tracking-tighter">

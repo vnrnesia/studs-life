@@ -396,7 +396,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
 
           {/* Mobile Languages */}
           <div className="mt-8">
-            <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Language</div>
+            <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Language</div>
             <div className="grid grid-cols-1 gap-2">
               {i18n.locales.map((locale) => {
                 const flags = { en: 'gb', ru: 'ru', tk: 'tm' };
