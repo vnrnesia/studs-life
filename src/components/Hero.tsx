@@ -112,6 +112,7 @@ export default function Hero({ lang, dict }: HeroProps) {
                             className="object-contain w-auto h-full object-bottom"
                             priority
                             fetchPriority="high"
+                            placeholder="blur"
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
                     </div>

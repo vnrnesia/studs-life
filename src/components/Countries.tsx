@@ -237,6 +237,7 @@ export default function Countries({ lang, dict }: CountriesProps) {
                     src={country.img}
                     alt={countryData.name}
                     fill
+                    loading="lazy"
                     className="object-cover transition-transform duration-1000 group-hover:scale-110 pointer-events-none"
                     draggable={false}
                     sizes="(max-width: 768px) 100vw, 50vw"

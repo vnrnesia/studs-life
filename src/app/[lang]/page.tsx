@@ -3,30 +3,13 @@ import { Locale } from "@/i18n-config";
 import { Metadata } from "next";
 import { generateSEOMetadata } from "@/lib/seo";
 import Hero from "@/components/Hero";
-import Services from "@/components/Services";
-import Countries from "@/components/Countries";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import Team from "@/components/Team";
-import Statistics from "@/components/Statistics";
-import ContactFormSection from "@/components/ContactFormSection";
-import Form from "@/components/Form";
-import FeatureTabs from "@/components/FeatureTabs";
-import HowItWorks from "@/components/HowItWorks";
-
-import { getTeamMembers, getLatestBlogs, getLatestCities } from "@/lib/strapi";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 import dynamic from "next/dynamic";
 import JsonLd from "@/components/JsonLd";
 import { WebSite, WebPage, WithContext } from "schema-dts";
 
-// Dynamic imports for below-the-fold components
-const TestimonialsCarousel = dynamic(() => import("@/components/TestimonialsCarousel"));
-const LatestJournal = dynamic(() => import("@/components/LatestJournal"));
-const OfficeLocations = dynamic(() => import("@/components/OfficeLocations"));
-const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
-const LeadMagnet = dynamic(() => import("@/components/LeadMagnet"));
+import { getTeamMembers, getLatestBlogs, getLatestCities } from "@/lib/strapi";
 
-// Import Support Icons
+// Import Support Icons (small, keep static)
 import supportUniversityIcon from "@/assets/support_icons/admission.webp";
 import supportVisaIcon from "@/assets/support_icons/visa.webp";
 import supportAccommodationIcon from "@/assets/support_icons/accommadation.webp";
@@ -42,6 +25,21 @@ import careerImg from "@/assets/student_support/career.webp";
 import consultationImg from "@/assets/how_it_works/free_consultation.webp";
 import preparationImg from "@/assets/how_it_works/visa.webp";
 import departureImg from "@/assets/how_it_works/departure_support.webp";
+
+// Dynamic imports for ALL below-the-fold components (performance optimization)
+const FeatureTabs = dynamic(() => import("@/components/FeatureTabs"), { ssr: true });
+const Services = dynamic(() => import("@/components/Services"), { ssr: true });
+const Countries = dynamic(() => import("@/components/Countries"), { ssr: true });
+const HowItWorks = dynamic(() => import("@/components/HowItWorks"), { ssr: true });
+const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"), { ssr: true });
+const Team = dynamic(() => import("@/components/Team"), { ssr: true });
+const Statistics = dynamic(() => import("@/components/Statistics"), { ssr: true });
+const ContactFormSection = dynamic(() => import("@/components/ContactFormSection"), { ssr: true });
+const TestimonialsCarousel = dynamic(() => import("@/components/TestimonialsCarousel"));
+const LatestJournal = dynamic(() => import("@/components/LatestJournal"));
+const OfficeLocations = dynamic(() => import("@/components/OfficeLocations"));
+const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
+const LeadMagnet = dynamic(() => import("@/components/LeadMagnet"));
 
 export const revalidate = 60;
 
@@ -176,61 +174,40 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     <main className="min-h-screen bg-gray-50">
       <JsonLd<WebSite> data={websiteSchema} />
       <JsonLd<WebPage> data={webPageSchema} />
+
+      {/* Hero - Critical above-the-fold, keep static */}
       <Hero lang={lang} dict={dict.hero} />
 
-      <ScrollReveal direction="up" distance={50}>
-        <FeatureTabs
-          features={features}
-          title={dict.featureTabs?.title || "Comprehensive Student Support"}
-          subtitle={dict.featureTabs?.subtitle || "Detailed assistance at every step of your study abroad journey."}
-        />
-      </ScrollReveal>
+      {/* All below-the-fold components - No ScrollReveal wrappers for performance */}
+      <FeatureTabs
+        features={features}
+        title={dict.featureTabs?.title || "Comprehensive Student Support"}
+        subtitle={dict.featureTabs?.subtitle || "Detailed assistance at every step of your study abroad journey."}
+      />
 
-      <ScrollReveal direction="up" delay={0.1}>
-        <Services lang={lang} dict={dict.services} />
-      </ScrollReveal>
+      <Services lang={lang} dict={dict.services} />
 
-      <ScrollReveal direction="up">
-        <Countries lang={lang} dict={dict.countries} />
-      </ScrollReveal>
+      <Countries lang={lang} dict={dict.countries} />
 
-      <ScrollReveal direction="up">
-        <HowItWorks steps={howItWorksSteps} dict={dict.howItWorks} lang={lang} />
-      </ScrollReveal>
+      <HowItWorks steps={howItWorksSteps} dict={dict.howItWorks} lang={lang} />
 
-      <ScrollReveal direction="up">
-        <WhyChooseUs lang={lang} dict={dict.whyUs} />
-      </ScrollReveal>
+      <WhyChooseUs lang={lang} dict={dict.whyUs} />
 
-      <ScrollReveal direction="up">
-        <Team lang={lang} dict={dict.team} teamMembers={teamMembers.slice(0, 6)} showViewAll={true} />
-      </ScrollReveal>
+      <Team lang={lang} dict={dict.team} teamMembers={teamMembers.slice(0, 6)} showViewAll={true} />
 
-      <ScrollReveal direction="up">
-        <Statistics lang={lang} dict={dict.statistics} />
-      </ScrollReveal>
+      <Statistics lang={lang} dict={dict.statistics} />
 
-      <ScrollReveal direction="up">
-        <TestimonialsCarousel title={dict.team.testimonials_title} videoCategory={dict.team.videoTestimonialCategory} />
-      </ScrollReveal>
+      <TestimonialsCarousel title={dict.team.testimonials_title} videoCategory={dict.team.videoTestimonialCategory} />
 
-      <ScrollReveal direction="up">
-        <ContactFormSection lang={lang} dict={dict.contactForm} />
-      </ScrollReveal>
+      <ContactFormSection lang={lang} dict={dict.contactForm} />
 
-      <ScrollReveal direction="up">
-        <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestCities} />
-      </ScrollReveal>
+      <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestCities} />
 
-      {/* Lead Magnet - Below Blog */}
       <LeadMagnet lang={lang} />
 
-      {/* ProcessSection - No ScrollReveal to preserve sticky animation */}
       <ProcessSection lang={lang} dict={(dict as any).processWorkflow} />
 
-      <ScrollReveal direction="up">
-        <OfficeLocations lang={lang} dict={dict.offices} />
-      </ScrollReveal>
+      <OfficeLocations lang={lang} dict={dict.offices} />
     </main>
   );
 }
