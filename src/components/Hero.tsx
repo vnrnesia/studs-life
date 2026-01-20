@@ -100,9 +100,9 @@ export default function Hero({ lang, dict }: HeroProps) {
                 {/* --- SAĞ KOLON: HERO GUY IMAGE --- */}
                 <motion.div
                     style={{ y: yImage }}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1, ease: "easeOut" }}
+                    // initial={{ opacity: 0, scale: 0.9 }} -> Removed for LCP
+                    // animate={{ opacity: 1, scale: 1 }} -> Removed for LCP
+                    // transition={{ duration: 1, ease: "easeOut" }} -> Removed for LCP
                     className="flex relative h-full w-full justify-center md:justify-end items-end"
                 >
                     <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[90vh] flex items-end justify-center md:justify-end translate-y-12 md:translate-y-20">
