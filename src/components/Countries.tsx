@@ -250,11 +250,14 @@ export default function Countries({ lang, dict }: CountriesProps) {
       </div>
 
       {/* Pagination Dots */}
-      <div className="flex justify-center gap-3 mt-8">
-        {countriesList.map((_, index) => (
+      <div className="flex justify-center gap-3 mt-8" role="tablist" aria-label="Country slides">
+        {countriesList.map((country, index) => (
           <button
             key={index}
             onClick={() => scrollToIndex(index)}
+            aria-label={`Go to slide ${index + 1}`}
+            aria-selected={activeIndex === index}
+            role="tab"
             className={`h-2.5 rounded-full transition-all duration-300 ${activeIndex === index ? "w-8 bg-crimson" : "w-2.5 bg-gray-300 hover:bg-gray-400"
               }`}
           />

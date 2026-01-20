@@ -72,6 +72,7 @@ export default function Footer({ lang, dict }: FooterProps) {
                     href="https://instagram.com/defyzerglobal"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Follow us on Instagram"
                     className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#06182E] transition-all duration-300"
                   >
                     <Instagram className="w-5 h-5" />
@@ -80,6 +81,7 @@ export default function Footer({ lang, dict }: FooterProps) {
                     href="https://facebook.com/defyzerglobal"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Follow us on Facebook"
                     className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#06182E] transition-all duration-300"
                   >
                     <Facebook className="w-5 h-5" />
@@ -88,6 +90,7 @@ export default function Footer({ lang, dict }: FooterProps) {
                     href="https://twitter.com/defyzerglobal"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Follow us on Twitter"
                     className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#06182E] transition-all duration-300"
                   >
                     <Twitter className="w-5 h-5" />
