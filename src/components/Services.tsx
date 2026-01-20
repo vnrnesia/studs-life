@@ -92,7 +92,7 @@ export default function Services({ lang, dict }: ServicesProps) {
     switch (service.type) {
       case "feature-list":
         return (
-          <div className="h-full flex flex-col pt-16">
+          <div className="h-full flex flex-col pt-10">
             <ul className="space-y-4">
               {service.features.map((feature: string, idx: number) => (
                 <li key={idx} className="flex items-center text-gray-100 text-sm">

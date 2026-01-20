@@ -41,7 +41,7 @@ export default function WhyChooseUs({ lang, dict }: WhyChooseUsProps) {
         style={{ y: yBgText }}
         className="absolute bottom-[0%] left-0 w-full select-none pointer-events-none opacity-5 px-4 text-center overflow-hidden"
       >
-        <span className="text-[12vw] md:text-[9vw] font-black uppercase tracking-widest text-white leading-none block w-full overflow-hidden text-ellipsis">
+        <span className="text-[8vw] sm:text-[9vw] md:text-[8vw] lg:text-[7vw] font-black uppercase tracking-widest text-white leading-none block w-full">
           {dict.decoration}
         </span>
       </motion.div>

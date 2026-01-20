@@ -43,14 +43,14 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
 
           {/* Card 1: Our Team Static Info */}
-          <div className="bg-[#0A2647] rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-10 flex flex-col justify-start border border-white/10 h-[300px] md:h-[450px] text-white">
-            <div className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold tracking-wider uppercase text-white/50 mb-4 w-fit">
+          <div className="bg-[#0A2647] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-10 flex flex-col justify-start border border-white/10 h-[340px] md:h-[450px] text-white overflow-hidden">
+            <div className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold tracking-wider uppercase text-white/50 mb-3 md:mb-4 w-fit">
               {dict.badge || "Our Team"}
             </div>
-            <h2 className="text-2xl md:text-4xl font-black text-white tracking-tight leading-tight">
+            <h2 className="text-xl md:text-4xl font-black text-white tracking-tight leading-tight">
               {dict.title || "The Experts Behind Us"}
             </h2>
-            <p className="text-white/80 text-sm leading-relaxed mt-auto">
+            <p className="text-white/80 text-xs md:text-sm leading-relaxed mt-auto line-clamp-5 md:line-clamp-none">
               {dict.description || "Dedicated individuals passionate about holistic well-being. Meet the diverse team driving innovation and shaping the future of wellness."}
             </p>
           </div>
@@ -64,7 +64,7 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
               onClick={() => setSelectedMember(member)}
-              className="group relative cursor-pointer h-[300px] md:h-[450px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden bg-gray-100 shadow-sm hover:shadow-xl transition-all duration-500"
+              className="group relative cursor-pointer h-[340px] md:h-[450px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden bg-gray-100 shadow-sm hover:shadow-xl transition-all duration-500"
             >
               {member.photo ? (
                 <Image
@@ -94,7 +94,7 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
           ))}
 
           {/* Card 8: Join the Team CTA */}
-          <div className="bg-[#5D0E0E] rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-10 flex flex-col justify-between text-white h-[300px] md:h-[450px] relative overflow-hidden group">
+          <div className="bg-[#5D0E0E] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-10 flex flex-col justify-between text-white h-[340px] md:h-[450px] relative overflow-hidden group">
             <div className="relative z-10">
               <h3 className="text-xl md:text-3xl font-bold font-montserrat tracking-tight mb-4" dangerouslySetInnerHTML={{ __html: dict.cta_card_title || "Meet Our<br />Whole Team" }} />
               <p className="text-white/80 text-[10px] md:text-xs leading-relaxed max-w-[90%]">

@@ -107,7 +107,7 @@ export default async function RootLayout({
           }}
         />
       </head>
-      <body className={`${manrope.variable} ${montserrat.variable} font-sans antialiased bg-gray-50 text-gray-900 w-full`}>
+      <body className={`${manrope.variable} ${montserrat.variable} font-sans antialiased bg-gray-50 text-gray-900 w-full overflow-x-hidden`}>
         {/* Skip to main content link for accessibility */}
         <a
           href="#main-content"
