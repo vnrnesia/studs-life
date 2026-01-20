@@ -140,9 +140,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-/* Mobile Overflow Prevention */
-html,
-body {
-  overflow-x: hidden;
-}

@@ -81,7 +81,7 @@ export default async function RootLayout({
   console.log('Loaded dictionary for:', lang, 'Keys:', Object.keys(dict || {}));
 
   return (
-    <html lang={lang} className="overflow-x-hidden">
+    <html lang={lang}>
       <head>
         {/* Preconnect to external domains for faster loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -107,7 +107,7 @@ export default async function RootLayout({
           }}
         />
       </head>
-      <body className={`${manrope.variable} ${montserrat.variable} font-sans antialiased bg-gray-50 text-gray-900 w-full overflow-x-hidden`}>
+      <body className={`${manrope.variable} ${montserrat.variable} font-sans antialiased bg-gray-50 text-gray-900 w-full`}>
         {/* Skip to main content link for accessibility */}
         <a
           href="#main-content"
