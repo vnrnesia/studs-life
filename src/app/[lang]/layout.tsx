@@ -81,7 +81,7 @@ export default async function RootLayout({
   console.log('Loaded dictionary for:', lang, 'Keys:', Object.keys(dict || {}));
 
   return (
-    <html lang={lang}>
+    <html lang={lang} className="overflow-x-hidden">
       <head>
         {/* Preconnect to external domains for faster loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

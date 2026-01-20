@@ -51,10 +51,10 @@ export default function Hero({ lang, dict }: HeroProps) {
                 {/* Large Parallax Text */}
                 <motion.div
                     style={{ y: yText }}
-                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                    className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
                 >
                     <span
-                        className="text-[14vw] md:text-[15vw] font-black text-[#06182E] font-[family-name:var(--font-octin)] tracking-widest uppercase whitespace-nowrap select-none italic -rotate-[16.5deg] md:-rotate-[4.0deg] translate-y-[30vh] md:translate-y-[25vh] 2xl:translate-y-[23vh]"
+                        className="text-[14vw] md:text-[15vw] font-black text-[#06182E] font-[family-name:var(--font-octin)] tracking-widest uppercase whitespace-nowrap select-none italic -rotate-[16.5deg] md:-rotate-[4.0deg] translate-y-[30vh] md:translate-y-[25vh] 2xl:translate-y-[23vh] max-w-full"
                         style={{ WebkitTextStroke: "2px #06182E", opacity: 0.9 }}
                     >
                         STUDENT&apos;S
