@@ -109,7 +109,7 @@ export default function ProcessSection({ lang, dict }: ProcessSectionProps) {
 
   return (
     // mt-32 vb. yerine padding kullanarak scroll alanı yaratıyoruz
-    <section ref={container} className="bg-gray-50 relative pt-12 md:pt-24 pb-24 md:pb-48">
+    <section ref={container} className="bg-gray-50 relative pt-12 md:pt-24 pb-24 md:pb-48 ">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
         {/* ÖNEMLİ DÜZELTME: items-start kaldırıldı. 

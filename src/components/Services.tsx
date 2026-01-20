@@ -156,7 +156,7 @@ export default function Services({ lang, dict }: ServicesProps) {
   };
 
   return (
-    <section id="services" className="relative py-16 bg-gray-50/50">
+    <section id="services" className="relative py-16 bg-gray-50/50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal direction="up">
           <div className="text-center mb-16">

@@ -94,7 +94,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
   };
 
   return (
-    <section id="contact" className="py-16 bg-white">
+    <section id="contact" className="py-16 bg-white overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
         <div className="relative overflow-hidden rounded-[2.5rem] bg-[#06182E] max-w-6xl mx-auto">
           {/* Background Image Wrapper */}
