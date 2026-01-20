@@ -208,7 +208,7 @@ export default function Services({ lang, dict }: ServicesProps) {
                   {(service.key === "ticket" || service.key === "accommodation") && (
                     <div className={cn(
                       "absolute top-0 left-0 bg-crimson z-0 opacity-100 rounded-br-[4rem]",
-                      service.key === "ticket" ? "w-52 h-28" : "w-44 h-24"
+                      service.key === "ticket" ? "w-52 h-28" : "w-72 h-24"
                     )} />
                   )}
 

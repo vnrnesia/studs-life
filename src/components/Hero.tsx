@@ -42,11 +42,7 @@ export default function Hero({ lang, dict }: HeroProps) {
                     className="absolute inset-0 bg-navy"
                 />
 
-                {/* Background Lighting Effects (Overlaying Navy) */}
-                <div className="absolute inset-0 z-[1] overflow-hidden">
-                    <div className="absolute top-[10%] right-[-10%] w-[80%] h-[80%] bg-white/12 rounded-full blur-[180px]" />
-                    <div className="absolute bottom-[-10%] right-[-5%] w-[50%] h-[50%] bg-white/5 rounded-full blur-[140px]" />
-                </div>
+                {/* Background Lighting Effects Removed */}
 
                 {/* Large Parallax Text */}
                 <motion.div
