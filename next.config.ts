@@ -5,6 +5,11 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
 
+  // Tree-shake icon libraries for smaller bundles
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'framer-motion', '@tabler/icons-react'],
+  },
+
   images: {
     remotePatterns: [
       {

@@ -328,6 +328,5 @@ export async function getLatestCities(locale: string = 'en'): Promise<City[]> {
     });
 
     const { data } = await strapiClient.get<StrapiResponse<City[]>>(`/cities?${query}`);
-    console.log("Latest Cities Data:", JSON.stringify(data.data, null, 2)); // Debug log
     return data.data;
 }

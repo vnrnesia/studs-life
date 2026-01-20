@@ -68,10 +68,14 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: langParam } = await params;
   const lang = langParam as Locale;
-  const dict = await getDictionary(lang);
-  const teamMembers = await getTeamMembers(lang);
-  const latestBlogs = await getLatestBlogs(lang);
-  const latestCities = await getLatestCities(lang);
+
+  // Parallel API calls for better performance
+  const [dict, teamMembers, latestBlogs, latestCities] = await Promise.all([
+    getDictionary(lang),
+    getTeamMembers(lang),
+    getLatestBlogs(lang),
+    getLatestCities(lang),
+  ]);
 
   const features = [
     {

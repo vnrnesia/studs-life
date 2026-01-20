@@ -76,9 +76,12 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>;
 }>) {
   const { lang } = await params;
-  const dict = await getDictionary(lang as Locale);
-  const countries = await getCountriesWithCities(lang);
-  console.log('Loaded dictionary for:', lang, 'Keys:', Object.keys(dict || {}));
+
+  // Parallel API calls for better performance
+  const [dict, countries] = await Promise.all([
+    getDictionary(lang as Locale),
+    getCountriesWithCities(lang),
+  ]);
 
   return (
     <html lang={lang}>
