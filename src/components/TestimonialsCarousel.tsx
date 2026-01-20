@@ -80,8 +80,8 @@ const rawTestimonials = [
   {
     category: "Video Testimonial",
     title: "Салим Х, 21 год",
-    src: "https://img.youtube.com/vi/p8sXo2xIiXo/maxresdefault.jpg",
-    videoUrl: "https://youtube.com/shorts/p8sXo2xIiXo",
+    src: "https://img.youtube.com/vi/7eu1KOD8D_s/maxresdefault.jpg",
+    videoUrl: "https://youtube.com/shorts/7eu1KOD8D_s",
     studentName: "Салим Х",
     university: "Student's Life",
     content: "Отзыв студента о поступлении и обучении через Student's Life.",
@@ -89,8 +89,8 @@ const rawTestimonials = [
   {
     category: "Video Testimonial",
     title: "Максат С, 28 лет",
-    src: "https://img.youtube.com/vi/4RbetlccZcg/maxresdefault.jpg",
-    videoUrl: "https://youtube.com/shorts/4RbetlccZcg",
+    src: "https://img.youtube.com/vi/cAgj7GdKx8s/maxresdefault.jpg",
+    videoUrl: "https://youtube.com/shorts/cAgj7GdKx8s",
     studentName: "Максат С",
     university: "Student's Life",
     content: "Студент делится своим опытом обучения с помощью Student's Life.",
@@ -98,8 +98,8 @@ const rawTestimonials = [
   {
     category: "Video Testimonial",
     title: "Александр Ц, 22 года",
-    src: "https://img.youtube.com/vi/EPnt8XUGm4A/maxresdefault.jpg",
-    videoUrl: "https://youtube.com/shorts/EPnt8XUGm4A",
+    src: "https://img.youtube.com/vi/7eu1KOD8D_s/maxresdefault.jpg",
+    videoUrl: "https://youtube.com/shorts/7eu1KOD8D_s",
     studentName: "Александр Ц",
     university: "Student's Life",
     content: "История успешного поступления через агентство Student's Life.",
