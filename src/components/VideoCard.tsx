@@ -93,28 +93,23 @@ export const VideoCard = ({ card, index, layout = false }: VideoCardProps) => {
           </div>
         )}
 
-        {/* Video Layer */}
-        {card.videoUrl && (
-          <div className={cn(
-            "absolute inset-0 z-10 transition-opacity duration-500",
-            (isHovered || isPlaying) ? "opacity-100" : "opacity-0"
-          )}>
+        {/* Video Layer - YouTube only loads when user clicks play */}
+        {card.videoUrl && isPlaying && (
+          <div className="absolute inset-0 z-10">
             {isNativeVideo ? (
               <video
                 ref={videoRef}
                 src={card.videoUrl}
                 loop
                 playsInline
-                autoPlay={isHovered || isPlaying}
+                autoPlay
                 className="h-full w-full object-cover"
               />
             ) : youtubeId ? (
               <iframe
-                src={`https://www.youtube.com/embed/${youtubeId}?autoplay=${(isHovered || isPlaying) ? 1 : 0}&mute=0&controls=${isPlaying ? 1 : 0}&loop=1&playlist=${youtubeId}&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1`}
-                className={cn(
-                  "h-full w-full object-cover",
-                  isPlaying ? "" : "scale-[1.5] pointer-events-none"
-                )}
+                src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=0&controls=1&loop=1&playlist=${youtubeId}&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1`}
+                title={card.title}
+                className="h-full w-full object-cover"
                 allow="autoplay; encrypted-media"
                 allowFullScreen={false}
               />
