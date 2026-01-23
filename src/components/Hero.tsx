@@ -1,11 +1,7 @@
-"use client";
-
 import { MoveRight } from "lucide-react";
-import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 import Image from "next/image";
-import heroGuy from "@/assets/hero_guy.webp";
+import mainBg from "../assets/herobg.webp";
+import mainBgMobile from "../assets/mainbg_mobile.webp";
 
 interface HeroProps {
     lang: string;
@@ -13,106 +9,70 @@ interface HeroProps {
 }
 
 export default function Hero({ lang, dict }: HeroProps) {
-    const containerRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end start"]
-    });
-
-    const yBlue = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
-    const yText = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
-    const yImage = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
-
     return (
-        <section
-            ref={containerRef}
-            className="relative w-full min-h-screen flex items-center pt-20 bg-[#6d1314] overflow-hidden"
-        >
+        <section className="relative w-full h-screen md:min-h-screen flex items-center pt-20 overflow-hidden">
 
-            {/* Background Parallax Layers */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                {/* Blue Angled Background */}
-                <motion.div
-                    style={{
-                        y: yBlue,
-                        clipPath: "polygon(0 65%, 100% 55%, 100% 100%, 0 100%)",
-                        height: "140%",
-                        top: "0"
-                    }}
-                    className="absolute inset-0 bg-navy"
+            {/* Background Images - Desktop and Mobile */}
+            <div className="absolute inset-0 z-0">
+                {/* Desktop Background */}
+                <Image
+                    src={mainBg}
+                    alt="Background"
+                    fill
+                    className="hidden md:block object-cover pt-16 "
+                    priority
+                    quality={100}
+                    unoptimized
                 />
-
-                {/* Background Lighting Effects Removed */}
-
-                {/* Large Parallax Text */}
-                <motion.div
-                    style={{ y: yText }}
-                    className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
-                >
-                    <span
-                        className="text-[14vw] md:text-[15vw] font-black text-[#06182E] font-[family-name:var(--font-octin)] tracking-widest uppercase whitespace-nowrap select-none italic -rotate-[16.5deg] md:-rotate-[4.0deg] translate-y-[30vh] md:translate-y-[25vh] 2xl:translate-y-[23vh] max-w-full"
-                        style={{ WebkitTextStroke: "2px #06182E", opacity: 0.9 }}
-                    >
-                        STUDENT&apos;S
-                    </span>
-                </motion.div>
+                {/* Mobile Background */}
+                <Image
+                    src={mainBgMobile}
+                    alt="Background Mobile"
+                    fill
+                    className="block md:hidden object-cover pt-19"
+                    priority
+                    quality={100}
+                    unoptimized
+                />
             </div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid md:grid-cols-2 gap-4 md:gap-8 md:items-center pt-10 md:pt-0 h-full py-6 sm:py-8 md:py-0">
+            {/* =========================================
+          ÖN PLAN İÇERİĞİ (TEXT & RESİM)
+          ========================================= */}
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center h-full pb-10">
 
-                {/* --- SOL KOLON: YAZILAR --- */}
-                <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="space-y-3 sm:space-y-4 md:space-y-6 lg:space-y-8 text-center md:text-left"
-                >
-
-                    {/* Ana Başlık */}
-                    <h1 className="text-[1.75rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black font-montserrat text-white leading-[0.9] uppercase drop-shadow-md px-4 sm:px-0 tracking-tight sm:tracking-tighter">
-                        {dict.title}
-                    </h1>
-
-                    {/* Alt Başlık */}
-                    <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-gray-100 tracking-wide px-4 sm:px-0">
-                        {dict.subtitle}
+                {/* Left Side Content */}
+                <div className="flex flex-col items-center md:items-start text-center md:text-left text-white w-full md:w-auto md:max-w-xs h-full md:h-auto pt-10 md:pt-0">
+                    <h2 className="text-3xl md:text-4xl font-bold uppercase leading-tight mb-4">
+                        {dict?.title}
                     </h2>
 
-                    {/* Açıklama */}
-                    <p className="text-sm sm:text-lg text-gray-100 font-medium max-w-lg mx-auto md:mx-0 leading-relaxed opacity-90 px-6 sm:px-0">
-                        {dict.description}
+                    <div className="mt-auto md:mt-0 flex flex-col items-center md:items-start pb-10 md:pb-0">
+                        <p className="text-sm md:text-base text-white/80 mb-6">
+                            {dict?.subtitle}
+                        </p>
+                        <a
+                            href={`/${lang}/contact`}
+                            className="inline-flex items-center gap-2 border-2 border-white text-white px-6 py-2 text-sm font-semibold uppercase tracking-wider hover:bg-white hover:text-red-700 transition-colors"
+                        >
+                            {dict?.cta}
+                            <MoveRight className="w-4 h-4" />
+                        </a>
+                    </div>
+                </div>
+
+                {/* Right Side Content */}
+                <div className="hidden md:flex flex-col items-end text-white max-w-xs ml-auto">
+                    <h2 className="text-3xl md:text-4xl font-bold uppercase leading-tight mb-4 text-right">
+                        {dict?.rightTitle}
+                    </h2>
+                    <p className="text-sm md:text-base text-white/80 mb-4 text-right">
+                        {dict?.rightSubtitle}
                     </p>
-
-                    {/* Buton */}
-                    <div className="flex justify-center md:justify-start pt-2 sm:pt-4">
-                        <Link href={`/${lang}/contact`} className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-white text-crimson font-bold tracking-widest uppercase overflow-hidden hover:text-white hover:bg-crimson transition-all shadow-[8px_8px_0px_rgba(0,0,0,0.1)] hover:shadow-[4px_4px_0px_rgba(0,0,0,0.1)] hover:translate-x-1 hover:translate-y-1 text-sm sm:text-base">
-                            <span className="relative z-10 flex items-center gap-2">
-                                {dict.cta} <MoveRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
-                            </span>
-                        </Link>
-                    </div>
-                </motion.div>
-
-                {/* --- SAĞ KOLON: HERO GUY IMAGE --- */}
-                <motion.div
-                    style={{ y: yImage }}
-                    // initial={{ opacity: 0, scale: 0.9 }} -> Removed for LCP
-                    // animate={{ opacity: 1, scale: 1 }} -> Removed for LCP
-                    // transition={{ duration: 1, ease: "easeOut" }} -> Removed for LCP
-                    className="flex relative h-full w-full justify-center md:justify-end items-end"
-                >
-                    <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[90vh] flex items-end justify-center md:justify-end translate-y-12 md:translate-y-20">
-                        <Image
-                            src={heroGuy}
-                            alt="International student celebrating study abroad success"
-                            className="object-contain w-auto h-full object-bottom"
-                            priority
-                            fetchPriority="high"
-                            placeholder="blur"
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                        />
-                    </div>
-                </motion.div>
+                    <p className="text-xs text-white/60 text-right">
+                        {dict?.partnerText}
+                    </p>
+                </div>
 
             </div>
         </section>

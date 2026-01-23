@@ -35,8 +35,9 @@ const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"), { ssr: tru
 const Team = dynamic(() => import("@/components/Team"), { ssr: true });
 const Statistics = dynamic(() => import("@/components/Statistics"), { ssr: true });
 const ContactFormSection = dynamic(() => import("@/components/ContactFormSection"), { ssr: true });
+import LatestJournal from "../../components/LatestJournal";
 const TestimonialsCarousel = dynamic(() => import("@/components/TestimonialsCarousel"));
-const LatestJournal = dynamic(() => import("@/components/LatestJournal"));
+// const LatestJournal = dynamic(() => import("@/components/LatestJournal"));
 const OfficeLocations = dynamic(() => import("@/components/OfficeLocations"));
 const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
 const LeadMagnet = dynamic(() => import("@/components/LeadMagnet"));
@@ -45,7 +46,7 @@ export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
-  const dict = await getDictionary(lang as Locale);
+  const dict: any = await getDictionary(lang as Locale);
 
   const pageMeta = dict.metadata?.title ? {
     title: dict.metadata.title,
@@ -73,7 +74,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     getTeamMembers(lang),
     getLatestBlogs(lang),
     getLatestCities(lang),
-  ]);
+  ]) as [any, any, any, any];
 
   const features = [
     {
@@ -201,7 +202,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
       <ContactFormSection lang={lang} dict={dict.contactForm} />
 
-      <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestCities} />
+      <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestBlogs} />
 
       <LeadMagnet lang={lang} />
 
