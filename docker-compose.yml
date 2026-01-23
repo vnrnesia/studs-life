@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # Backend (Strapi)
+  cms:
+    build:
+      context: ./studs-life-cms
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./studs-life-cms/.tmp:/app/.tmp
+      - ./studs-life-cms/public/uploads:/app/public/uploads
+    env_file:
+      - ./studs-life-cms/.env
+    networks:
+      - app-network
+
+  # Frontend (Next.js)
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # IMPORTANT: Replace URLs with your actual VPS IP or Domain
+      - NEXT_PUBLIC_STRAPI_URL=http://cms:1337
+    depends_on:
+      - cms
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
