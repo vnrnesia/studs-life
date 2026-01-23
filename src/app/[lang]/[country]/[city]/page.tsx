@@ -17,14 +17,21 @@ interface CityPageProps {
 
 // Generate static params for all cities
 export async function generateStaticParams() {
-  const cities = await getCities();
+  try {
+    const cities = await getCities();
 
-  return cities
-    .filter((city) => city?.country?.slug) // Filter out cities without country
-    .map((city) => ({
-      country: city.country.slug,
-      city: city.slug,
-    }));
+    return cities
+      .filter((city) => city?.country?.slug) // Filter out cities without country
+      .map((city) => ({
+        country: city.country.slug,
+        city: city.slug,
+      }));
+  } catch (error) {
+    console.error('Build-time fetch failed (this is expected if Strapi is not reachable during build):', error);
+    // Return empty array to allow build to succeed. 
+    // Pages will be generated on-demand at runtime when visited.
+    return [];
+  }
 }
 
 // Metadata Generation
