@@ -17,6 +17,15 @@ COPY . .
 
 # Build Strapi admin
 ENV NODE_ENV=production
+# These variables are required for the build step, but their values don't matter for the admin panel UI itself
+# They will be overridden by the actual env vars at runtime
+ENV APP_KEYS="toBeModified1,toBeModified2"
+ENV API_TOKEN_SALT="toBeModified"
+ENV ADMIN_JWT_SECRET="toBeModified"
+ENV TRANSFER_TOKEN_SALT="toBeModified"
+ENV JWT_SECRET="toBeModified"
+ENV DATABASE_CLIENT="sqlite"
+
 RUN npm run build
 
 # Expose port
