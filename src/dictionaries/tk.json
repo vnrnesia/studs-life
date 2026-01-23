@@ -57,8 +57,9 @@
             "blog": "Habarlar",
             "blogDesc": "Talyplar üçin soňky habarlar we gollanmalar",
             "getConsultation": "Mugt maslahat alyň",
-            "ceoRole": "test",
-            "ceoQuote": "Biz bütin dünýä talyplary üçin arzuwlar we hakykat arasynda köpri gurýarys."
+            "studentName": "Talyp Üstünligi",
+            "studentRole": "Uçurym",
+            "studentQuote": "Biz bütin dünýä talyplary üçin arzuwlar we hakykat arasynda köpri gurýarys."
         }
     },
     "services": {

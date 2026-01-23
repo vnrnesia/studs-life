@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 import JsonLd from "@/components/JsonLd";
 import { WebSite, WebPage, WithContext } from "schema-dts";
 
-import { getTeamMembers, getLatestBlogs, getLatestCities } from "@/lib/strapi";
+import { getTeamMembers, getLatestCities } from "@/lib/strapi";
 
 // Import Support Icons (small, keep static)
 import supportUniversityIcon from "@/assets/support_icons/admission.webp";
@@ -35,9 +35,9 @@ const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"), { ssr: tru
 const Team = dynamic(() => import("@/components/Team"), { ssr: true });
 const Statistics = dynamic(() => import("@/components/Statistics"), { ssr: true });
 const ContactFormSection = dynamic(() => import("@/components/ContactFormSection"), { ssr: true });
-import LatestJournal from "../../components/LatestJournal";
+// import LatestJournal from "../../components/LatestJournal";
 const TestimonialsCarousel = dynamic(() => import("@/components/TestimonialsCarousel"));
-// const LatestJournal = dynamic(() => import("@/components/LatestJournal"));
+const LatestJournal = dynamic(() => import("@/components/LatestJournal"));
 const OfficeLocations = dynamic(() => import("@/components/OfficeLocations"));
 const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
 const LeadMagnet = dynamic(() => import("@/components/LeadMagnet"));
@@ -45,170 +45,169 @@ const LeadMagnet = dynamic(() => import("@/components/LeadMagnet"));
 export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
-  const { lang } = await params;
-  const dict: any = await getDictionary(lang as Locale);
+    const { lang } = await params;
+    const dict: any = await getDictionary(lang as Locale);
 
-  const pageMeta = dict.metadata?.title ? {
-    title: dict.metadata.title,
-    description: dict.metadata.description
-  } : {
-    title: "Student's Life | Study Abroad, Visa & Travel Services",
-    description: "Guiding students through university applications, visa processing, and relocation support for a successful study abroad experience."
-  };
+    const pageMeta = dict.metadata?.title ? {
+        title: dict.metadata.title,
+        description: dict.metadata.description
+    } : {
+        title: "Student's Life | Study Abroad, Visa & Travel Services",
+        description: "Guiding students through university applications, visa processing, and relocation support for a successful study abroad experience."
+    };
 
-  return generateSEOMetadata({
-    lang,
-    path: '', // Home page
-    title: pageMeta.title,
-    description: pageMeta.description,
-  });
+    return generateSEOMetadata({
+        lang,
+        path: '', // Home page
+        title: pageMeta.title,
+        description: pageMeta.description,
+    });
 }
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
-  const { lang: langParam } = await params;
-  const lang = langParam as Locale;
+    const { lang: langParam } = await params;
+    const lang = langParam as Locale;
 
-  // Parallel API calls for better performance
-  const [dict, teamMembers, latestBlogs, latestCities] = await Promise.all([
-    getDictionary(lang),
-    getTeamMembers(lang),
-    getLatestBlogs(lang),
-    getLatestCities(lang),
-  ]) as [any, any, any, any];
+    // Parallel API calls for better performance
+    const [dict, teamMembers, latestCities] = await Promise.all([
+        getDictionary(lang),
+        getTeamMembers(lang),
+        getLatestCities(lang),
+    ]) as [any, any, any];
 
-  const features = [
-    {
-      id: "admissions",
-      title: dict.featureTabs?.features?.admissions?.title || "University Admissions",
-      description: dict.featureTabs?.features?.admissions?.description || "Guiding through top-tier university applications with personalized strategy and detailed roadmap planning.",
-      icon: supportUniversityIcon,
-      image: universityImg.src
-    },
-    {
-      id: "visa",
-      title: dict.featureTabs?.features?.visa?.title || "Visa Assistance",
-      description: dict.featureTabs?.features?.visa?.description || "Hassle-free student visa processing with high success rates and comprehensive document verification.",
-      icon: supportVisaIcon,
-      image: visaImg.src
-    },
-    {
-      id: "accommodation",
-      title: dict.featureTabs?.features?.accommodation?.title || "Accommodation",
-      description: dict.featureTabs?.features?.accommodation?.description || "Finding safe, affordable, and comfortable housing options near your campus.",
-      icon: supportAccommodationIcon,
-      image: accommodationImg.src
-    },
-    {
-      id: "career",
-      title: dict.featureTabs?.features?.career?.title || "Career Guidance",
-      description: dict.featureTabs?.features?.career?.description || "Post-graduation planning, resume building, and interview preparation for a successful career launch.",
-      icon: supportCareerIcon,
-      image: careerImg.src
-    }
-  ];
+    const features = [
+        {
+            id: "admissions",
+            title: dict.featureTabs?.features?.admissions?.title || "University Admissions",
+            description: dict.featureTabs?.features?.admissions?.description || "Guiding through top-tier university applications with personalized strategy and detailed roadmap planning.",
+            icon: supportUniversityIcon,
+            image: universityImg.src
+        },
+        {
+            id: "visa",
+            title: dict.featureTabs?.features?.visa?.title || "Visa Assistance",
+            description: dict.featureTabs?.features?.visa?.description || "Hassle-free student visa processing with high success rates and comprehensive document verification.",
+            icon: supportVisaIcon,
+            image: visaImg.src
+        },
+        {
+            id: "accommodation",
+            title: dict.featureTabs?.features?.accommodation?.title || "Accommodation",
+            description: dict.featureTabs?.features?.accommodation?.description || "Finding safe, affordable, and comfortable housing options near your campus.",
+            icon: supportAccommodationIcon,
+            image: accommodationImg.src
+        },
+        {
+            id: "career",
+            title: dict.featureTabs?.features?.career?.title || "Career Guidance",
+            description: dict.featureTabs?.features?.career?.description || "Post-graduation planning, resume building, and interview preparation for a successful career launch.",
+            icon: supportCareerIcon,
+            image: careerImg.src
+        }
+    ];
 
-  const howItWorksSteps = [
-    {
-      id: "consultation",
-      stepNumber: "01",
-      title: dict.howItWorks?.steps?.consultation?.title || "Free Consultation",
-      description: dict.howItWorks?.steps?.consultation?.description || "We analyze your academic profile and career goals to recommend the best universities and programs tailored to your aspirations.",
-      iconName: "search",
-      image: consultationImg.src
-    },
-    {
-      id: "preparation",
-      stepNumber: "02",
-      title: dict.howItWorks?.steps?.preparation?.title || "Preparation & Visa",
-      description: dict.howItWorks?.steps?.preparation?.description || "Our experts handle the entire application process, document verification, and visa submission to ensure a smooth approval.",
-      iconName: "clipboard",
-      image: preparationImg.src
-    },
-    {
-      id: "departure",
-      stepNumber: "03",
-      title: dict.howItWorks?.steps?.departure?.title || "Departure & Support",
-      description: dict.howItWorks?.steps?.departure?.description || "From flight bookings to finding accommodation, we support you until you are settled in your new student life.",
-      iconName: "rocket",
-      image: departureImg.src
-    }
-  ];
+    const howItWorksSteps = [
+        {
+            id: "consultation",
+            stepNumber: "01",
+            title: dict.howItWorks?.steps?.consultation?.title || "Free Consultation",
+            description: dict.howItWorks?.steps?.consultation?.description || "We analyze your academic profile and career goals to recommend the best universities and programs tailored to your aspirations.",
+            iconName: "search",
+            image: consultationImg.src
+        },
+        {
+            id: "preparation",
+            stepNumber: "02",
+            title: dict.howItWorks?.steps?.preparation?.title || "Preparation & Visa",
+            description: dict.howItWorks?.steps?.preparation?.description || "Our experts handle the entire application process, document verification, and visa submission to ensure a smooth approval.",
+            iconName: "clipboard",
+            image: preparationImg.src
+        },
+        {
+            id: "departure",
+            stepNumber: "03",
+            title: dict.howItWorks?.steps?.departure?.title || "Departure & Support",
+            description: dict.howItWorks?.steps?.departure?.description || "From flight bookings to finding accommodation, we support you until you are settled in your new student life.",
+            iconName: "rocket",
+            image: departureImg.src
+        }
+    ];
 
-  const BASE_URL = 'https://studs-life.com';
+    const BASE_URL = 'https://studs-life.com';
 
-  const websiteSchema: WithContext<WebSite> = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Student's Life",
-    "url": BASE_URL,
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `${BASE_URL}/${lang}/search?q={search_term_string}`
-      },
-      // @ts-ignore - query-input is valid but not in types
-      "query-input": "required name=search_term_string"
-    },
-    "inLanguage": lang === 'tk' ? 'tk' : lang === 'ru' ? 'ru' : 'en'
-  };
+    const websiteSchema: WithContext<WebSite> = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Student's Life",
+        "url": BASE_URL,
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": `${BASE_URL}/${lang}/search?q={search_term_string}`
+            },
+            // @ts-ignore - query-input is valid but not in types
+            "query-input": "required name=search_term_string"
+        },
+        "inLanguage": lang === 'tk' ? 'tk' : lang === 'ru' ? 'ru' : 'en'
+    };
 
-  const webPageSchema: WithContext<WebPage> = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": dict.metadata?.title || "Student's Life | Study Abroad Services",
-    "description": dict.metadata?.description || "Expert guidance for university admissions, visa processing, and relocation support.",
-    "url": `${BASE_URL}/${lang}`,
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "Student's Life",
-      "url": BASE_URL
-    },
-    "about": {
-      "@type": "Thing",
-      "name": "Study Abroad Services"
-    },
-    "inLanguage": lang === 'tk' ? 'tk' : lang === 'ru' ? 'ru' : 'en'
-  };
+    const webPageSchema: WithContext<WebPage> = {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": dict.metadata?.title || "Student's Life | Study Abroad Services",
+        "description": dict.metadata?.description || "Expert guidance for university admissions, visa processing, and relocation support.",
+        "url": `${BASE_URL}/${lang}`,
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "Student's Life",
+            "url": BASE_URL
+        },
+        "about": {
+            "@type": "Thing",
+            "name": "Study Abroad Services"
+        },
+        "inLanguage": lang === 'tk' ? 'tk' : lang === 'ru' ? 'ru' : 'en'
+    };
 
-  return (
-    <main className="min-h-screen bg-gray-50">
-      <JsonLd<WebSite> data={websiteSchema} />
-      <JsonLd<WebPage> data={webPageSchema} />
+    return (
+        <main className="min-h-screen bg-gray-50">
+            <JsonLd<WebSite> data={websiteSchema} />
+            <JsonLd<WebPage> data={webPageSchema} />
 
-      {/* Hero - Critical above-the-fold, keep static */}
-      <Hero lang={lang} dict={dict.hero} />
+            {/* Hero - Critical above-the-fold, keep static */}
+            <Hero lang={lang} dict={dict.hero} />
 
-      {/* All below-the-fold components - No ScrollReveal wrappers for performance */}
-      <FeatureTabs
-        features={features}
-        title={dict.featureTabs?.title || "Comprehensive Student Support"}
-        subtitle={dict.featureTabs?.subtitle || "Detailed assistance at every step of your study abroad journey."}
-      />
+            {/* All below-the-fold components - No ScrollReveal wrappers for performance */}
+            <FeatureTabs
+                features={features}
+                title={dict.featureTabs?.title || "Comprehensive Student Support"}
+                subtitle={dict.featureTabs?.subtitle || "Detailed assistance at every step of your study abroad journey."}
+            />
 
-      <Services lang={lang} dict={dict.services} />
+            <Services lang={lang} dict={dict.services} />
 
-      <Countries lang={lang} dict={dict.countries} />
+            <Countries lang={lang} dict={dict.countries} />
 
-      <HowItWorks steps={howItWorksSteps} dict={dict.howItWorks} lang={lang} />
+            <HowItWorks steps={howItWorksSteps} dict={dict.howItWorks} lang={lang} />
 
-      <WhyChooseUs lang={lang} dict={dict.whyUs} />
+            <WhyChooseUs lang={lang} dict={dict.whyUs} />
 
-      <Team lang={lang} dict={dict.team} teamMembers={teamMembers.slice(0, 6)} showViewAll={true} />
+            <Team lang={lang} dict={dict.team} teamMembers={teamMembers.slice(0, 6)} showViewAll={true} />
 
-      <Statistics lang={lang} dict={dict.statistics} />
+            <Statistics lang={lang} dict={dict.statistics} />
 
-      <TestimonialsCarousel title={dict.team.testimonials_title} videoCategory={dict.team.videoTestimonialCategory} />
+            <TestimonialsCarousel title={dict.team.testimonials_title} videoCategory={dict.team.videoTestimonialCategory} />
 
-      <ContactFormSection lang={lang} dict={dict.contactForm} />
+            <ContactFormSection lang={lang} dict={dict.contactForm} />
 
-      <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestBlogs} />
+            <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestCities} />
 
-      <LeadMagnet lang={lang} />
+            <LeadMagnet lang={lang} />
 
-      <ProcessSection lang={lang} dict={(dict as any).processWorkflow} />
+            <ProcessSection lang={lang} dict={(dict as any).processWorkflow} />
 
-      <OfficeLocations lang={lang} dict={dict.offices} />
-    </main>
-  );
+            <OfficeLocations lang={lang} dict={dict.offices} />
+        </main>
+    );
 }

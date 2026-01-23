@@ -7,6 +7,7 @@ import {
     Globe,
     GraduationCap
 } from 'lucide-react';
+import studentImage from '@/assets/whyus_student.webp';
 
 export const companyLinks = [
     {
@@ -46,9 +47,9 @@ export const trustBadges = [
     { name: 'Gartner', rating: '4.8' }
 ];
 
-export const ceoProfile = {
-    name: "ogrenci",
-    roleKey: "ceoRole",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400",
-    quoteKey: "ceoQuote"
+export const studentProfile = {
+    nameKey: "studentName",
+    roleKey: "studentRole",
+    image: studentImage,
+    quoteKey: "studentQuote"
 };

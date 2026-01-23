@@ -57,8 +57,9 @@
             "blog": "News",
             "blogDesc": "Latest news and student guides",
             "getConsultation": "Get Free Consultation",
-            "ceoRole": "test",
-            "ceoQuote": "We build bridges between dreams and reality for students worldwide."
+            "studentName": "Student Success",
+            "studentRole": "Alumni",
+            "studentQuote": "We build bridges between dreams and reality for students worldwide."
         }
     },
     "services": {

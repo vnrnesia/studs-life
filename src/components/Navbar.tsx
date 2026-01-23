@@ -8,7 +8,7 @@ import { Menu, X, Globe, ChevronDown, ChevronRight, Phone } from "lucide-react";
 import { Country } from "@/lib/strapi";
 import logo from "../assets/logo.svg";
 import Image from "next/image";
-import { companyLinks, trustBadges, ceoProfile } from "@/data/navData";
+import { companyLinks, trustBadges, studentProfile } from "@/data/navData";
 
 interface NavbarProps {
   lang: Locale;
@@ -180,22 +180,19 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                             <div>
                               <div className="w-16 h-16 rounded-full overflow-hidden mb-4 border-2 border-white/20">
                                 <Image
-                                  src={ceoProfile.image}
-                                  alt={ceoProfile.name}
+                                  src={studentProfile.image}
+                                  alt="Student"
                                   width={64}
                                   height={64}
                                   className="object-cover w-full h-full"
                                 />
                               </div>
-                              <h3 className="text-lg font-bold">{ceoProfile.name}</h3>
-                              <p className="text-sm text-gray-400 mb-6">{dict?.nav?.megaMenu?.[ceoProfile.roleKey]}</p>
+                              <h3 className="text-lg font-bold">{dict?.nav?.megaMenu?.[studentProfile.nameKey]}</h3>
+                              <p className="text-sm text-gray-400 mb-6">{dict?.nav?.megaMenu?.[studentProfile.roleKey]}</p>
                               <blockquote className="text-sm italic text-gray-300 border-l-2 border-navy pl-4">
-                                "{dict?.nav?.megaMenu?.[ceoProfile.quoteKey]}"
+                                "{dict?.nav?.megaMenu?.[studentProfile.quoteKey]}"
                               </blockquote>
                             </div>
-                            <button className="mt-6 w-full py-3 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors backdrop-blur-sm border border-white/10">
-                              Linkedin Profile
-                            </button>
                           </div>
                         </div>
                       </div>
