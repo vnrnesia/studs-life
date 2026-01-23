@@ -16,11 +16,16 @@ interface CountryPageProps {
 
 // Generate static params for all countries
 export async function generateStaticParams() {
-  const countries = await import('@/lib/strapi').then(m => m.getCountries());
+  try {
+    const countries = await import('@/lib/strapi').then(m => m.getCountries());
 
-  return countries.map((country) => ({
-    country: country.slug,
-  }));
+    return countries.map((country) => ({
+      country: country.slug,
+    }));
+  } catch (error) {
+    console.error('Build-time fetch failed (this is expected if Strapi is not reachable during build):', error);
+    return [];
+  }
 }
 
 // Revalidate every 60 seconds (1 minute)
