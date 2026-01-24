@@ -18,6 +18,8 @@ COPY . .
 # We set a dummy URL for build time to preventing failure if Strapi isn't reachable
 # Real URL will be provided at runtime
 ENV NODE_ENV=production
+ARG NEXT_PUBLIC_GOOGLE_SHEETS_URL
+ENV NEXT_PUBLIC_GOOGLE_SHEETS_URL=$NEXT_PUBLIC_GOOGLE_SHEETS_URL
 ENV NEXT_PUBLIC_STRAPI_URL=http://localhost:1337 
 RUN npm run build
 
