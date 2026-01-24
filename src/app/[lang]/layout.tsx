@@ -77,11 +77,22 @@ export default async function RootLayout({
 }>) {
   const { lang } = await params;
 
-  // Parallel API calls for better performance
-  const [dict, countries] = await Promise.all([
-    getDictionary(lang as Locale),
-    getCountriesWithCities(lang),
-  ]);
+  // Parallel API calls for better performance with error handling
+  let dict, countries;
+  try {
+    [dict, countries] = await Promise.all([
+      getDictionary(lang as Locale),
+      getCountriesWithCities(lang).catch(err => {
+        console.error('Layout fetch failed (countries):', err);
+        return [];
+      }),
+    ]);
+  } catch (error) {
+    console.error('Layout fetch failed (critical):', error);
+    // Fallback dictionary or re-throw if critical
+    dict = await getDictionary(lang as Locale);
+    countries = [];
+  }
 
   return (
     <html lang={lang}>

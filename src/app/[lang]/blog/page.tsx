@@ -29,7 +29,12 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
   const { lang: langParam } = await params;
   const lang = langParam as Locale;
   const dict = await getDictionary(lang);
-  const cities = await getCities(undefined, lang);
+  let cities = [];
+  try {
+    cities = await getCities(undefined, lang);
+  } catch (error) {
+    console.error('BlogPage fetch failed:', error);
+  }
 
   const blogDict = dict.latestJournal || {};
 

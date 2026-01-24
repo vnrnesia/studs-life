@@ -10,6 +10,7 @@ export const strapiClient = axios.create({
         'Content-Type': 'application/json',
         ...(strapiToken && { Authorization: `Bearer ${strapiToken}` }),
     },
+    timeout: 5000, // Fail fast (5s) to avoid build hangs
 });
 
 // Types
