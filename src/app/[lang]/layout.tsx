@@ -5,7 +5,7 @@ import { i18n, type Locale } from "@/i18n-config";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getDictionary } from "@/get-dictionary";
-import { getCountriesWithCities } from "@/lib/strapi";
+import { getCountriesWithCities, type Country } from "@/lib/strapi";
 import JsonLd from "@/components/JsonLd";
 import { Organization } from "schema-dts";
 import CookieConsent from "@/components/CookieConsent";
@@ -78,13 +78,14 @@ export default async function RootLayout({
   const { lang } = await params;
 
   // Parallel API calls for better performance with error handling
-  let dict, countries;
+  let dict;
+  let countries: Country[] = [];
   try {
     [dict, countries] = await Promise.all([
       getDictionary(lang as Locale),
       getCountriesWithCities(lang).catch(err => {
         console.error('Layout fetch failed (countries):', err);
-        return [];
+        return [] as Country[];
       }),
     ]);
   } catch (error) {

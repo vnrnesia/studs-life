@@ -1,6 +1,6 @@
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n-config";
-import { getCities, getStrapiImageUrl } from "@/lib/strapi";
+import { getCities, getStrapiImageUrl, type City } from "@/lib/strapi";
 import { generateSEOMetadata } from "@/lib/seo";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -29,7 +29,7 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
   const { lang: langParam } = await params;
   const lang = langParam as Locale;
   const dict = await getDictionary(lang);
-  let cities = [];
+  let cities: City[] = [];
   try {
     cities = await getCities(undefined, lang);
   } catch (error) {
