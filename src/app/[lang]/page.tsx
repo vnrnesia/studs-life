@@ -68,12 +68,25 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     const { lang: langParam } = await params;
     const lang = langParam as Locale;
 
-    // Parallel API calls for better performance
-    const [dict, teamMembers, latestCities] = await Promise.all([
-        getDictionary(lang),
-        getTeamMembers(lang),
-        getLatestCities(lang),
-    ]) as [any, any, any];
+    // Parallel API calls for better performance with error handling
+    let dict, teamMembers, latestCities;
+    try {
+        [dict, teamMembers, latestCities] = await Promise.all([
+            getDictionary(lang),
+            getTeamMembers(lang),
+            getLatestCities(lang),
+        ]) as [any, any, any];
+    } catch (error) {
+        console.error('Homepage fetch failed, falling back to static content:', error);
+        // Fallback: try to get at least the dictionary
+        try {
+            dict = await getDictionary(lang);
+        } catch (e) {
+            dict = {}; // Last resort fallback
+        }
+        teamMembers = [];
+        latestCities = [];
+    }
 
     const features = [
         {
