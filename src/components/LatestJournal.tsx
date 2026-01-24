@@ -18,7 +18,7 @@ export default function LatestJournal({ lang, dict, posts = [] }: LatestJournalP
     if (!posts || posts.length === 0) return null;
 
     return (
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-white overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
 
