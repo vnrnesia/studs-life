@@ -77,7 +77,7 @@ export async function getCountries(locale: string = 'en'): Promise<Country[]> {
     const query = qs.stringify({
         locale,
         populate: '*',
-        sort: ['name:asc'],
+        sort: ['featured:desc', 'name:asc'],
     });
 
     const { data } = await strapiClient.get<StrapiResponse<Country[]>>(`/countries?${query}`);
@@ -220,7 +220,7 @@ export async function getCountriesWithCities(locale: string = 'en'): Promise<Cou
                 sort: ['name:asc'],
             },
         },
-        sort: ['name:asc'],
+        sort: ['featured:desc', 'name:asc'],
     });
 
     const { data } = await strapiClient.get<StrapiResponse<Country[]>>(`/countries?${query}`);
