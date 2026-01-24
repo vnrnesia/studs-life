@@ -33,21 +33,29 @@ export const revalidate = 60;
 
 // Generate metadata with canonical and hreflang
 export async function generateMetadata({ params }: CountryPageProps): Promise<Metadata> {
-  const { country: countrySlug, lang } = await params;
-  const country = await getCountry(countrySlug, lang);
+  try {
+    const { country: countrySlug, lang } = await params;
+    const country = await getCountry(countrySlug, lang);
 
-  if (!country) {
+    if (!country) {
+      return {
+        title: 'Country Not Found',
+      };
+    }
+
+    return generateSEOMetadata({
+      lang,
+      path: `/${countrySlug}`,
+      title: `${country.name} | Student's Life`,
+      description: country.description || `Discover study opportunities in ${country.name}. Universities, cities, and student life guide.`,
+    });
+  } catch (error) {
+    console.error('Build-time fetch failed in generateMetadata:', error);
     return {
-      title: 'Country Not Found',
+      title: 'Student\'s Life',
+      description: 'Discover global study opportunities.'
     };
   }
-
-  return generateSEOMetadata({
-    lang,
-    path: `/${countrySlug}`,
-    title: `${country.name} | Student's Life`,
-    description: country.description || `Discover study opportunities in ${country.name}. Universities, cities, and student life guide.`,
-  });
 }
 
 export default async function CountryPage({ params }: CountryPageProps) {

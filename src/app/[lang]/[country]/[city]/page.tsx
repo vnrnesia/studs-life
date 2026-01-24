@@ -36,26 +36,34 @@ export async function generateStaticParams() {
 
 // Metadata Generation
 export async function generateMetadata({ params }: CityPageProps): Promise<Metadata> {
-  const { country, city: citySlug, lang } = await params;
-  const city = await getCity(country, citySlug, lang);
+  try {
+    const { country, city: citySlug, lang } = await params;
+    const city = await getCity(country, citySlug, lang);
 
-  if (!city) {
+    if (!city) {
+      return {
+        title: 'City Not Found',
+      };
+    }
+
+    const title = city.metaDescription || `${city.title} | Student's Life`;
+    const description = city.intro ? city.intro.substring(0, 160) : `Study in ${city.title}, ${city.country?.name}. Comprehensive guide for international students.`;
+    const image = city.images && city.images.length > 0 ? getStrapiImageUrl(city.images[0].url) : undefined;
+
+    return generateSEOMetadata({
+      lang,
+      path: `/${country}/${citySlug}`,
+      title,
+      description,
+      image,
+    });
+  } catch (error) {
+    console.error('Build-time fetch failed in generateMetadata:', error);
     return {
-      title: 'City Not Found',
+      title: 'Student\'s Life',
+      description: 'Comprehensive guide for international students.'
     };
   }
-
-  const title = city.metaDescription || `${city.title} | Student's Life`;
-  const description = city.intro ? city.intro.substring(0, 160) : `Study in ${city.title}, ${city.country?.name}. Comprehensive guide for international students.`;
-  const image = city.images && city.images.length > 0 ? getStrapiImageUrl(city.images[0].url) : undefined;
-
-  return generateSEOMetadata({
-    lang,
-    path: `/${country}/${citySlug}`,
-    title,
-    description,
-    image,
-  });
 }
 
 // Revalidate every 60 seconds (1 minute)
