@@ -92,7 +92,7 @@ export async function submitToGoogleSheets(
         // Map form data keys to Google Sheet headers (Russian)
         const mappedData = {
             'Тип формы': mapValue(formType),
-            'ФИО': formData.fullName,
+            'ФИО': formData.fullName || formData.name,
             'Телефон': formData.phone,
             'Email': formData.email,
             'Дата рождения': formData.dateOfBirth,
