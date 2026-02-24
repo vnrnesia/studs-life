@@ -48,6 +48,7 @@ export async function POST(request: Request) {
 
         // Map the payload
         const crmPayload = {
+            ...formData, // Spread all extra properties first
             full_name: formData.fullName || formData.name,
             phone: formData.phone,
             email: formData.email,
@@ -57,6 +58,15 @@ export async function POST(request: Request) {
             relation: formData.relationship,
             direction: direction,
         };
+
+        // Remove duplicate/unmapped keys we just re-mapped explicitly
+        delete crmPayload.fullName;
+        delete crmPayload.name;
+        delete crmPayload.citizenship;
+        delete crmPayload.educationLevel;
+        delete crmPayload.currentEducationLevel;
+        delete crmPayload.relationship;
+        delete crmPayload.dateOfBirth;
 
         // Remove undefined/null properties to not send empty fields
         const cleanPayload = Object.fromEntries(
