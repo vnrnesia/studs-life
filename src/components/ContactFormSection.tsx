@@ -6,6 +6,7 @@ import { Send, CheckCircle2, Info, MessageCircle, PhoneCall, Mail } from "lucide
 import Image from "next/image";
 import ctaBg from "@/assets/ctaform.webp";
 import { submitToGoogleSheets } from "@/lib/submitToGoogleSheets";
+import { submitToCRM } from "@/lib/submitToCRM";
 
 interface ContactFormSectionProps {
   lang: string;
@@ -82,9 +83,16 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
       country: country || 'Other'
     };
 
-    const result = await submitToGoogleSheets('General Inquiry', submissionData);
+    const [sheetsResult] = await Promise.allSettled([
+      submitToGoogleSheets('General Inquiry', submissionData),
+      submitToCRM('General Inquiry', submissionData)
+    ]);
 
     setIsSubmitting(false);
+
+    const result = sheetsResult.status === 'fulfilled'
+      ? sheetsResult.value
+      : { success: false, message: 'Google Sheets submission failed' };
 
     if (result.success) {
       setSubmitted(true);

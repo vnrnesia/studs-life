@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Download, Gift, ArrowRight } from "lucide-react";
 import { submitToGoogleSheets } from "@/lib/submitToGoogleSheets";
+import { submitToCRM } from "@/lib/submitToCRM";
 
 interface LeadMagnetProps {
     lang: string;
@@ -21,6 +22,8 @@ const content = {
             "Советы по подготовке к интервью"
         ],
         inputPlaceholder: "Ваш email",
+        namePlaceholder: "Ваше имя",
+        phonePlaceholder: "Ваш телефон",
         buttonText: "Получить руководство",
         successMessage: "Спасибо! Проверьте вашу почту.",
         noThanks: "Нет, спасибо"
@@ -36,6 +39,8 @@ const content = {
             "Interview preparation tips"
         ],
         inputPlaceholder: "Your email",
+        namePlaceholder: "Your name",
+        phonePlaceholder: "Your phone",
         buttonText: "Get the Guide",
         successMessage: "Thank you! Check your email.",
         noThanks: "No, thanks"
@@ -51,6 +56,8 @@ const content = {
             "Söhbetdeşlige taýýarlyk maslahatlary"
         ],
         inputPlaceholder: "Siziň email",
+        namePlaceholder: "Siziň adyňyz",
+        phonePlaceholder: "Siziň telefonyňyz",
         buttonText: "Gollanmany alyň",
         successMessage: "Sagbol! Poçtañyzy barlaň.",
         noThanks: "Ýok, sagbol"
@@ -68,6 +75,8 @@ export default function LeadMagnet({ lang }: LeadMagnetProps) {
         return () => clearTimeout(timer);
     }, []);
     const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [phone, setPhone] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -79,10 +88,21 @@ export default function LeadMagnet({ lang }: LeadMagnetProps) {
 
         setIsSubmitting(true);
 
-        const result = await submitToGoogleSheets('Лид-магнит', {
+        const formData = {
             email: email,
+            name: name,
+            phone: phone,
             preference: 'Лид-магнит'
-        });
+        };
+
+        const [sheetsResult] = await Promise.allSettled([
+            submitToGoogleSheets('Лид-магнит', formData),
+            submitToCRM('Лид-магнит', formData)
+        ]);
+
+        const result = sheetsResult.status === 'fulfilled'
+            ? sheetsResult.value
+            : { success: false, message: 'Google Sheets submission failed' };
 
         setIsSubmitting(false);
 
@@ -153,20 +173,52 @@ export default function LeadMagnet({ lang }: LeadMagnetProps) {
 
                                 {/* Email Form */}
                                 <form onSubmit={handleSubmit} className="space-y-3">
-                                    <div className="space-y-1">
-                                        <label htmlFor="lead-magnet-email" className="sr-only">
-                                            {dict.inputPlaceholder}
-                                        </label>
-                                        <input
-                                            id="lead-magnet-email"
-                                            type="email"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            placeholder={dict.inputPlaceholder}
-                                            required
-                                            className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
-                                            aria-label={dict.inputPlaceholder}
-                                        />
+                                    <div className="space-y-2">
+                                        <div>
+                                            <label htmlFor="lead-magnet-name" className="sr-only">
+                                                {dict.namePlaceholder}
+                                            </label>
+                                            <input
+                                                id="lead-magnet-name"
+                                                type="text"
+                                                value={name}
+                                                onChange={(e) => setName(e.target.value)}
+                                                placeholder={dict.namePlaceholder}
+                                                required
+                                                className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
+                                                aria-label={dict.namePlaceholder}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="lead-magnet-phone" className="sr-only">
+                                                {dict.phonePlaceholder}
+                                            </label>
+                                            <input
+                                                id="lead-magnet-phone"
+                                                type="tel"
+                                                value={phone}
+                                                onChange={(e) => setPhone(e.target.value)}
+                                                placeholder={dict.phonePlaceholder}
+                                                required
+                                                className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
+                                                aria-label={dict.phonePlaceholder}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="lead-magnet-email" className="sr-only">
+                                                {dict.inputPlaceholder}
+                                            </label>
+                                            <input
+                                                id="lead-magnet-email"
+                                                type="email"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                placeholder={dict.inputPlaceholder}
+                                                required
+                                                className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
+                                                aria-label={dict.inputPlaceholder}
+                                            />
+                                        </div>
                                     </div>
 
                                     <button

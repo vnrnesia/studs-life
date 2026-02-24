@@ -5,6 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { submitToGoogleSheets } from "@/lib/submitToGoogleSheets";
+import { submitToCRM } from "@/lib/submitToCRM";
 import {
   Check,
   ChevronLeft,
@@ -139,8 +140,8 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
 
   // Helper to check errors
   const getInputClass = (fieldName: string) => `w-full bg-gray-50 border-2 outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors ${errors[fieldName]
-      ? 'border-red-500 ring-4 ring-red-500/10'
-      : 'border-gray-200 focus:border-navy'
+    ? 'border-red-500 ring-4 ring-red-500/10'
+    : 'border-gray-200 focus:border-navy'
     }`;
 
   const handleFieldChange = (field: string, value: string) => {
@@ -382,10 +383,16 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
       ticket: 'Ticket'
     };
 
-    const result = await submitToGoogleSheets(
-      serviceMap[formData.service as keyof typeof serviceMap],
-      formData
-    );
+    const serviceKey = serviceMap[formData.service as keyof typeof serviceMap];
+
+    const [sheetsResult] = await Promise.allSettled([
+      submitToGoogleSheets(serviceKey, formData),
+      submitToCRM(serviceKey, formData)
+    ]);
+
+    const result = sheetsResult.status === 'fulfilled'
+      ? sheetsResult.value
+      : { success: false, message: 'Google Sheets submission failed' };
 
     if (result.success) {
       router.push(`/${lang}/thanks`);
@@ -501,8 +508,8 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
                   type="button"
                   onClick={() => setFormData({ ...formData, service: service.id })}
                   className={`w-full flex items-center gap-4 p-3.5 rounded-2xl border-2 transition-all duration-300 ${isSelected
-                      ? 'border-navy bg-navy/[0.02] shadow-[0_0_0_1px_#06182E]'
-                      : 'border-gray-100 hover:border-gray-200 hover:bg-gray-50/50'
+                    ? 'border-navy bg-navy/[0.02] shadow-[0_0_0_1px_#06182E]'
+                    : 'border-gray-100 hover:border-gray-200 hover:bg-gray-50/50'
                     }`}
                   style={{ borderRadius: '1.25rem' }}
                 >

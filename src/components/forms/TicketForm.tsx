@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { submitToGoogleSheets } from "@/lib/submitToGoogleSheets";
+import { submitToCRM } from "@/lib/submitToCRM";
 
 interface TicketFormProps {
   onBack: () => void;
@@ -34,7 +35,14 @@ export default function TicketForm({ onBack, dict }: TicketFormProps) {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const result = await submitToGoogleSheets('Ticket', formData);
+    const [sheetsResult] = await Promise.allSettled([
+      submitToGoogleSheets('Ticket', formData),
+      submitToCRM('Ticket', formData)
+    ]);
+
+    const result = sheetsResult.status === 'fulfilled'
+      ? sheetsResult.value
+      : { success: false, message: 'Google Sheets submission failed' };
 
     if (result.success) {
       // Redirect to thanks page

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { submitToGoogleSheets } from "@/lib/submitToGoogleSheets";
+import { submitToCRM } from "@/lib/submitToCRM";
 
 interface TransferFormProps {
   onBack: () => void;
@@ -35,7 +36,14 @@ export default function TransferForm({ onBack, dict }: TransferFormProps) {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const result = await submitToGoogleSheets('Transfer', formData);
+    const [sheetsResult] = await Promise.allSettled([
+      submitToGoogleSheets('Transfer', formData),
+      submitToCRM('Transfer', formData)
+    ]);
+
+    const result = sheetsResult.status === 'fulfilled'
+      ? sheetsResult.value
+      : { success: false, message: 'Google Sheets submission failed' };
 
     if (result.success) {
       router.push(`/${lang}/thanks`);
