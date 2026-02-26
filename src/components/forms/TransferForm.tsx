@@ -38,7 +38,7 @@ export default function TransferForm({ onBack, dict }: TransferFormProps) {
 
     const [sheetsResult] = await Promise.allSettled([
       submitToGoogleSheets('Transfer', formData),
-      submitToCRM('Transfer', formData)
+      // submitToCRM('Transfer', formData) // Disabled for testing
     ]);
 
     const result = sheetsResult.status === 'fulfilled'

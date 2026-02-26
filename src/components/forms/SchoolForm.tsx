@@ -37,7 +37,7 @@ export default function SchoolForm({ onBack, dict }: SchoolFormProps) {
 
     const [sheetsResult] = await Promise.allSettled([
       submitToGoogleSheets('School', formData),
-      submitToCRM('School', formData)
+      // submitToCRM('School', formData) // Disabled for testing
     ]);
 
     const result = sheetsResult.status === 'fulfilled'

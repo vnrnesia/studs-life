@@ -85,7 +85,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
 
     const [sheetsResult] = await Promise.allSettled([
       submitToGoogleSheets('General Inquiry', submissionData),
-      submitToCRM('General Inquiry', submissionData)
+      // submitToCRM('General Inquiry', submissionData) // Disabled for testing
     ]);
 
     setIsSubmitting(false);

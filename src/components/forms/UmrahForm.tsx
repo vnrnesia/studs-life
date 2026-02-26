@@ -38,7 +38,7 @@ export default function UmrahForm({ onBack, dict }: UmrahFormProps) {
 
     const [sheetsResult] = await Promise.allSettled([
       submitToGoogleSheets('Umrah', formData),
-      submitToCRM('Umrah', formData)
+      // submitToCRM('Umrah', formData) // Disabled for testing
     ]);
 
     const result = sheetsResult.status === 'fulfilled'

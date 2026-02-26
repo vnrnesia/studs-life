@@ -56,7 +56,7 @@ export default function UniversityForm({ onBack, dict }: UniversityFormProps) {
 
     const [sheetsResult] = await Promise.allSettled([
       submitToGoogleSheets('University', formData),
-      submitToCRM('University', formData)
+      // submitToCRM('University', formData) // Disabled for testing
     ]);
 
     const result = sheetsResult.status === 'fulfilled'

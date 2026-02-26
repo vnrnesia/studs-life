@@ -37,7 +37,7 @@ export default function TicketForm({ onBack, dict }: TicketFormProps) {
 
     const [sheetsResult] = await Promise.allSettled([
       submitToGoogleSheets('Ticket', formData),
-      submitToCRM('Ticket', formData)
+      // submitToCRM('Ticket', formData) // Disabled for testing
     ]);
 
     const result = sheetsResult.status === 'fulfilled'

@@ -387,7 +387,7 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
 
     const [sheetsResult] = await Promise.allSettled([
       submitToGoogleSheets(serviceKey, formData),
-      submitToCRM(serviceKey, formData)
+      // submitToCRM(serviceKey, formData) // Disabled for testing
     ]);
 
     const result = sheetsResult.status === 'fulfilled'

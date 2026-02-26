@@ -39,7 +39,7 @@ export default function WorkVisaForm({ onBack, dict }: WorkVisaFormProps) {
 
     const [sheetsResult] = await Promise.allSettled([
       submitToGoogleSheets('Work Visa', formData),
-      submitToCRM('Work Visa', formData)
+      // submitToCRM('Work Visa', formData) // Disabled for testing
     ]);
 
     const result = sheetsResult.status === 'fulfilled'
