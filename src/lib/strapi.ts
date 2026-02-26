@@ -1,19 +1,15 @@
 import axios from 'axios';
 import qs from 'qs';
-
 const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
 const strapiToken = process.env.STRAPI_API_TOKEN;
-
 export const strapiClient = axios.create({
     baseURL: `${strapiUrl}/api`,
     headers: {
         'Content-Type': 'application/json',
         ...(strapiToken && { Authorization: `Bearer ${strapiToken}` }),
     },
-    timeout: 5000, // Fail fast (5s) to avoid build hangs
+    timeout: 5000,
 });
-
-// Types
 export interface Country {
     id: number;
     documentId: string;
@@ -27,7 +23,6 @@ export interface Country {
     publishedAt: string;
     cities?: City[];
 }
-
 export interface City {
     id: number;
     documentId: string;
@@ -57,7 +52,6 @@ export interface City {
         height: number;
     }>;
 }
-
 interface StrapiResponse<T> {
     data: T;
     meta: {
@@ -69,24 +63,15 @@ interface StrapiResponse<T> {
         };
     };
 }
-
-/**
- * Get all countries
- */
 export async function getCountries(locale: string = 'en'): Promise<Country[]> {
     const query = qs.stringify({
         locale,
         populate: '*',
         sort: ['featured:desc', 'name:asc'],
     });
-
     const { data } = await strapiClient.get<StrapiResponse<Country[]>>(`/countries?${query}`);
     return data.data;
 }
-
-/**
- * Get single country by slug
- */
 export async function getCountry(slug: string, locale: string = 'en'): Promise<Country | null> {
     const query = qs.stringify({
         locale,
@@ -101,14 +86,9 @@ export async function getCountry(slug: string, locale: string = 'en'): Promise<C
             },
         },
     });
-
     const { data } = await strapiClient.get<StrapiResponse<Country[]>>(`/countries?${query}`);
     return data.data[0] || null;
 }
-
-/**
- * Get all cities, optionally filtered by country
- */
 export async function getCities(countrySlug?: string, locale: string = 'en'): Promise<City[]> {
     const query = qs.stringify({
         locale,
@@ -127,14 +107,9 @@ export async function getCities(countrySlug?: string, locale: string = 'en'): Pr
         }),
         sort: ['name:asc'],
     });
-
     const { data } = await strapiClient.get<StrapiResponse<City[]>>(`/cities?${query}`);
     return data.data;
 }
-
-/**
- * Get single city by country slug and city slug
- */
 export async function getCity(
     countrySlug: string,
     citySlug: string,
@@ -157,14 +132,9 @@ export async function getCity(
             images: true,
         },
     });
-
     const { data } = await strapiClient.get<StrapiResponse<City[]>>(`/cities?${query}`);
     return data.data[0] || null;
 }
-
-/**
- * Get single city by slug only (regardless of country)
- */
 export async function getCityBySlug(
     citySlug: string,
     locale: string = 'en'
@@ -181,14 +151,9 @@ export async function getCityBySlug(
             images: true,
         },
     });
-
     const { data } = await strapiClient.get<StrapiResponse<City[]>>(`/cities?${query}`);
     return data.data[0] || null;
 }
-
-/**
- * Get featured cities for homepage
- */
 export async function getFeaturedCities(locale: string = 'en'): Promise<City[]> {
     const query = qs.stringify({
         locale,
@@ -203,40 +168,29 @@ export async function getFeaturedCities(locale: string = 'en'): Promise<City[]> 
         },
         sort: ['name:asc'],
     });
-
     const { data } = await strapiClient.get<StrapiResponse<City[]>>(`/cities?${query}`);
     return data.data;
 }
-
-/**
- * Get countries with cities for the Mega Menu
- */
 export async function getCountriesWithCities(locale: string = 'en'): Promise<Country[]> {
     const query = qs.stringify({
         locale,
         populate: {
             cities: {
-                fields: ['name', 'slug'], // Correct way to select fields
+                fields: ['name', 'slug'],
                 sort: ['name:asc'],
             },
         },
         sort: ['featured:desc', 'name:asc'],
     });
-
     const { data } = await strapiClient.get<StrapiResponse<Country[]>>(`/countries?${query}`);
     return data.data;
 }
-
-/**
- * Get image URL from Strapi
- */
 export function getStrapiImageUrl(url: string): string {
     if (url.startsWith('http')) {
         return url;
     }
     return `${strapiUrl}${url}`;
 }
-
 export interface TeamMember {
     id: number;
     documentId: string;
@@ -256,21 +210,15 @@ export interface TeamMember {
     responsibilities?: string;
     locale: string;
 }
-
-/**
- * Get all team members
- */
 export async function getTeamMembers(locale: string = 'en'): Promise<TeamMember[]> {
     const query = qs.stringify({
         locale,
         populate: '*',
         sort: ['fullName:asc'],
     });
-
     const { data } = await strapiClient.get<StrapiResponse<TeamMember[]>>(`/team-members?${query}`);
     return data.data;
 }
-
 export interface BlogPost {
     id: number;
     documentId: string;
@@ -289,10 +237,6 @@ export interface BlogPost {
     readTime?: string;
     locale: string;
 }
-
-/**
- * Get latest blogs
- */
 export async function getLatestBlogs(locale: string = 'en'): Promise<BlogPost[]> {
     const query = qs.stringify({
         locale,
@@ -302,19 +246,13 @@ export async function getLatestBlogs(locale: string = 'en'): Promise<BlogPost[]>
             limit: 3,
         },
     });
-
     try {
         const { data } = await strapiClient.get<StrapiResponse<BlogPost[]>>(`/blogs?${query}`);
         return data.data;
     } catch (error) {
-        // Silently return empty array if blogs endpoint doesn't exist
         return [];
     }
 }
-
-/**
- * Get latest cities for Journal section
- */
 export async function getLatestCities(locale: string = 'en'): Promise<City[]> {
     const query = qs.stringify({
         locale,
@@ -327,7 +265,6 @@ export async function getLatestCities(locale: string = 'en'): Promise<City[]> {
             limit: 3,
         },
     });
-
     const { data } = await strapiClient.get<StrapiResponse<City[]>>(`/cities?${query}`);
     return data.data;
 }

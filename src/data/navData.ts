@@ -8,7 +8,6 @@ import {
     GraduationCap
 } from 'lucide-react';
 import studentImage from '@/assets/whyus_student.webp';
-
 export const companyLinks = [
     {
         icon: Building2,
@@ -41,12 +40,10 @@ export const companyLinks = [
         href: '/blog'
     }
 ];
-
 export const trustBadges = [
     { name: 'Clutch', rating: '4.9' },
     { name: 'Gartner', rating: '4.8' }
 ];
-
 export const studentProfile = {
     nameKey: "studentName",
     roleKey: "studentRole",

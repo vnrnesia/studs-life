@@ -3,16 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import footerLogo from "../assets/footer_logo.webp";
 import footerBg from "../assets/footerbg.webp";
-
 interface FooterProps {
   lang: string;
   dict: any;
 }
-
 export default function Footer({ lang, dict }: FooterProps) {
   return (
     <footer className="relative bg-[#06182E] text-white overflow-hidden rounded-t-[3rem]">
-      {/* Background Image Container */}
+      {}
       <div className="absolute inset-0 w-full h-full">
         <Image
           src={footerBg}
@@ -21,19 +19,17 @@ export default function Footer({ lang, dict }: FooterProps) {
           className="object-cover object-left"
           priority
         />
-        {/* Gradient Overlay for better text readability on the right */}
+        {}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#06182E]/20 to-[#06182E]/60" />
       </div>
-
-      {/* Content Container */}
+      {}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left side - Empty space for background image visibility */}
+          {}
           <div className="hidden lg:block" />
-
-          {/* Right side - All footer content */}
+          {}
           <div className="space-y-8">
-            {/* Logo and Description */}
+            {}
             <div>
               <Link href={`/${lang}`} className="inline-block mb-4">
                 <Image
@@ -47,10 +43,9 @@ export default function Footer({ lang, dict }: FooterProps) {
                 {dict?.footer?.description || "Your reliable partner for education abroad and visa services since 2019."}
               </p>
             </div>
-
-            {/* Contact Info and Social Links */}
+            {}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              {/* Contact */}
+              {}
               <div>
                 <h3 className="font-bold uppercase mb-4 text-white tracking-wider text-sm">
                   {dict?.footer?.contact || "Contact"}
@@ -61,8 +56,7 @@ export default function Footer({ lang, dict }: FooterProps) {
                   <li>Turkmenistan, Turkmenabat</li>
                 </ul>
               </div>
-
-              {/* Social Links */}
+              {}
               <div>
                 <h3 className="font-bold uppercase mb-4 text-white tracking-wider text-sm">
                   {dict?.footer?.socials || "Follow Us"}
@@ -98,8 +92,7 @@ export default function Footer({ lang, dict }: FooterProps) {
                 </div>
               </div>
             </div>
-
-            {/* Copyright */}
+            {}
             <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-blue-100/60 text-xs">
               <p className="whitespace-normal break-words">© {new Date().getFullYear()} Student's Life Agency. {dict?.footer?.copyright || "All rights reserved."}</p>
               <div className="flex flex-wrap gap-4">

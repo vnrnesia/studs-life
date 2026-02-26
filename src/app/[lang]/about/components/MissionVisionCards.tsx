@@ -2,7 +2,6 @@ import Image from "next/image";
 import img1 from "@/assets/vision_mision/1.png";
 import img2 from "@/assets/vision_mision/2.png";
 import img3 from "@/assets/vision_mision/3.png";
-
 interface MissionVisionCardsProps {
   dict: {
     mission: { title: string; content: string };
@@ -10,14 +9,12 @@ interface MissionVisionCardsProps {
     values: { title: string; content: string };
   };
 }
-
 export default function MissionVisionCards({ dict }: MissionVisionCardsProps) {
   const cards = [
     { key: "mission" as const, image: img1 },
     { key: "vision" as const, image: img2 },
     { key: "values" as const, image: img3 }
   ];
-
   return (
     <section className="py-24 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

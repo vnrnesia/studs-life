@@ -8,15 +8,11 @@ import Image from "next/image";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
 import { BreadcrumbList, CollectionPage, WithContext } from "schema-dts";
-
 export const revalidate = 60;
-
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang as Locale);
-
   const pageMeta = dict.metadata?.pages?.blog;
-
   return generateSEOMetadata({
     lang,
     path: '/blog',
@@ -24,7 +20,6 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     description: pageMeta?.description || "Latest news, guides, and articles for international students.",
   });
 }
-
 export default async function BlogPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: langParam } = await params;
   const lang = langParam as Locale;
@@ -35,9 +30,7 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
   } catch (error) {
     console.error('BlogPage fetch failed:', error);
   }
-
   const blogDict = dict.latestJournal || {};
-
   const breadcrumbData: WithContext<BreadcrumbList> = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -56,7 +49,6 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
       },
     ],
   };
-
   const collectionPageSchema: WithContext<CollectionPage> = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -77,14 +69,12 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
     },
     "inLanguage": lang === 'tk' ? 'tk' : lang === 'ru' ? 'ru' : 'en'
   };
-
   return (
     <main className="min-h-screen bg-gray-50 pt-24 pb-16">
       <JsonLd<BreadcrumbList> data={breadcrumbData} />
       <JsonLd<CollectionPage> data={collectionPageSchema} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* Header */}
+        {}
         <div className="mb-12 text-center md:text-left">
           <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-[10px] md:text-xs font-bold tracking-wider uppercase text-gray-500 mb-6">
             {blogDict.label || "Journal"}
@@ -98,11 +88,9 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
               : 'Learn more about studying and living in different countries through our detailed articles.'}
           </p>
         </div>
-
-        {/* Blog Grid */}
+        {}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {cities.map((post) => {
-            // Image extraction
             let imageUrl = null;
             const images = post.images;
             if (images) {
@@ -113,13 +101,12 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
               }
             }
             const finalImageUrl = imageUrl ? getStrapiImageUrl(imageUrl) : null;
-
             return (
               <article
                 key={post.id}
                 className="group bg-white rounded-[2.5rem] border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 h-full flex flex-col"
               >
-                {/* Image Container */}
+                {}
                 <Link href={`/${lang}/${post.country?.slug}/${post.slug}`} className="relative h-64 overflow-hidden block">
                   {finalImageUrl ? (
                     <Image
@@ -135,16 +122,14 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
                       {blogDict.noImage || "No Image"}
                     </div>
                   )}
-
-                  {/* Country Badge */}
+                  {}
                   <div className="absolute top-6 left-6">
                     <span className="px-4 py-2 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest text-navy border border-white/20 shadow-sm">
                       {post.country?.name}
                     </span>
                   </div>
                 </Link>
-
-                {/* Content */}
+                {}
                 <div className="p-8 flex flex-col flex-grow">
                   <div className="flex items-center gap-4 text-xs text-gray-400 mb-4 font-medium">
                     <div className="flex items-center gap-1.5">
@@ -163,17 +148,14 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
                       <span>{blogDict.admin || "Admin"}</span>
                     </div>
                   </div>
-
                   <h2 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-navy transition-colors line-clamp-2 leading-tight">
                     <Link href={`/${lang}/${post.country?.slug}/${post.slug}`}>
                       {post.title}
                     </Link>
                   </h2>
-
                   <p className="text-gray-500 text-sm mb-6 line-clamp-3 leading-relaxed">
                     {post.intro || post.metaDescription}
                   </p>
-
                   <div className="mt-auto pt-6 border-t border-gray-50 flex items-center justify-between">
                     <Link
                       href={`/${lang}/${post.country?.slug}/${post.slug}`}

@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type Locale, i18n } from "@/i18n-config";
@@ -9,43 +8,36 @@ import { Country } from "@/lib/strapi";
 import logo from "../assets/logo.svg";
 import Image from "next/image";
 import { companyLinks, trustBadges, studentProfile } from "@/data/navData";
-
 interface NavbarProps {
   lang: Locale;
   dict: any;
   countries: Country[];
 }
-
 export default function Navbar({ lang, dict, countries }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobileCountriesOpen, setIsMobileCountriesOpen] = useState(false);
   const [isMobileCompanyOpen, setIsMobileCompanyOpen] = useState(false);
   const pathname = usePathname();
-
-
-
   const redirectedPathName = (locale: Locale) => {
     if (!pathname) return "/";
     const segments = pathname.split("/");
     segments[1] = locale;
     return segments.join("/");
   };
-
   const navLinks = [
     { name: dict?.nav?.home, href: `/${lang}` },
-    { name: dict?.nav?.countries, href: "#", type: "countries" }, // Special handling
-    { name: dict?.nav?.company, href: "#", type: "mega" }, // Special handling
-    { name: dict?.nav?.megaMenu?.blog || "Blog", href: `/${lang}/blog` }, // Blog link
+    { name: dict?.nav?.countries, href: "#", type: "countries" },
+    { name: dict?.nav?.company, href: "#", type: "mega" },
+    { name: dict?.nav?.megaMenu?.blog || "Blog", href: `/${lang}/blog` },
     { name: dict?.nav?.contact, href: `/${lang}/contact` },
   ];
-
   return (
     <nav
       className="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-md py-2"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+          {}
           <div className="flex-shrink-0 relative z-50">
             <Link href={`/${lang}`} className="flex items-center gap-2">
               <Image
@@ -57,11 +49,9 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
               />
             </Link>
           </div>
-
-          {/* Desktop Navigation */}
+          {}
           <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((link, index) => {
-              // 1. Countries Dropdown
               if (link.type === 'countries') {
                 return (
                   <div key={index} className="relative group px-3 py-2">
@@ -69,8 +59,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                       {link.name}
                       <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                     </button>
-
-                    {/* Countries Dropdown Panel */}
+                    {}
                     <div className="absolute left-0 top-full pt-4 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                       <div className="bg-white rounded-xl shadow-2xl border border-gray-100">
                         <div className="py-2">
@@ -87,8 +76,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                                   )}
                                 </div>
                               </Link>
-
-                              {/* Nested Cities */}
+                              {}
                               {country.cities && country.cities.length > 0 && (
                                 <div className="absolute left-full top-0 ml-2 w-56 opacity-0 invisible group-hover/country:opacity-100 group-hover/country:visible transition-all duration-200">
                                   <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2">
@@ -117,8 +105,6 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                   </div>
                 );
               }
-
-              // 2. Company Mega Menu
               if (link.type === 'mega') {
                 return (
                   <div key={index} className="relative group px-3 py-2 cursor-pointer">
@@ -126,12 +112,10 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                       {link.name}
                       <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                     </button>
-
-                    {/* Mega Menu Panel */}
+                    {}
                     <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-[90vw] md:w-[600px] lg:w-[800px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                       <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden grid grid-cols-12">
-
-                        {/* Left Side: Links */}
+                        {}
                         <div className="col-span-8 p-8">
                           <div className="grid grid-cols-2 gap-y-8 gap-x-12">
                             {companyLinks.map((item, i) => {
@@ -157,8 +141,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                               );
                             })}
                           </div>
-
-                          {/* Bottom Action Area */}
+                          {}
                           <div className="mt-8 pt-8 border-t border-gray-100 flex items-center justify-between">
                             <Link
                               href={`/${lang}/contact`}
@@ -167,15 +150,12 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                               {dict?.nav?.megaMenu?.getConsultation}
                               <ChevronRight className="w-4 h-4" />
                             </Link>
-
                           </div>
                         </div>
-
-                        {/* Right Side: CEO Profile (Dark Sidebar) */}
+                        {}
                         <div className="col-span-4 bg-slate-900 p-8 text-white relative overflow-hidden">
-                          {/* Abstract Decorative Circle */}
+                          {}
                           <div className="absolute top-0 right-0 w-32 h-32 bg-navy blur-[80px] opacity-20 rounded-full translate-x-1/2 -translate-y-1/2"></div>
-
                           <div className="relative z-10 flex flex-col h-full justify-between">
                             <div>
                               <div className="w-16 h-16 rounded-full overflow-hidden mb-4 border-2 border-white/20">
@@ -200,8 +180,6 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                   </div>
                 );
               }
-
-              // 3. Simple Link
               return (
                 <Link
                   key={index}
@@ -216,10 +194,9 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
               );
             })}
           </div>
-
-          {/* Right Area: Language & CTA */}
+          {}
           <div className="hidden md:flex items-center gap-6">
-            {/* Language Switcher */}
+            {}
             <div className="relative group">
               <button className="flex items-center gap-2 px-2 py-1 rounded-md text-sm font-bold transition-colors text-gray-900 hover:text-navy">
                 <div className="relative w-6 h-4 shadow-sm rounded-[2px] overflow-hidden">
@@ -233,7 +210,6 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                 </div>
                 <ChevronDown className="w-4 h-4 ml-1" />
               </button>
-
               <div className="absolute right-0 pt-2 w-40 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                 <div className="bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 py-2">
                   {i18n.locales.map((locale) => {
@@ -262,8 +238,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                 </div>
               </div>
             </div>
-
-            {/* CTA Button */}
+            {}
             <Link
               href={`/${lang}/contact`}
               className="px-6 py-2.5 bg-navy text-white text-sm font-bold rounded-full shadow-lg hover:bg-blue-900 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
@@ -271,10 +246,9 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
               {dict?.nav?.letsTalk}
             </Link>
           </div>
-
-          {/* Mobile Menu Button */}
+          {}
           <div className="md:hidden flex items-center gap-4">
-            {/* Small Language Indicator for Mobile */}
+            {}
             <div className="flex items-center gap-1">
               <div className="relative w-6 h-4 shadow-sm rounded-[2px] overflow-hidden">
                 <Image
@@ -285,7 +259,6 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                 />
               </div>
             </div>
-
             <button
               onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? "Close menu" : "Open menu"}
@@ -297,16 +270,14 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
           </div>
         </div>
       </div>
-
-      {/* Mobile Drawer */}
+      {}
       <div className={`fixed inset-0 z-40 bg-white transform transition-transform duration-300 ease-in-out md:hidden ${isOpen ? "translate-x-0" : "translate-x-full"
         }`}
-        style={{ top: '80px', height: 'calc(100vh - 80px)' }} // Below navbar
+        style={{ top: '80px', height: 'calc(100vh - 80px)' }}
       >
         <div className="h-full overflow-y-auto pb-20 px-6 py-8">
           <div className="space-y-4">
             {navLinks.map((link, index) => {
-              // Mobile Countries
               if (link.type === 'countries') {
                 return (
                   <div key={index} className="border-b border-gray-100 pb-2">
@@ -347,8 +318,6 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                   </div>
                 );
               }
-
-              // Mobile Company
               if (link.type === 'mega') {
                 return (
                   <div key={index} className="border-b border-gray-100 pb-2">
@@ -377,7 +346,6 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                   </div>
                 );
               }
-
               return (
                 <Link
                   key={index}
@@ -390,8 +358,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
               );
             })}
           </div>
-
-          {/* Mobile Languages */}
+          {}
           <div className="mt-8">
             <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Language</div>
             <div className="grid grid-cols-1 gap-2">
@@ -420,8 +387,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
               })}
             </div>
           </div>
-
-          {/* Mobile CTA */}
+          {}
           <div className="mt-8">
             <Link
               href={`/${lang}/contact`}

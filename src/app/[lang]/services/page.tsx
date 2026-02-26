@@ -7,18 +7,14 @@ import ServicesGrid from "./components/ServicesGrid";
 import CostOfLiving from "./components/CostOfLiving";
 import DestinationsHub from "./components/DestinationsHub";
 import AccommodationAssistant from "./components/AccommodationAssistant";
-
 import FAQ from "./components/FAQ";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/JsonLd";
 import { FAQPage, BreadcrumbList, WithContext } from "schema-dts";
-
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang as Locale);
-
   const pageMeta = dict.metadata?.pages?.services;
-
   return generateSEOMetadata({
     lang,
     path: '/services',
@@ -26,7 +22,6 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     description: pageMeta?.description || "Comprehensive educational support including university admissions, visa assistance, accommodation, and more.",
   });
 }
-
 export default async function ServicesPage({
   params,
 }: {
@@ -34,7 +29,6 @@ export default async function ServicesPage({
 }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
-
   const faqItems = Object.keys(dict.servicesPage.faq)
     .filter((key) => key.startsWith("q"))
     .map((key) => {
@@ -48,13 +42,11 @@ export default async function ServicesPage({
         },
       };
     });
-
   const jsonLdData: WithContext<FAQPage> = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: faqItems as any,
   };
-
   const breadcrumbData: WithContext<BreadcrumbList> = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -73,8 +65,6 @@ export default async function ServicesPage({
       },
     ],
   };
-
-  // Service schema for all services
   const serviceSchemas = [
     {
       "@context": "https://schema.org",
@@ -134,7 +124,6 @@ export default async function ServicesPage({
       serviceType: "Travel Services"
     }
   ];
-
   return (
     <main className="min-h-screen bg-gray-50">
       <JsonLd<FAQPage> data={jsonLdData} />
@@ -147,25 +136,18 @@ export default async function ServicesPage({
         />
       ))}
       <ServicesHero dict={dict.servicesPage.hero} />
-
       <ScrollReveal direction="up">
         <ServicesGrid dict={dict.servicesPage.coreServices} />
       </ScrollReveal>
-
       <ScrollReveal direction="up">
         <CostOfLiving dict={dict.servicesPage.costOfLiving} />
       </ScrollReveal>
-
       <ScrollReveal direction="up">
         <DestinationsHub dict={dict.servicesPage.destinations} lang={lang} />
       </ScrollReveal>
-
       <ScrollReveal direction="up">
         <AccommodationAssistant dict={dict.servicesPage.accommodationAssistant} lang={lang} />
       </ScrollReveal>
-
-
-
       <ScrollReveal direction="up">
         <FAQ dict={dict.servicesPage.faq} />
       </ScrollReveal>

@@ -6,7 +6,6 @@ import { marked } from 'marked';
 import { Metadata } from 'next';
 import JsonLd from '@/components/JsonLd';
 import { Article, BreadcrumbList, WithContext } from 'schema-dts';
-
 interface CityPageProps {
   params: Promise<{
     lang: string;
@@ -14,42 +13,32 @@ interface CityPageProps {
     city: string;
   }>;
 };
-
-// Generate static params for all cities
 export async function generateStaticParams() {
   try {
     const cities = await getCities();
-
     return cities
-      .filter((city) => city?.country?.slug) // Filter out cities without country
+      .filter((city) => city?.country?.slug)
       .map((city) => ({
         country: city.country.slug,
         city: city.slug,
       }));
   } catch (error) {
     console.error('Build-time fetch failed (this is expected if Strapi is not reachable during build):', error);
-    // Return empty array to allow build to succeed. 
-    // Pages will be generated on-demand at runtime when visited.
     return [];
   }
 }
-
-// Metadata Generation
 export async function generateMetadata({ params }: CityPageProps): Promise<Metadata> {
   try {
     const { country, city: citySlug, lang } = await params;
     const city = await getCity(country, citySlug, lang);
-
     if (!city) {
       return {
         title: 'City Not Found',
       };
     }
-
     const title = city.metaDescription || `${city.title} | Student's Life`;
     const description = city.intro ? city.intro.substring(0, 160) : `Study in ${city.title}, ${city.country?.name}. Comprehensive guide for international students.`;
     const image = city.images && city.images.length > 0 ? getStrapiImageUrl(city.images[0].url) : undefined;
-
     return generateSEOMetadata({
       lang,
       path: `/${country}/${citySlug}`,
@@ -65,19 +54,13 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     };
   }
 }
-
-// Revalidate every 60 seconds (1 minute)
 export const revalidate = 60;
-
 export default async function CityPage({ params }: CityPageProps) {
   const { country, city: citySlug, lang } = await params;
   const city = await getCity(country, citySlug, lang);
-
   if (!city) {
     notFound();
   }
-
-  // Destructure directly from city object (flattened structure)
   const {
     title,
     intro,
@@ -92,18 +75,12 @@ export default async function CityPage({ params }: CityPageProps) {
     publishedAt,
     updatedAt
   } = city;
-
-  // Access images array directly if it exists
   const heroImage = cityImages?.[0];
   const heroImageUrl = heroImage ? getStrapiImageUrl(heroImage.url) : '';
-
-  // Helper to safely parse markdown
   const parseMarkdown = (content?: string) => {
     if (!content) return null;
     return { __html: marked.parse(content) as string };
   };
-
-  // Structured Data
   const articleSchema: WithContext<Article> = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -130,7 +107,6 @@ export default async function CityPage({ params }: CityPageProps) {
       "@id": `https://studs-life.com/${lang}/${country}/${citySlug}`,
     },
   };
-
   const breadcrumbSchema: WithContext<BreadcrumbList> = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -155,14 +131,11 @@ export default async function CityPage({ params }: CityPageProps) {
       },
     ],
   };
-
   return (
-    // DEĞİŞİKLİK BURADA: bg-gray-50 ve text-black eklendi
     <main className="min-h-screen bg-gray-50 text-black">
       <JsonLd<Article> data={articleSchema} />
       <JsonLd<BreadcrumbList> data={breadcrumbSchema} />
-
-      {/* Hero Section */}
+      {}
       <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center">
         {heroImage && (
           <Image
@@ -176,8 +149,7 @@ export default async function CityPage({ params }: CityPageProps) {
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
-
-        {/* Buradaki text-white, yukarıdaki text-black'i ezer (istenilen durum) */}
+        {}
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
           <div className="mb-4">
             <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">
@@ -187,18 +159,16 @@ export default async function CityPage({ params }: CityPageProps) {
           <h1 className="text-4xl md:text-6xl font-bold mb-4">{title}</h1>
         </div>
       </section>
-
-      {/* Content Sections */}
+      {}
       <div className="container mx-auto px-4 py-16 max-w-4xl">
-        {/* Introduction */}
+        {}
         {intro && (
           <div
             className="prose prose-lg max-w-none mb-16 text-black prose-headings:text-black prose-p:text-black prose-strong:text-black"
             dangerouslySetInnerHTML={parseMarkdown(intro) || { __html: '' }}
           />
         )}
-
-        {/* Economy Section */}
+        {}
         {economyContent && (
           <section className="mb-16">
             <h2 className="text-3xl font-bold mb-6 flex items-center gap-3 text-black">
@@ -211,8 +181,7 @@ export default async function CityPage({ params }: CityPageProps) {
             />
           </section>
         )}
-
-        {/* Housing Section */}
+        {}
         {housingContent && (
           <section className="mb-16">
             <h2 className="text-3xl font-bold mb-6 flex items-center gap-3 text-black">
@@ -225,8 +194,7 @@ export default async function CityPage({ params }: CityPageProps) {
             />
           </section>
         )}
-
-        {/* Transport Section */}
+        {}
         {transportContent && (
           <section className="mb-16">
             <h2 className="text-3xl font-bold mb-6 flex items-center gap-3 text-black">
@@ -239,8 +207,7 @@ export default async function CityPage({ params }: CityPageProps) {
             />
           </section>
         )}
-
-        {/* Climate Section */}
+        {}
         {climateContent && (
           <section className="mb-16">
             <h2 className="text-3xl font-bold mb-6 flex items-center gap-3 text-black">
@@ -251,8 +218,7 @@ export default async function CityPage({ params }: CityPageProps) {
               className="prose prose-lg max-w-none text-black prose-headings:text-black prose-p:text-black prose-strong:text-black"
               dangerouslySetInnerHTML={parseMarkdown(climateContent) || { __html: '' }}
             />
-
-            {/* Climate Table */}
+            {}
             {climateTable && (
               <div className="mt-8 overflow-x-auto">
                 <table className="min-w-full border-collapse border border-gray-300 text-black">
@@ -283,8 +249,7 @@ export default async function CityPage({ params }: CityPageProps) {
             )}
           </section>
         )}
-
-        {/* Conclusion */}
+        {}
         {conclusion && (
           <section className="mb-16">
             <h2 className="text-3xl font-bold mb-6 flex items-center gap-3 text-black">
@@ -297,8 +262,7 @@ export default async function CityPage({ params }: CityPageProps) {
             />
           </section>
         )}
-
-        {/* Image Gallery */}
+        {}
         {cityImages && cityImages.length > 1 && (
           <section className="mb-16">
             <h2 className="text-3xl font-bold mb-6 text-black">

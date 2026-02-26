@@ -1,12 +1,10 @@
 "use client";
-
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { IconX } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 import { CarouselContext } from "@/components/ui/apple-cards-carousel";
-
 interface VideoCardProps {
   card: {
     src: string;
@@ -18,31 +16,26 @@ interface VideoCardProps {
   index: number;
   layout?: boolean;
 }
-
 export const VideoCard = ({ card, index, layout = false }: VideoCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-
   const getYouTubeId = (url: string) => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#&?]*).*/;
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
   };
-
   const youtubeId = card.videoUrl ? getYouTubeId(card.videoUrl) : null;
   const youtubeThumbnail = youtubeId ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg` : null;
   const isNativeVideo = card.videoUrl && !youtubeId;
-
   const handleClick = () => {
     if (card.videoUrl) {
       setIsPlaying(true);
     }
   };
-
   return (
     <>
-      {/* CSS to hide YouTube logo and branding */}
+      {}
       <style jsx global>{`
         .youtube-container iframe {
           pointer-events: auto;
@@ -65,15 +58,14 @@ export const VideoCard = ({ card, index, layout = false }: VideoCardProps) => {
         onMouseLeave={() => setIsHovered(false)}
         className="relative z-10 flex h-80 w-56 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 md:h-[35rem] md:w-96 dark:bg-neutral-900 group youtube-container"
       >
-        {/* Gray Overlay - disappears when playing or hovering */}
+        {}
         <div
           className={cn(
             "absolute inset-0 z-20 bg-black/20 transition-opacity duration-300 pointer-events-none",
             (isHovered || isPlaying) ? "opacity-0" : "opacity-100"
           )}
         />
-
-        {/* Content Overlay */}
+        {}
         <div className={cn(
           "relative z-40 p-8 pointer-events-none transition-opacity duration-300",
           isPlaying ? "opacity-0" : "opacity-100"
@@ -85,8 +77,7 @@ export const VideoCard = ({ card, index, layout = false }: VideoCardProps) => {
             {card.title}
           </p>
         </div>
-
-        {/* Close Button - Only visible when playing */}
+        {}
         {isPlaying && (
           <button
             onClick={(e) => {
@@ -99,8 +90,7 @@ export const VideoCard = ({ card, index, layout = false }: VideoCardProps) => {
             <IconX className="w-5 h-5" />
           </button>
         )}
-
-        {/* Play Button Overlay */}
+        {}
         {card.videoUrl && !isPlaying && (
           <button
             onClick={handleClick}
@@ -114,8 +104,7 @@ export const VideoCard = ({ card, index, layout = false }: VideoCardProps) => {
             </div>
           </button>
         )}
-
-        {/* Video Layer - YouTube only loads when user clicks play */}
+        {}
         {card.videoUrl && isPlaying && (
           <div className="absolute inset-0 z-10 w-full h-full bg-black">
             {isNativeVideo ? (
@@ -138,8 +127,7 @@ export const VideoCard = ({ card, index, layout = false }: VideoCardProps) => {
             ) : null}
           </div>
         )}
-
-        {/* Fallback/Preview Image */}
+        {}
         <img
           src={youtubeThumbnail || card.src}
           alt={card.title}

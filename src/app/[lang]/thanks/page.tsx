@@ -5,7 +5,6 @@ import { Instagram, FileDown, MessageCircle, Home, CheckCircle } from "lucide-re
 import { generateSEOMetadata } from "@/lib/seo";
 import { Metadata } from "next";
 import { BreadcrumbList, WithContext } from "schema-dts";
-
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang as Locale);
@@ -14,20 +13,16 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     title: dict.thanksPage.title,
     description: dict.thanksPage.message.substring(0, 160),
     path: "/thanks",
-    noIndex: true // Thank you pages should usually be noindexed
+    noIndex: true
   });
 }
-
 export default async function ThanksPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: langParam } = await params;
   const lang = langParam as Locale;
   const dict = await getDictionary(lang);
-
-  // Placeholder URLs - replace with actual values
-  const INSTAGRAM_URL = "https://instagram.com/studentslife"; // Replace with actual Instagram
-  const WHATSAPP_NUMBER = "99312345678"; // Replace with actual WhatsApp number
-  const PDF_URL = "/downloads/russia-student-guide.pdf"; // Replace with actual PDF path
-
+  const INSTAGRAM_URL = "https://instagram.com/studentslife";
+  const WHATSAPP_NUMBER = "99312345678";
+  const PDF_URL = "/downloads/russia-student-guide.pdf";
   const ctas = [
     {
       icon: Instagram,
@@ -58,7 +53,6 @@ export default async function ThanksPage({ params }: { params: Promise<{ lang: s
       external: true,
     },
   ];
-
   const jsonLd: WithContext<BreadcrumbList> = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -77,7 +71,6 @@ export default async function ThanksPage({ params }: { params: Promise<{ lang: s
       }
     ]
   };
-
   return (
     <main className="h-screen bg-gray-50 flex items-center justify-center px-4 overflow-hidden">
       <script
@@ -85,26 +78,22 @@ export default async function ThanksPage({ params }: { params: Promise<{ lang: s
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="max-w-4xl w-full">
-        {/* Success Icon & Message */}
+        {}
         <div className="text-center mb-6 md:mb-8">
           <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full mb-3 md:mb-4 shadow-xl">
             <CheckCircle className="w-6 h-6 md:w-8 md:h-8 text-white" strokeWidth={3} />
           </div>
-
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-1 md:mb-2 uppercase tracking-tight">
             {dict.thanksPage.title}
           </h1>
-
           <p className="text-base md:text-xl text-gray-700 font-bold mb-1 md:mb-2">
             {dict.thanksPage.subtitle}
           </p>
-
           <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto px-4">
             {dict.thanksPage.message}
           </p>
         </div>
-
-        {/* CTA Cards */}
+        {}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-4 md:mb-6">
           {ctas.map((cta, index) => {
             const Icon = cta.icon;
@@ -120,16 +109,13 @@ export default async function ThanksPage({ params }: { params: Promise<{ lang: s
                 <div className={`flex-shrink-0 inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${cta.color} rounded-lg mb-0 md:mb-3 group-hover:scale-110 transition-transform`}>
                   <Icon className="w-5 h-5 md:w-6 md:h-6 text-white" strokeWidth={2.5} />
                 </div>
-
                 <div className="flex-1 md:flex-none">
                   <h3 className="text-xs md:text-sm font-black text-gray-900 mb-0.5 md:mb-1 uppercase">
                     {cta.title}
                   </h3>
-
                   <p className="text-xs text-gray-600 mb-1 md:mb-3 leading-relaxed line-clamp-1 md:line-clamp-2">
                     {cta.description}
                   </p>
-
                   <span className="inline-block text-crimson font-bold text-xs group-hover:underline">
                     {cta.button} →
                   </span>
@@ -138,8 +124,7 @@ export default async function ThanksPage({ params }: { params: Promise<{ lang: s
             );
           })}
         </div>
-
-        {/* Home Button */}
+        {}
         <div className="text-center">
           <Link
             href={`/${lang}`}

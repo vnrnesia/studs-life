@@ -6,13 +6,10 @@ import Team from "@/components/Team";
 import { getTeamMembers } from "@/lib/strapi";
 import JsonLd from "@/components/JsonLd";
 import { BreadcrumbList, WithContext } from "schema-dts";
-
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang as Locale);
-
   const pageMeta = dict.metadata?.pages?.teams;
-
   return generateSEOMetadata({
     lang,
     path: '/teams',
@@ -20,13 +17,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     description: pageMeta?.description || "Meet our diverse team of education consultants dedicated to helping students achieve their study abroad goals.",
   });
 }
-
 export default async function TeamsPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: langParam } = await params;
   const lang = langParam as Locale;
   const dict = await getDictionary(lang);
   const teamMembers = await getTeamMembers(lang);
-
   const breadcrumbData: WithContext<BreadcrumbList> = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -45,8 +40,6 @@ export default async function TeamsPage({ params }: { params: Promise<{ lang: st
       },
     ],
   };
-
-  // Person schema for team members
   const personSchemas = teamMembers.map((member) => ({
     "@context": "https://schema.org",
     "@type": "Person",
@@ -61,7 +54,6 @@ export default async function TeamsPage({ params }: { params: Promise<{ lang: st
     ...(member.phone && { telephone: member.phone }),
     ...(member.photo?.url && { image: member.photo.url }),
   }));
-
   return (
     <div className="bg-gray-50 pt-10 pb-40">
       <JsonLd<BreadcrumbList> data={breadcrumbData} />

@@ -1,25 +1,20 @@
 "use client";
-
 import { motion } from "framer-motion";
 import Image from "next/image";
 import girlImg from "@/assets/girl.webp";
-
 interface ServicesHeroProps {
   dict: any;
 }
-
 export default function ServicesHero({ dict }: ServicesHeroProps) {
   return (
     <section className="relative w-full h-screen min-h-[700px] flex items-center bg-[#06182E] overflow-hidden pt-24 lg:pt-32">
-      {/* Background Decorative Elements */}
+      {}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full lg:w-[800px] h-full lg:h-[800px] bg-blue-500/10 rounded-full blur-[120px]" />
       </div>
-
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 md:px-12 lg:px-20 h-full flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full py-10 lg:py-0">
-
-          {/* Left Column - Company Info */}
+          {}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -34,15 +29,13 @@ export default function ServicesHero({ dict }: ServicesHeroProps) {
                 {dict.companyDescription}
               </p>
             </div>
-
             <div className="mt-auto hidden lg:block">
               <p className="text-white/40 text-[10px] md:text-xs leading-relaxed max-w-xs font-medium">
                 {dict.officialReps}
               </p>
             </div>
           </motion.div>
-
-          {/* Center Column - Girl on Globe */}
+          {}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -58,15 +51,14 @@ export default function ServicesHero({ dict }: ServicesHeroProps) {
               />
             </div>
           </motion.div>
-
-          {/* Right Column - Heading and Services */}
+          {}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             className="lg:col-span-4 flex flex-col justify-center lg:items-end space-y-6 md:space-y-10"
           >
-            {/* Stylized Heading */}
+            {}
             <div className="text-center lg:text-right">
               <h1 className="flex flex-col text-4xl md:text-6xl lg:text-[6.5rem] font-extrabold lg:font-black leading-[0.85] tracking-tighter uppercase">
                 <span className="text-crimson block">{dict.mainHeading.part1}</span>
@@ -74,8 +66,7 @@ export default function ServicesHero({ dict }: ServicesHeroProps) {
                 <span className="text-white block translate-x-8 lg:translate-x-0">{dict.mainHeading.part3}</span>
               </h1>
             </div>
-
-            {/* Services List */}
+            {}
             <ul className="space-y-2 md:space-y-3 lg:text-right px-4 lg:px-0">
               {dict.services.map((service: string, index: number) => (
                 <motion.li
@@ -90,18 +81,15 @@ export default function ServicesHero({ dict }: ServicesHeroProps) {
                 </motion.li>
               ))}
             </ul>
-
             <div className="lg:hidden text-center pt-6">
               <p className="text-white/40 text-[9px] leading-relaxed max-w-xs mx-auto font-medium italic">
                 {dict.officialReps}
               </p>
             </div>
           </motion.div>
-
         </div>
       </div>
-
-      {/* Subtle Bottom Glow */}
+      {}
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
     </section>
   );

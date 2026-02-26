@@ -5,13 +5,10 @@ import { generateSEOMetadata } from "@/lib/seo";
 import MultiStepContactForm from "@/components/MultiStepContactForm";
 import JsonLd from "@/components/JsonLd";
 import { BreadcrumbList, LocalBusiness, WithContext } from "schema-dts";
-
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang as Locale);
-
   const pageMeta = dict.metadata?.pages?.contact;
-
   return generateSEOMetadata({
     lang,
     path: '/contact',
@@ -19,7 +16,6 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     description: pageMeta?.description || "Get in touch with us for your study abroad journey. Free consultation available.",
   });
 }
-
 export default async function ContactPage({
   params,
 }: {
@@ -27,7 +23,6 @@ export default async function ContactPage({
 }) {
   const { lang } = await params;
   const dict = await getDictionary(lang as Locale);
-
   const breadcrumbData: WithContext<BreadcrumbList> = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -46,7 +41,6 @@ export default async function ContactPage({
       },
     ],
   };
-
   const localBusinessSchema: WithContext<LocalBusiness> = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -92,7 +86,6 @@ export default async function ContactPage({
       { "@type": "Country", "name": "Kazakhstan" }
     ]
   };
-
   return (
     <main className="flex-grow">
       <JsonLd<BreadcrumbList> data={breadcrumbData} />

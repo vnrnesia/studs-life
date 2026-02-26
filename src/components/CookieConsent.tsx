@@ -1,17 +1,13 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { X, Cookie } from "lucide-react";
-
 interface CookieConsentProps {
     lang: string;
     dict: any;
 }
-
 export default function CookieConsent({ lang, dict }: CookieConsentProps) {
     const [isVisible, setIsVisible] = useState(false);
-
     useEffect(() => {
         console.log("CookieConsent mounted");
         const consent = localStorage.getItem("cookie-consent");
@@ -21,19 +17,15 @@ export default function CookieConsent({ lang, dict }: CookieConsentProps) {
             setIsVisible(true);
         }
     }, []);
-
     const handleAccept = () => {
         localStorage.setItem("cookie-consent", "accepted");
         setIsVisible(false);
     };
-
     const handleDecline = () => {
         localStorage.setItem("cookie-consent", "declined");
         setIsVisible(false);
     };
-
     if (!isVisible) return null;
-
     return (
         <div className="fixed bottom-6 left-6 right-6 z-[100] md:max-w-md lg:max-w-lg md:left-auto">
             <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 overflow-hidden relative group transition-all duration-300 hover:shadow-blue-500/10 dark:bg-slate-900 dark:border-slate-800">
@@ -76,8 +68,7 @@ export default function CookieConsent({ lang, dict }: CookieConsentProps) {
                         <X className="w-5 h-5" />
                     </button>
                 </div>
-
-                {/* Subtle decorative element */}
+                {}
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-blue-500/5 rounded-full blur-2xl" />
             </div>
         </div>

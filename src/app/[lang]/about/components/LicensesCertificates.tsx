@@ -1,27 +1,21 @@
 "use client";
-
 import { useState } from "react";
 import { X } from "lucide-react";
 import Image from "next/image";
-
 interface LicensesCertificatesProps {
   dict: {
     title: string;
     subtitle: string;
   };
 }
-
 export default function LicensesCertificates({ dict }: LicensesCertificatesProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  // Placeholder certificate images
   const certificates = [
     "https://images.unsplash.com/photo-1554224311-beee4ead2e10?w=600&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&auto=format&fit=crop"
   ];
-
   return (
     <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,7 +27,6 @@ export default function LicensesCertificates({ dict }: LicensesCertificatesProps
             {dict.subtitle}
           </p>
         </div>
-
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {certificates.map((cert, index) => (
             <div 
@@ -51,8 +44,7 @@ export default function LicensesCertificates({ dict }: LicensesCertificatesProps
           ))}
         </div>
       </div>
-
-      {/* Lightbox */}
+      {}
       {selectedImage && (
         <div 
           className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"

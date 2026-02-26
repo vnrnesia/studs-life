@@ -2,19 +2,16 @@ import { MoveRight } from "lucide-react";
 import Image from "next/image";
 import mainBg from "../assets/herobg.webp";
 import mainBgMobile from "../assets/mainbg_mobile.webp";
-
 interface HeroProps {
     lang: string;
     dict: any;
 }
-
 export default function Hero({ lang, dict }: HeroProps) {
     return (
         <section className="relative w-full h-screen md:min-h-screen flex items-center pt-20 overflow-hidden">
-
-            {/* Background Images - Desktop and Mobile */}
+            {}
             <div className="absolute inset-0 z-0">
-                {/* Desktop Background */}
+                {}
                 <Image
                     src={mainBg}
                     alt="Background"
@@ -24,7 +21,7 @@ export default function Hero({ lang, dict }: HeroProps) {
                     quality={100}
                     unoptimized
                 />
-                {/* Mobile Background */}
+                {}
                 <Image
                     src={mainBgMobile}
                     alt="Background Mobile"
@@ -35,18 +32,13 @@ export default function Hero({ lang, dict }: HeroProps) {
                     unoptimized
                 />
             </div>
-
-            {/* =========================================
-          ÖN PLAN İÇERİĞİ (TEXT & RESİM)
-          ========================================= */}
+            {}
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center h-full pb-10">
-
-                {/* Left Side Content */}
+                {}
                 <div className="flex flex-col items-center md:items-start text-center md:text-left text-white w-full md:w-auto md:max-w-xs h-full md:h-auto pt-10 md:pt-0">
                     <h2 className="text-3xl md:text-4xl font-bold uppercase leading-tight mb-4">
                         {dict?.title}
                     </h2>
-
                     <div className="mt-auto md:mt-0 flex flex-col items-center md:items-start pb-10 md:pb-0">
                         <p className="text-sm md:text-base text-white/80 mb-6">
                             {dict?.subtitle}
@@ -60,8 +52,7 @@ export default function Hero({ lang, dict }: HeroProps) {
                         </a>
                     </div>
                 </div>
-
-                {/* Right Side Content */}
+                {}
                 <div className="hidden md:flex flex-col items-end text-white max-w-xs ml-auto">
                     <h2 className="text-3xl md:text-4xl font-bold uppercase leading-tight mb-4 text-right">
                         {dict?.rightTitle}
@@ -73,7 +64,6 @@ export default function Hero({ lang, dict }: HeroProps) {
                         {dict?.partnerText}
                     </p>
                 </div>
-
             </div>
         </section>
     );

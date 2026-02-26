@@ -1,5 +1,4 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion, useScroll, useSpring } from "framer-motion";
@@ -7,14 +6,12 @@ import { useRef, useState, useEffect } from "react";
 import { Globe, ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
-
 interface CountryData {
   name: string;
   slogan: string;
   description: string;
   tags: string[];
 }
-
 interface CountriesProps {
   lang: string;
   dict: {
@@ -26,14 +23,12 @@ interface CountriesProps {
     [key: string]: any;
   };
 }
-
 import russiaImg from "../assets/images/russia.webp";
 import chinaImg from "../assets/images/china.webp";
 import turkeyImg from "../assets/images/turkey.webp";
 import cyprusImg from "../assets/images/cyprus.webp";
 import belarusImg from "../assets/images/belarus.webp";
 import bulgariaImg from "../assets/images/bulgaria.webp";
-
 const countriesList = [
   { key: "china", img: chinaImg },
   { key: "russia", img: russiaImg },
@@ -42,7 +37,6 @@ const countriesList = [
   { key: "belarus", img: belarusImg },
   { key: "bulgaria", img: bulgariaImg },
 ];
-
 export default function Countries({ lang, dict }: CountriesProps) {
   const router = useRouter();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -50,35 +44,25 @@ export default function Countries({ lang, dict }: CountriesProps) {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  // Helper to get dynamic card width
   const getCardWidth = () => {
     if (scrollContainerRef.current) {
-      // Get the first card width + gap (32px = 2rem)
-      // We can query the first child directly.
       const firstCard = scrollContainerRef.current.querySelector('div > div > div') as HTMLElement;
       if (firstCard) {
         return firstCard.offsetWidth + 32;
       }
     }
-    return 932; // Fallback
+    return 932;
   };
-
-  // Initialize scroll to center the second card (index 1) on mobile
   useEffect(() => {
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current;
       const cardWidth = getCardWidth();
       const containerWidth = container.offsetWidth;
-
-      // Center Russia (index 1)
       const targetScroll = (cardWidth * 1) - (containerWidth / 2) + (cardWidth / 2);
-
       container.scrollLeft = targetScroll;
       setActiveIndex(1);
     }
   }, []);
-
   const handleScroll = () => {
     if (scrollContainerRef.current && !isDragging) {
       const { scrollLeft } = scrollContainerRef.current;
@@ -87,7 +71,6 @@ export default function Countries({ lang, dict }: CountriesProps) {
       setActiveIndex(index);
     }
   };
-
   const scrollToIndex = (index: number) => {
     if (scrollContainerRef.current) {
       const cardWidth = getCardWidth();
@@ -98,34 +81,28 @@ export default function Countries({ lang, dict }: CountriesProps) {
       setActiveIndex(index);
     }
   };
-
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!scrollContainerRef.current) return;
     setIsDragging(true);
-    // Disable snapping during drag to prevent "shift"
     scrollContainerRef.current.style.scrollSnapType = 'none';
     setStartX(e.pageX - scrollContainerRef.current.offsetLeft);
     setScrollLeft(scrollContainerRef.current.scrollLeft);
   };
-
   const handleMouseLeave = () => {
     if (isDragging && scrollContainerRef.current) {
       scrollContainerRef.current.style.scrollSnapType = 'x mandatory';
       setIsDragging(false);
     }
   };
-
   const handleMouseUp = () => {
     if (isDragging && scrollContainerRef.current) {
       scrollContainerRef.current.style.scrollSnapType = 'x mandatory';
       setIsDragging(false);
-      // Update active index after snapping back
       setTimeout(() => {
         handleScroll();
       }, 100);
     }
   };
-
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging || !scrollContainerRef.current) return;
     e.preventDefault();
@@ -133,18 +110,15 @@ export default function Countries({ lang, dict }: CountriesProps) {
     const walk = (x - startX) * 2;
     scrollContainerRef.current.scrollLeft = scrollLeft - walk;
   };
-
   const handleCardClick = (key: string) => {
     if (!isDragging) {
       router.push(`/${lang}/${key}`);
     }
   };
-
   return (
     <section className="relative py-16 bg-[#F8F9FA] text-gray-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* Header Section */}
+        {}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
           <div className="flex-1 text-left">
             <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-[10px] md:text-xs font-bold tracking-wider uppercase text-gray-500 mb-4">
@@ -157,7 +131,6 @@ export default function Countries({ lang, dict }: CountriesProps) {
               {dict.description}
             </p>
           </div>
-
           <div className="pb-2">
             <Link href={`/${lang}/contact`}>
               <InteractiveHoverButton
@@ -170,8 +143,7 @@ export default function Countries({ lang, dict }: CountriesProps) {
           </div>
         </div>
       </div>
-
-      {/* Slider Container */}
+      {}
       <div
         ref={scrollContainerRef}
         onScroll={handleScroll}
@@ -194,21 +166,18 @@ export default function Countries({ lang, dict }: CountriesProps) {
                 onClick={() => handleCardClick(country.key)}
                 className="bg-white rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row w-[350px] md:w-[900px] h-[480px] md:h-[420px] border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-500 group cursor-pointer"
               >
-                {/* Content Left */}
+                {}
                 <div className="flex-[1.2] p-8 md:p-10 flex flex-col justify-between items-start bg-white z-10">
                   <div>
                     <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center mb-6 border border-gray-100 group-hover:bg-crimson group-hover:text-white transition-colors duration-300">
                       <Globe className="w-6 h-6" />
                     </div>
-
                     <h3 className="text-2xl md:text-3xl font-bold mb-3 group-hover:text-crimson transition-colors font-montserrat tracking-tight">
                       {countryData.name}
                     </h3>
-
                     <p className="text-gray-500 line-clamp-2 md:line-clamp-3 leading-relaxed text-sm md:text-base mb-6">
                       {countryData.description}
                     </p>
-
                     <div className="flex flex-wrap gap-2 mb-6">
                       {countryData.tags?.map((tag, tIdx) => (
                         <span
@@ -220,7 +189,6 @@ export default function Countries({ lang, dict }: CountriesProps) {
                       ))}
                     </div>
                   </div>
-
                   <div className="mt-auto">
                     <InteractiveHoverButton
                       className="bg-white text-black border-gray-200"
@@ -230,8 +198,7 @@ export default function Countries({ lang, dict }: CountriesProps) {
                     </InteractiveHoverButton>
                   </div>
                 </div>
-
-                {/* Image Right */}
+                {}
                 <div className="flex-1 relative h-full overflow-hidden">
                   <Image
                     src={country.img}
@@ -248,8 +215,7 @@ export default function Countries({ lang, dict }: CountriesProps) {
           })}
         </div>
       </div>
-
-      {/* Pagination Dots */}
+      {}
       <div className="flex justify-center gap-1 mt-8" role="tablist" aria-label="Country slides">
         {countriesList.map((country, index) => (
           <button

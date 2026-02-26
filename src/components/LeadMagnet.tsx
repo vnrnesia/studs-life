@@ -1,15 +1,12 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Download, Gift, ArrowRight } from "lucide-react";
 import { submitToGoogleSheets } from "@/lib/submitToGoogleSheets";
 import { submitToCRM } from "@/lib/submitToCRM";
-
 interface LeadMagnetProps {
     lang: string;
 }
-
 const content = {
     ru: {
         badge: "БЕСПЛАТНО",
@@ -63,15 +60,12 @@ const content = {
         noThanks: "Ýok, sagbol"
     }
 };
-
 export default function LeadMagnet({ lang }: LeadMagnetProps) {
     const [isVisible, setIsVisible] = useState(false);
-
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsVisible(true);
         }, 10000);
-
         return () => clearTimeout(timer);
     }, []);
     const [email, setEmail] = useState("");
@@ -79,33 +73,25 @@ export default function LeadMagnet({ lang }: LeadMagnetProps) {
     const [phone, setPhone] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-
     const dict = content[lang as keyof typeof content] || content.ru;
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!email) return;
-
         setIsSubmitting(true);
-
         const formData = {
             email: email,
             name: name,
             phone: phone,
             preference: 'Лид-магнит'
         };
-
         const [sheetsResult] = await Promise.allSettled([
             submitToGoogleSheets('Лид-магнит', formData),
             submitToCRM('Лид-магнит', formData)
         ]);
-
         const result = sheetsResult.status === 'fulfilled'
             ? sheetsResult.value
             : { success: false, message: 'Google Sheets submission failed' };
-
         setIsSubmitting(false);
-
         if (result.success) {
             setIsSubmitted(true);
             setTimeout(() => {
@@ -115,9 +101,7 @@ export default function LeadMagnet({ lang }: LeadMagnetProps) {
             alert(result.message);
         }
     };
-
     if (!isVisible) return null;
-
     return (
         <AnimatePresence>
             <motion.div
@@ -128,8 +112,7 @@ export default function LeadMagnet({ lang }: LeadMagnetProps) {
                 className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 z-50 w-auto md:w-full md:max-w-md"
             >
                 <div className="relative bg-gradient-to-br from-[#C62828] to-[#8B1E1E] rounded-2xl shadow-2xl overflow-hidden border border-white/10">
-
-                    {/* Close Button */}
+                    {}
                     <button
                         onClick={() => setIsVisible(false)}
                         className="absolute top-4 right-4 z-10 text-white/70 hover:text-white transition-colors"
@@ -137,8 +120,7 @@ export default function LeadMagnet({ lang }: LeadMagnetProps) {
                     >
                         <X className="w-5 h-5" />
                     </button>
-
-                    {/* Badge */}
+                    {}
                     <div className="absolute top-4 left-4 z-10">
                         <div className="flex items-center gap-2 bg-white px-3 py-1 rounded-full">
                             <Gift className="w-4 h-4 text-[#C62828]" />
@@ -147,21 +129,17 @@ export default function LeadMagnet({ lang }: LeadMagnetProps) {
                             </span>
                         </div>
                     </div>
-
-                    {/* Content */}
+                    {}
                     <div className="p-6 pt-14">
-
                         {!isSubmitted ? (
                             <>
                                 <h3 className="text-2xl font-black text-white mb-2 leading-tight">
                                     {dict.title}
                                 </h3>
-
                                 <p className="text-white/80 text-sm mb-4 leading-relaxed">
                                     {dict.subtitle}
                                 </p>
-
-                                {/* Features List */}
+                                {}
                                 <ul className="space-y-2 mb-6">
                                     {dict.features.map((feature, idx) => (
                                         <li key={idx} className="flex items-start gap-2 text-white/90 text-sm">
@@ -170,8 +148,7 @@ export default function LeadMagnet({ lang }: LeadMagnetProps) {
                                         </li>
                                     ))}
                                 </ul>
-
-                                {/* Email Form */}
+                                {}
                                 <form onSubmit={handleSubmit} className="space-y-3">
                                     <div className="space-y-2">
                                         <div>
@@ -220,7 +197,6 @@ export default function LeadMagnet({ lang }: LeadMagnetProps) {
                                             />
                                         </div>
                                     </div>
-
                                     <button
                                         type="submit"
                                         disabled={isSubmitting}
@@ -237,8 +213,7 @@ export default function LeadMagnet({ lang }: LeadMagnetProps) {
                                         )}
                                     </button>
                                 </form>
-
-                                {/* No Thanks */}
+                                {}
                                 <button
                                     onClick={() => setIsVisible(false)}
                                     className="w-full text-center text-white/60 hover:text-white/80 text-xs mt-3 transition-colors"

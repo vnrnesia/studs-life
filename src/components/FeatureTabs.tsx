@@ -1,10 +1,8 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import { cn } from "@/lib/utils";
-
 export interface FeatureTab {
   id: string;
   title: string;
@@ -12,14 +10,12 @@ export interface FeatureTab {
   icon: StaticImageData;
   image: string;
 }
-
 interface FeatureTabsProps {
   features: FeatureTab[];
   title?: string;
   subtitle?: string;
   className?: string;
 }
-
 export default function FeatureTabs({
   features,
   title,
@@ -27,23 +23,17 @@ export default function FeatureTabs({
   className
 }: FeatureTabsProps) {
   const [activeTabId, setActiveTabId] = useState<string>("");
-
-  // Set initial active tab
   useEffect(() => {
     if (features.length > 0 && !activeTabId) {
       setActiveTabId(features[0].id);
     }
   }, [features, activeTabId]);
-
   const activeFeature = features.find(f => f.id === activeTabId) || features[0];
-
   if (!features.length) return null;
-
   return (
     <section className={cn("py-24 bg-white text-gray-900 overflow-hidden", className)}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* Section Header */}
+        {}
         {(title || subtitle) && (
           <div className="mb-16 md:mb-24 max-w-3xl">
             {title && (
@@ -58,14 +48,11 @@ export default function FeatureTabs({
             )}
           </div>
         )}
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-
-          {/* Left Column: Navigation */}
+          {}
           <div className="flex flex-col space-y-4">
             {features.map((feature) => {
               const isActive = activeTabId === feature.id;
-
               return (
                 <button
                   key={feature.id}
@@ -75,7 +62,7 @@ export default function FeatureTabs({
                     isActive ? "opacity-100" : "opacity-100 hover:opacity-100"
                   )}
                 >
-                  {/* Active Background Animation */}
+                  {}
                   {isActive && (
                     <motion.div
                       layoutId="activeTabBg"
@@ -83,8 +70,7 @@ export default function FeatureTabs({
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
                   )}
-
-                  {/* Content */}
+                  {}
                   <div className="relative z-10 flex gap-6 items-center">
                     <div className={cn(
                       "flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 relative",
@@ -105,7 +91,6 @@ export default function FeatureTabs({
                         />
                       </div>
                     </div>
-
                     <div>
                       <h3 className={cn(
                         "text-xl font-bold mb-1 transition-colors",
@@ -125,8 +110,7 @@ export default function FeatureTabs({
               );
             })}
           </div>
-
-          {/* Right Column: Preview */}
+          {}
           <div className="relative h-[400px] md:h-[600px] w-full rounded-3xl bg-gray-50 border border-gray-200 p-2 overflow-hidden shadow-2xl">
             <AnimatePresence mode="wait">
               <motion.div
@@ -137,8 +121,7 @@ export default function FeatureTabs({
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className="relative w-full h-full rounded-2xl overflow-hidden"
               >
-
-                {/* We use a generic placeholder if image is missing, or the image provided */}
+                {}
                 {activeFeature.image ? (
                   <Image
                     src={activeFeature.image}
@@ -153,12 +136,10 @@ export default function FeatureTabs({
                     <p className="text-gray-400">No Image Preview</p>
                   </div>
                 )}
-
-                {/* Optional Overlay Info removed to match reference image cleaner look */}
+                {}
               </motion.div>
             </AnimatePresence>
           </div>
-
         </div>
       </div>
     </section>

@@ -1,5 +1,4 @@
 "use client";
-
 import { MapPin, Phone, Globe, Mail, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -7,15 +6,12 @@ import { useState } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/JsonLd";
 import { EducationalOrganization, WithContext } from "schema-dts";
-
 interface OfficeLocationsProps {
   lang: string;
   dict?: any;
 }
-
 export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
   const [activeOffice, setActiveOffice] = useState<string>("turkmenabat");
-
   const offices = [
     {
       id: "turkmenabat",
@@ -68,9 +64,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
       color: "blue"
     }
   ];
-
   const activeOfficeData = offices.find(o => o.id === activeOffice) || offices[0];
-
   const localBusinessSchema: WithContext<EducationalOrganization> = {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
@@ -95,19 +89,16 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
       telephone: office.phone || office.phones?.[0],
     })),
   };
-
   return (
     <section className="py-16 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
       <JsonLd<EducationalOrganization> data={localBusinessSchema} />
-      {/* Background Pattern */}
+      {}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-20 w-72 h-72 bg-crimson rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500 rounded-full blur-3xl" />
       </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-        {/* Header */}
+        {}
         <ScrollReveal direction="up">
           <div className="text-center mb-16">
             <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-[10px] md:text-xs font-bold tracking-wider uppercase text-gray-500 mb-4">
@@ -121,12 +112,10 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
             </p>
           </div>
         </ScrollReveal>
-
         <div className="flex flex-col lg:grid lg:grid-cols-2 md:gap-12 items-start">
-
-          {/* Office Selection */}
+          {}
           <div className="w-full">
-            {/* Mobile Selection (Arrow Navigation) */}
+            {}
             <div className="lg:hidden mb-8">
               <ScrollReveal direction="up">
                 <div className="flex items-center justify-between bg-white rounded-2xl border-2 border-gray-100 p-2 shadow-sm">
@@ -140,7 +129,6 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                   >
                     <ChevronLeft className="w-6 h-6" />
                   </button>
-
                   <div className="flex items-center gap-3">
                     <div className="relative w-8 h-6 overflow-hidden rounded shadow-sm">
                       <Image
@@ -154,7 +142,6 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                       {activeOfficeData.city}
                     </span>
                   </div>
-
                   <button
                     onClick={() => {
                       const currentIndex = offices.findIndex(o => o.id === activeOffice);
@@ -168,14 +155,12 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                 </div>
               </ScrollReveal>
             </div>
-
-            {/* Desktop Selection (Grid) */}
+            {}
             <div className="hidden lg:grid grid-cols-2 gap-4">
               {offices.map((office, index) => {
                 const isActive = activeOffice === office.id;
                 const borderColor = office.color === "green" ? "border-green-500" : "border-blue-500";
                 const bgColor = office.color === "green" ? "bg-green-50" : "bg-blue-50";
-
                 return (
                   <ScrollReveal
                     key={office.id}
@@ -200,7 +185,6 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                           <div className="w-2 h-2 bg-white rounded-full" />
                         </motion.div>
                       )}
-
                       <div className="flex items-center gap-3 mb-3">
                         <div className="relative w-10 h-7 overflow-hidden rounded shadow-sm">
                           <Image
@@ -214,7 +198,6 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                           <p className="font-black text-gray-900">{office.city}</p>
                         </div>
                       </div>
-
                       <p className="text-xs text-gray-600 line-clamp-2">
                         {office.address}
                       </p>
@@ -224,8 +207,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
               })}
             </div>
           </div>
-
-          {/* Right: Active Office Details */}
+          {}
           <ScrollReveal direction="right" className="w-full">
             <motion.div
               key={activeOffice}
@@ -247,9 +229,8 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                   <h3 className="text-2xl md:text-3xl font-black break-words leading-tight">{activeOfficeData.city}</h3>
                 </div>
               </div>
-
               <div className="space-y-6">
-                {/* Address */}
+                {}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-5 h-5 text-white" />
@@ -259,8 +240,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                     <p className="text-white/90">{activeOfficeData.address}</p>
                   </div>
                 </div>
-
-                {/* Phone(s) */}
+                {}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
                     <Phone className="w-5 h-5 text-white" />
@@ -279,8 +259,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                     ))}
                   </div>
                 </div>
-
-                {/* Working Hours */}
+                {}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
                     <Clock className="w-5 h-5 text-white" />
@@ -292,8 +271,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                   </div>
                 </div>
               </div>
-
-              {/* CTA */}
+              {}
               <div className="mt-8 pt-8 border-t border-white/10">
                 <a
                   href={`tel:${activeOfficeData.phone || activeOfficeData.phones?.[0]}`}

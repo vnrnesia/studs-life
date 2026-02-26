@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, CheckCircle2, Info, MessageCircle, PhoneCall, Mail } from "lucide-react";
@@ -7,15 +6,12 @@ import Image from "next/image";
 import ctaBg from "@/assets/ctaform.webp";
 import { submitToGoogleSheets } from "@/lib/submitToGoogleSheets";
 import { submitToCRM } from "@/lib/submitToCRM";
-
 interface ContactFormSectionProps {
   lang: string;
   dict: any;
 }
-
 type ContactPreference = "call" | "whatsapp" | "telegram" | "email";
 type Country = "RU" | "TM" | null;
-
 export default function ContactFormSection({ lang, dict }: ContactFormSectionProps) {
   const [formData, setFormData] = useState({
     name: "",
@@ -27,21 +23,15 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showTelegramModal, setShowTelegramModal] = useState(false);
-
-  // Clear phone when country changes to avoid mask mismatch
   useEffect(() => {
     setFormData((prev) => ({ ...prev, phone: "" }));
   }, [country]);
-
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // If Telegram is selected, allow free text input (for @username)
     if (formData.preference === "telegram") {
       setFormData((prev) => ({ ...prev, phone: e.target.value }));
       return;
     }
-
     let raw = e.target.value.replace(/\D/g, "");
-
     if (country === "RU") {
       if (raw.startsWith("7")) raw = raw.slice(1);
       raw = raw.slice(0, 10);
@@ -62,7 +52,6 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
       setFormData((prev) => ({ ...prev, phone: e.target.value }));
     }
   };
-
   useEffect(() => {
     if (formData.preference === "telegram") {
       setShowTelegramModal(true);
@@ -70,11 +59,9 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
       setShowTelegramModal(false);
     }
   }, [formData.preference]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     const submissionData = {
       fullName: formData.name,
       email: formData.email,
@@ -82,30 +69,25 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
       preference: formData.preference,
       country: country || 'Other'
     };
-
     const [sheetsResult] = await Promise.allSettled([
       submitToGoogleSheets('General Inquiry', submissionData),
       submitToCRM('General Inquiry', submissionData)
     ]);
-
     setIsSubmitting(false);
-
     const result = sheetsResult.status === 'fulfilled'
       ? sheetsResult.value
       : { success: false, message: 'Google Sheets submission failed' };
-
     if (result.success) {
       setSubmitted(true);
     } else {
       alert(result.message);
     }
   };
-
   return (
     <section id="contact" className="py-16 bg-white overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
         <div className="relative overflow-hidden rounded-[2.5rem] bg-[#06182E] max-w-6xl mx-auto">
-          {/* Background Image Wrapper */}
+          {}
           <div className="absolute inset-0 z-0">
             <Image
               src={ctaBg}
@@ -114,17 +96,15 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
               className="object-cover object-right pointer-events-none"
               priority
             />
-            {/* Gradient Overlay for Left Content Readability */}
+            {}
             <div className="absolute inset-0 bg-gradient-to-r from-[#06182E] via-[#06182E]/60 to-transparent" />
           </div>
-
           <div className="relative z-10 px-8 md:px-16 py-8 md:py-10">
             <div className="max-w-4xl mx-auto md:mx-0 text-center md:text-left mb-12">
-              {/* Badge */}
+              {}
               <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-xs font-bold tracking-wider uppercase text-gray-500 mb-4">
                 {dict.badge}
               </div>
-
               <h2 className="text-3xl md:text-5xl font-black text-white mb-3 tracking-tight leading-tight">
                 {dict.title}
               </h2>
@@ -132,9 +112,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
                 {dict.subtitle}
               </p>
             </div>
-
             <div className="max-w-lg mx-auto md:mx-0 text-left">
-
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -147,7 +125,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* Full Name */}
+                    {}
                     <div className="space-y-2">
                       <label className="text-[10px] font-bold text-blue-200/40 uppercase tracking-[0.2em] pl-1">
                         {dict.fields.name}
@@ -161,7 +139,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
                         className="w-full bg-[#0A2647]/60 backdrop-blur-md border border-white/10 focus:border-white/30 outline-none px-5 py-3 rounded-xl text-white placeholder-white/10 transition-all font-medium text-sm"
                       />
                     </div>
-                    {/* Email Address */}
+                    {}
                     <div className="space-y-2">
                       <label className="text-[10px] font-bold text-blue-200/40 uppercase tracking-[0.2em] pl-1">
                         {dict.fields.email}
@@ -176,8 +154,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
                       />
                     </div>
                   </div>
-
-                  {/* Phone Number / Telegram row */}
+                  {}
                   <div className="space-y-2">
                     <div className="flex items-center justify-between pl-1">
                       <label className="text-[10px] font-bold text-blue-200/40 uppercase tracking-[0.2em]">
@@ -236,8 +213,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
                       />
                     </div>
                   </div>
-
-                  {/* Preferences Row */}
+                  {}
                   <div className="space-y-3">
                     <label className="text-[10px] font-bold text-blue-200/40 uppercase tracking-[0.2em] pl-1">
                       {dict.fields.contactPreference}
@@ -262,10 +238,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
                       ))}
                     </div>
                   </div>
-
-
-
-                  {/* Submit Button */}
+                  {}
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -279,8 +252,7 @@ export default function ContactFormSection({ lang, dict }: ContactFormSectionPro
           </div>
         </div>
       </div>
-
-      {/* Telegram Privacy Settings (Modal) */}
+      {}
       <AnimatePresence>
         {showTelegramModal && (
           <motion.div

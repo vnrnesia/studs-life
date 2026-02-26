@@ -6,19 +6,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import JsonLd from '@/components/JsonLd';
 import { BreadcrumbList, WithContext } from 'schema-dts';
-
 interface CountryPageProps {
   params: Promise<{
     lang: string;
     country: string;
   }>;
 }
-
-// Generate static params for all countries
 export async function generateStaticParams() {
   try {
     const countries = await import('@/lib/strapi').then(m => m.getCountries());
-
     return countries.map((country) => ({
       country: country.slug,
     }));
@@ -27,22 +23,16 @@ export async function generateStaticParams() {
     return [];
   }
 }
-
-// Revalidate every 60 seconds (1 minute)
 export const revalidate = 60;
-
-// Generate metadata with canonical and hreflang
 export async function generateMetadata({ params }: CountryPageProps): Promise<Metadata> {
   try {
     const { country: countrySlug, lang } = await params;
     const country = await getCountry(countrySlug, lang);
-
     if (!country) {
       return {
         title: 'Country Not Found',
       };
     }
-
     return generateSEOMetadata({
       lang,
       path: `/${countrySlug}`,
@@ -57,16 +47,13 @@ export async function generateMetadata({ params }: CountryPageProps): Promise<Me
     };
   }
 }
-
 export default async function CountryPage({ params }: CountryPageProps) {
   const { country: countrySlug, lang } = await params;
   const country = await getCountry(countrySlug, lang);
   const cities = await getCities(countrySlug, lang);
-
   if (!country) {
     notFound();
   }
-
   const breadcrumbData: WithContext<BreadcrumbList> = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -85,12 +72,11 @@ export default async function CountryPage({ params }: CountryPageProps) {
       },
     ],
   };
-
   return (
     <main className="min-h-screen pt-32 pb-16">
       <JsonLd<BreadcrumbList> data={breadcrumbData} />
       <div className="container mx-auto px-4">
-        {/* Header */}
+        {}
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold mb-4">{country.name}</h1>
           {country.description && (
@@ -99,8 +85,7 @@ export default async function CountryPage({ params }: CountryPageProps) {
             </p>
           )}
         </div>
-
-        {/* Cities Grid */}
+        {}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {cities.map((city) => (
             <Link
@@ -131,7 +116,6 @@ export default async function CountryPage({ params }: CountryPageProps) {
             </Link>
           ))}
         </div>
-
         {cities.length === 0 && (
           <div className="text-center py-16">
             <p className="text-xl text-gray-500">
@@ -145,4 +129,3 @@ export default async function CountryPage({ params }: CountryPageProps) {
     </main>
   );
 }
-

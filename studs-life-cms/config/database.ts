@@ -1,8 +1,6 @@
 import path from 'path';
-
 export default ({ env }) => {
     const client = env('DATABASE_CLIENT', 'sqlite');
-
     const connections = {
         mysql: {
             connection: {
@@ -49,7 +47,6 @@ export default ({ env }) => {
             useNullAsDefault: true,
         },
     };
-
     return {
         connection: {
             client,

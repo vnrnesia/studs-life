@@ -1,28 +1,22 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Calendar } from "lucide-react";
 import { City, getStrapiImageUrl } from "@/lib/strapi";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-
 interface LatestJournalProps {
     lang: string;
     dict: any;
     posts: City[];
 }
-
 export default function LatestJournal({ lang, dict, posts = [] }: LatestJournalProps) {
-    // If no posts, don't render section
     if (!posts || posts.length === 0) return null;
-
     return (
         <section className="py-16 bg-white overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
-
-                    {/* Left Side: Text & Button */}
+                    {}
                     <ScrollReveal direction="left" className="lg:w-1/3 flex flex-col justify-center">
                         <div>
                             <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-[10px] md:text-xs font-bold tracking-wider uppercase text-gray-500 mb-6 w-fit">
@@ -31,7 +25,6 @@ export default function LatestJournal({ lang, dict, posts = [] }: LatestJournalP
                             <h2 className="text-4xl md:text-5xl font-black tracking-tight text-gray-900 mb-8 leading-tight">
                                 {dict?.title_part1 || "Explore Our"} {dict?.title_part2 || "Latest Journal"}
                             </h2>
-
                             <div className="flex">
                                 <Link href={`/${lang}/blog`}>
                                     <InteractiveHoverButton
@@ -44,15 +37,11 @@ export default function LatestJournal({ lang, dict, posts = [] }: LatestJournalP
                             </div>
                         </div>
                     </ScrollReveal>
-
-                    {/* Right Side: Vertical List */}
+                    {}
                     <div className="lg:w-2/3 flex flex-col gap-6">
                         {posts.map((post: any, index: number) => {
-                            // Robust image extraction for different Strapi structures
-                            // ... existing logic ...
                             let imageUrl = null;
                             const images = post.images;
-
                             if (images) {
                                 if (Array.isArray(images) && images.length > 0) {
                                     const firstImage = images[0];
@@ -62,9 +51,7 @@ export default function LatestJournal({ lang, dict, posts = [] }: LatestJournalP
                                     imageUrl = firstImage.url || firstImage.attributes?.url;
                                 }
                             }
-
                             const finalImageUrl = imageUrl ? getStrapiImageUrl(imageUrl) : null;
-
                             return (
                                 <ScrollReveal
                                     key={post.id}
@@ -75,7 +62,7 @@ export default function LatestJournal({ lang, dict, posts = [] }: LatestJournalP
                                         href={`/${lang}/${post.country?.slug}/${post.slug}`}
                                         className="group flex flex-col md:flex-row gap-6 p-4 rounded-3xl hover:bg-gray-50 transition-colors"
                                     >
-                                        {/* Image */}
+                                        {}
                                         <div className="relative h-48 md:h-32 w-full md:w-48 overflow-hidden rounded-2xl flex-shrink-0">
                                             {finalImageUrl ? (
                                                 <Image
@@ -91,8 +78,7 @@ export default function LatestJournal({ lang, dict, posts = [] }: LatestJournalP
                                                 </div>
                                             )}
                                         </div>
-
-                                        {/* Content */}
+                                        {}
                                         <div className="flex flex-col justify-center flex-grow">
                                             <div className="flex items-center gap-3 text-sm text-gray-500 mb-2">
                                                 <span>
@@ -105,11 +91,9 @@ export default function LatestJournal({ lang, dict, posts = [] }: LatestJournalP
                                                 <span className="w-1 h-1 rounded-full bg-gray-300" />
                                                 <span>{post.country?.name || post.country?.data?.attributes?.name}</span>
                                             </div>
-
                                             <h3 className="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-crimson transition-colors line-clamp-2 mb-2">
                                                 {post.title}
                                             </h3>
-
                                             <p className="text-gray-600 text-sm line-clamp-2">
                                                 {post.intro || post.metaDescription || post.summary}
                                             </p>
@@ -119,7 +103,6 @@ export default function LatestJournal({ lang, dict, posts = [] }: LatestJournalP
                             );
                         })}
                     </div>
-
                 </div>
             </div>
         </section>

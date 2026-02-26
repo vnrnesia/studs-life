@@ -1,5 +1,4 @@
 import { MetadataRoute } from 'next';
-
 export default function manifest(): MetadataRoute.Manifest {
     return {
         name: "Student's Life - Study Abroad Services",
@@ -9,7 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
         display: 'standalone',
         orientation: 'portrait-primary',
         background_color: '#ffffff',
-        theme_color: '#6d1314', // Crimson from the project
+        theme_color: '#6d1314',
         categories: ['education', 'travel', 'lifestyle'],
         lang: 'ru',
         dir: 'ltr',
@@ -37,7 +36,6 @@ export default function manifest(): MetadataRoute.Manifest {
                 src: '/screenshots/home.png',
                 sizes: '1280x720',
                 type: 'image/png',
-                // @ts-ignore - form_factor is valid but not in types
                 form_factor: 'wide',
             },
         ],

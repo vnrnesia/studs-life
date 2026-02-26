@@ -9,19 +9,14 @@ import { getCountriesWithCities, type Country } from "@/lib/strapi";
 import JsonLd from "@/components/JsonLd";
 import { Organization } from "schema-dts";
 import CookieConsent from "@/components/CookieConsent";
-
 const manrope = Manrope({ subsets: ["latin", "cyrillic"], variable: "--font-manrope" });
 const montserrat = Montserrat({ subsets: ["latin", "cyrillic"], variable: "--font-montserrat", weight: ["400", "700", "800", "900"] });
-
 const BASE_URL = 'https://studs-life.com';
-
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang as Locale);
-
   const title = dict.metadata?.title || "Student's Life | Study Abroad, Visa & Travel Services";
   const description = dict.metadata?.description || "Guiding students through university applications, visa processing, and relocation support for a successful study abroad experience.";
-
   return {
     title,
     description,
@@ -61,13 +56,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     },
   };
 }
-
 export const revalidate = 60;
-
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
-
 export default async function RootLayout({
   children,
   params,
@@ -76,8 +68,6 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>;
 }>) {
   const { lang } = await params;
-
-  // Parallel API calls for better performance with error handling
   let dict;
   let countries: Country[] = [];
   try {
@@ -90,24 +80,20 @@ export default async function RootLayout({
     ]);
   } catch (error) {
     console.error('Layout fetch failed (critical):', error);
-    // Fallback dictionary or re-throw if critical
     dict = await getDictionary(lang as Locale);
     countries = [];
   }
-
   return (
     <html lang={lang}>
       <head>
-        {/* Preconnect to external domains for faster loading */}
+        {}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://img.youtube.com" />
         <link rel="preconnect" href="https://flagcdn.com" />
-
-        {/* DNS Prefetch for Strapi */}
+        {}
         <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'} />
-
-        {/* Preload critical font to reduce LCP blocking */}
+        {}
         <link
           rel="preload"
           href="/fonts/octin-stencil.woff"
@@ -115,8 +101,7 @@ export default async function RootLayout({
           type="font/woff"
           crossOrigin="anonymous"
         />
-
-        {/* Custom font with display optional for better LCP */}
+        {}
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -132,14 +117,13 @@ export default async function RootLayout({
         />
       </head>
       <body className={`${manrope.variable} ${montserrat.variable} font-sans antialiased bg-gray-50 text-gray-900 w-full`}>
-        {/* Skip to main content link for accessibility */}
+        {}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-crimson focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:font-bold"
         >
           Skip to main content
         </a>
-
         <JsonLd<Organization>
           data={{
             "@context": "https://schema.org",

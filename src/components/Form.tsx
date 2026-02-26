@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { GraduationCap, Users, School, Plane as PlaneIcon, Briefcase, Ticket } from "lucide-react";
 import UniversityForm from "./forms/UniversityForm";
@@ -8,7 +7,6 @@ import SchoolForm from "./forms/SchoolForm";
 import UmrahForm from "./forms/UmrahForm";
 import WorkVisaForm from "./forms/WorkVisaForm";
 import TicketForm from "./forms/TicketForm";
-
 interface FormProps {
   lang: string;
   dict: {
@@ -29,13 +27,10 @@ interface FormProps {
     buttons: Record<string, string>;
   };
 }
-
 type ServiceType = 'university' | 'transfer' | 'school' | 'umrah' | 'workVisa' | 'ticket' | null;
-
 export default function Form({ lang, dict }: FormProps) {
   const [selectedService, setSelectedService] = useState<ServiceType>(null);
   const [step, setStep] = useState<number>(1);
-
   const services = [
     { 
       id: 'university' as const, 
@@ -80,12 +75,10 @@ export default function Form({ lang, dict }: FormProps) {
       desc: dict.services.ticket.desc
     },
   ];
-
   const handleBack = () => {
     setStep(1);
     setSelectedService(null);
   };
-
   return (
     <section id="quick-form" className="relative py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -97,8 +90,7 @@ export default function Form({ lang, dict }: FormProps) {
             {dict.selectService}
           </p>
         </div>
-
-        {/* Step 1: Service Selection */}
+        {}
         {step === 1 && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service) => {
@@ -126,28 +118,22 @@ export default function Form({ lang, dict }: FormProps) {
             })}
           </div>
         )}
-
-        {/* Step 2: Dynamic Forms */}
+        {}
         {step === 2 && selectedService === 'university' && (
           <UniversityForm onBack={handleBack} dict={dict} />
         )}
-
         {step === 2 && selectedService === 'transfer' && (
           <TransferForm onBack={handleBack} dict={dict} />
         )}
-
         {step === 2 && selectedService === 'school' && (
           <SchoolForm onBack={handleBack} dict={dict} />
         )}
-
         {step === 2 && selectedService === 'umrah' && (
           <UmrahForm onBack={handleBack} dict={dict} />
         )}
-
         {step === 2 && selectedService === 'workVisa' && (
           <WorkVisaForm onBack={handleBack} dict={dict} />
         )}
-
         {step === 2 && selectedService === 'ticket' && (
           <TicketForm onBack={handleBack} dict={dict} />
         )}

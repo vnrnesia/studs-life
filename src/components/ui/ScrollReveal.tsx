@@ -1,8 +1,6 @@
 "use client";
-
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
-
 interface ScrollRevealProps {
   children: ReactNode;
   direction?: "up" | "down" | "left" | "right" | "none";
@@ -11,7 +9,6 @@ interface ScrollRevealProps {
   className?: string;
   distance?: number;
 }
-
 export default function ScrollReveal({
   children,
   direction = "up",
@@ -36,7 +33,6 @@ export default function ScrollReveal({
         return { opacity: 0, y: distance };
     }
   };
-
   const getAnimateProps = () => {
     switch (direction) {
       case "up":
@@ -51,7 +47,6 @@ export default function ScrollReveal({
         return { opacity: 1, y: 0 };
     }
   };
-
   return (
     <motion.div
       initial={getInitialProps()}
@@ -60,7 +55,7 @@ export default function ScrollReveal({
       transition={{
         duration: duration,
         delay: delay,
-        ease: [0.21, 0.47, 0.32, 0.98], // Custom ease for smooth reveal
+        ease: [0.21, 0.47, 0.32, 0.98],
       }}
       className={className}
     >

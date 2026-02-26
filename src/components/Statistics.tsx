@@ -1,15 +1,12 @@
 "use client";
-
 import React from "react";
 import { motion } from "framer-motion";
 import { TrendingUp } from "lucide-react";
 import { Locale } from "@/i18n-config";
-
 interface StatisticsProps {
   lang: Locale;
   dict: any;
 }
-
 export default function Statistics({ lang, dict }: StatisticsProps) {
   const stats = [
     { 
@@ -38,27 +35,23 @@ export default function Statistics({ lang, dict }: StatisticsProps) {
       icon: false 
     },
   ];
-
   return (
     <section className="py-16 bg-white overflow-hidden border-t border-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Top Section: Badge & Description */}
+        {}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-20">
           <div className="md:col-span-1">
             <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-[10px] md:text-xs font-bold tracking-wider uppercase text-gray-500">
               {dict.badge || "Statistics"}
             </div>
           </div>
-          
           <div className="md:col-span-4">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[#0A2647] leading-tight tracking-tight">
               {dict.description || "Our dedicated team of education consultants, visa experts, and mentors works tirelessly to ensure your success."}
             </h2>
           </div>
         </div>
-
-        {/* Stats Grid with Dividers */}
+        {}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-y-12 relative">
           {stats.map((stat, index) => (
             <motion.div 
@@ -69,11 +62,10 @@ export default function Statistics({ lang, dict }: StatisticsProps) {
               transition={{ delay: index * 0.1 }}
               className="relative px-4 first:pl-0 last:pr-0"
             >
-              {/* Vertical Divider (Desktop Only) */}
+              {}
               {index !== 0 && (
                 <div className="hidden md:block absolute left-0 top-0 bottom-0 w-px bg-gray-100" />
               )}
-              
               <div className="group">
                 <div className="flex items-start gap-1 mb-2">
                   <span className="text-4xl md:text-4xl lg:text-5xl font-bold text-[#0A2647] tracking-tighter">
@@ -90,7 +82,6 @@ export default function Statistics({ lang, dict }: StatisticsProps) {
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );

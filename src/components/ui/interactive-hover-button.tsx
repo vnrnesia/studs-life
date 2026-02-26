@@ -1,12 +1,9 @@
 import { ArrowRight } from "lucide-react"
-
 import { cn } from "@/lib/utils"
-
 interface InteractiveHoverButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   dotClassName?: string;
   hoverTextClassName?: string;
 }
-
 export function InteractiveHoverButton({
   children,
   className,

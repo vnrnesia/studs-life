@@ -6,27 +6,18 @@ import Hero from "@/components/Hero";
 import dynamic from "next/dynamic";
 import JsonLd from "@/components/JsonLd";
 import { WebSite, WebPage, WithContext } from "schema-dts";
-
 import { getTeamMembers, getLatestCities } from "@/lib/strapi";
-
-// Import Support Icons (small, keep static)
 import supportUniversityIcon from "@/assets/support_icons/admission.webp";
 import supportVisaIcon from "@/assets/support_icons/visa.webp";
 import supportAccommodationIcon from "@/assets/support_icons/accommadation.webp";
 import supportCareerIcon from "@/assets/support_icons/career.webp";
-
-// Import Student Support Images
 import universityImg from "@/assets/student_support/university.webp";
 import visaImg from "@/assets/student_support/visa.webp";
 import accommodationImg from "@/assets/student_support/accommadation.webp";
 import careerImg from "@/assets/student_support/career.webp";
-
-// Import How It Works Images
 import consultationImg from "@/assets/how_it_works/free_consultation.webp";
 import preparationImg from "@/assets/how_it_works/visa.webp";
 import departureImg from "@/assets/how_it_works/departure_support.webp";
-
-// Dynamic imports for ALL below-the-fold components (performance optimization)
 const FeatureTabs = dynamic(() => import("@/components/FeatureTabs"), { ssr: true });
 const Services = dynamic(() => import("@/components/Services"), { ssr: true });
 const Countries = dynamic(() => import("@/components/Countries"), { ssr: true });
@@ -35,19 +26,15 @@ const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"), { ssr: tru
 const Team = dynamic(() => import("@/components/Team"), { ssr: true });
 const Statistics = dynamic(() => import("@/components/Statistics"), { ssr: true });
 const ContactFormSection = dynamic(() => import("@/components/ContactFormSection"), { ssr: true });
-// import LatestJournal from "../../components/LatestJournal";
 const TestimonialsCarousel = dynamic(() => import("@/components/TestimonialsCarousel"));
 const LatestJournal = dynamic(() => import("@/components/LatestJournal"));
 const OfficeLocations = dynamic(() => import("@/components/OfficeLocations"));
 const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
 const LeadMagnet = dynamic(() => import("@/components/LeadMagnet"));
-
 export const revalidate = 60;
-
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
     const dict: any = await getDictionary(lang as Locale);
-
     const pageMeta = dict.metadata?.title ? {
         title: dict.metadata.title,
         description: dict.metadata.description
@@ -55,20 +42,16 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         title: "Student's Life | Study Abroad, Visa & Travel Services",
         description: "Guiding students through university applications, visa processing, and relocation support for a successful study abroad experience."
     };
-
     return generateSEOMetadata({
         lang,
-        path: '', // Home page
+        path: '',
         title: pageMeta.title,
         description: pageMeta.description,
     });
 }
-
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
     const { lang: langParam } = await params;
     const lang = langParam as Locale;
-
-    // Parallel API calls for better performance with error handling
     let dict, teamMembers, latestCities;
     try {
         [dict, teamMembers, latestCities] = await Promise.all([
@@ -78,16 +61,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         ]) as [any, any, any];
     } catch (error) {
         console.error('Homepage fetch failed, falling back to static content:', error);
-        // Fallback: try to get at least the dictionary
         try {
             dict = await getDictionary(lang);
         } catch (e) {
-            dict = {}; // Last resort fallback
+            dict = {};
         }
         teamMembers = [];
         latestCities = [];
     }
-
     const features = [
         {
             id: "admissions",
@@ -118,7 +99,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             image: careerImg.src
         }
     ];
-
     const howItWorksSteps = [
         {
             id: "consultation",
@@ -145,9 +125,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             image: departureImg.src
         }
     ];
-
     const BASE_URL = 'https://studs-life.com';
-
     const websiteSchema: WithContext<WebSite> = {
         "@context": "https://schema.org",
         "@type": "WebSite",
@@ -159,12 +137,10 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 "@type": "EntryPoint",
                 "urlTemplate": `${BASE_URL}/${lang}/search?q={search_term_string}`
             },
-            // @ts-ignore - query-input is valid but not in types
             "query-input": "required name=search_term_string"
         },
         "inLanguage": lang === 'tk' ? 'tk' : lang === 'ru' ? 'ru' : 'en'
     };
-
     const webPageSchema: WithContext<WebPage> = {
         "@context": "https://schema.org",
         "@type": "WebPage",
@@ -182,44 +158,29 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         },
         "inLanguage": lang === 'tk' ? 'tk' : lang === 'ru' ? 'ru' : 'en'
     };
-
     return (
         <main className="min-h-screen bg-gray-50">
             <JsonLd<WebSite> data={websiteSchema} />
             <JsonLd<WebPage> data={webPageSchema} />
-
-            {/* Hero - Critical above-the-fold, keep static */}
+            {}
             <Hero lang={lang} dict={dict.hero} />
-
-            {/* All below-the-fold components - No ScrollReveal wrappers for performance */}
+            {}
             <FeatureTabs
                 features={features}
                 title={dict.featureTabs?.title || "Comprehensive Student Support"}
                 subtitle={dict.featureTabs?.subtitle || "Detailed assistance at every step of your study abroad journey."}
             />
-
             <Services lang={lang} dict={dict.services} />
-
             <Countries lang={lang} dict={dict.countries} />
-
             <HowItWorks steps={howItWorksSteps} dict={dict.howItWorks} lang={lang} />
-
             <WhyChooseUs lang={lang} dict={dict.whyUs} />
-
             <Team lang={lang} dict={dict.team} teamMembers={teamMembers.slice(0, 6)} showViewAll={true} />
-
             <Statistics lang={lang} dict={dict.statistics} />
-
             <TestimonialsCarousel title={dict.team.testimonials_title} videoCategory={dict.team.videoTestimonialCategory} />
-
             <ContactFormSection lang={lang} dict={dict.contactForm} />
-
             <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestCities} />
-
             <LeadMagnet lang={lang} />
-
             <ProcessSection lang={lang} dict={(dict as any).processWorkflow} />
-
             <OfficeLocations lang={lang} dict={dict.offices} />
         </main>
     );

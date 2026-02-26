@@ -1,11 +1,9 @@
 "use client";
-
 import React from "react";
 import { Carousel } from "@/components/ui/apple-cards-carousel";
 import { VideoCard } from "./VideoCard";
 import JsonLd from "@/components/JsonLd";
 import { Review, WithContext } from "schema-dts";
-
 interface Testimonial {
   category: string;
   title: string;
@@ -14,23 +12,18 @@ interface Testimonial {
   studentName: string;
   university: string;
 }
-
 interface TestimonialsCarouselProps {
   title?: React.ReactNode;
   videoCategory?: string;
 }
-
 export default function TestimonialsCarousel({ title, videoCategory = "Video Testimonial" }: TestimonialsCarouselProps) {
-  // Apply category from props (i18n)
   const localizedTestimonials = rawTestimonials.map(item => ({
     ...item,
     category: videoCategory
   }));
-
   const cards = localizedTestimonials.map((card, index) => (
     <VideoCard key={card.src} card={{ ...card, content: <DummyContent content={card.content} studentName={card.studentName} university={card.university} /> }} index={index} />
   ));
-
   const reviewSchema: WithContext<Review>[] = rawTestimonials.map((item) => ({
     "@context": "https://schema.org",
     "@type": "Review",
@@ -50,7 +43,6 @@ export default function TestimonialsCarousel({ title, videoCategory = "Video Tes
       image: item.src,
     },
   }));
-
   return (
     <div className="w-full h-full">
       {reviewSchema.map((schema, idx) => (
@@ -60,7 +52,6 @@ export default function TestimonialsCarousel({ title, videoCategory = "Video Tes
     </div>
   );
 }
-
 const DummyContent = ({ content, studentName, university }: { content: string; studentName: string; university: string }) => {
   return (
     <div className="bg-[#F5F5F7] dark:bg-neutral-800 p-8 md:p-14 rounded-3xl mb-4">
@@ -74,8 +65,6 @@ const DummyContent = ({ content, studentName, university }: { content: string; s
     </div>
   );
 };
-
-// Define raw data with string content first
 const rawTestimonials = [
   {
     category: "Video Testimonial",

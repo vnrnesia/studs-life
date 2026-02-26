@@ -1,22 +1,15 @@
 "use client";
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
-
 interface FAQProps {
   dict: any;
 }
-
 export default function FAQ({ dict }: FAQProps) {
-  // Extract questions from dict object. Assuming dict structure: { title, q1: {q, a}, q2: {q, a}, ... }
-  // We need to filter keys that start with 'q'
   const questions = Object.keys(dict)
     .filter((key) => key.startsWith("q"))
     .map((key) => dict[key]);
-
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
-
   return (
     <section className="py-24 bg-white text-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,7 +19,6 @@ export default function FAQ({ dict }: FAQProps) {
           </h2>
           <div className="mt-4 h-1 w-24 bg-crimson mx-auto rounded-full" />
         </div>
-
         <div className="space-y-4">
           {questions.map((item: any, index: number) => (
             <div 

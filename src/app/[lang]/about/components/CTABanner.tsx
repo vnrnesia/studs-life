@@ -1,12 +1,10 @@
 import Link from "next/link";
-
 interface CTABannerProps {
   dict: {
     title: string;
     button: string;
   };
 }
-
 export default function CTABanner({ dict }: CTABannerProps) {
   return (
     <section className="py-20 bg-red-600">

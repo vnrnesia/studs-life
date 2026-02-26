@@ -4,7 +4,6 @@ import icon2 from "@/assets/departments_grid/2.png";
 import icon3 from "@/assets/departments_grid/3.png";
 import icon4 from "@/assets/departments_grid/4.png";
 import icon5 from "@/assets/departments_grid/5.png";
-
 interface DepartmentsGridProps {
   dict: {
     title: string;
@@ -14,17 +13,14 @@ interface DepartmentsGridProps {
     }>;
   };
 }
-
 export default function DepartmentsGrid({ dict }: DepartmentsGridProps) {
   const icons = [icon1, icon2, icon3, icon4, icon5];
-
   return (
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-black text-slate-800 text-center mb-16">
           {dict.title}
         </h2>
-
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {dict.list.map((dept: any, index: number) => (
             <div
