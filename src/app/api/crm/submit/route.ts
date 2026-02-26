@@ -79,7 +79,7 @@ export async function POST(request: Request) {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-        const crmResponse = await fetch('http://manager-sl.ru/api/leads/create/', {
+        const crmResponse = await fetch('https://manager-sl.ru/api/leads/create/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

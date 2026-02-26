@@ -34,6 +34,7 @@ export async function submitToGoogleSheets(
             'Umrah': 'Умра в Мекку',
             'Work Visa': 'Рабочая виза',
             'Ticket': 'Покупка билета',
+            'General Inquiry': 'Общий запрос',
 
             // Education levels / Form of study
             'language': 'Языковые курсы',
@@ -80,7 +81,13 @@ export async function submitToGoogleSheets(
 
             // Transfer types
             'same': 'В той же стране',
-            'different': 'В другую страну'
+            'different': 'В другую страну',
+
+            // Contact preferences
+            'call': 'Звонок',
+            'whatsapp': 'WhatsApp',
+            'telegram': 'Telegram',
+            'email': 'Email'
         };
 
         const mapValue = (val: any) => {
@@ -101,18 +108,28 @@ export async function submitToGoogleSheets(
             'Регион': mapValue(formData.region),
             'Город': formData.city,
             'Уровень образования': mapValue(formData.educationLevel || formData.currentEducationLevel),
-            'Направление обучения': formData.fieldOfStudy || formData.targetField || formData.currentField,
-            'Университет': formData.targetUniversity || formData.currentUniversity,
-            'Страна назначения': mapValue(formData.targetCountry || formData.currentCountry),
-            'Срок паспорта': formData.passportExpiry,
-            'Есть паспорт': mapValue(formData.hasPassport),
+            'Страна назначения': mapValue(formData.targetCountry),
+            'Направление обучения': formData.fieldOfStudy || formData.targetField,
+            'ФИО студента': formData.studentName,
+            'ФИО родителя': formData.parentName,
+            'Наличие паспорта': mapValue(formData.hasPassport),
+            'Срок действия паспорта': formData.passportExpiry,
             'Месяц поездки': mapValue(formData.travelMonth),
-            'Предпочтения по работе': formData.workPreferences,
-            'Предыдущие поездки': formData.previousTravel,
-            'Откуда': formData.fromCity,
-            'Куда': formData.toCity,
+            'Город вылета': formData.fromCity,
+            'Город прибытия': formData.toCity,
             'Дата поездки': formData.travelDate,
+            'Способ связи': mapValue(formData.preference),
             'Багаж': mapValue(formData.needsBaggage),
+            'Текущее образование': mapValue(formData.currentEducationLevel),
+            'Текущий университет': formData.currentUniversity,
+            'Текущая страна': mapValue(formData.currentCountry),
+            'Текущая специальность': formData.currentField,
+            'Способ оплаты': mapValue(formData.paymentType),
+            'Тип перевода': mapValue(formData.transferType),
+            'Целевой университет': formData.targetUniversity,
+            'Целевая специальность': formData.targetField,
+            'Предпочтения по работе': formData.workPreferences,
+            'История поездок': formData.previousTravel,
             // Fallback for any other values that might need mapping
             ...Object.keys(formData).reduce((acc: any, key) => {
                 acc[key] = mapValue(formData[key]);
