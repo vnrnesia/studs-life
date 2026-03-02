@@ -38,6 +38,12 @@ export const companyLinks = [
         titleKey: 'blog',
         descKey: 'blogDesc',
         href: '/blog'
+    },
+    {
+        icon: GraduationCap,
+        titleKey: 'partnership',
+        descKey: 'partnershipDesc',
+        href: '/partnership'
     }
 ];
 export const trustBadges = [

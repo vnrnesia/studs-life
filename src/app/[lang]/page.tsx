@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import JsonLd from "@/components/JsonLd";
 import { WebSite, WebPage, WithContext } from "schema-dts";
 import { getTeamMembers, getLatestCities } from "@/lib/strapi";
+import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import supportUniversityIcon from "@/assets/support_icons/admission.webp";
 import supportVisaIcon from "@/assets/support_icons/visa.webp";
 import supportAccommodationIcon from "@/assets/support_icons/accommadation.webp";
@@ -26,7 +27,6 @@ const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"), { ssr: tru
 const Team = dynamic(() => import("@/components/Team"), { ssr: true });
 const Statistics = dynamic(() => import("@/components/Statistics"), { ssr: true });
 const ContactFormSection = dynamic(() => import("@/components/ContactFormSection"), { ssr: true });
-const TestimonialsCarousel = dynamic(() => import("@/components/TestimonialsCarousel"));
 const LatestJournal = dynamic(() => import("@/components/LatestJournal"));
 const OfficeLocations = dynamic(() => import("@/components/OfficeLocations"));
 const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
@@ -176,7 +176,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <WhyChooseUs lang={lang} dict={dict.whyUs} />
             <Team lang={lang} dict={dict.team} teamMembers={teamMembers.slice(0, 6)} showViewAll={true} />
             <Statistics lang={lang} dict={dict.statistics} />
-            <TestimonialsCarousel title={dict.team.testimonials_title} videoCategory={dict.team.videoTestimonialCategory} />
+            <TestimonialsCarousel title={dict.team.testimonials_title} videoCategory={dict.team.videoTestimonialCategory} lang={lang} />
             <ContactFormSection lang={lang} dict={dict.contactForm} />
             <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestCities} />
             <LeadMagnet lang={lang} />

@@ -268,3 +268,29 @@ export async function getLatestCities(locale: string = 'en'): Promise<City[]> {
     const { data } = await strapiClient.get<StrapiResponse<City[]>>(`/cities?${query}`);
     return data.data;
 }
+
+export interface Testimonial {
+    id: number;
+    documentId: string;
+    title: string;
+    studentName: string;
+    content?: string;
+    video?: { url: string; mime: string };
+    thumbnail?: { url: string; alternativeText?: string };
+    order: number;
+    locale: string;
+}
+
+export async function getTestimonials(locale: string = 'en'): Promise<Testimonial[]> {
+    const query = qs.stringify({
+        locale,
+        populate: ['video', 'thumbnail'],
+        sort: ['order:asc'],
+    });
+    try {
+        const { data } = await strapiClient.get<StrapiResponse<Testimonial[]>>(`/testimonials?${query}`);
+        return data.data;
+    } catch {
+        return [];
+    }
+}

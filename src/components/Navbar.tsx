@@ -17,6 +17,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobileCountriesOpen, setIsMobileCountriesOpen] = useState(false);
   const [isMobileCompanyOpen, setIsMobileCompanyOpen] = useState(false);
+  const [isMobileLangOpen, setIsMobileLangOpen] = useState(false);
   const pathname = usePathname();
   const redirectedPathName = (locale: Locale) => {
     if (!pathname) return "/";
@@ -37,7 +38,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {}
+          { }
           <div className="flex-shrink-0 relative z-50">
             <Link href={`/${lang}`} className="flex items-center gap-2">
               <Image
@@ -49,7 +50,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
               />
             </Link>
           </div>
-          {}
+          { }
           <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((link, index) => {
               if (link.type === 'countries') {
@@ -59,7 +60,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                       {link.name}
                       <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                     </button>
-                    {}
+                    { }
                     <div className="absolute left-0 top-full pt-4 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                       <div className="bg-white rounded-xl shadow-2xl border border-gray-100">
                         <div className="py-2">
@@ -76,7 +77,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                                   )}
                                 </div>
                               </Link>
-                              {}
+                              { }
                               {country.cities && country.cities.length > 0 && (
                                 <div className="absolute left-full top-0 ml-2 w-56 opacity-0 invisible group-hover/country:opacity-100 group-hover/country:visible transition-all duration-200">
                                   <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2">
@@ -112,10 +113,10 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                       {link.name}
                       <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                     </button>
-                    {}
+                    { }
                     <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-[90vw] md:w-[600px] lg:w-[800px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                       <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden grid grid-cols-12">
-                        {}
+                        { }
                         <div className="col-span-8 p-8">
                           <div className="grid grid-cols-2 gap-y-8 gap-x-12">
                             {companyLinks.map((item, i) => {
@@ -141,7 +142,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                               );
                             })}
                           </div>
-                          {}
+                          { }
                           <div className="mt-8 pt-8 border-t border-gray-100 flex items-center justify-between">
                             <Link
                               href={`/${lang}/contact`}
@@ -152,9 +153,9 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                             </Link>
                           </div>
                         </div>
-                        {}
+                        { }
                         <div className="col-span-4 bg-slate-900 p-8 text-white relative overflow-hidden">
-                          {}
+                          { }
                           <div className="absolute top-0 right-0 w-32 h-32 bg-navy blur-[80px] opacity-20 rounded-full translate-x-1/2 -translate-y-1/2"></div>
                           <div className="relative z-10 flex flex-col h-full justify-between">
                             <div>
@@ -194,14 +195,14 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
               );
             })}
           </div>
-          {}
+          { }
           <div className="hidden md:flex items-center gap-6">
-            {}
+            { }
             <div className="relative group">
               <button className="flex items-center gap-2 px-2 py-1 rounded-md text-sm font-bold transition-colors text-gray-900 hover:text-navy">
                 <div className="relative w-6 h-4 shadow-sm rounded-[2px] overflow-hidden">
                   <Image
-                    src={`https://flagcdn.com/w40/${{ en: 'gb', ru: 'ru', tk: 'tm' }[lang]}.png`}
+                    src={`https://flagcdn.com/w40/${{ en: 'gb', ru: 'ru', tk: 'tm', oz: 'uz' }[lang]}.png`}
                     alt={lang}
                     fill
                     className="object-cover"
@@ -213,8 +214,8 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
               <div className="absolute right-0 pt-2 w-40 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                 <div className="bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 py-2">
                   {i18n.locales.map((locale) => {
-                    const flags = { en: 'gb', ru: 'ru', tk: 'tm' };
-                    const names = { en: 'English', ru: 'Русский', tk: 'Türkmençe' };
+                    const flags = { en: 'gb', ru: 'ru', tk: 'tm', oz: 'uz' };
+                    const names = { en: 'English', ru: 'Русский', tk: 'Türkmençe', oz: 'O\'zbekcha' };
                     return (
                       <Link
                         key={locale}
@@ -238,7 +239,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                 </div>
               </div>
             </div>
-            {}
+            { }
             <Link
               href={`/${lang}/contact`}
               className="px-6 py-2.5 bg-navy text-white text-sm font-bold rounded-full shadow-lg hover:bg-blue-900 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
@@ -246,18 +247,63 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
               {dict?.nav?.letsTalk}
             </Link>
           </div>
-          {}
-          <div className="md:hidden flex items-center gap-4">
-            {}
-            <div className="flex items-center gap-1">
-              <div className="relative w-6 h-4 shadow-sm rounded-[2px] overflow-hidden">
-                <Image
-                  src={`https://flagcdn.com/w40/${{ en: 'gb', ru: 'ru', tk: 'tm' }[lang]}.png`}
-                  alt={lang}
-                  fill
-                  className="object-cover"
-                />
-              </div>
+          { }
+          <div className="md:hidden flex items-center gap-3">
+            {/* Mobile Language Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setIsMobileLangOpen(!isMobileLangOpen)}
+                className="flex items-center gap-1 p-1.5 rounded-lg transition-colors hover:bg-gray-100"
+                aria-label="Change language"
+              >
+                <div className="relative w-6 h-4 shadow-sm rounded-[2px] overflow-hidden">
+                  <Image
+                    src={`https://flagcdn.com/w40/${{ en: 'gb', ru: 'ru', tk: 'tm', oz: 'uz' }[lang]}.png`}
+                    alt={lang}
+                    fill
+                    className="object-cover"
+                    sizes="24px"
+                  />
+                </div>
+                <ChevronDown className={`w-3 h-3 text-gray-600 transition-transform ${isMobileLangOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {isMobileLangOpen && (
+                <>
+                  {/* Backdrop to close dropdown on outside click */}
+                  <div
+                    className="fixed inset-0 z-30"
+                    onClick={() => setIsMobileLangOpen(false)}
+                  />
+                  <div className="absolute right-0 top-full mt-2 w-44 bg-white rounded-xl shadow-2xl ring-1 ring-black/5 py-2 z-40">
+                    {i18n.locales.map((locale) => {
+                      const flags = { en: 'gb', ru: 'ru', tk: 'tm', oz: 'uz' };
+                      const names = { en: 'English', ru: 'Русский', tk: 'Türkmençe', oz: 'O\'zbekcha' };
+                      return (
+                        <Link
+                          key={locale}
+                          href={redirectedPathName(locale)}
+                          onClick={() => setIsMobileLangOpen(false)}
+                          className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${lang === locale
+                            ? 'text-navy font-bold bg-blue-50'
+                            : 'text-gray-700 hover:bg-gray-50'
+                            }`}
+                        >
+                          <div className="relative w-5 h-3.5 shadow-sm rounded-[1px] overflow-hidden">
+                            <Image
+                              src={`https://flagcdn.com/w40/${flags[locale as keyof typeof flags]}.png`}
+                              alt={names[locale as keyof typeof names]}
+                              fill
+                              className="object-cover"
+                              sizes="20px"
+                            />
+                          </div>
+                          {names[locale as keyof typeof names]}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
             </div>
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -270,7 +316,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
           </div>
         </div>
       </div>
-      {}
+      { }
       <div className={`fixed inset-0 z-40 bg-white transform transition-transform duration-300 ease-in-out md:hidden ${isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         style={{ top: '80px', height: 'calc(100vh - 80px)' }}
@@ -358,13 +404,13 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
               );
             })}
           </div>
-          {}
+          { }
           <div className="mt-8">
             <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Language</div>
             <div className="grid grid-cols-1 gap-2">
               {i18n.locales.map((locale) => {
-                const flags = { en: 'gb', ru: 'ru', tk: 'tm' };
-                const names = { en: 'English', ru: 'Русский', tk: 'Türkmençe' };
+                const flags = { en: 'gb', ru: 'ru', tk: 'tm', oz: 'uz' };
+                const names = { en: 'English', ru: 'Русский', tk: 'Türkmençe', oz: 'O\'zbekcha' };
                 return (
                   <Link
                     key={locale}
@@ -387,7 +433,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
               })}
             </div>
           </div>
-          {}
+          { }
           <div className="mt-8">
             <Link
               href={`/${lang}/contact`}

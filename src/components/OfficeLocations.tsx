@@ -19,7 +19,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
       countryCode: "tm",
       flag: "🇹🇲",
       city: dict?.turkmenabat?.city || "ТУРКМЕНАБАД",
-      address: dict?.turkmenabat?.address || "офисное здание у городского парка, 4° офис слева от входа",
+      address: dict?.turkmenabat?.address || "Офисное здание снаружи городского парка, 4-й офис слева от главного входа",
       phone: "+993 71 832 749",
       color: "green"
     },
@@ -29,7 +29,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
       countryCode: "tm",
       flag: "🇹🇲",
       city: dict?.mary?.city || "МАРЫ",
-      address: dict?.mary?.address || "1ª микрорайон, 9-этажка, 2ª этаж, 2ª дверь справа",
+      address: dict?.mary?.address || "Мерв базар, ул. 40 йыл, напротив ТЦ Белент",
       phones: ["+993 71 856 226", "+993 71 859 994"],
       color: "green"
     },
@@ -39,7 +39,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
       countryCode: "tm",
       flag: "🇹🇲",
       city: dict?.dashoguz?.city || "ДАШОГУЗ",
-      address: dict?.dashoguz?.address || "ул. А. Новаи, д. 17 (возле Ныгмат базара)",
+      address: dict?.dashoguz?.address || "Улица А. Новаи, дом 17 (возле Ныгмат базара)",
       phones: ["+993 71 787 424", "+993 71 787 423"],
       color: "green"
     },
@@ -49,9 +49,29 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
       countryCode: "tm",
       flag: "🇹🇲",
       city: dict?.ashgabat?.city || "АШХАБАД",
-      address: dict?.ashgabat?.address || "ул. Г. Кулиева (Объездная), здание Hil Gurlusyk (БЦ Regus)",
-      phone: "+993 71 810 797",
+      address: dict?.ashgabat?.address || "Ул. Г. Кулиева (Объездная), здание Hil Gurluşyk (Бизнес-центр Regus)",
+      phones: ["+993 71 810 797", "+993 71 027 524"],
       color: "green"
+    },
+    {
+      id: "balkanabat",
+      country: "turkmenistan",
+      countryCode: "tm",
+      flag: "🇹🇲",
+      city: dict?.balkanabat?.city || "БАЛКАНАБАД",
+      address: dict?.balkanabat?.address || "Улица 8 марта, дом 22, офисное помещение 2",
+      phones: ["+993 71 856 664", "+993 71 036 948"],
+      color: "green"
+    },
+    {
+      id: "tashkent",
+      country: "uzbekistan",
+      countryCode: "uz",
+      flag: "🇺🇿",
+      city: dict?.tashkent?.city || "ТАШКЕНТ",
+      address: dict?.tashkent?.address || "р. Мирзо-Улугбекский, ул. Сайрам, дом 1Б, офис (1 этаж), первый поворот направо (Корзинка Техномарт)",
+      phone: "+998 50 115 65 19",
+      color: "yellow"
     },
     {
       id: "kazan",
@@ -59,7 +79,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
       countryCode: "ru",
       flag: "🇷🇺",
       city: dict?.kazan?.city || "КАЗАНЬ",
-      address: dict?.kazan?.address || "ул. Пушкина, д. 52, оф. 306/4 (3 этаж)",
+      address: dict?.kazan?.address || "Ул. Пушкина, дом 52, офис 306/4 (3 этаж)",
       phone: "+7 919 685 61 94",
       color: "blue"
     }
@@ -84,7 +104,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
         "@type": "PostalAddress",
         streetAddress: office.address,
         addressLocality: office.city,
-        addressCountry: office.country === "turkmenistan" ? "TM" : "RU",
+        addressCountry: office.country === "turkmenistan" ? "TM" : office.country === "uzbekistan" ? "UZ" : "RU",
       },
       telephone: office.phone || office.phones?.[0],
     })),
@@ -92,13 +112,13 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
   return (
     <section className="py-16 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
       <JsonLd<EducationalOrganization> data={localBusinessSchema} />
-      {}
+      { }
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-20 w-72 h-72 bg-crimson rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500 rounded-full blur-3xl" />
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {}
+        { }
         <ScrollReveal direction="up">
           <div className="text-center mb-16">
             <div className="inline-block px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-[10px] md:text-xs font-bold tracking-wider uppercase text-gray-500 mb-4">
@@ -113,9 +133,9 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
           </div>
         </ScrollReveal>
         <div className="flex flex-col lg:grid lg:grid-cols-2 md:gap-12 items-start">
-          {}
+          { }
           <div className="w-full">
-            {}
+            { }
             <div className="lg:hidden mb-8">
               <ScrollReveal direction="up">
                 <div className="flex items-center justify-between bg-white rounded-2xl border-2 border-gray-100 p-2 shadow-sm">
@@ -155,7 +175,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                 </div>
               </ScrollReveal>
             </div>
-            {}
+            { }
             <div className="hidden lg:grid grid-cols-2 gap-4">
               {offices.map((office, index) => {
                 const isActive = activeOffice === office.id;
@@ -207,7 +227,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
               })}
             </div>
           </div>
-          {}
+          { }
           <ScrollReveal direction="right" className="w-full">
             <motion.div
               key={activeOffice}
@@ -230,7 +250,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                 </div>
               </div>
               <div className="space-y-6">
-                {}
+                { }
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-5 h-5 text-white" />
@@ -240,7 +260,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                     <p className="text-white/90">{activeOfficeData.address}</p>
                   </div>
                 </div>
-                {}
+                { }
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
                     <Phone className="w-5 h-5 text-white" />
@@ -259,7 +279,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                     ))}
                   </div>
                 </div>
-                {}
+                { }
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
                     <Clock className="w-5 h-5 text-white" />
@@ -271,7 +291,7 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                   </div>
                 </div>
               </div>
-              {}
+              { }
               <div className="mt-8 pt-8 border-t border-white/10">
                 <a
                   href={`tel:${activeOfficeData.phone || activeOfficeData.phones?.[0]}`}

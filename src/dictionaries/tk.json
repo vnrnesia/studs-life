@@ -5,7 +5,7 @@
         "pages": {
             "services": {
                 "title": "Hyzmatlar | Student's Life",
-                "description": "Talyplara doly goldaw: uniwersitete kabul, wiza kömegi, ýaşaýyş jaý, resminama terjimesi. 99% üstünlik. Mugt maslahat."
+                "description": "Talyplara doly goldaw: uniwersitete kabul edilşik, wiza kömegi, ýaşaýyş jaý, resminama terjimesi. 99% üstünlik. Mugt maslahat."
             },
             "about": {
                 "title": "Biz barada | Student's Life",
@@ -45,7 +45,7 @@
         "letsTalk": "Habarlaşmak",
         "megaMenu": {
             "about": "Biz barada",
-            "aboutDesc": "Bizim missiýamyz we gymmatlyklarymyz barada öwreniň",
+            "aboutDesc": "Bizim maksadymyz we gymmatlyklarymyz barada öwreniň",
             "team": "Bizim toparymyz",
             "teamDesc": "Üstünliklerimiziň aňyrsyndaky hünärmenler bilen tanyşyň",
             "careers": "Karýera",
@@ -56,6 +56,8 @@
             "pricingDesc": "Açyk paketler we bahalar",
             "blog": "Habarlar",
             "blogDesc": "Talyplar üçin soňky habarlar we gollanmalar",
+            "partnership": "Hyzmatdaşlyk",
+            "partnershipDesc": "Uniwersitetler üçin hyzmatdaşlyk",
             "getConsultation": "Mugt maslahat alyň",
             "studentName": "Talyp Üstünligi",
             "studentRole": "Uçurym",
@@ -67,7 +69,7 @@
         "title": "Hemmetaraplaýyn bilim goldawy",
         "visa": "Wiza hyzmatlary",
         "visaDesc": "99% Üstünlik",
-        "university": "Uniwersitete Kabul",
+        "university": "Uniwersitete Kabul edilşik",
         "universityDesc": "Iň gowy uniwersitetler",
         "translation": "Resminama terjimesi",
         "translationDesc": "Tiz we takyk",
@@ -90,7 +92,7 @@
     "countries": {
         "badge": "Ugurlar",
         "title": "Meşhur ugurlar",
-        "description": "Halkara bilimiňize tarap ýoluňyzda biziň hünärmen goldawymyz bilen iň gowy ýurtlary kşfediň.",
+        "description": "Halkara bilimiňize tarap ýoluňyzda biziň hünärmen goldawymyz bilen iň gowy ýurtlary syn ediň.",
         "viewMore": "Sahypa git",
         "contactCta": "Habarlaşmak",
         "russia": {
@@ -125,7 +127,7 @@
         },
         "cyprus": {
             "name": "Kipr",
-            "slogan": "Ýewropa bilimi we rahatlygyň günli adasy",
+            "slogan": "Ýewropa bilimi we rahatlygyň güneşli adasy",
             "description": "Howpsuz, güneşli we Ýewropa standartlaryna doly laýyk gelýän Kipr, hilli bilim we dynç alyş gözleýän talyplar üçin iň amatly ýerdir.",
             "tags": [
                 "ÝEWROPA",
@@ -192,7 +194,7 @@
         "badge": "Statistika",
         "description": "Bilim geňeşçilerimizden, wiza hünärmenlerimizden we halypalarymyzdan ybarat bolan toparymyz siziň üstünligiňiz üçin ýadaman zähmet çekýär.",
         "results": {
-            "totalStudents": "Ähli daky talyplar",
+            "totalStudents": "Ähli ugurdaky talyplar",
             "lastYearStudents": "Diňe geçen okuw ýylyndaky talyplar",
             "averageGrowth": "Ortaça ýyllyk ösüş",
             "firstAttempt": "Birinji synanyşykda kabul edilmek",
@@ -219,8 +221,8 @@
         },
         "stepTitles": {
             "serviceSelection": "Haýsy hyzmat gerek?",
-            "personalInfo": "Öz barada aýdyň",
-            "serviceDetails": "Hyzmat jikmelikleri",
+            "personalInfo": "Özüñiz barada aýdyň",
+            "serviceDetails": "Hyzmat jikme-jiklikleri",
             "additionalInfo": "Goşmaça maglumat"
         },
         "stepDescriptions": {
@@ -338,14 +340,14 @@
     "offices": {
         "badge": "OFISLERIMIZ",
         "title": "Size ýakyn",
-        "subtitle": "Amatlylyk üçin Türkmenistanda we Russiýada ofislerimiz",
+        "subtitle": "Amatlylyk üçin Türkmenistanda, Özbegistanda we Russiýada ofislerimiz",
         "turkmenabat": {
             "city": "TÜRKMENABAT",
-            "address": "Şäher parkynyň ýanyndaky ofis binasy, girelgeden çep tarapda 4-nji ofis"
+            "address": "Şäher parkynyň daşyndaky ofis binasy, baş girelgeden çep tarapda 4-nji ofis"
         },
         "mary": {
             "city": "MARY",
-            "address": "40 ýyl köçesi, Merw bazary."
+            "address": "Merw bazary, 40 ýyl köçesi, Belent söwda merkeziniň garşysy"
         },
         "dashoguz": {
             "city": "DAŞOGUZ",
@@ -354,6 +356,14 @@
         "ashgabat": {
             "city": "AŞGABAT",
             "address": "G. Kuliýew köçesi (Obýezdnoý), Hil Gurluşyk binasy (Regus Business Center)"
+        },
+        "balkanabat": {
+            "city": "BALKANABAT",
+            "address": "8-nji mart köçesi, 22-nji jaý, 2-nji ofis jaýy"
+        },
+        "tashkent": {
+            "city": "DAŞKENT",
+            "address": "Mirzo-Ulugbek etraby, Saýram köçesi, 1B jaý, ofis (1-nji gat), saga birinji öwrüm (Korzinka Tekhnomart)"
         },
         "kazan": {
             "city": "KAZAN",
@@ -371,6 +381,7 @@
         },
         "countries": {
             "turkmenistan": "Türkmenistan",
+            "uzbekistan": "Özbegistan",
             "russia": "Russiýa"
         },
         "websites": {
@@ -388,24 +399,24 @@
         "readMore": "Dowamyny okamak"
     },
     "featureTabs": {
-        "title": "Talyplar üçin iñ dýpli goldaw",
+        "title": "Talyplar üçin iñ düýpli goldaw",
         "subtitle": "Daşary ýurtda okuw syýahatyňyzyň her ädiminde jikme-jik kömek.",
         "features": {
             "admissions": {
-                "title": "Uniwersitetlere kabul edişlik",
+                "title": "Uniwersitetlere kabul edilşik",
                 "description": "Ýokary derejeli uniwersitetlere ýazylmak üçin şahsy strategiýa we jikme-jik meýilnama bilen ýol görkezmek."
             },
             "visa": {
                 "title": "Wiza kömegi",
-                "description": "Talyp wizasyny ýokary üstünlik derejesi we dýpli resminamalarň barlagy bilen aňsat işleşdirmek."
+                "description": "Talyp wizasyny almagyñ ýokary üstünlik derejesi we düýpli resminamalarň barlagy bilen aňsat işjeñleşdirmek."
             },
             "accommodation": {
                 "title": "Ýaşaýyş ýeri",
                 "description": "Kampusyňyzyň ýanynda howpsuz, elýeterli we amatly ýaşaýyş ýeri tapmak."
             },
             "career": {
-                "title": "Karýýera boýunça maslahat",
-                "description": "Okuwy tamamlandan soň meýilnama, rýuzme düzme we üstünlikli karýýera başlamak üçin interwýu taýýarlygy."
+                "title": "Karýera boýunça maslahat",
+                "description": "Okuwy tamamlandan soň meýilnama, rezýume düzme we üstünlikli karýera başlamak üçin interwýu taýýarlygy."
             }
         }
     },
@@ -430,8 +441,8 @@
     },
     "processWorkflow": {
         "badge": "Biziň iş meýilnamamyz",
-        "title": "Bizim 5 basgançakly iş proçesimiz",
-        "description": "Bizim 5 ädimli netijeli iş proçesimiz, durnukly çözgütleri üpjün edýär. Zerurlyklaryňyzy düşünmekden başlaýarys, soňra meýilnamalaşdyrýarys, dizaýn edýäris, gurýarys we synagdan geçirýäris.",
+        "title": "Biziñ 5 basgançakly iş prosesimiz",
+        "description": "Biziñ 5 ädimli netijeli iş prosesimiz, durnukly çözgütleri üpjün edýär. Zerurlyklaryňyza düşünmekden başlaýarys, soňra meýilnamalaşdyrýarys, dizaýn edýäris, gurýarys we synagdan geçirýäris.",
         "cta": "Biz barada has giňişleýin",
         "steps": {
             "s1": {
@@ -504,8 +515,8 @@
         },
         "costOfLiving": {
             "title": "Talyp Durmuşynyň Gollanmasy",
-            "subtitle": "Şäherler boýunça ortaça aýlyk çykdajylar",
-            "rent": "Kireý",
+            "subtitle": "Şäherler boýunça ortaça aýlyk çykdaýjylar",
+            "rent": "Öý",
             "food": "Iýmit",
             "transport": "Ulag",
             "total": "Jemi / Aý",
@@ -592,7 +603,7 @@
         },
         "destinations": {
             "title": "Meşhur Ugurlar",
-            "description": "Bizim iň meşhur okuw ugurlarymyzy öwreniň we akademiki syýahatyňyz üçin iň amatly şäheri tapyň.",
+            "description": "Biziñ iň meşhur okuw ugurlarymyzy öwreniň we akademiki syýahatyňyz üçin iň amatly şäheri tapyň.",
             "viewAll": "Ähli ugurlary görmek",
             "viewDetails": "Giňişleýin",
             "cities": [
@@ -692,7 +703,7 @@
             "shared": {
                 "title": "Talyp kwartiralary",
                 "price": "$150-$250",
-                "desc": "Has köp azatlyk, umumy çykdajylar."
+                "desc": "Has köp azatlyk, umumy çykdaýjylar."
             },
             "private": {
                 "title": "Hususy kwartira",
@@ -731,7 +742,7 @@
             },
             "q7": {
                 "q": "7. Başlamak üçin näçe pul gerek?",
-                "a": "Ilkinji çykdajylar (wiza, petekler, ilkinji tölegler) üçin ýura görä adatça $500-den $1500 aralygynda pul gerek bolýar."
+                "a": "Ilkinji çykdaýjylar (wiza, petekler, ilkinji tölegler) üçin ýura görä adatça $500-den $1500 aralygynda pul gerek bolýar."
             },
             "q8": {
                 "q": "8. Diplom nostrifikasiýasy gerekmi?",
@@ -747,7 +758,7 @@
             },
             "q11": {
                 "q": "11. Mugt maksatnamalar ýa-da stipendiýalar barmy?",
-                "a": "Hawa, hökümet grantlary (CSC, Türkiye Bursları, RF grantlary) we okuw bahasynyň 25%-den 100%-e çenli pokrywaýan uniwersitet stipendiýalary bar."
+                "a": "Hawa, hökümet grantlary (CSC, Türkiye Bursları, RF grantlary) we okuw bahasynyň 25%-den 100%-e çenli ýapýan uniwersitet stipendiýalary bar."
             },
             "q12": {
                 "q": "12. Talyp wizasy nähili alynýar we näçe wagt alýar?",
@@ -909,6 +920,263 @@
             "title": "Çerez syýasaty",
             "lastUpdated": "Soňky täzelenme: Ýanwar 2026",
             "content": "Bu web sahypasy, sahypada gezen wagtyňyz tejribäňizi gowulandyrmak üçin çerezleri ulanýar. Bularyň arasynda zerur diýlip klassifikasiýa edilen çerezler, sahypanyň esasy funksiýalarynyň işlemegi üçin brauzeriňizde saklanýar."
+        }
+    },
+    "partnershipPage": {
+        "hero": {
+            "badge": "UNIWERSITETLER WE HYZMATDASLAR UCIN",
+            "title": "Student's Life bilen hyzmatdaslyk edin",
+            "subtitle": "Biz Turkmenistandan, Ozbegistandan we GDA yurtlaryndan zehinli talyplary dunyaning onde baryjy uniwersitetleri bilen birlesdiryaris. 8 yurtdaky 50+ hyzmatdas yokary okuw jayymyza gosulyn.",
+            "cta": "Hyzmatdas bolun"
+        },
+        "contact": {
+            "title": "Hyzmatdaslyk ucin habarlasma",
+            "role": "B2B hyzmatdaslyk menejeri",
+            "department": "Students Life B2B bolumi",
+            "phone": "+99371250041",
+            "email": "partners@stud-life.com",
+            "location": "Turkmenistan, Turkmenabat, saher parky ofis binasy, 4-nji ofis",
+            "startDate": "2025-nji yylyn iyun ayyndan bari"
+        },
+        "b2bModels": {
+            "title": "B2B hyzmatdaslyk modelleri",
+            "subtitle": "Edaralar we agentlikler ucin ceyje hyzmatdaslyk wariantlary",
+            "items": [
+                {
+                    "title": "B2B Agentlik hyzmatdaslygy",
+                    "description": "Talyplary ugratmak we cekmek ucin edaralar we agentlikler bilen bilelikdaki is.",
+                    "icon": "building"
+                },
+                {
+                    "title": "PR we media hyzmatlary",
+                    "description": "Hyzmatdaslaryn tanalmagy ucin Students Life adyndan PR we mazmun onumciligi.",
+                    "icon": "megaphone"
+                },
+                {
+                    "title": "Komissiya / Referal modeli",
+                    "description": "Ugradylan her talyp ucin toleg.",
+                    "icon": "coins"
+                },
+                {
+                    "title": "B2C Goldaw",
+                    "description": "Ayry-ayry talyplara gonukdirilen hyzmatlar ucin edaralayyn goldaw.",
+                    "icon": "users"
+                },
+                {
+                    "title": "Green Card we goc maslahat hyzmaty",
+                    "description": "Uzak mohletli yerlesme we goc proseslerinde goldaw.",
+                    "icon": "globe"
+                },
+                {
+                    "title": "24/7 Goldaw",
+                    "description": "Students Life topary bilen gije-gundiz uznuksiz aragatnasyk.",
+                    "icon": "headphones"
+                }
+            ]
+        },
+        "benefits": {
+            "title": "Name ucin bizin bilen hyzmatdaslyk etmeli?",
+            "subtitle": "Biz talyplary cekmek we goldamak boyunca doly hyzmat beryaris",
+            "items": [
+                {
+                    "title": "Talyp cekmek",
+                    "description": "Turkmenistandan, Ozbegistandan we GDA yurtlaryndan halkara bilim gozleyjan howesli talyplara girip gorun.",
+                    "icon": "users"
+                },
+                {
+                    "title": "Marketing we tanalma",
+                    "description": "Bizin osen ulgamymyz we marketing kanallary arkaly uniwersitetinizin Merkezi Aziyadaky markasyny guyijlendirin.",
+                    "icon": "megaphone"
+                },
+                {
+                    "title": "Talyplara doly goldaw",
+                    "description": "Biz wiza, yasalga, aeroport transferi we uygunlasmany oz ustumize alyarys.",
+                    "icon": "shield"
+                },
+                {
+                    "title": "Sahsy hyzmatdaslyk menejeri",
+                    "description": "Her bir hyzmatdas uniwersitet uznuksiz aragatnasyk ucin ayratyn menejer alyar.",
+                    "icon": "handshake"
+                }
+            ]
+        },
+        "geography": {
+            "title": "Bizin geografiyamyz",
+            "subtitle": "Biz 8 yurtda we 30+ saherde uniwersitetler bilen isleyaris",
+            "countries": {
+                "turkey": {
+                    "name": "Turkiye",
+                    "flag": "🇹🇷",
+                    "cities": {
+                        "Stambul": [
+                            "Istanbul University",
+                            "Bogazici University",
+                            "ITU",
+                            "Koc University",
+                            "Medipol University"
+                        ],
+                        "Ankara": [
+                            "METU",
+                            "Ankara University",
+                            "Hacettepe University",
+                            "Bilkent University",
+                            "TOBB University"
+                        ],
+                        "Izmir": [
+                            "Ege University",
+                            "Dokuz Eylul University",
+                            "IZTECH",
+                            "Yasar University",
+                            "IEU"
+                        ],
+                        "Bursa": [
+                            "Uludag University",
+                            "Bursa Technical University",
+                            "Mudanya University",
+                            "Bursa Orhangazi University"
+                        ],
+                        "Manisa": [
+                            "Manisa Celal Bayar University (MCBU)"
+                        ],
+                        "Konya": [
+                            "Selcuk University",
+                            "Necmettin Erbakan University",
+                            "KTO Karatay University",
+                            "Konya Technical University"
+                        ]
+                    },
+                    "programs": [
+                        "Erasmus",
+                        "Mevlana"
+                    ]
+                },
+                "germany": {
+                    "name": "Germaniya",
+                    "flag": "🇩🇪",
+                    "cities": {
+                        "Durli saherler": [
+                            "TU Munich",
+                            "RWTH Aachen",
+                            "University of Stuttgart",
+                            "Jacobs University Bremen",
+                            "Hochschule Bonn-Rhein-Sieg"
+                        ]
+                    },
+                    "programs": [
+                        "2000+ programma",
+                        "IT ugurly"
+                    ]
+                },
+                "china": {
+                    "name": "Hytay",
+                    "flag": "🇨🇳",
+                    "cities": {
+                        "Siyan": [
+                            "XJTU",
+                            "Xi'an International Studies University"
+                        ],
+                        "Beyleki saherler": [
+                            "Zhejiang University",
+                            "Nanjing University",
+                            "Beijing Normal University",
+                            "GDUFS",
+                            "SCUT",
+                            "SYSU"
+                        ]
+                    }
+                },
+                "cyprus": {
+                    "name": "Kipr",
+                    "flag": "🇨🇾",
+                    "cities": {
+                        "Nikosiya": [
+                            "University of Nicosia",
+                            "NEU",
+                            "CIU"
+                        ]
+                    },
+                    "programs": [
+                        "IT",
+                        "Lukmanculyk",
+                        "Biznes"
+                    ]
+                },
+                "bulgaria": {
+                    "name": "Bolgariya",
+                    "flag": "🇧🇬",
+                    "cities": {
+                        "Warna": [
+                            "VUM",
+                            "Medical University of Varna",
+                            "Technical University of Varna",
+                            "University of Economics Varna"
+                        ]
+                    },
+                    "programs": [
+                        "Erasmus agzasy"
+                    ]
+                },
+                "canada": {
+                    "name": "Kanada",
+                    "flag": "🇨🇦",
+                    "cities": {
+                        "Durli saherler": [
+                            "25 uniwersitet"
+                        ]
+                    },
+                    "programs": [
+                        "WES/ECA",
+                        "PGWP"
+                    ]
+                },
+                "belarus": {
+                    "name": "Belarus",
+                    "flag": "🇧🇾",
+                    "cities": {
+                        "Grodno": [
+                            "Yanka Kupala adyndaky Grodno dowlet uniwersiteti"
+                        ]
+                    }
+                },
+                "russia": {
+                    "name": "Russiya",
+                    "flag": "🇷🇺",
+                    "cities": {
+                        "Moskwa": [],
+                        "Sankt-Peterburg": [],
+                        "Kazan": [],
+                        "Ufa": [],
+                        "Irkutsk": [],
+                        "Saransk": [],
+                        "Arhangelsk": [],
+                        "Kaliningrad": [],
+                        "Sewastopol": [],
+                        "Innopolis": [],
+                        "Nowosibyrsk": [],
+                        "Oryol": [],
+                        "Tula": []
+                    }
+                }
+            }
+        },
+        "stats": {
+            "students": "1200+",
+            "studentsLabel": "Yerlesdirilen talyplar",
+            "universities": "50+",
+            "universitiesLabel": "Hyzmatdas uniwersitetler",
+            "countries": "8",
+            "countriesLabel": "Yurt",
+            "cities": "30+",
+            "citiesLabel": "Saher",
+            "years": "5+",
+            "yearsLabel": "Yyl tejribe"
+        },
+        "cta": {
+            "title": "Hyzmatdaslyga tayyarmy?",
+            "subtitle": "Bizin osyan hyzmatdas uniwersitetler ulgamymyza gosulyn we zehinli halkara talyplaryna girin.",
+            "button": "Bizin bilen habarlasyn",
+            "email": "partners@stud-life.com",
+            "emailLabel": "Ya-da bize goni yazyn"
         }
     }
 }

@@ -9,11 +9,8 @@ interface CookieConsentProps {
 export default function CookieConsent({ lang, dict }: CookieConsentProps) {
     const [isVisible, setIsVisible] = useState(false);
     useEffect(() => {
-        console.log("CookieConsent mounted");
         const consent = localStorage.getItem("cookie-consent");
-        console.log("Current consent:", consent);
         if (!consent) {
-            console.log("Setting CookieConsent to visible");
             setIsVisible(true);
         }
     }, []);
@@ -68,7 +65,7 @@ export default function CookieConsent({ lang, dict }: CookieConsentProps) {
                         <X className="w-5 h-5" />
                     </button>
                 </div>
-                {}
+                { }
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-blue-500/5 rounded-full blur-2xl" />
             </div>
         </div>

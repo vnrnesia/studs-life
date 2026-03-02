@@ -1,7 +1,7 @@
 import { MoveRight } from "lucide-react";
 import Image from "next/image";
 import mainBg from "../assets/herobg.webp";
-import mainBgMobile from "../assets/mainbg_mobile.webp";
+import mainBgMobile from "../assets/herobg2.webp";
 interface HeroProps {
     lang: string;
     dict: any;
@@ -9,9 +9,9 @@ interface HeroProps {
 export default function Hero({ lang, dict }: HeroProps) {
     return (
         <section className="relative w-full h-screen md:min-h-screen flex items-center pt-20 overflow-hidden">
-            {}
+            { }
             <div className="absolute inset-0 z-0">
-                {}
+                { }
                 <Image
                     src={mainBg}
                     alt="Background"
@@ -21,7 +21,7 @@ export default function Hero({ lang, dict }: HeroProps) {
                     quality={100}
                     unoptimized
                 />
-                {}
+                { }
                 <Image
                     src={mainBgMobile}
                     alt="Background Mobile"
@@ -32,9 +32,9 @@ export default function Hero({ lang, dict }: HeroProps) {
                     unoptimized
                 />
             </div>
-            {}
+            { }
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center h-full pb-10">
-                {}
+                { }
                 <div className="flex flex-col items-center md:items-start text-center md:text-left text-white w-full md:w-auto md:max-w-xs h-full md:h-auto pt-10 md:pt-0">
                     <h2 className="text-3xl md:text-4xl font-bold uppercase leading-tight mb-4">
                         {dict?.title}
@@ -52,7 +52,7 @@ export default function Hero({ lang, dict }: HeroProps) {
                         </a>
                     </div>
                 </div>
-                {}
+                { }
                 <div className="hidden md:flex flex-col items-end text-white max-w-xs ml-auto">
                     <h2 className="text-3xl md:text-4xl font-bold uppercase leading-tight mb-4 text-right">
                         {dict?.rightTitle}
