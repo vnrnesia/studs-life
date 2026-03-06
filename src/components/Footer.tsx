@@ -1,4 +1,4 @@
-import { Instagram, Facebook, Twitter } from "lucide-react";
+import { Instagram } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import footerLogo from "../assets/footer_logo.webp";
@@ -63,7 +63,7 @@ export default function Footer({ lang, dict }: FooterProps) {
                 </h3>
                 <div className="flex gap-3">
                   <a
-                    href="https://instagram.com/defyzerglobal"
+                    href="https://www.instagram.com/stud_life_ru"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Follow us on Instagram"
@@ -72,22 +72,15 @@ export default function Footer({ lang, dict }: FooterProps) {
                     <Instagram className="w-5 h-5" />
                   </a>
                   <a
-                    href="https://facebook.com/defyzerglobal"
+                    href="https://www.tiktok.com/@aga_sila"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Follow us on Facebook"
+                    aria-label="Follow us on TikTok"
                     className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#06182E] transition-all duration-300"
                   >
-                    <Facebook className="w-5 h-5" />
-                  </a>
-                  <a
-                    href="https://twitter.com/defyzerglobal"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Follow us on Twitter"
-                    className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#06182E] transition-all duration-300"
-                  >
-                    <Twitter className="w-5 h-5" />
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+                    </svg>
                   </a>
                 </div>
               </div>

@@ -132,11 +132,8 @@ export default async function RootLayout({
             "url": BASE_URL,
             "logo": `${BASE_URL}/logo.webp`,
             "sameAs": [
-              "https://instagram.com/studentslife_agency",
-              "https://facebook.com/studentslife.agency",
-              "https://twitter.com/studentslife",
-              "https://linkedin.com/company/students-life-agency",
-              "https://vk.com/studentslife_agency"
+              "https://www.instagram.com/stud_life_ru",
+              "https://www.tiktok.com/@aga_sila"
             ],
             "contactPoint": [
               {

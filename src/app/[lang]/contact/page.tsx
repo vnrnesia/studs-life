@@ -73,9 +73,8 @@ export default async function ContactPage({
       }
     ],
     "sameAs": [
-      "https://instagram.com/studentslife_agency",
-      "https://facebook.com/studentslife.agency",
-      "https://vk.com/studentslife_agency"
+      "https://www.instagram.com/stud_life_ru",
+      "https://www.tiktok.com/@aga_sila"
     ],
     "priceRange": "$$",
     "areaServed": [

@@ -58,6 +58,61 @@ function slugify(text: string): string {
         .replace(/^-+|-+$/g, '');
 }
 
+// English slug overrides for countries and cities
+const slugOverrides: { [key: string]: string } = {
+    // Countries
+    'россия': 'russia',
+    'кипр': 'cyprus',
+    'китай': 'china',
+    'турция': 'turkey',
+    'беларусь': 'belarus',
+    'болгария': 'bulgaria',
+    // Russian cities
+    'москва': 'moscow',
+    'санкт-петербург': 'saint-petersburg',
+    'казань': 'kazan',
+    'уфа': 'ufa',
+    'иркутск': 'irkutsk',
+    'саранск': 'saransk',
+    'архангельск': 'arkhangelsk',
+    'калининград': 'kaliningrad',
+    'севастополь': 'sevastopol',
+    'иннополис': 'innopolis',
+    'новосибирск': 'novosibirsk',
+    'орёл': 'orel',
+    'тула': 'tula',
+    // Cyprus cities
+    'никосия': 'nicosia',
+    // Chinese cities
+    'пекин': 'beijing',
+    'шанхай': 'shanghai',
+    'тяньцзинь': 'tianjin',
+    'сиань': 'xian',
+    'гуанчжоу': 'guangzhou',
+    'урумчи': 'urumqi',
+    'харбин': 'harbin',
+    // Turkish cities
+    'стамбул': 'istanbul',
+    'анкара': 'ankara',
+    'бурса': 'bursa',
+    'измир': 'izmir',
+    'конья': 'konya',
+    'маниса': 'manisa',
+    // Belarus cities
+    'минск': 'minsk',
+    'гомель': 'gomel',
+    'витебск': 'vitebsk',
+    'гродно': 'grodno',
+    // Bulgaria cities
+    'варна': 'varna',
+};
+
+function getSlug(name: string): string {
+    const lower = name.toLowerCase().trim();
+    return slugOverrides[lower] || slugify(name);
+}
+
+
 // Helper: Convert text to HTML
 function textToHtml(text: string): string {
     if (!text) return '';
@@ -130,37 +185,98 @@ function textToHtml(text: string): string {
     return html.trim();
 }
 
+// Helper: Check if a line is a city title
+// City titles look like "Москва — столица возможностей для студентов"
+// The part before — should be short (city name), and the whole line should be a short title
+function isCityTitle(line: string): boolean {
+    if (!line.includes(' — ')) return false;
+
+    const dashIdx = line.indexOf(' — ');
+    const beforeDash = line.substring(0, dashIdx).trim();
+    const afterDash = line.substring(dashIdx + 3).trim();
+
+    // City names are short (max ~40 chars, max ~4 words)
+    if (beforeDash.length > 40) return false;
+    const wordCount = beforeDash.split(/\s+/).length;
+    if (wordCount > 5) return false;
+
+    // The subtitle/slogan after — should also be relatively short (not a full sentence)
+    if (afterDash.length > 80) return false;
+
+    // Total line should be short enough to be a title, not a paragraph
+    if (line.length > 100) return false;
+
+    // Must start with uppercase Cyrillic letter (city name)
+    if (!/^[А-ЯЁA-Z]/.test(beforeDash)) return false;
+
+    // Should NOT start with emoji, number, or bullet
+    if (/^[0-9💰🏠🚇🚍🌦🌤🎯✨🔹💡❄☀🌧🍂🌸•\-]/.test(beforeDash)) return false;
+
+    // Should NOT be common content words that appear with —
+    const lowerBefore = beforeDash.toLowerCase();
+    const contentWords = ['стоимость', 'преимущества', 'расходы', 'цена', 'средние', 'аренда', 'питание', 'транспорт', 'общежити', 'климат', 'итог', 'это', 'как', 'он', 'она', 'они', 'здесь', 'благодаря', 'компания', 'однако'];
+    if (contentWords.some(w => lowerBefore.startsWith(w))) return false;
+
+    // The afterDash should not end with period (titles usually don't)
+    if (afterDash.endsWith('.')) return false;
+
+    return true;
+}
+
 // Main parser function
 function parseContent(content: string): Country[] {
     const countries: Country[] = [];
 
-    // Split by country headers (lines with just country name in caps)
-    const countryBlocks = content.split(/\n(?=[А-ЯЁ]{3,}\n)/);
+    // Split by country headers
+    // Match lines that are ONLY a country name (uppercase Cyrillic, or title case like "Россия")
+    const lines = content.split('\n');
+    const countryStartIndices: number[] = [];
 
-    for (const block of countryBlocks) {
-        const lines = block.split('\n').filter(l => l.trim());
-        if (lines.length === 0) continue;
+    // Known country names for better detection
+    const knownCountries = ['россия', 'кипр', 'китай', 'турция', 'беларусь', 'болгария'];
 
-        // First line is country name
-        const countryName = lines[0].trim();
-        if (countryName.length < 3) continue;
+    for (let i = 0; i < lines.length; i++) {
+        const trimmed = lines[i].trim();
+        if (!trimmed) continue;
 
+        // Check if this line is a standalone country name
+        if (knownCountries.includes(trimmed.toLowerCase())) {
+            countryStartIndices.push(i);
+        }
+    }
+
+    // If no known countries found, fall back to uppercase detection
+    if (countryStartIndices.length === 0) {
+        for (let i = 0; i < lines.length; i++) {
+            const trimmed = lines[i].trim();
+            if (/^[А-ЯЁ]{3,}$/.test(trimmed)) {
+                countryStartIndices.push(i);
+            }
+        }
+    }
+
+    // Process each country block
+    for (let ci = 0; ci < countryStartIndices.length; ci++) {
+        const startIdx = countryStartIndices[ci];
+        const endIdx = ci + 1 < countryStartIndices.length ? countryStartIndices[ci + 1] : lines.length;
+
+        const countryName = lines[startIdx].trim();
         const country: Country = {
             name: countryName,
-            slug: slugify(countryName),
+            slug: getSlug(countryName),
             cities: []
         };
 
-        // Find all city titles (lines with —)
         let currentCity: Partial<City> | null = null;
         let currentSection = '';
         let sectionContent = '';
 
-        for (let i = 1; i < lines.length; i++) {
+        for (let i = startIdx + 1; i < endIdx; i++) {
             const line = lines[i].trim();
+            if (!line) continue;
 
-            // City title (contains —)
-            if (line.includes(' — ')) {
+            // City title detection (uses the improved helper)
+            if (isCityTitle(line)) {
                 // Save previous city
                 if (currentCity && currentCity.name) {
                     if (sectionContent) {
@@ -170,10 +286,12 @@ function parseContent(content: string): Country[] {
                 }
 
                 // Start new city
-                const [cityName, subtitle] = line.split(' — ');
+                const dashIdx = line.indexOf(' — ');
+                const cityName = line.substring(0, dashIdx).trim();
+                const subtitle = line.substring(dashIdx + 3).trim();
                 currentCity = {
-                    name: cityName.trim(),
-                    slug: slugify(cityName.trim()),
+                    name: cityName,
+                    slug: getSlug(cityName),
                     title: line,
                     intro: '',
                     economyContent: '',
@@ -191,7 +309,7 @@ function parseContent(content: string): Country[] {
             }
 
             // Section headers
-            if (line.includes('💰 Экономика')) {
+            if (line.includes('💰 Экономика') || line.startsWith('💰')) {
                 if (sectionContent && currentCity) {
                     (currentCity as any)[currentSection] = textToHtml(sectionContent);
                 }
@@ -200,7 +318,7 @@ function parseContent(content: string): Country[] {
                 continue;
             }
 
-            if (line.includes('🏠 Варианты проживания') || line.includes('🏠 Проживание')) {
+            if (line.includes('🏠 Варианты проживания') || line.includes('🏠 Проживание') || line.startsWith('🏠')) {
                 if (sectionContent && currentCity) {
                     (currentCity as any)[currentSection] = textToHtml(sectionContent);
                 }
@@ -209,7 +327,7 @@ function parseContent(content: string): Country[] {
                 continue;
             }
 
-            if (line.includes('🚇') || line.includes('🚍') || line.includes('Транспорт')) {
+            if (line.startsWith('🚇') || line.startsWith('🚍')) {
                 if (sectionContent && currentCity) {
                     (currentCity as any)[currentSection] = textToHtml(sectionContent);
                 }
@@ -218,7 +336,7 @@ function parseContent(content: string): Country[] {
                 continue;
             }
 
-            if (line.includes('🌦️') || line.includes('🌤️') || line.includes('Климат')) {
+            if (line.startsWith('🌦️') || line.startsWith('🌤️') || line.startsWith('🌦')) {
                 if (sectionContent && currentCity) {
                     (currentCity as any)[currentSection] = textToHtml(sectionContent);
                 }
@@ -227,7 +345,7 @@ function parseContent(content: string): Country[] {
                 continue;
             }
 
-            if (line.includes('🎯 Итог') || line.includes('✨ Итог')) {
+            if (line.includes('🎯 Итог') || line.includes('✨ Итог') || line.startsWith('🎯') || line.startsWith('✨')) {
                 if (sectionContent && currentCity) {
                     (currentCity as any)[currentSection] = textToHtml(sectionContent);
                 }
@@ -258,7 +376,7 @@ function parseContent(content: string): Country[] {
 
 // Main execution
 async function main() {
-    const inputPath = path.join('C:', 'Users', 'vnrnesia', 'Desktop', 'cities-content.txt');
+    const inputPath = path.join(__dirname, 'data', 'cities-content.txt');
     const outputPath = path.join(__dirname, 'data', 'cities-data.ts');
 
     console.log('🔍 Reading input file:', inputPath);

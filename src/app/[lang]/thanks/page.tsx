@@ -20,7 +20,7 @@ export default async function ThanksPage({ params }: { params: Promise<{ lang: s
   const { lang: langParam } = await params;
   const lang = langParam as Locale;
   const dict = await getDictionary(lang);
-  const INSTAGRAM_URL = "https://instagram.com/studentslife";
+  const INSTAGRAM_URL = "https://www.instagram.com/stud_life_ru";
   const WHATSAPP_NUMBER = "99312345678";
   const PDF_URL = "/downloads/russia-student-guide.pdf";
   const ctas = [

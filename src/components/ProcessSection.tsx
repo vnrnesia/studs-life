@@ -95,9 +95,9 @@ export default function ProcessSection({ lang, dict }: ProcessSectionProps) {
         {}
         <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-16 relative">
           {}
-          <div className="w-full h-full">
+          <div className="w-full h-full lg:sticky lg:top-0 lg:h-screen lg:flex lg:items-center">
             {}
-            <div className="lg:sticky lg:top-32 flex flex-col gap-4 md:gap-8 pr-0 md:pr-8">
+            <div className="flex flex-col gap-4 md:gap-8 pr-0 md:pr-8">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}

@@ -138,7 +138,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 "urlTemplate": `${BASE_URL}/${lang}/search?q={search_term_string}`
             },
             "query-input": "required name=search_term_string"
-        },
+        } as any,
         "inLanguage": lang === 'tk' ? 'tk' : lang === 'ru' ? 'ru' : 'en'
     };
     const webPageSchema: WithContext<WebPage> = {
@@ -162,9 +162,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <main className="min-h-screen bg-gray-50">
             <JsonLd<WebSite> data={websiteSchema} />
             <JsonLd<WebPage> data={webPageSchema} />
-            {}
+            { }
             <Hero lang={lang} dict={dict.hero} />
-            {}
+            { }
             <FeatureTabs
                 features={features}
                 title={dict.featureTabs?.title || "Comprehensive Student Support"}

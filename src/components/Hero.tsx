@@ -35,7 +35,7 @@ export default function Hero({ lang, dict }: HeroProps) {
             { }
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center h-full pb-10">
                 { }
-                <div className="flex flex-col items-center md:items-start text-center md:text-left text-white w-full md:w-auto md:max-w-xs h-full md:h-auto pt-10 md:pt-0">
+                <div className={`flex flex-col items-center md:items-start text-center md:text-left text-white w-full md:w-auto md:max-w-xs h-full md:h-auto pt-10 md:pt-0${lang === 'ru' ? ' md:-ml-8 md:-mt-16' : ''}`}>
                     <h2 className="text-3xl md:text-4xl font-bold uppercase leading-tight mb-4">
                         {dict?.title}
                     </h2>
