@@ -3,7 +3,7 @@ import { Locale } from "@/i18n-config";
 import { Metadata } from "next";
 import { generateSEOMetadata } from "@/lib/seo";
 import Team from "@/components/Team";
-import { getTeamMembers } from "@/lib/strapi";
+import { getTeamMembers, type TeamMember } from "@/lib/strapi";
 import JsonLd from "@/components/JsonLd";
 import { BreadcrumbList, WithContext } from "schema-dts";
 import ContactFormSection from "@/components/ContactFormSection";
@@ -25,7 +25,13 @@ export default async function TeamsPage({ params }: { params: Promise<{ lang: st
   const { lang: langParam } = await params;
   const lang = langParam as Locale;
   const dict = await getDictionary(lang);
-  const teamMembers = await getTeamMembers(lang);
+  let teamMembers: TeamMember[];
+  try {
+    teamMembers = await getTeamMembers(lang);
+  } catch (error) {
+    console.error('Teams page: getTeamMembers failed:', error);
+    teamMembers = [];
+  }
   const breadcrumbData: WithContext<BreadcrumbList> = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
