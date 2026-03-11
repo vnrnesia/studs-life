@@ -214,8 +214,7 @@ export default function PartnershipHero({ dict, benefits, lang }: PartnershipHer
                         <motion.div
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.5 }}
-                            className="grid grid-cols-4 gap-0 bg-white rounded-2xl shadow-2xl shadow-gray-900/10 overflow-hidden border border-gray-100"
+                            className="grid grid-cols-2 xl:grid-cols-4 gap-px bg-gray-100 rounded-2xl shadow-2xl shadow-gray-900/10 overflow-hidden border border-gray-100"
                         >
                             {benefits?.items?.map((item: BenefitItem, index: number) => {
                                 const isLast = index === (benefits?.items?.length || 0) - 1;
@@ -225,9 +224,9 @@ export default function PartnershipHero({ dict, benefits, lang }: PartnershipHer
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                                        className={`group relative p-6 lg:p-8 text-center min-w-0 break-words ${!isLast ? "border-r border-gray-100" : ""}`}
+                                        className="group relative p-5 lg:p-6 xl:p-8 text-center flex flex-col items-center justify-start min-w-0 bg-white"
                                     >
-                                        <div className="w-20 h-20 bg-crimson/5 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-crimson/10 transition-colors duration-300 overflow-hidden p-3">
+                                        <div className="w-16 h-16 xl:w-20 xl:h-20 bg-crimson/5 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-crimson/10 transition-colors duration-300 overflow-hidden p-3 shrink-0">
                                             <Image
                                                 src={iconMap[item.icon] || img1}
                                                 alt={item.title}
@@ -236,8 +235,12 @@ export default function PartnershipHero({ dict, benefits, lang }: PartnershipHer
                                                 className="w-full h-full object-contain"
                                             />
                                         </div>
-                                        <h3 className="text-base font-bold text-crimson mb-2">{item.title}</h3>
-                                        <p className="text-sm text-gray-500 leading-relaxed">{item.description}</p>
+                                        <h3 className="text-sm xl:text-base font-bold text-crimson mb-2 w-full break-words hyphens-auto">
+                                            {item.title}
+                                        </h3>
+                                        <p className="text-xs xl:text-sm text-gray-500 leading-relaxed w-full">
+                                            {item.description}
+                                        </p>
                                     </motion.div>
                                 );
                             })}

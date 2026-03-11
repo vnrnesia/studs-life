@@ -5,7 +5,7 @@ import { type Locale, i18n } from "@/i18n-config";
 import { useState, useEffect } from "react";
 import { Menu, X, Globe, ChevronDown, ChevronRight, Phone } from "lucide-react";
 import { Country } from "@/lib/strapi";
-import logo from "../assets/onlylogo.png";
+import logo from "../assets/header-logo.svg";
 import Image from "next/image";
 import { companyLinks, trustBadges, studentProfile } from "@/data/navData";
 
