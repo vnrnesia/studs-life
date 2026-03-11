@@ -48,6 +48,14 @@
         "featured": {
             "type": "boolean",
             "default": false
+        },
+        "images": {
+            "type": "media",
+            "multiple": true,
+            "required": false,
+            "allowedTypes": [
+                "images"
+            ]
         }
     }
 }

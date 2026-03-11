@@ -553,6 +553,7 @@ export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
         };
       }>;
     featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    images: Schema.Attribute.Media<'images', true>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

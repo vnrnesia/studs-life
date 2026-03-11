@@ -22,6 +22,14 @@ export interface Country {
     updatedAt: string;
     publishedAt: string;
     cities?: City[];
+    images?: Array<{
+        id: number;
+        url: string;
+        alternativeText?: string;
+        caption?: string;
+        width: number;
+        height: number;
+    }>;
 }
 export interface City {
     id: number;
@@ -84,6 +92,7 @@ export async function getCountry(slug: string, locale: string = 'en'): Promise<C
             cities: {
                 populate: '*',
             },
+            images: true,
         },
     });
     const { data } = await strapiClient.get<StrapiResponse<Country[]>>(`/countries?${query}`);

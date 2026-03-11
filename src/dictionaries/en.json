@@ -378,6 +378,10 @@
                         "support": {
                                 "title": "Adaptation & Support",
                                 "desc": "City orientation and 24/7 emergency line."
+                        },
+                        "workVisa": {
+                                "title": "Work Visa",
+                                "desc": "Assistance with obtaining work permits and visas."
                         }
                 },
                 "costOfLiving": {
@@ -514,7 +518,7 @@
                                                 "BUSINESS",
                                                 "ANCIENT"
                                         ],
-                                        "img": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=1000&auto=format&fit=crop"
+                                        "img": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1000&auto=format&fit=crop"
                                 },
                                 {
                                         "name": "Shanghai",
@@ -528,7 +532,7 @@
                                                 "MODERN",
                                                 "HUB"
                                         ],
-                                        "img": "https://images.unsplash.com/photo-1548957175-84f0f9af659e?q=80&w=1000&auto=format&fit=crop"
+                                        "img": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?q=80&w=1000&auto=format&fit=crop"
                                 },
                                 {
                                         "name": "Istanbul",
@@ -556,7 +560,7 @@
                                                 "LAW",
                                                 "STATE"
                                         ],
-                                        "img": "https://images.unsplash.com/photo-1589030343991-69ea1433b941?q=80&w=1000&auto=format&fit=crop"
+                                        "img": "https://images.unsplash.com/photo-1605259386010-d7003729af98?q=80&w=1000&auto=format&fit=crop"
                                 }
                         ]
                 },
@@ -1051,7 +1055,7 @@
                                         },
                                         "programs": [
                                                 "Erasmus",
-                                                "Mevlana"
+                                                "YÖK Approved"
                                         ]
                                 },
                                 "germany": {
@@ -1087,7 +1091,11 @@
                                                         "South China University of Technology (SCUT)",
                                                         "Sun Yat-sen University (SYSU)"
                                                 ]
-                                        }
+                                        },
+                                        "programs": [
+                                                "CSC Scholarship",
+                                                "English-taught"
+                                        ]
                                 },
                                 "cyprus": {
                                         "name": "Cyprus",
@@ -1140,26 +1148,67 @@
                                                 "Grodno": [
                                                         "Yanka Kupala State University of Grodno"
                                                 ]
-                                        }
+                                        },
+                                        "programs": [
+                                                "Affordable tuition"
+                                        ]
                                 },
                                 "russia": {
                                         "name": "Russia",
                                         "flag": "🇷🇺",
                                         "cities": {
-                                                "Moscow": [],
-                                                "St. Petersburg": [],
-                                                "Kazan": [],
-                                                "Ufa": [],
-                                                "Irkutsk": [],
-                                                "Saransk": [],
-                                                "Arkhangelsk": [],
-                                                "Kaliningrad": [],
-                                                "Sevastopol": [],
-                                                "Innopolis": [],
-                                                "Novosibirsk": [],
-                                                "Oryol": [],
-                                                "Tula": []
-                                        }
+                                                "Moscow": [
+                                                        "Moscow State University (MSU)",
+                                                        "MGIMO University",
+                                                        "Peoples' Friendship University (RUDN)"
+                                                ],
+                                                "St. Petersburg": [
+                                                        "Saint Petersburg State University (SPbSU)",
+                                                        "ITMO University",
+                                                        "Peter the Great Polytechnic University (SPbPU)"
+                                                ],
+                                                "Kazan": [
+                                                        "Kazan Federal University (KFU)",
+                                                        "Kazan National Research Technological University"
+                                                ],
+                                                "Ufa": [
+                                                        "Bashkir State Medical University",
+                                                        "Ufa University of Science and Technology"
+                                                ],
+                                                "Irkutsk": [
+                                                        "Irkutsk State University",
+                                                        "Irkutsk National Research Technical University"
+                                                ],
+                                                "Saransk": [
+                                                        "Mordovia State University"
+                                                ],
+                                                "Arkhangelsk": [
+                                                        "Northern (Arctic) Federal University (NArFU)"
+                                                ],
+                                                "Kaliningrad": [
+                                                        "Immanuel Kant Baltic Federal University"
+                                                ],
+                                                "Sevastopol": [
+                                                        "Sevastopol State University"
+                                                ],
+                                                "Innopolis": [
+                                                        "Innopolis University"
+                                                ],
+                                                "Novosibirsk": [
+                                                        "Novosibirsk State University (NSU)",
+                                                        "Novosibirsk State Technical University (NSTU)"
+                                                ],
+                                                "Oryol": [
+                                                        "Oryol State University"
+                                                ],
+                                                "Tula": [
+                                                        "Tula State University"
+                                                ]
+                                        },
+                                        "programs": [
+                                                "State-funded",
+                                                "Medical & Engineering"
+                                        ]
                                 }
                         }
                 },

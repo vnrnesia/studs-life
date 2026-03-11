@@ -3,11 +3,11 @@ import { Locale } from "@/i18n-config";
 import { Metadata } from "next";
 import { generateSEOMetadata } from "@/lib/seo";
 import PartnershipHero from "./components/PartnershipHero";
-import PartnershipBenefits from "./components/PartnershipBenefits";
+
 import PartnershipModels from "./components/PartnershipModels";
-import PartnerContact from "./components/PartnerContact";
 import CountryCityShowcase from "./components/CountryCityShowcase";
-import PartnershipCTA from "./components/PartnershipCTA";
+import ContactFormSection from "@/components/ContactFormSection";
+import OfficeLocations from "@/components/OfficeLocations";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/JsonLd";
 import { BreadcrumbList, WithContext } from "schema-dts";
@@ -81,27 +81,19 @@ export default async function PartnershipPage({
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
             />
 
-            <PartnershipHero dict={page.hero} lang={lang} />
+            <PartnershipHero dict={page.hero} benefits={page.benefits} lang={lang} />
 
             <ScrollReveal direction="up">
                 <PartnershipModels dict={page.b2bModels} />
             </ScrollReveal>
 
             <ScrollReveal direction="up">
-                <PartnershipBenefits dict={page.benefits} />
-            </ScrollReveal>
-
-            <ScrollReveal direction="up">
                 <CountryCityShowcase dict={page.geography} stats={page.stats} />
             </ScrollReveal>
 
-            <ScrollReveal direction="up">
-                <PartnerContact dict={page.contact} />
-            </ScrollReveal>
+            <ContactFormSection lang={lang} dict={dict.contactForm} />
 
-            <ScrollReveal direction="up">
-                <PartnershipCTA dict={page.cta} lang={lang} />
-            </ScrollReveal>
+            <OfficeLocations lang={lang} dict={dict.offices} />
         </main>
     );
 }

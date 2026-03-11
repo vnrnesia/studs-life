@@ -379,6 +379,10 @@
             "support": {
                 "title": "Moslashish va qo'llab-quvvatlash",
                 "desc": "O'qish shahrida moslashishda yordam va 24/7 ishonch telefoni."
+            },
+            "workVisa": {
+                "title": "Ish Vizasi",
+                "desc": "Ishlash ruxsatnomalari va vizalarini olishda yordam."
             }
         },
         "costOfLiving": {
@@ -515,7 +519,7 @@
                         "BIZNES",
                         "QADIMIY"
                     ],
-                    "img": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=1000&auto=format&fit=crop"
+                    "img": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1000&auto=format&fit=crop"
                 },
                 {
                     "name": "Shanxai",
@@ -529,7 +533,7 @@
                         "ZAMONAVIY",
                         "XAB"
                     ],
-                    "img": "https://images.unsplash.com/photo-1548957175-84f0f9af659e?q=80&w=1000&auto=format&fit=crop"
+                    "img": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?q=80&w=1000&auto=format&fit=crop"
                 },
                 {
                     "name": "Stambul",
@@ -557,7 +561,7 @@
                         "HUQUQ",
                         "DAVLAT"
                     ],
-                    "img": "https://images.unsplash.com/photo-1589030343991-69ea1433b941?q=80&w=1000&auto=format&fit=crop"
+                    "img": "https://images.unsplash.com/photo-1605259386010-d7003729af98?q=80&w=1000&auto=format&fit=crop"
                 }
             ]
         },

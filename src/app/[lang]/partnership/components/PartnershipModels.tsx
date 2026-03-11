@@ -12,13 +12,21 @@ interface PartnershipModelsProps {
     dict: any;
 }
 
-const iconMap: Record<string, LucideIcon> = {
-    building: Building2,
-    megaphone: Megaphone,
-    coins: Coins,
-    users: Users,
-    globe: Globe,
-    headphones: Headphones,
+import Image from "next/image";
+import img1 from "@/assets/partnership_bento/1.png";
+import img2 from "@/assets/partnership_bento/2.png";
+import img3 from "@/assets/partnership_bento/3.png";
+import img4 from "@/assets/partnership_bento/4.png";
+import img5 from "@/assets/partnership_bento/5.png";
+import img6 from "@/assets/partnership_bento/6.png";
+
+const iconMap: Record<string, any> = {
+    building: img1,
+    megaphone: img2,
+    coins: img3,
+    users: img4,
+    globe: img5,
+    headphones: img6,
 };
 
 export default function PartnershipModels({ dict }: PartnershipModelsProps) {
@@ -49,7 +57,6 @@ export default function PartnershipModels({ dict }: PartnershipModelsProps) {
                 {/* B2B Models Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {dict.items?.map((item: B2BModelItem, index: number) => {
-                        const IconComponent = iconMap[item.icon] || Building2;
                         return (
                             <motion.div
                                 key={index}
@@ -65,8 +72,14 @@ export default function PartnershipModels({ dict }: PartnershipModelsProps) {
                                 </div>
 
                                 {/* Icon */}
-                                <div className="w-12 h-12 bg-crimson/10 rounded-xl flex items-center justify-center mb-5 group-hover:bg-crimson transition-colors duration-300">
-                                    <IconComponent className="w-5 h-5 text-crimson group-hover:text-white transition-colors duration-300" />
+                                <div className="w-16 h-16 bg-crimson/5 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-crimson/10 transition-colors duration-300 overflow-hidden p-3 relative z-10">
+                                    <Image
+                                        src={iconMap[item.icon] || img1}
+                                        alt={item.title}
+                                        width={48}
+                                        height={48}
+                                        className="w-full h-full object-contain"
+                                    />
                                 </div>
 
                                 {/* Content */}
