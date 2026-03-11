@@ -11,10 +11,9 @@ import { Locale } from '@/i18n-config';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 
-// Dynamic imports for components
-const WhyChooseUs = dynamic(() => import('@/components/WhyChooseUs'));
-const TestimonialsCarousel = dynamic(() => import('@/components/TestimonialsCarousel'));
 const OfficeLocations = dynamic(() => import('@/components/OfficeLocations'));
+const ContactFormSection = dynamic(() => import('@/components/ContactFormSection'));
+import ScrollReveal from '@/components/ui/ScrollReveal';
 
 interface CountryPageProps {
   params: Promise<{
@@ -71,11 +70,6 @@ export default async function CountryPage({ params }: CountryPageProps) {
       { "@type": "ListItem", position: 2, name: country.name, item: `https://studs-life.com/${lang}/${countrySlug}` },
     ],
   };
-
-  // Get university data from dictionary if exists
-  const geoData = dict.partnershipPage?.geography?.countries?.[countrySlug];
-  const universitiesByCity = geoData?.cities || {};
-  const hasUniversities = Object.keys(universitiesByCity).length > 0;
 
   return (
     <main className="min-h-screen bg-gray-50 flex flex-col">
@@ -159,10 +153,7 @@ export default async function CountryPage({ params }: CountryPageProps) {
         </section>
       )}
 
-      {/* 2. WHY US SECTION */}
-      <WhyChooseUs lang={lang} dict={dict.whyUs} />
-
-      {/* 3. CITIES SECTION */}
+      {/* 2. CITIES SECTION */}
       <section className="py-24 bg-white relative">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-16">
@@ -216,58 +207,15 @@ export default async function CountryPage({ params }: CountryPageProps) {
         </div>
       </section>
 
-      {/* 4. UNIVERSITIES SECTION */}
-      {hasUniversities && (
-        <section className="py-24 bg-gray-50 border-t border-gray-100">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                {lang === 'ru' ? 'Наши университеты-партнеры' : 'Our Partner Universities'}
-              </h2>
-              <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-                {lang === 'ru' ? `Лучшие университеты в ${country.name}` : `Top institutions we work with in ${country.name}`}
-              </p>
-            </div>
+      {/* 3. CONTACT FORM */}
+      <ScrollReveal direction="up">
+        <ContactFormSection lang={lang} dict={dict.contactForm} />
+      </ScrollReveal>
 
-            <div className="space-y-6">
-              {Object.entries(universitiesByCity).map(([cityName, universityList]) => (
-                (universityList as string[]).length > 0 && (
-                  <div key={cityName} className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100">
-                    <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                      <div className="w-2 h-6 bg-crimson rounded-full" />
-                      {cityName}
-                    </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
-                      {(universityList as string[]).map((uni, idx) => (
-                        <div key={idx} className="flex items-start gap-3">
-                          <div className="w-1.5 h-1.5 rounded-full bg-crimson/50 mt-2" />
-                          <span className="text-gray-700 font-medium">{uni}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* 5. TESTIMONIALS SECTION */}
-      <section className="py-24 bg-white overflow-hidden">
-        <TestimonialsCarousel
-          title={
-            <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">
-              {dict.team?.testimonials_title || (lang === 'ru' ? "Отзывы студентов" : "Student Testimonials")}
-            </h2>
-          }
-          videoCategory={dict.team?.videoTestimonialCategory || "Video Testimonial"}
-          lang={lang}
-        />
-      </section>
-
-      {/* 6. OFFICE SECTION */}
-      <OfficeLocations lang={lang} dict={dict.offices} />
+      {/* 4. OFFICE SECTION */}
+      <ScrollReveal direction="up">
+        <OfficeLocations lang={lang} dict={dict.offices} />
+      </ScrollReveal>
 
     </main>
   );
