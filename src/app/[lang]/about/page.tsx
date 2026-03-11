@@ -86,7 +86,7 @@ export default async function AboutPage({
         <DepartmentsGrid dict={dict.aboutPage.departments} />
       </ScrollReveal>
       <ScrollReveal direction="up">
-        <ContactFormSection lang={lang} dict={dict.form} />
+        <ContactFormSection lang={lang} dict={dict.contactForm} />
       </ScrollReveal>
       <OfficeLocations lang={lang} dict={dict.offices} />
     </main>
