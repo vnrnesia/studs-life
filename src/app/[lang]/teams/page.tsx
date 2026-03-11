@@ -70,7 +70,7 @@ export default async function TeamsPage({ params }: { params: Promise<{ lang: st
       <Team lang={lang} dict={dict.team} teamMembers={teamMembers} />
 
       {/* Contact Form */}
-      <ContactFormSection lang={lang} dict={dict.form} />
+      <ContactFormSection lang={lang} dict={dict.contactForm} />
 
       {/* Office Locations */}
       <OfficeLocations lang={lang} dict={dict.offices} />

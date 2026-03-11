@@ -90,7 +90,7 @@ export default async function ContactPage({
     <main className="flex-grow">
       <JsonLd<BreadcrumbList> data={breadcrumbData} />
       <JsonLd<LocalBusiness> data={localBusinessSchema} />
-      <ContactFormSection lang={lang} dict={dict.form} />
+      <ContactFormSection lang={lang} dict={dict.contactForm} />
       <OfficeLocations lang={lang} dict={dict.offices} />
     </main>
   );
