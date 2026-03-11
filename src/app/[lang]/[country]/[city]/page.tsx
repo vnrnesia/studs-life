@@ -164,7 +164,7 @@ export default async function CityPage({ params }: CityPageProps) {
         {}
         {intro && (
           <div
-            className="prose prose-lg max-w-none mb-16 text-black prose-headings:text-black prose-p:text-black prose-strong:text-black"
+            className="prose prose-lg max-w-none mb-16 text-gray-800 prose-headings:text-black prose-p:text-gray-800 prose-p:font-medium prose-strong:text-black prose-li:font-medium leading-relaxed"
             dangerouslySetInnerHTML={parseMarkdown(intro) || { __html: '' }}
           />
         )}
@@ -176,7 +176,7 @@ export default async function CityPage({ params }: CityPageProps) {
               {lang === 'ru' ? 'Экономика и стоимость жизни' : 'Economy & Cost of Living'}
             </h2>
             <div
-              className="prose prose-lg max-w-none text-black prose-headings:text-black prose-p:text-black prose-strong:text-black"
+              className="prose prose-lg max-w-none text-gray-800 prose-headings:text-black prose-p:text-gray-800 prose-p:font-medium prose-strong:text-black prose-li:font-medium leading-relaxed"
               dangerouslySetInnerHTML={parseMarkdown(economyContent) || { __html: '' }}
             />
           </section>
@@ -189,7 +189,7 @@ export default async function CityPage({ params }: CityPageProps) {
               {lang === 'ru' ? 'Варианты проживания студентов' : 'Student Accommodation'}
             </h2>
             <div
-              className="prose prose-lg max-w-none text-black prose-headings:text-black prose-p:text-black prose-strong:text-black"
+              className="prose prose-lg max-w-none text-gray-800 prose-headings:text-black prose-p:text-gray-800 prose-p:font-medium prose-strong:text-black prose-li:font-medium leading-relaxed"
               dangerouslySetInnerHTML={parseMarkdown(housingContent) || { __html: '' }}
             />
           </section>
@@ -202,7 +202,7 @@ export default async function CityPage({ params }: CityPageProps) {
               {lang === 'ru' ? 'Городская инфраструктура и транспорт' : 'Transport & Infrastructure'}
             </h2>
             <div
-              className="prose prose-lg max-w-none text-black prose-headings:text-black prose-p:text-black prose-strong:text-black"
+              className="prose prose-lg max-w-none text-gray-800 prose-headings:text-black prose-p:text-gray-800 prose-p:font-medium prose-strong:text-black prose-li:font-medium leading-relaxed"
               dangerouslySetInnerHTML={parseMarkdown(transportContent) || { __html: '' }}
             />
           </section>
@@ -215,7 +215,7 @@ export default async function CityPage({ params }: CityPageProps) {
               {lang === 'ru' ? 'Климат' : 'Climate'}
             </h2>
             <div
-              className="prose prose-lg max-w-none text-black prose-headings:text-black prose-p:text-black prose-strong:text-black"
+              className="prose prose-lg max-w-none text-gray-800 prose-headings:text-black prose-p:text-gray-800 prose-p:font-medium prose-strong:text-black prose-li:font-medium leading-relaxed"
               dangerouslySetInnerHTML={parseMarkdown(climateContent) || { __html: '' }}
             />
             {}
@@ -257,7 +257,7 @@ export default async function CityPage({ params }: CityPageProps) {
               {lang === 'ru' ? 'Итог' : 'Conclusion'}
             </h2>
             <div
-              className="prose prose-lg max-w-none text-black prose-headings:text-black prose-p:text-black prose-strong:text-black"
+              className="prose prose-lg max-w-none text-gray-800 prose-headings:text-black prose-p:text-gray-800 prose-p:font-medium prose-strong:text-black prose-li:font-medium leading-relaxed"
               dangerouslySetInnerHTML={parseMarkdown(conclusion) || { __html: '' }}
             />
           </section>
