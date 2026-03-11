@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getCountry, getCities } from '@/lib/strapi';
+import { getCountry, getCities, getStrapiImageUrl } from '@/lib/strapi';
 import { generateSEOMetadata } from '@/lib/seo';
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -81,7 +81,7 @@ export default async function CountryPage({ params }: CountryPageProps) {
         {country.images?.[0] ? (
           <>
             <Image
-              src={`${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}${country.images[0].url}`}
+              src={getStrapiImageUrl(country.images[0].url) || ''}
               alt={country.images[0].alternativeText || country.name}
               fill
               className="object-cover"
@@ -126,7 +126,7 @@ export default async function CountryPage({ params }: CountryPageProps) {
                   {country.images.slice(1, 5).map((img, idx) => (
                     <div key={img.id} className={`relative overflow-hidden rounded-2xl shadow-lg ${idx === 0 ? 'row-span-2 h-full min-h-[300px]' : 'h-48'}`}>
                       <Image
-                        src={`${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}${img.url}`}
+                        src={getStrapiImageUrl(img.url) || ''}
                         alt={img.alternativeText || `${country.name} photo ${idx + 2}`}
                         fill
                         className="object-cover hover:scale-105 transition-transform duration-500"
@@ -176,7 +176,7 @@ export default async function CountryPage({ params }: CountryPageProps) {
                   <div className="relative h-56 overflow-hidden">
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10" />
                     <Image
-                      src={`${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}${city.images[0].url}`}
+                      src={getStrapiImageUrl(city.images[0].url) || ''}
                       alt={`${city.name} - Student life`}
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-500"

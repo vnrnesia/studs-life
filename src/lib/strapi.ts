@@ -2,14 +2,16 @@ import axios from 'axios';
 import qs from 'qs';
 const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
 const strapiToken = process.env.STRAPI_API_TOKEN;
+
 export const strapiClient = axios.create({
     baseURL: `${strapiUrl}/api`,
     headers: {
         'Content-Type': 'application/json',
-        ...(strapiToken && { Authorization: `Bearer ${strapiToken}` }),
+        ...(strapiToken && strapiToken !== 'buraya_strapi_admin_panelinden_alacagin_tokeni_yaz' && { Authorization: `Bearer ${strapiToken}` }),
     },
     timeout: 5000,
 });
+
 export interface Country {
     id: number;
     documentId: string;
@@ -210,11 +212,14 @@ export async function getCountriesWithCities(locale: string = 'en'): Promise<Cou
     const { data } = await strapiClient.get<StrapiResponse<Country[]>>(`/countries?${query}`);
     return data.data;
 }
-export function getStrapiImageUrl(url: string): string {
-    if (url.startsWith('http')) {
+export function getStrapiImageUrl(url: string | null | undefined): string {
+    if (!url) return '';
+    if (url.startsWith('http') || url.startsWith('//')) {
         return url;
     }
-    return `${strapiUrl}${url}`;
+    const isProd = process.env.NODE_ENV === 'production';
+    const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || (isProd ? 'https://admin-studs-life.defyzer.com' : 'http://localhost:1337');
+    return `${baseUrl}${url}`;
 }
 export interface TeamMember {
     id: number;
