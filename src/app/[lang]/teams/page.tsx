@@ -8,6 +8,7 @@ import JsonLd from "@/components/JsonLd";
 import { BreadcrumbList, WithContext } from "schema-dts";
 import ContactFormSection from "@/components/ContactFormSection";
 import OfficeLocations from "@/components/OfficeLocations";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
@@ -70,10 +71,14 @@ export default async function TeamsPage({ params }: { params: Promise<{ lang: st
       <Team lang={lang} dict={dict.team} teamMembers={teamMembers} />
 
       {/* Contact Form */}
-      <ContactFormSection lang={lang} dict={dict.contactForm} />
+      <ScrollReveal direction="up">
+        <ContactFormSection lang={lang} dict={dict.contactForm} />
+      </ScrollReveal>
 
       {/* Office Locations */}
-      <OfficeLocations lang={lang} dict={dict.offices} />
+      <ScrollReveal direction="up">
+        <OfficeLocations lang={lang} dict={dict.offices} />
+      </ScrollReveal>
     </div>
   );
 }

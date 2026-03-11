@@ -155,10 +155,14 @@ export default async function ServicesPage({
       </ScrollReveal>
 
       {/* Contact Form */}
-      <ContactFormSection lang={lang} dict={dict.contactForm} />
+      <ScrollReveal direction="up">
+        <ContactFormSection lang={lang} dict={dict.contactForm} />
+      </ScrollReveal>
 
       {/* Office Locations */}
-      <OfficeLocations lang={lang} dict={dict.offices} />
+      <ScrollReveal direction="up">
+        <OfficeLocations lang={lang} dict={dict.offices} />
+      </ScrollReveal>
     </main>
   );
 }
