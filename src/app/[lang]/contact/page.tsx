@@ -2,8 +2,7 @@ import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n-config";
 import { Metadata } from "next";
 import { generateSEOMetadata } from "@/lib/seo";
-import ContactFormSection from "@/components/ContactFormSection";
-import OfficeLocations from "@/components/OfficeLocations";
+import MultiStepContactForm from "@/components/MultiStepContactForm";
 import JsonLd from "@/components/JsonLd";
 import { BreadcrumbList, LocalBusiness, WithContext } from "schema-dts";
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
@@ -90,8 +89,7 @@ export default async function ContactPage({
     <main className="flex-grow">
       <JsonLd<BreadcrumbList> data={breadcrumbData} />
       <JsonLd<LocalBusiness> data={localBusinessSchema} />
-      <ContactFormSection lang={lang} dict={dict.contactForm} />
-      <OfficeLocations lang={lang} dict={dict.offices} />
+      <MultiStepContactForm lang={lang} dict={dict.form as any} />
     </main>
   );
 }
