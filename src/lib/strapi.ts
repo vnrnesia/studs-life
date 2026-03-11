@@ -95,8 +95,24 @@ export async function getCountry(slug: string, locale: string = 'en'): Promise<C
             images: true,
         },
     });
-    const { data } = await strapiClient.get<StrapiResponse<Country[]>>(`/countries?${query}`);
-    return data.data[0] || null;
+    try {
+        const { data } = await strapiClient.get<StrapiResponse<Country[]>>(`/countries?${query}`);
+        return data.data[0] || null;
+    } catch (error) {
+        // Fallback: try without images populate (for older Strapi schemas)
+        try {
+            const fallbackQuery = qs.stringify({
+                locale,
+                filters: { slug: { $eq: slug } },
+                populate: { cities: { populate: '*' } },
+            });
+            const { data } = await strapiClient.get<StrapiResponse<Country[]>>(`/countries?${fallbackQuery}`);
+            return data.data[0] || null;
+        } catch {
+            console.error('getCountry failed:', error);
+            return null;
+        }
+    }
 }
 export async function getCities(countrySlug?: string, locale: string = 'en'): Promise<City[]> {
     const query = qs.stringify({
