@@ -31,7 +31,7 @@ const iconMap: Record<string, any> = {
 
 export default function PartnershipHero({ dict, benefits, lang }: PartnershipHeroProps) {
     return (
-        <div className="relative lg:mb-[120px]">
+        <div className="relative lg:mb-[160px] xl:mb-[180px]">
             {/* Dark hero section - full screen */}
             <section className="relative w-full h-screen lg:min-h-screen flex items-center bg-[#06182E] overflow-visible pt-24 pb-16 lg:pt-16">
                 {/* Background effects */}
@@ -209,9 +209,8 @@ export default function PartnershipHero({ dict, benefits, lang }: PartnershipHer
                     </div>
                 </div>
 
-                {/* Benefits cards - desktop only: positioned at the boundary */}
                 <div className="hidden lg:block absolute bottom-0 left-0 right-0 z-20 translate-y-1/2">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                         <motion.div
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -226,7 +225,7 @@ export default function PartnershipHero({ dict, benefits, lang }: PartnershipHer
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                                        className={`group relative p-8 text-center ${!isLast ? "border-r border-gray-100" : ""}`}
+                                        className={`group relative p-6 lg:p-8 text-center min-w-0 break-words ${!isLast ? "border-r border-gray-100" : ""}`}
                                     >
                                         <div className="w-20 h-20 bg-crimson/5 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-crimson/10 transition-colors duration-300 overflow-hidden p-3">
                                             <Image

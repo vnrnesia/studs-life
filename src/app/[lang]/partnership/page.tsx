@@ -74,7 +74,7 @@ export default async function PartnershipPage({
     };
 
     return (
-        <main className="min-h-screen bg-gray-50">
+        <main className="min-h-screen bg-gray-50 overflow-x-hidden">
             <JsonLd<BreadcrumbList> data={breadcrumbData} />
             <script
                 type="application/ld+json"
