@@ -8,6 +8,7 @@ import CompanyTimeline from "./components/CompanyTimeline";
 import DepartmentsGrid from "./components/DepartmentsGrid";
 import TrustSection from "../services/components/TrustSection";
 import ContactFormSection from "@/components/ContactFormSection";
+import OfficeLocations from "@/components/OfficeLocations";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/JsonLd";
 import { BreadcrumbList, AboutPage as AboutPageSchema, WithContext } from "schema-dts";
@@ -85,8 +86,9 @@ export default async function AboutPage({
         <DepartmentsGrid dict={dict.aboutPage.departments} />
       </ScrollReveal>
       <ScrollReveal direction="up">
-        <ContactFormSection lang={lang} dict={dict.contactForm} />
+        <ContactFormSection lang={lang} dict={dict.form} />
       </ScrollReveal>
+      <OfficeLocations lang={lang} dict={dict.offices} />
     </main>
   );
 }

@@ -21,7 +21,7 @@ export default function Footer({ lang, dict }: FooterProps) {
   const legal = dict?.legal || {};
 
   return (
-    <footer className="relative bg-white text-gray-900 pt-6 pb-0 overflow-hidden mt-12">
+    <footer className="relative bg-white text-gray-900 pt-6 pb-0 overflow-hidden ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* === TOP CTA BANNER (Red Section) === */}
@@ -146,9 +146,9 @@ export default function Footer({ lang, dict }: FooterProps) {
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0 border border-gray-100 shadow-sm overflow-hidden p-1.5">
-                      <Image 
-                        src={onlyLogo} 
-                        alt="Student's Life Logo" 
+                      <Image
+                        src={onlyLogo}
+                        alt="Student's Life Logo"
                         className="w-full h-full object-contain"
                       />
                     </div>
@@ -183,9 +183,9 @@ export default function Footer({ lang, dict }: FooterProps) {
         {/* === BOTTOM STRIP (Copyright & Logo) === */}
         <div className="border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center py-8 mt-4 gap-4">
           <div className="flex items-center gap-3">
-            <Image 
-              src={onlyLogo} 
-              alt="Student's Life Logo" 
+            <Image
+              src={onlyLogo}
+              alt="Student's Life Logo"
               className="w-8 h-8 object-contain"
             />
             <span className="text-gray-500 text-sm font-medium">

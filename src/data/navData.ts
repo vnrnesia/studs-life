@@ -22,12 +22,6 @@ export const companyLinks = [
         href: '/teams'
     },
     {
-        icon: Briefcase,
-        titleKey: 'careers',
-        descKey: 'careersDesc',
-        href: '/contact'
-    },
-    {
         icon: LayoutGrid,
         titleKey: 'services',
         descKey: 'servicesDesc',

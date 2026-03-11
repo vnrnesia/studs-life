@@ -6,6 +6,9 @@ import Team from "@/components/Team";
 import { getTeamMembers } from "@/lib/strapi";
 import JsonLd from "@/components/JsonLd";
 import { BreadcrumbList, WithContext } from "schema-dts";
+import ContactFormSection from "@/components/ContactFormSection";
+import OfficeLocations from "@/components/OfficeLocations";
+
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang as Locale);
@@ -55,7 +58,7 @@ export default async function TeamsPage({ params }: { params: Promise<{ lang: st
     ...(member.photo?.url && { image: member.photo.url }),
   }));
   return (
-    <div className="bg-gray-50 pt-10 pb-40">
+    <div className="bg-gray-50 pt-10 pb-8">
       <JsonLd<BreadcrumbList> data={breadcrumbData} />
       {personSchemas.map((schema, idx) => (
         <script
@@ -65,6 +68,12 @@ export default async function TeamsPage({ params }: { params: Promise<{ lang: st
         />
       ))}
       <Team lang={lang} dict={dict.team} teamMembers={teamMembers} />
+
+      {/* Contact Form */}
+      <ContactFormSection lang={lang} dict={dict.form} />
+
+      {/* Office Locations */}
+      <OfficeLocations lang={lang} dict={dict.offices} />
     </div>
   );
 }

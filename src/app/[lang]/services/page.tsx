@@ -9,6 +9,8 @@ import DestinationsHub from "./components/DestinationsHub";
 import AccommodationAssistant from "./components/AccommodationAssistant";
 import FAQ from "./components/FAQ";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import ContactFormSection from "@/components/ContactFormSection";
+import OfficeLocations from "@/components/OfficeLocations";
 import JsonLd from "@/components/JsonLd";
 import { FAQPage, BreadcrumbList, WithContext } from "schema-dts";
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
@@ -151,6 +153,12 @@ export default async function ServicesPage({
       <ScrollReveal direction="up">
         <FAQ dict={dict.servicesPage.faq} />
       </ScrollReveal>
+
+      {/* Contact Form */}
+      <ContactFormSection lang={lang} dict={dict.form} />
+
+      {/* Office Locations */}
+      <OfficeLocations lang={lang} dict={dict.offices} />
     </main>
   );
 }
