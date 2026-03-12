@@ -17,6 +17,7 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const parseMarkdown = (content?: string) => {
     if (!content) return { __html: "" };
+    marked.setOptions({ breaks: true, gfm: true });
     return { __html: marked.parse(content) as string };
   };
   let filteredMembers = teamMembers;

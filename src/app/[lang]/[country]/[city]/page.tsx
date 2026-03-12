@@ -77,6 +77,7 @@ export default async function CityPage({ params }: CityPageProps) {
   } = city;
   const heroImage = cityImages?.[0];
   const heroImageUrl = heroImage ? getStrapiImageUrl(heroImage.url) : '';
+  marked.setOptions({ breaks: true, gfm: true });
   const parseMarkdown = (content?: string) => {
     if (!content) return null;
     return { __html: marked.parse(content) as string };
@@ -164,7 +165,7 @@ export default async function CityPage({ params }: CityPageProps) {
         {}
         {intro && (
           <div
-            className="prose prose-lg max-w-none mb-16 text-gray-800 prose-headings:text-black prose-p:text-gray-800 prose-p:font-medium prose-strong:text-black prose-li:font-medium leading-relaxed"
+            className="prose prose-lg max-w-none mb-16 text-gray-800 prose-headings:text-black prose-p:text-gray-800 prose-p:font-semibold prose-strong:text-black prose-li:font-semibold leading-relaxed"
             dangerouslySetInnerHTML={parseMarkdown(intro) || { __html: '' }}
           />
         )}
@@ -176,7 +177,7 @@ export default async function CityPage({ params }: CityPageProps) {
               {lang === 'ru' ? 'Экономика и стоимость жизни' : 'Economy & Cost of Living'}
             </h2>
             <div
-              className="prose prose-lg max-w-none text-gray-800 prose-headings:text-black prose-p:text-gray-800 prose-p:font-medium prose-strong:text-black prose-li:font-medium leading-relaxed"
+              className="prose prose-lg max-w-none text-gray-800 prose-headings:text-black prose-p:text-gray-800 prose-p:font-semibold prose-strong:text-black prose-li:font-semibold leading-relaxed"
               dangerouslySetInnerHTML={parseMarkdown(economyContent) || { __html: '' }}
             />
           </section>

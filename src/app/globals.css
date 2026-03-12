@@ -140,3 +140,25 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Strapi markdown content typography */
+.prose p {
+  margin-bottom: 1.25em;
+  line-height: 1.8;
+}
+
+.prose br {
+  display: block;
+  content: "";
+  margin-top: 0.75em;
+}
+
+.prose ul,
+.prose ol {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.prose li {
+  margin-bottom: 0.5em;
+}
