@@ -190,6 +190,14 @@
         "cta_card_desc": "Biziň hünärmenlerimiziň doly sanawy bilen tanyşyň.",
         "cta_card_button": "Ählisini görkez"
     },
+    "teamMember": {
+        "backToTeam": "Topara dolanmak",
+        "contactInfo": "Habarlaşmak üçin maglumatlar",
+        "responsibilities": "Hünär we kömek",
+        "since": "Biz bilen bäri",
+        "breadcrumbHome": "Baş sahypa",
+        "breadcrumbTeam": "Topar"
+    },
     "statistics": {
         "badge": "Statistika",
         "description": "Bilim geňeşçilerimizden, wiza hünärmenlerimizden we halypalarymyzdan ybarat bolan toparymyz siziň üstünligiňiz üçin ýadaman zähmet çekýär.",

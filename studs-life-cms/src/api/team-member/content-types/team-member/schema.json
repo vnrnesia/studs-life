@@ -16,6 +16,11 @@
         }
     },
     "attributes": {
+        "slug": {
+            "type": "uid",
+            "targetField": "fullName",
+            "required": true
+        },
         "fullName": {
             "type": "string",
             "required": true,

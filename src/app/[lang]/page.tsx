@@ -6,7 +6,7 @@ import Hero from "@/components/Hero";
 import dynamic from "next/dynamic";
 import JsonLd from "@/components/JsonLd";
 import { WebSite, WebPage, WithContext } from "schema-dts";
-import { getTeamMembers, getLatestCities } from "@/lib/strapi";
+import { getTeamMembers, getNewsPosts } from "@/lib/strapi";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import supportUniversityIcon from "@/assets/support_icons/admission.webp";
 import supportVisaIcon from "@/assets/support_icons/visa.webp";
@@ -52,12 +52,12 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
     const { lang: langParam } = await params;
     const lang = langParam as Locale;
-    let dict, teamMembers, latestCities;
+    let dict, teamMembers, latestNews;
     try {
-        [dict, teamMembers, latestCities] = await Promise.all([
+        [dict, teamMembers, latestNews] = await Promise.all([
             getDictionary(lang),
             getTeamMembers(lang),
-            getLatestCities(lang),
+            getNewsPosts(3),
         ]) as [any, any, any];
     } catch (error) {
         console.error('Homepage fetch failed, falling back to static content:', error);
@@ -67,7 +67,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             dict = {};
         }
         teamMembers = [];
-        latestCities = [];
+        latestNews = [];
     }
     const features = [
         {
@@ -178,7 +178,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <Statistics lang={lang} dict={dict.statistics} />
             <TestimonialsCarousel title={dict.team.testimonials_title} videoCategory={dict.team.videoTestimonialCategory} lang={lang} />
             <ContactFormSection lang={lang} dict={dict.contactForm} />
-            <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestCities} />
+            <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestNews} />
             <LeadMagnet lang={lang} />
             <ProcessSection lang={lang} dict={(dict as any).processWorkflow} />
             <OfficeLocations lang={lang} dict={dict.offices} />

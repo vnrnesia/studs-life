@@ -224,6 +224,7 @@ export function getStrapiImageUrl(url: string | null | undefined): string {
 export interface TeamMember {
     id: number;
     documentId: string;
+    slug: string;
     fullName: string;
     role: string;
     photo?: {
@@ -249,7 +250,21 @@ export async function getTeamMembers(locale: string = 'en'): Promise<TeamMember[
     const { data } = await strapiClient.get<StrapiResponse<TeamMember[]>>(`/team-members?${query}`);
     return data.data;
 }
-export interface BlogPost {
+export async function getTeamMember(slug: string, locale: string = 'en'): Promise<TeamMember | null> {
+    const query = qs.stringify({
+        locale,
+        filters: { slug: { $eq: slug } },
+        populate: '*',
+    });
+    try {
+        const { data } = await strapiClient.get<StrapiResponse<TeamMember[]>>(`/team-members?${query}`);
+        return data.data[0] || null;
+    } catch (error) {
+        console.error('getTeamMember failed:', error);
+        return null;
+    }
+}
+export interface NewsPost {
     id: number;
     documentId: string;
     title: string;
@@ -261,27 +276,38 @@ export interface BlogPost {
         url: string;
         alternativeText?: string;
     };
-    author?: {
-        fullName: string;
-    };
-    readTime?: string;
-    locale: string;
+    category?: string;
 }
-export async function getLatestBlogs(locale: string = 'en'): Promise<BlogPost[]> {
+export async function getNewsPosts(limit?: number): Promise<NewsPost[]> {
     const query = qs.stringify({
-        locale,
         populate: '*',
         sort: ['publishedAt:desc'],
-        pagination: {
-            limit: 3,
-        },
+        ...(limit ? { pagination: { limit } } : {}),
     });
     try {
-        const { data } = await strapiClient.get<StrapiResponse<BlogPost[]>>(`/blogs?${query}`);
+        const { data } = await strapiClient.get<StrapiResponse<NewsPost[]>>(`/news-list?${query}`);
         return data.data;
     } catch (error) {
+        console.error('getNewsPosts failed:', error);
         return [];
     }
+}
+export async function getNewsPost(slug: string): Promise<NewsPost | null> {
+    const query = qs.stringify({
+        filters: { slug: { $eq: slug } },
+        populate: '*',
+    });
+    try {
+        const { data } = await strapiClient.get<StrapiResponse<NewsPost[]>>(`/news-list?${query}`);
+        return data.data[0] || null;
+    } catch (error) {
+        console.error('getNewsPost failed:', error);
+        return null;
+    }
+}
+/** @deprecated Use getNewsPosts instead */
+export async function getLatestBlogs(): Promise<NewsPost[]> {
+    return getNewsPosts(3);
 }
 export async function getLatestCities(locale: string = 'en'): Promise<City[]> {
     const query = qs.stringify({

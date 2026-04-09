@@ -191,6 +191,14 @@
         "cta_card_desc": "Bizning o'zini ishga bag'ishlagan ixtisoslashgan mutaxassislarimizning to'liq ro'yxati bilan tanishing.",
         "cta_card_button": "Butun jamoani ko'ring"
     },
+    "teamMember": {
+        "backToTeam": "Jamoaga qaytish",
+        "contactInfo": "Aloqa ma'lumotlari",
+        "responsibilities": "Mutaxassislik va yordam",
+        "since": "Biz bilan",
+        "breadcrumbHome": "Bosh sahifa",
+        "breadcrumbTeam": "Jamoa"
+    },
     "statistics": {
         "badge": "Statistika",
         "description": "Bizning sodiq jamoadagi ta'lim bo'yicha suhbatchilar, viza bo'yicha ekspertlar va ustozlar sizning muvaffaqiyatingizni ta'minlash uchun tinimsiz ishlaydi.",

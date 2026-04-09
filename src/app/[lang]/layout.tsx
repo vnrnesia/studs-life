@@ -9,6 +9,7 @@ import { getCountriesWithCities, type Country } from "@/lib/strapi";
 import JsonLd from "@/components/JsonLd";
 import { Organization } from "schema-dts";
 import CookieConsent from "@/components/CookieConsent";
+import FloatingApplyButton from "@/components/FloatingApplyButton";
 const manrope = Manrope({ subsets: ["latin", "cyrillic"], variable: "--font-manrope" });
 const montserrat = Montserrat({ subsets: ["latin", "cyrillic"], variable: "--font-montserrat", weight: ["400", "700", "800", "900"] });
 const BASE_URL = 'https://studs-life.com';
@@ -159,6 +160,7 @@ export default async function RootLayout({
         </main>
         <Footer lang={lang} dict={dict} />
         <CookieConsent lang={lang} dict={dict} />
+        <FloatingApplyButton lang={lang} />
       </body>
     </html>
   );

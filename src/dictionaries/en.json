@@ -190,6 +190,14 @@
                 "cta_card_desc": "Explore the full directory of our dedicated professionals.",
                 "cta_card_button": "View All Team"
         },
+        "teamMember": {
+                "backToTeam": "Back to Team",
+                "contactInfo": "Contact Information",
+                "responsibilities": "Expertise & How I Can Help",
+                "since": "With us since",
+                "breadcrumbHome": "Home",
+                "breadcrumbTeam": "Team"
+        },
         "statistics": {
                 "badge": "Statistics",
                 "description": "Our dedicated team of education consultants, visa experts, and mentors works tirelessly to ensure your success.",
