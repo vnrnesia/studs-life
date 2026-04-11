@@ -19,7 +19,7 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
       member.fullName !== "Nurana Jemshidova"
     );
   }
-  const displayMembers = showViewAll ? filteredMembers.slice(0, 4) : filteredMembers;
+  const displayMembers = filteredMembers;
   return (
     <section className="relative pt-24 bg-white text-gray-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -73,22 +73,41 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
             </Link>
           ))}
           {}
-          <div className="bg-[#5D0E0E] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-10 flex flex-col justify-between text-white h-[340px] md:h-[450px] relative overflow-hidden group">
-            <div className="relative z-10">
-              <h3 className="text-xl md:text-3xl font-bold font-montserrat tracking-tight mb-4" dangerouslySetInnerHTML={{ __html: dict.cta_card_title || "Meet Our<br />Whole Team" }} />
-              <p className="text-white/80 text-[10px] md:text-xs leading-relaxed max-w-[90%]">
-                {dict.cta_card_desc || "Explore the full directory of our dedicated professionals."}
-              </p>
+          {showViewAll ? (
+            <div className="bg-[#5D0E0E] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-10 flex flex-col justify-between text-white h-[340px] md:h-[450px] relative overflow-hidden group">
+              <div className="relative z-10">
+                <h3 className="text-xl md:text-3xl font-bold font-montserrat tracking-tight mb-4" dangerouslySetInnerHTML={{ __html: dict.cta_card_title || "Meet Our<br />Whole Team" }} />
+                <p className="text-white/80 text-[10px] md:text-xs leading-relaxed max-w-[90%]">
+                  {dict.cta_card_desc || "Explore the full directory of our dedicated professionals."}
+                </p>
+              </div>
+              <Link
+                href={`/${lang}/teams`}
+                className="relative z-10 bg-white text-[#0A2647] w-full py-3 md:py-4 rounded-full font-bold text-xs md:text-base text-center hover:bg-white/90 transition-colors mt-auto"
+              >
+                {dict.cta_card_button || "View All Team"}
+              </Link>
+              <UserPlus className="absolute -top-10 -right-10 w-40 h-40 text-white/5 rotate-12" />
             </div>
-            <Link
-              href={`/${lang}/teams`}
-              className="relative z-10 bg-white text-[#0A2647] w-full py-3 md:py-4 rounded-full font-bold text-xs md:text-base text-center hover:bg-white/90 transition-colors mt-auto"
-            >
-              {dict.cta_card_button || "View All Team"}
-            </Link>
-            {}
-            <UserPlus className="absolute -top-10 -right-10 w-40 h-40 text-white/5 rotate-12" />
-          </div>
+          ) : (
+            <div className="bg-[#0A2647] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-10 flex flex-col justify-between text-white h-[340px] md:h-[450px] relative overflow-hidden group">
+              <div className="relative z-10">
+                <h3 className="text-xl md:text-3xl font-bold font-montserrat tracking-tight mb-4">
+                  {lang === 'ru' ? 'Начни Своё Обучение За Рубежом' : lang === 'tk' ? 'Daşary ýurtda Okuw Başla' : lang === 'oz' ? "Xorijda O'qishni Boshlang" : 'Start Studying Abroad'}
+                </h3>
+                <p className="text-white/80 text-[10px] md:text-xs leading-relaxed max-w-[90%]">
+                  {lang === 'ru' ? 'Оставь заявку — мы свяжемся с тобой и подберём лучший вариант.' : lang === 'tk' ? 'Arza galdyr, biz saňa jaň ederis.' : lang === 'oz' ? "Ariza qoldiring, biz siz bilan bog'lanamiz." : "Leave a request and we'll find the best option for you."}
+                </p>
+              </div>
+              <Link
+                href={`/${lang}/contact`}
+                className="relative z-10 bg-white text-[#0A2647] w-full py-3 md:py-4 rounded-full font-bold text-xs md:text-base text-center hover:bg-white/90 transition-colors mt-auto"
+              >
+                {lang === 'ru' ? 'Подать заявку' : lang === 'tk' ? 'Arza tabşyr' : lang === 'oz' ? "Ariza yuborish" : 'Apply Now'}
+              </Link>
+              <UserPlus className="absolute -top-10 -right-10 w-40 h-40 text-white/5 rotate-12" />
+            </div>
+          )}
         </div>
         {showViewAll && filteredMembers.length > 6 && (
           <div className="text-center mt-16">
