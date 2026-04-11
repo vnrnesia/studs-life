@@ -26,7 +26,6 @@ export async function POST(request: Request) {
         };
         const direction = directionMapping[formType];
         if (direction === undefined || direction === null) {
-            console.log(`Ignoring CRM submission for formType: ${formType}`);
             return NextResponse.json({ success: true, message: 'Ignored' });
         }
         let age = null;
@@ -57,7 +56,6 @@ export async function POST(request: Request) {
         const cleanPayload = Object.fromEntries(
             Object.entries(crmPayload).filter(([_, v]) => v != null && v !== '')
         );
-        console.log(`Sending to CRM (${formType} -> ${direction}):`, cleanPayload);
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 5000);
         const crmResponse = await fetch('https://manager-sl.ru/api/leads/create/', {
@@ -80,8 +78,7 @@ export async function POST(request: Request) {
             console.error(`CRM API Error (${crmResponse.status}):`, errorText);
             return NextResponse.json({ success: false, message: 'CRM API Error' }, { status: crmResponse.status });
         }
-        const result = await crmResponse.json();
-        console.log('CRM API Success:', result);
+        await crmResponse.json();
         return NextResponse.json({ success: true, message: 'Success' });
     } catch (error: any) {
         if (error.name === 'AbortError') {

@@ -32,7 +32,7 @@ const COUNTRIES = [
   'Russia', 'Kazakhstan', 'Kyrgyzstan', 'Afghanistan', 'Iran'
 ];
 const TURKMEN_REGIONS = ['Lebap', 'Mary', 'Dashoguz', 'Balkan', 'Ahal', 'Ashgabat'];
-const TARGET_COUNTRIES = ['Russia', 'China', 'Cyprus', 'Turkey', 'Belarus', 'Uzbekistan', 'Europe'];
+const TARGET_COUNTRIES = ['Russia', 'China', 'Cyprus', 'Turkey', 'Belarus', 'Uzbekistan', 'Kazakhstan', 'Malaysia', 'Romania', 'Europe (Hungary, Bulgaria)'];
 export default function UniversityForm({ onBack, dict }: UniversityFormProps) {
   const router = useRouter();
   const params = useParams();
@@ -97,6 +97,7 @@ export default function UniversityForm({ onBack, dict }: UniversityFormProps) {
               className="w-full max-w-full min-w-0 max-w-[calc(100vw-3rem)] bg-gray-100 border-2 border-transparent focus:border-crimson outline-none px-4 py-3 rounded-lg text-gray-900 transition-colors">
               <option value="">{dict.options.selectLevel}</option>
               <option value="language">{dict.options.languageCourses}</option>
+              <option value="college">{dict.options.college || 'Колледж'}</option>
               <option value="preparatory">{dict.options.preparatory}</option>
               <option value="bachelor">{dict.options.bachelor}</option>
               <option value="master">{dict.options.master}</option>

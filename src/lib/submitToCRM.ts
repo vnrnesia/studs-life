@@ -11,7 +11,6 @@ export async function submitToCRM(
             body: JSON.stringify({ formType, formData }),
         });
         if (!response.ok) {
-            console.warn('CRM submission returned non-OK status:', response.status);
             return { success: false, message: 'CRM API Error' };
         }
         const data = await response.json();

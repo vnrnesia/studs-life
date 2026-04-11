@@ -139,7 +139,7 @@ export default async function ServicesPage({
       ))}
       <ServicesHero dict={dict.servicesPage.hero} />
       <ScrollReveal direction="up">
-        <ServicesGrid dict={dict.servicesPage.coreServices} />
+        <ServicesGrid dict={dict.servicesPage.coreServices} lang={lang} />
       </ScrollReveal>
       <ScrollReveal direction="up">
         <CostOfLiving dict={dict.servicesPage.costOfLiving} />

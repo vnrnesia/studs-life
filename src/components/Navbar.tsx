@@ -404,6 +404,13 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                 </Link>
               );
             })}
+            <Link
+              href={`/${lang}/universities`}
+              onClick={() => setIsOpen(false)}
+              className="block py-3 text-lg font-bold text-gray-900 border-b border-gray-100 hover:text-navy"
+            >
+              {lang === 'ru' ? 'Список признаваемых университетов' : lang === 'tk' ? 'Ykrar edilýän uniwersitetler' : lang === 'oz' ? "Tan olingan universitetlar" : 'Recognized Universities'}
+            </Link>
           </div>
           { }
           <div className="mt-8">

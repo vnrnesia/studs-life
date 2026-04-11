@@ -337,6 +337,28 @@ export interface Testimonial {
     locale: string;
 }
 
+export interface Review {
+    id: number;
+    documentId: string;
+    name: string;
+    city?: string;
+    service?: string;
+    rating: number;
+    content: string;
+    publishedAt: string;
+}
+
+export async function getReviews(limit?: number): Promise<Review[]> {
+    const query = qs.stringify({ sort: ['publishedAt:desc'], pagination: { limit: limit ?? 100 } });
+    try {
+        const { data } = await strapiClient.get<StrapiResponse<Review[]>>(`/reviews?${query}`);
+        return data.data;
+    } catch (error) {
+        console.error('getReviews failed:', error);
+        return [];
+    }
+}
+
 export async function getTestimonials(locale: string = 'en'): Promise<Testimonial[]> {
     const query = qs.stringify({
         locale,

@@ -1,5 +1,5 @@
 "use client";
-import { MapPin, Phone, Globe, Mail, Clock, ChevronLeft, ChevronRight } from "lucide-react";
+import { MapPin, Phone, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -10,7 +10,7 @@ interface OfficeLocationsProps {
   lang: string;
   dict?: any;
 }
-export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
+export default function OfficeLocations({ dict }: OfficeLocationsProps) {
   const [activeOffice, setActiveOffice] = useState<string>("turkmenabat");
   const offices = [
     {
@@ -248,6 +248,30 @@ export default function OfficeLocations({ lang, dict }: OfficeLocationsProps) {
                 <div>
                   <h3 className="text-2xl md:text-3xl font-black break-words leading-tight">{activeOfficeData.city}</h3>
                 </div>
+              </div>
+              { }
+              <div className="flex flex-wrap gap-2 mb-6">
+                {[
+                  { id: "kazan", abbr: "КЗН" },
+                  { id: "ashgabat", abbr: "АГ" },
+                  { id: "balkanabat", abbr: "БН" },
+                  { id: "turkmenabat", abbr: "ЛБ" },
+                  { id: "dashoguz", abbr: "ДЗ" },
+                  { id: "mary", abbr: "МР" },
+                  { id: "tashkent", abbr: "ТАШ" },
+                ].map(({ id, abbr }) => (
+                  <button
+                    key={id}
+                    onClick={() => setActiveOffice(id)}
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
+                      activeOffice === id
+                        ? "bg-crimson text-white"
+                        : "bg-white/10 text-white/60 hover:bg-white/20 hover:text-white"
+                    }`}
+                  >
+                    {abbr}
+                  </button>
+                ))}
               </div>
               <div className="space-y-6">
                 { }

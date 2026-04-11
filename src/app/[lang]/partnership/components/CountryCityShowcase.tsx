@@ -134,7 +134,7 @@ export default function CountryCityShowcase({ dict, stats }: CountryCityShowcase
                                                     alt={`${country.name} flag`}
                                                     fill
                                                     className="object-cover"
-                                                    unoptimized
+
                                                 />
                                             </div>
                                         </div>
@@ -214,7 +214,7 @@ export default function CountryCityShowcase({ dict, stats }: CountryCityShowcase
                                                                 alt={`${country.name} flag`}
                                                                 fill
                                                                 className="object-cover"
-                                                                unoptimized
+
                                                             />
                                                         </div>
 

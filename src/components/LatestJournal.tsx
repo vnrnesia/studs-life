@@ -56,7 +56,7 @@ export default function LatestJournal({ lang, dict, posts = [] }: LatestJournalP
                                                     alt={post.image?.alternativeText || post.title}
                                                     fill
                                                     className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                                    unoptimized
+
                                                 />
                                             ) : (
                                                 <div className="w-full h-full bg-gray-200 flex items-center justify-center">

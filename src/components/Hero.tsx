@@ -19,7 +19,7 @@ export default function Hero({ lang, dict }: HeroProps) {
                     className="hidden md:block object-cover pt-16 "
                     priority
                     quality={100}
-                    unoptimized
+
                 />
                 { }
                 <Image
@@ -29,7 +29,7 @@ export default function Hero({ lang, dict }: HeroProps) {
                     className="block md:hidden object-cover pt-19"
                     priority
                     quality={100}
-                    unoptimized
+
                 />
             </div>
             { }

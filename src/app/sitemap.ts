@@ -91,7 +91,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             }
         }
     } catch (error) {
-        console.log('Blog API not available for sitemap');
+        console.error('Error fetching blogs for sitemap:', error);
     }
     const uniqueEntries = Array.from(
         new Map(sitemapEntries.map(entry => [entry.url, entry])).values()

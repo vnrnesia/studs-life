@@ -86,7 +86,7 @@ export default async function CountryPage({ params }: CountryPageProps) {
               fill
               className="object-cover"
               priority
-              unoptimized
+
             />
             <div className="absolute inset-0 bg-gradient-to-b from-[#06182E]/80 via-[#06182E]/60 to-[#06182E]/90 z-[1]" />
           </>
@@ -131,7 +131,7 @@ export default async function CountryPage({ params }: CountryPageProps) {
                         fill
                         className="object-cover hover:scale-105 transition-transform duration-500"
                         sizes="(max-width: 768px) 100vw, 50vw"
-                        unoptimized
+
                       />
                     </div>
                   ))}
@@ -181,7 +181,7 @@ export default async function CountryPage({ params }: CountryPageProps) {
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-500"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      unoptimized
+
                     />
                   </div>
                 )}

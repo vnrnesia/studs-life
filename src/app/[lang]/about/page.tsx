@@ -7,6 +7,8 @@ import MissionVisionCards from "./components/MissionVisionCards";
 import CompanyTimeline from "./components/CompanyTimeline";
 import DepartmentsGrid from "./components/DepartmentsGrid";
 import TrustSection from "../services/components/TrustSection";
+import TrustCertificates from "@/components/TrustCertificates";
+import StudsGallery from "@/components/StudsGallery";
 import ContactFormSection from "@/components/ContactFormSection";
 import OfficeLocations from "@/components/OfficeLocations";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -84,6 +86,19 @@ export default async function AboutPage({
       </ScrollReveal>
       <ScrollReveal direction="up">
         <DepartmentsGrid dict={dict.aboutPage.departments} />
+      </ScrollReveal>
+      <ScrollReveal direction="up">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-8">
+            {lang === 'ru' ? 'Наши доверенности' : lang === 'tk' ? 'Ygtyýarnamalarymyz' : lang === 'oz' ? 'Ishonchnomalarimiz' : 'Our Authorizations'}
+          </h2>
+          <TrustCertificates />
+        </section>
+      </ScrollReveal>
+      <ScrollReveal direction="up">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <StudsGallery title={lang === 'ru' ? 'Наши студенты' : lang === 'tk' ? 'Biziň talyplarmyz' : lang === 'oz' ? 'Bizning talabalarimiz' : 'Our Students'} />
+        </section>
       </ScrollReveal>
       <ScrollReveal direction="up">
         <ContactFormSection lang={lang} dict={dict.contactForm} />

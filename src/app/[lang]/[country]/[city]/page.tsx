@@ -146,7 +146,7 @@ export default async function CityPage({ params }: CityPageProps) {
             className="object-cover"
             priority
             sizes="100vw"
-            unoptimized
+
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
@@ -278,7 +278,7 @@ export default async function CityPage({ params }: CityPageProps) {
                     fill
                     className="object-cover hover:scale-105 transition-transform duration-300"
                     sizes="(max-width: 768px) 50vw, 33vw"
-                    unoptimized
+
                   />
                 </div>
               ))}

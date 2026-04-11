@@ -98,7 +98,7 @@ export default async function NewsPostPage({ params }: NewsPostPageProps) {
                         fill
                         className="object-cover"
                         priority
-                        unoptimized
+
                     />
                 ) : (
                     <div className="w-full h-full bg-[#0A2647]" />

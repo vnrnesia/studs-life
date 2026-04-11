@@ -21,6 +21,7 @@ import chinaIcon from "@/assets/contact_icons/china.webp";
 import umrahIcon from "@/assets/contact_icons/umrah.webp";
 import visaIcon from "@/assets/contact_icons/visa.webp";
 import flightIcon from "@/assets/contact_icons/flight.webp";
+import rvpIcon from "@/assets/contact_icons/rvp.png";
 interface MultiStepContactFormProps {
   lang: string;
   dict: {
@@ -53,6 +54,7 @@ interface MultiStepContactFormProps {
       umrah: { title: string; desc: string };
       workVisa: { title: string; desc: string };
       ticket: { title: string; desc: string };
+      rvp?: { title: string; desc: string };
     };
     fields: Record<string, string>;
     placeholders: Record<string, string>;
@@ -60,7 +62,7 @@ interface MultiStepContactFormProps {
     buttons: Record<string, string>;
   };
 }
-type ServiceType = 'university' | 'transfer' | 'school' | 'umrah' | 'workVisa' | 'ticket' | '';
+type ServiceType = 'university' | 'transfer' | 'school' | 'umrah' | 'workVisa' | 'ticket' | 'rvp' | '';
 interface FormData {
   service: ServiceType;
   fullName: string;
@@ -93,13 +95,18 @@ interface FormData {
   toCity?: string;
   travelDate?: string;
   needsBaggage?: string;
+  rvpType?: string;
+  legalBasis?: string;
+  applicationCity?: string;
+  hasViolations?: string;
+  rvpService?: string;
 }
 const COUNTRIES = [
   'Turkmenistan', 'China', 'Turkey', 'Uzbekistan', 'Tajikistan',
   'Russia', 'Kazakhstan', 'Kyrgyzstan', 'Afghanistan', 'Iran'
 ];
 const TURKMEN_REGIONS = ['Lebap', 'Mary', 'Dashoguz', 'Balkan', 'Ahal', 'Ashgabat'];
-const TARGET_COUNTRIES = ['Russia', 'China', 'Cyprus', 'Turkey', 'Belarus', 'Uzbekistan', 'Europe'];
+const TARGET_COUNTRIES = ['Russia', 'China', 'Cyprus', 'Turkey', 'Belarus', 'Uzbekistan', 'Kazakhstan', 'Malaysia', 'Romania', 'Europe (Hungary, Bulgaria)'];
 export default function MultiStepContactForm({ lang, dict }: MultiStepContactFormProps) {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
@@ -154,7 +161,12 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
     targetField: '',
     travelMonth: '',
     workPreferences: '',
-    previousTravel: ''
+    previousTravel: '',
+    rvpType: '',
+    legalBasis: '',
+    applicationCity: '',
+    hasViolations: '',
+    rvpService: ''
   });
   const services = [
     {
@@ -192,6 +204,12 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
       icon: flightIcon,
       title: dict.services.ticket.title,
       desc: dict.services.ticket.desc
+    },
+    {
+      id: 'rvp' as const,
+      icon: rvpIcon,
+      title: dict.services.rvp?.title || 'РВП / РВПО / ВНЖ',
+      desc: dict.services.rvp?.desc || 'Помощь в оформлении разрешений на проживание в России'
     },
   ];
   const getSteps = () => {
@@ -283,6 +301,13 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
         check('workPreferences', formData.workPreferences);
         check('previousTravel', formData.previousTravel);
       }
+      if (formData.service === 'rvp') {
+        check('rvpType', formData.rvpType);
+        check('legalBasis', formData.legalBasis);
+        check('applicationCity', formData.applicationCity);
+        check('hasViolations', formData.hasViolations);
+        check('rvpService', formData.rvpService);
+      }
     }
     if (currentStep === 4) {
       check('citizenship', formData.citizenship);
@@ -326,7 +351,8 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
       school: 'School',
       umrah: 'Umrah',
       workVisa: 'Work Visa',
-      ticket: 'Ticket'
+      ticket: 'Ticket',
+      rvp: 'RVP'
     };
     const serviceKey = serviceMap[formData.service as keyof typeof serviceMap];
     const [sheetsResult] = await Promise.allSettled([
@@ -545,6 +571,7 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
                     className={getInputClass("educationLevel")}>
                     <option value="">{dict.options.selectLevel}</option>
                     <option value="language">{dict.options.languageCourses}</option>
+                    <option value="college">{dict.options.college || 'Колледж'}</option>
                     <option value="preparatory">{dict.options.preparatory}</option>
                     <option value="bachelor">{dict.options.bachelor}</option>
                     <option value="master">{dict.options.master}</option>
@@ -826,6 +853,64 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
           </div>
         );
       }
+      if (formData.service === 'rvp') {
+        return (
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-xl md:text-3xl font-black text-gray-900 mb-1 md:mb-2">{dict.services.rvp?.title || 'РВП / РВПО / ВНЖ'}</h3>
+              <p className="text-sm md:text-base text-gray-600">{dict.services.rvp?.desc || 'Помощь в оформлении разрешений на проживание в России'}</p>
+            </div>
+            <div className="space-y-3 md:space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.rvpType || 'Подаёте на'} *</label>
+                  <motion.select required variants={shakeAnimation} animate={errors.rvpType && shake ? "shake" : "static"} value={formData.rvpType} onChange={(e) => handleFieldChange("rvpType", e.target.value)}
+                    className={getInputClass("rvpType")}>
+                    <option value="">{dict.options.select}</option>
+                    <option value="РВП">РВП</option>
+                    <option value="РВПО">РВПО</option>
+                    <option value="ВНЖ">ВНЖ</option>
+                  </motion.select>
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.hasViolations || 'Административное нарушение'} *</label>
+                  <motion.select required variants={shakeAnimation} animate={errors.hasViolations && shake ? "shake" : "static"} value={formData.hasViolations} onChange={(e) => handleFieldChange("hasViolations", e.target.value)}
+                    className={getInputClass("hasViolations")}>
+                    <option value="">{dict.options.select}</option>
+                    <option value="yes">{dict.options.yes}</option>
+                    <option value="no">{dict.options.no}</option>
+                  </motion.select>
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.legalBasis || 'Основание для подачи'} *</label>
+                <motion.input type="text" required variants={shakeAnimation} animate={errors.legalBasis && shake ? "shake" : "static"} value={formData.legalBasis} onChange={(e) => handleFieldChange("legalBasis", e.target.value)}
+                  className={getInputClass("legalBasis")} placeholder={dict.placeholders.legalBasis || 'Укажите основание'} />
+              </div>
+              <div>
+                <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.applicationCity || 'Город подачи документов'} *</label>
+                <motion.input type="text" required variants={shakeAnimation} animate={errors.applicationCity && shake ? "shake" : "static"} value={formData.applicationCity} onChange={(e) => handleFieldChange("applicationCity", e.target.value)}
+                  className={getInputClass("applicationCity")} placeholder={dict.placeholders.applicationCity || 'Например: Казань'} />
+              </div>
+              <div>
+                <label className="block text-sm font-bold text-gray-900 mb-2">{dict.fields.rvpService || 'Какой услугой хотите воспользоваться'} *</label>
+                <motion.select required variants={shakeAnimation} animate={errors.rvpService && shake ? "shake" : "static"} value={formData.rvpService} onChange={(e) => handleFieldChange("rvpService", e.target.value)}
+                  className={getInputClass("rvpService")}>
+                  <option value="">{dict.options.select}</option>
+                  <option value="consultation">{dict.options.rvpConsultation || 'Консультация'}</option>
+                  <option value="documents">{dict.options.rvpDocuments || 'Помощь в подготовке документов'}</option>
+                  <option value="queue">{dict.options.rvpQueue || 'Получение талона для подачи документов'}</option>
+                </motion.select>
+                {formData.rvpService === 'queue' && (
+                  <p className="mt-2 text-xs text-amber-600 font-medium">
+                    ⚠️ Получение талона для подачи документов в Москве недоступно
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      }
     }
     if (currentStep === 4) {
       return (
@@ -885,6 +970,9 @@ export default function MultiStepContactForm({ lang, dict }: MultiStepContactFor
       }
       if (formData.service === 'workVisa') {
         return formData.targetCountry && formData.relationship && formData.workPreferences && formData.previousTravel;
+      }
+      if (formData.service === 'rvp') {
+        return formData.rvpType && formData.legalBasis && formData.applicationCity && formData.hasViolations && formData.rvpService;
       }
     }
     if (currentStep === 4) {

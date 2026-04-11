@@ -8,6 +8,7 @@ import JsonLd from "@/components/JsonLd";
 import { WebSite, WebPage, WithContext } from "schema-dts";
 import { getTeamMembers, getNewsPosts } from "@/lib/strapi";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import ReviewsSection from "@/components/ReviewsSection";
 import supportUniversityIcon from "@/assets/support_icons/admission.webp";
 import supportVisaIcon from "@/assets/support_icons/visa.webp";
 import supportAccommodationIcon from "@/assets/support_icons/accommadation.webp";
@@ -19,6 +20,7 @@ import careerImg from "@/assets/student_support/career.webp";
 import consultationImg from "@/assets/how_it_works/free_consultation.webp";
 import preparationImg from "@/assets/how_it_works/visa.webp";
 import departureImg from "@/assets/how_it_works/departure_support.webp";
+import { Suspense } from "react";
 const FeatureTabs = dynamic(() => import("@/components/FeatureTabs"), { ssr: true });
 const Services = dynamic(() => import("@/components/Services"), { ssr: true });
 const Countries = dynamic(() => import("@/components/Countries"), { ssr: true });
@@ -27,10 +29,22 @@ const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"), { ssr: tru
 const Team = dynamic(() => import("@/components/Team"), { ssr: true });
 const Statistics = dynamic(() => import("@/components/Statistics"), { ssr: true });
 const ContactFormSection = dynamic(() => import("@/components/ContactFormSection"), { ssr: true });
-const LatestJournal = dynamic(() => import("@/components/LatestJournal"));
-const OfficeLocations = dynamic(() => import("@/components/OfficeLocations"));
-const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
-const LeadMagnet = dynamic(() => import("@/components/LeadMagnet"));
+const LatestJournal = dynamic(() => import("@/components/LatestJournal"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-2xl mx-4" />,
+});
+const OfficeLocations = dynamic(() => import("@/components/OfficeLocations"), {
+  ssr: false,
+  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-2xl mx-4" />,
+});
+const ProcessSection = dynamic(() => import("@/components/ProcessSection"), {
+  ssr: false,
+  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-2xl mx-4" />,
+});
+const LeadMagnet = dynamic(() => import("@/components/LeadMagnet"), {
+  ssr: false,
+  loading: () => <div className="h-48 bg-gray-100 animate-pulse rounded-2xl mx-4" />,
+});
 export const revalidate = 60;
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
@@ -177,11 +191,20 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <Team lang={lang} dict={dict.team} teamMembers={teamMembers.slice(0, 6)} showViewAll={true} />
             <Statistics lang={lang} dict={dict.statistics} />
             <TestimonialsCarousel title={dict.team.testimonials_title} videoCategory={dict.team.videoTestimonialCategory} lang={lang} />
+            <ReviewsSection lang={lang} dict={dict} />
             <ContactFormSection lang={lang} dict={dict.contactForm} />
-            <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestNews} />
-            <LeadMagnet lang={lang} />
-            <ProcessSection lang={lang} dict={(dict as any).processWorkflow} />
-            <OfficeLocations lang={lang} dict={dict.offices} />
+            <Suspense fallback={<div className="h-96 bg-gray-100 animate-pulse rounded-2xl mx-4" />}>
+              <LatestJournal lang={lang} dict={dict.latestJournal} posts={latestNews} />
+            </Suspense>
+            <Suspense fallback={<div className="h-48 bg-gray-100 animate-pulse rounded-2xl mx-4" />}>
+              <LeadMagnet lang={lang} />
+            </Suspense>
+            <Suspense fallback={<div className="h-64 bg-gray-100 animate-pulse rounded-2xl mx-4" />}>
+              <ProcessSection lang={lang} dict={(dict as any).processWorkflow} />
+            </Suspense>
+            <Suspense fallback={<div className="h-64 bg-gray-100 animate-pulse rounded-2xl mx-4" />}>
+              <OfficeLocations lang={lang} dict={dict.offices} />
+            </Suspense>
         </main>
     );
 }

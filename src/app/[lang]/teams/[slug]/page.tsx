@@ -140,7 +140,7 @@ export default async function TeamMemberPage({ params }: TeamMemberPageProps) {
                                     className="object-cover"
                                     priority
                                     sizes="(max-width: 768px) 192px, 256px"
-                                    unoptimized
+
                                 />
                             ) : (
                                 <div className="w-full h-full flex items-center justify-center text-6xl">👤</div>

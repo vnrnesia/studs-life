@@ -7,6 +7,7 @@ import PartnershipHero from "./components/PartnershipHero";
 import PartnershipModels from "./components/PartnershipModels";
 import CountryCityShowcase from "./components/CountryCityShowcase";
 import ContactFormSection from "@/components/ContactFormSection";
+import TrustCertificates from "@/components/TrustCertificates";
 import OfficeLocations from "@/components/OfficeLocations";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/JsonLd";
@@ -89,6 +90,21 @@ export default async function PartnershipPage({
 
             <ScrollReveal direction="up">
                 <CountryCityShowcase dict={page.geography} stats={page.stats} />
+            </ScrollReveal>
+
+            <ScrollReveal direction="up">
+                <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-8">
+                        {lang === 'ru'
+                            ? 'Наши доверенности'
+                            : lang === 'tk'
+                            ? 'Ygtyýarnamalarymyz'
+                            : lang === 'oz'
+                            ? 'Ishonchnomalarimiz'
+                            : 'Our Authorizations'}
+                    </h2>
+                    <TrustCertificates />
+                </section>
             </ScrollReveal>
 
             <ContactFormSection lang={lang} dict={dict.contactForm} />

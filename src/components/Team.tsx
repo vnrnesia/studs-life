@@ -52,7 +52,7 @@ export default function Team({ lang, dict, teamMembers, showViewAll = false }: T
                     alt={member.fullName}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    unoptimized
+
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-6xl bg-gray-200">
