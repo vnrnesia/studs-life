@@ -1,30 +1,52 @@
-FROM node:20-alpine
+FROM node:20-alpine AS base
+
+# Install dependencies needed for sharp (Next.js image optimization)
+RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
-# Install dependencies needed for sharp
-RUN apk add --no-cache libc6-compat
-
-# Copy package files
+# ---- deps stage ----
+FROM base AS deps
 COPY package.json package-lock.json ./
-
-# Install dependencies
 RUN npm ci
 
-# Copy source code
+# ---- builder stage ----
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build Next.js
-# We set a dummy URL for build time to preventing failure if Strapi isn't reachable
-# Real URL will be provided at runtime
-ENV NODE_ENV=production
+# Build-time env vars (NEXT_PUBLIC_ vars are baked into the bundle)
+ARG NEXT_PUBLIC_STRAPI_URL=https://admin-studs-life.defyzer.com
 ARG NEXT_PUBLIC_GOOGLE_SHEETS_URL
+ARG STRAPI_API_TOKEN
+
+ENV NEXT_PUBLIC_STRAPI_URL=$NEXT_PUBLIC_STRAPI_URL
 ENV NEXT_PUBLIC_GOOGLE_SHEETS_URL=$NEXT_PUBLIC_GOOGLE_SHEETS_URL
-ENV NEXT_PUBLIC_STRAPI_URL=http://localhost:1337 
+ENV STRAPI_API_TOKEN=$STRAPI_API_TOKEN
+ENV NODE_ENV=production
+
 RUN npm run build
 
-# Expose port
+# ---- runner stage ----
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+
+USER nextjs
+
 EXPOSE 3000
 
-# Start Next.js
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
 CMD ["npm", "start"]
