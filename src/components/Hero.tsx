@@ -1,6 +1,6 @@
 import { MoveRight } from "lucide-react";
 import Image from "next/image";
-import mainBg from "../assets/herobg.webp";
+import mainBg from "../assets/herobg.png";
 import mainBgMobile from "../assets/herobg2.webp";
 interface HeroProps {
     lang: string;
