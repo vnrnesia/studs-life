@@ -38,6 +38,12 @@ export const companyLinks = [
         titleKey: 'partnership',
         descKey: 'partnershipDesc',
         href: '/partnership'
+    },
+    {
+        icon: BookOpen,
+        titleKey: 'universities',
+        descKey: 'universitiesDesc',
+        href: '/universities'
     }
 ];
 export const trustBadges = [

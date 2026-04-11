@@ -199,18 +199,23 @@ export async function getFeaturedCities(locale: string = 'en'): Promise<City[]> 
     return data.data;
 }
 export async function getCountriesWithCities(locale: string = 'en'): Promise<Country[]> {
-    const query = qs.stringify({
-        locale,
-        populate: {
-            cities: {
-                fields: ['name', 'slug'],
-                sort: ['name:asc'],
+    try {
+        const query = qs.stringify({
+            locale,
+            populate: {
+                cities: {
+                    fields: ['name', 'slug'],
+                    sort: ['name:asc'],
+                },
             },
-        },
-        sort: ['featured:desc', 'name:asc'],
-    });
-    const { data } = await strapiClient.get<StrapiResponse<Country[]>>(`/countries?${query}`);
-    return data.data;
+            sort: ['featured:desc', 'name:asc'],
+        });
+        const { data } = await strapiClient.get<StrapiResponse<Country[]>>(`/countries?${query}`);
+        return data.data;
+    } catch (error) {
+        console.error('getCountriesWithCities error:', error);
+        return [];
+    }
 }
 export function getStrapiImageUrl(url: string | null | undefined): string {
     if (!url) return '';

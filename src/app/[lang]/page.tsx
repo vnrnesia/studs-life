@@ -30,19 +30,15 @@ const Team = dynamic(() => import("@/components/Team"), { ssr: true });
 const Statistics = dynamic(() => import("@/components/Statistics"), { ssr: true });
 const ContactFormSection = dynamic(() => import("@/components/ContactFormSection"), { ssr: true });
 const LatestJournal = dynamic(() => import("@/components/LatestJournal"), {
-  ssr: false,
   loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-2xl mx-4" />,
 });
 const OfficeLocations = dynamic(() => import("@/components/OfficeLocations"), {
-  ssr: false,
   loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-2xl mx-4" />,
 });
 const ProcessSection = dynamic(() => import("@/components/ProcessSection"), {
-  ssr: false,
   loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-2xl mx-4" />,
 });
 const LeadMagnet = dynamic(() => import("@/components/LeadMagnet"), {
-  ssr: false,
   loading: () => <div className="h-48 bg-gray-100 animate-pulse rounded-2xl mx-4" />,
 });
 export const revalidate = 60;
