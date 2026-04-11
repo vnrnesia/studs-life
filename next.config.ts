@@ -25,6 +25,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'flagcdn.com' },
       { protocol: 'https', hostname: 'img.youtube.com' },
       { protocol: 'https', hostname: 'admin-studs-life.defyzer.com' },
+      { protocol: 'https', hostname: 'res.cloudinary.com' },
       { protocol: 'http', hostname: 'localhost', port: '1337', pathname: '/uploads/**' },
       { protocol: 'http', hostname: '127.0.0.1', port: '1337', pathname: '/uploads/**' },
       // Internal Docker/Coolify networking (HTTP only, not exposed to public)
