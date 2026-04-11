@@ -249,7 +249,7 @@ export interface TeamMember {
 export async function getTeamMembers(locale: string = 'en'): Promise<TeamMember[]> {
     const query = qs.stringify({
         locale,
-        populate: '*',
+        populate: { photo: true },
         sort: ['fullName:asc'],
     });
     const { data } = await strapiClient.get<StrapiResponse<TeamMember[]>>(`/team-members?${query}`);
@@ -259,7 +259,7 @@ export async function getTeamMember(slug: string, locale: string = 'en'): Promis
     const query = qs.stringify({
         locale,
         filters: { slug: { $eq: slug } },
-        populate: '*',
+        populate: { photo: true },
     });
     try {
         const { data } = await strapiClient.get<StrapiResponse<TeamMember[]>>(`/team-members?${query}`);
