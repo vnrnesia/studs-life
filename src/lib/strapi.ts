@@ -250,7 +250,7 @@ export async function getTeamMembers(locale: string = 'en'): Promise<TeamMember[
     const query = qs.stringify({
         locale,
         populate: { photo: true },
-        sort: ['fullName:asc'],
+        sort: ['order:asc', 'fullName:asc'],
     });
     const { data } = await strapiClient.get<StrapiResponse<TeamMember[]>>(`/team-members?${query}`);
     return data.data;
