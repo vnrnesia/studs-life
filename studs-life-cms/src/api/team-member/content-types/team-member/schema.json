@@ -95,6 +95,12 @@
         "order": {
             "type": "integer",
             "default": 0
+        },
+        "office": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::office.office",
+            "inversedBy": "teamMembers"
         }
     }
 }

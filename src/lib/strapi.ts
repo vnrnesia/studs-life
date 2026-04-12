@@ -226,6 +226,18 @@ export function getStrapiImageUrl(url: string | null | undefined): string {
     const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || (isProd ? 'https://admin-studs-life.defyzer.com' : 'http://localhost:1337');
     return `${baseUrl}${url}`;
 }
+export interface Office {
+    id: number;
+    documentId: string;
+    name: string;
+    order: number;
+    photo?: {
+        url: string;
+        alternativeText?: string;
+    };
+    teamMembers?: TeamMember[];
+}
+
 export interface TeamMember {
     id: number;
     documentId: string;
@@ -237,6 +249,7 @@ export interface TeamMember {
         alternativeText?: string;
     };
     city: string;
+    office?: { id: number; documentId: string; name: string };
     officeAddress?: string;
     birthDate?: string;
     startDate?: string;
@@ -246,6 +259,26 @@ export interface TeamMember {
     responsibilities?: string;
     locale: string;
 }
+export async function getOffices(): Promise<Office[]> {
+    const query = qs.stringify({
+        populate: {
+            photo: true,
+            teamMembers: {
+                populate: { photo: true },
+                sort: ['order:asc', 'fullName:asc'],
+            },
+        },
+        sort: ['order:asc', 'name:asc'],
+    });
+    try {
+        const { data } = await strapiClient.get<StrapiResponse<Office[]>>(`/offices?${query}`);
+        return data.data;
+    } catch (error) {
+        console.error('getOffices failed:', error);
+        return [];
+    }
+}
+
 export async function getTeamMembers(locale: string = 'en'): Promise<TeamMember[]> {
     const query = qs.stringify({
         locale,

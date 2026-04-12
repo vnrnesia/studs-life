@@ -2,8 +2,8 @@ import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n-config";
 import { Metadata } from "next";
 import { generateSEOMetadata } from "@/lib/seo";
-import Team from "@/components/Team";
-import { getTeamMembers, type TeamMember } from "@/lib/strapi";
+import TeamByCity from "@/components/TeamByCity";
+import { getOffices, getTeamMembers, type TeamMember, type Office } from "@/lib/strapi";
 import JsonLd from "@/components/JsonLd";
 import { BreadcrumbList, WithContext } from "schema-dts";
 import ContactFormSection from "@/components/ContactFormSection";
@@ -25,12 +25,15 @@ export default async function TeamsPage({ params }: { params: Promise<{ lang: st
   const { lang: langParam } = await params;
   const lang = langParam as Locale;
   const dict = await getDictionary(lang);
-  let teamMembers: TeamMember[];
+  let teamMembers: TeamMember[] = [];
+  let offices: Office[] = [];
   try {
-    teamMembers = await getTeamMembers(lang);
+    [teamMembers, offices] = await Promise.all([
+      getTeamMembers(lang),
+      getOffices(),
+    ]);
   } catch (error) {
-    console.error('Teams page: getTeamMembers failed:', error);
-    teamMembers = [];
+    console.error('Teams page fetch failed:', error);
   }
   const breadcrumbData: WithContext<BreadcrumbList> = {
     "@context": "https://schema.org",
@@ -74,7 +77,7 @@ export default async function TeamsPage({ params }: { params: Promise<{ lang: st
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       ))}
-      <Team lang={lang} dict={dict.team} teamMembers={teamMembers} />
+      <TeamByCity lang={lang} dict={dict.team} offices={offices} />
 
       {/* Contact Form */}
       <ScrollReveal direction="up">
