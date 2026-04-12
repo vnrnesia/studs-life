@@ -17,15 +17,16 @@ const LANG_MAP: Record<string, Locale> = {
 
 function getLocale(request: NextRequest): Locale {
     const acceptLanguage = request.headers.get('accept-language') || '';
-    // Check languages in priority order
-    const langs = acceptLanguage
-        .split(',')
-        .map(part => part.split(';')[0].trim().toLowerCase().split('-')[0]);
+    // Only check the PRIMARY language (first entry), ignore browser fallbacks like en.
+    // e.g. "tr,en;q=0.9" → primary is "tr" → not in map → default "ru"
+    const primaryLang = acceptLanguage
+        .split(',')[0]
+        .split(';')[0]
+        .trim()
+        .toLowerCase()
+        .split('-')[0];
 
-    for (const lang of langs) {
-        if (lang in LANG_MAP) return LANG_MAP[lang];
-    }
-    return i18n.defaultLocale;
+    return LANG_MAP[primaryLang] ?? i18n.defaultLocale;
 }
 
 export function middleware(request: NextRequest) {
