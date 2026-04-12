@@ -33,7 +33,7 @@ export default function PartnershipHero({ dict, benefits, lang }: PartnershipHer
     return (
         <div className="relative lg:mb-[160px] xl:mb-[180px]">
             {/* Dark hero section - full screen */}
-            <section className="relative w-full h-screen lg:min-h-screen flex items-center bg-[#06182E] overflow-visible pt-24 pb-16 lg:pt-16">
+            <section className="relative w-full h-screen lg:min-h-screen flex items-center bg-[#06182E] overflow-visible pt-24 pb-16 lg:pt-16 lg:pb-48">
                 {/* Background effects */}
                 <div className="absolute inset-0 z-0 overflow-hidden">
                     <div className="absolute top-1/4 left-1/6 w-[500px] h-[500px] bg-crimson/8 rounded-full blur-[150px]" />
