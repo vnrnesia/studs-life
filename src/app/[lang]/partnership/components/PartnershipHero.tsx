@@ -93,7 +93,7 @@ export default function PartnershipHero({ dict, benefits, lang }: PartnershipHer
                                 className="flex items-center justify-center lg:justify-start gap-4"
                             >
                                 <Link
-                                    href={`/${lang}/contact`}
+                                    href="#contact-form"
                                     className="inline-flex items-center gap-3 px-8 py-4 bg-crimson text-white font-bold text-lg rounded-full hover:bg-crimson/90 transition-all duration-300 shadow-lg shadow-crimson/30 hover:shadow-xl hover:shadow-crimson/40 hover:-translate-y-1"
                                 >
                                     <Handshake className="w-5 h-5" />

@@ -107,7 +107,9 @@ export default async function PartnershipPage({
                 </section>
             </ScrollReveal>
 
-            <ContactFormSection lang={lang} dict={dict.contactForm} />
+            <div id="contact-form">
+                <ContactFormSection lang={lang} dict={dict.contactForm} />
+            </div>
 
             <OfficeLocations lang={lang} dict={dict.offices} />
         </main>
