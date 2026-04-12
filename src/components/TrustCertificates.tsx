@@ -97,7 +97,7 @@ export default function TrustCertificates() {
           </div>
 
           {/* View / download links — always visible */}
-          <div className="pt-4 border-t border-gray-100 flex items-center gap-3">
+          <div className="pt-4 border-t border-gray-100 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
             <a
               href={cert.file}
               target="_blank"
