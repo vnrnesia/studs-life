@@ -377,7 +377,7 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                     </button>
                     {isMobileCompanyOpen && (
                       <div className="pl-4 grid grid-cols-1 gap-4 pb-4">
-                        {companyLinks.map((item, i) => (
+                        {companyLinks.filter(item => item.href !== '/universities').map((item, i) => (
                           <Link
                             key={i}
                             href={`/${lang}${item.href}`}
@@ -404,6 +404,13 @@ export default function Navbar({ lang, dict, countries }: NavbarProps) {
                 </Link>
               );
             })}
+            <Link
+              href={`/${lang}/universities`}
+              onClick={() => setIsOpen(false)}
+              className="block py-3 text-lg font-bold text-gray-900 border-b border-gray-100 hover:text-navy"
+            >
+              {lang === 'ru' ? 'Список университетов в Туркменистане' : lang === 'tk' ? 'Türkmenistanda ykrar edilýän universitetler' : lang === 'oz' ? "Türkmanistonda tan olingan universitetlar" : 'Recognized Universities in Turkmenistan'}
+            </Link>
           </div>
           { }
           <div className="mt-8">
