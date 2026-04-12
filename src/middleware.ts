@@ -19,15 +19,10 @@ export function middleware(request: NextRequest) {
         (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
     );
     if (pathnameIsMissingLocale) {
-        const country = (request as any).geo?.country || "US";
-        const cisCountries = ["RU", "BY", "KZ", "UZ", "KG", "TJ", "TM", "AM", "AZ", "MD", "UA"];
-        let targetLocale: Locale = i18n.defaultLocale;
-        if (cisCountries.includes(country)) {
-            targetLocale = "ru";
-        }
+        const locale = getLocale(request) ?? i18n.defaultLocale;
         return NextResponse.redirect(
             new URL(
-                `/${targetLocale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
+                `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
                 request.url
             )
         );
