@@ -13,10 +13,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         en: 'List of Recognized Universities of Turkmenistan | Student\'s Life',
     };
     const descs: Record<string, string> = {
-        ru: 'Полный список из 965+ университетов в 23 странах, признаваемых в Туркменистане. Поиск по названию и стране.',
-        tk: 'Türkmenistanda ykrar edilýän 23 ýurtdaky 965+ uniwersitetleriň doly sanawy.',
-        oz: 'Turkmanistonda tan olingan 23 mamlakatdagi 965+ universitetlarning to\'liq ro\'yxati.',
-        en: 'Complete list of 965+ universities in 23 countries recognized by Turkmenistan. Search by name and country.',
+        ru: 'Полный список из 1179+ университетов в 25 странах, признаваемых в Туркменистане. Поиск по названию и стране.',
+        tk: 'Türkmenistanda ykrar edilýän 25 ýurtdaky 1179+ uniwersitetleriň doly sanawy.',
+        oz: 'Turkmanistonda tan olingan 25 mamlakatdagi 1179+ universitetlarning to\'liq ro\'yxati.',
+        en: 'Complete list of 1179+ universities in 25 countries recognized by Turkmenistan. Search by name and country.',
     };
     return generateSEOMetadata({
         lang,
